@@ -1,0 +1,60 @@
+name: Replace workout typing with pickers
+
+on:
+  push:
+    paths:
+      - '.github/workflows/picker-inputs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch workout inputs
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+
+          def rep(old,new,label):
+              global s
+              if old not in s:
+                  raise SystemExit(f'Patch anchor not found: {label}')
+              s=s.replace(old,new,1)
+
+          css_anchor=".set-row input{min-width:0;border:1px solid #282d37;background:#0d0f14;color:white;border-radius:11px;padding:10px 8px;outline:none}"
+          css_new=css_anchor+".picker-select{width:100%;min-width:0;appearance:none;-webkit-appearance:none;border:1px solid #303642;background:linear-gradient(180deg,#11141a,#0c0e12);color:#f5f7fb;border-radius:12px;padding:11px 28px 11px 10px;outline:none;font-weight:850;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,#8d95a7 50%),linear-gradient(135deg,#8d95a7 50%,transparent 50%);background-position:calc(100% - 14px) 50%,calc(100% - 9px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}.picker-select:focus{border-color:#667a19;box-shadow:0 0 0 3px rgba(216,255,62,.06)}.picker-select option{background:#111318;color:#f5f7fb}.live-input-wrap .picker-select{padding:14px 28px 14px 10px;font-size:16px;border-radius:14px}.calibration-row .picker-select{padding:10px 25px 10px 8px;border-radius:11px;font-size:12px}"
+          rep(css_anchor,css_new,'picker css')
+
+          helper_anchor="function blankSet(){return {kg:'',reps:'',rir:''}}"
+          helper_new=helper_anchor+"\nfunction pickerOptions(values,current,placeholder,labels={}){const cur=String(current??'');const list=values.map(String);if(cur&&!list.includes(cur))list.unshift(cur);return `<option value=\"\">${esc(placeholder)}</option>`+list.map(v=>`<option value=\"${esc(v)}\" ${v===cur?'selected':''}>${esc(labels[v]||v)}</option>`).join('')}\nfunction kgOptions(current=''){const vals=[];for(let x=.5;x<=100;x+=.5)vals.push(Number(x.toFixed(1)));for(let x=101;x<=200;x+=1)vals.push(x);for(let x=202.5;x<=300;x+=2.5)vals.push(Number(x.toFixed(1)));return pickerOptions(vals,current,'kg')}\nfunction repsOptions(current=''){return pickerOptions(Array.from({length:30},(_,i)=>i+1),current,'reps')}\nfunction rirOptions(current=''){return pickerOptions(['0','0.5','1','1.5','1-2','2','2.5','3','4','5'],current,'RIR',{'0':'0 · falha','1-2':'1–2'})}\nfunction setPicker(kind,value,handler,id=''){const opts=kind==='kg'?kgOptions(value):kind==='reps'?repsOptions(value):rirOptions(value);return `<select ${id?`id=\"${id}\"`:''} class=\"picker-select\" onchange=\"${handler}\">${opts}</select>`}"
+          rep(helper_anchor,helper_new,'picker helpers')
+
+          old_render="function renderSetEditors(){const prep=document.getElementById('usePrep').checked;const root=document.getElementById('setsEditor');const types=TYPES.filter(t=>prep||t.key==='work');root.innerHTML=types.map(t=>{const arr=currentSets[t.key]||[];const isWork=t.key==='work';return `<div class=\"set-group ${isWork?'final-set':''}\"><div class=\"set-group-head\"><div><strong>${t.label}</strong><small> · ${t.hint}</small></div><small>${arr.length} série(s)</small></div><div>${arr.map((s,i)=>`${isWork?`<div class=\"series-label ${i===0?'work1':'work2'}\">${i===0?'Trabalho 1 · forte, guardar 1–2 reps':'Trabalho 2 · série final, falha técnica'}</div>`:''}<div class=\"set-row\"><input inputmode=\"decimal\" placeholder=\"kg\" value=\"${s.kg}\" onchange=\"setVal('${t.key}',${i},'kg',this.value)\"><input inputmode=\"numeric\" placeholder=\"reps\" value=\"${s.reps}\" onchange=\"setVal('${t.key}',${i},'reps',this.value)\"><input placeholder=\"RIR\" value=\"${s.rir||''}\" onchange=\"setVal('${t.key}',${i},'rir',this.value)\"><button class=\"remove-set\" onclick=\"removeSet('${t.key}',${i})\">−</button></div>`).join('')}</div>${isWork?'':`<button class=\"addset\" onclick=\"addSet('${t.key}')\">+ adicionar série</button>`}</div>`}).join('')}"
+          new_render="function renderSetEditors(){const prep=document.getElementById('usePrep').checked;const root=document.getElementById('setsEditor');const types=TYPES.filter(t=>prep||t.key==='work');root.innerHTML=types.map(t=>{const arr=currentSets[t.key]||[];const isWork=t.key==='work';return `<div class=\"set-group ${isWork?'final-set':''}\"><div class=\"set-group-head\"><div><strong>${t.label}</strong><small> · ${t.hint}</small></div><small>${arr.length} série(s)</small></div><div>${arr.map((s,i)=>`${isWork?`<div class=\"series-label ${i===0?'work1':'work2'}\">${i===0?'Trabalho 1 · forte, guardar 1–2 reps':'Trabalho 2 · série final, falha técnica'}</div>`:''}<div class=\"set-row\">${setPicker('kg',s.kg,`setVal('${t.key}',${i},'kg',this.value)`)}${setPicker('reps',s.reps,`setVal('${t.key}',${i},'reps',this.value)`)}${setPicker('rir',s.rir||'',`setVal('${t.key}',${i},'rir',this.value)`)}<button class=\"remove-set\" onclick=\"removeSet('${t.key}',${i})\">−</button></div>`).join('')}</div>${isWork?'':`<button class=\"addset\" onclick=\"addSet('${t.key}')\">+ adicionar série</button>`}</div>`}).join('')}"
+          rep(old_render,new_render,'registrar depois pickers')
+
+          old_cal="const row=(kind,i,label,work=false)=>{const v=currentCalibration[kind][i];return `<div class=\"calibration-row ${work?'work':''}\"><div class=\"tag\">${esc(label)}</div><input inputmode=\"decimal\" placeholder=\"kg\" value=\"${esc(v.kg)}\" oninput=\"setCalibrationVal('${kind}',${i},'kg',this.value)\"><input inputmode=\"numeric\" placeholder=\"reps\" value=\"${esc(v.reps)}\" oninput=\"setCalibrationVal('${kind}',${i},'reps',this.value)\"><input placeholder=\"RIR ?\" value=\"${esc(v.rir||'')}\" oninput=\"setCalibrationVal('${kind}',${i},'rir',this.value)\"></div>`};"
+          new_cal="const row=(kind,i,label,work=false)=>{const v=currentCalibration[kind][i];return `<div class=\"calibration-row ${work?'work':''}\"><div class=\"tag\">${esc(label)}</div>${setPicker('kg',v.kg,`setCalibrationVal('${kind}',${i},'kg',this.value)`)}${setPicker('reps',v.reps,`setCalibrationVal('${kind}',${i},'reps',this.value)`)}${setPicker('rir',v.rir||'',`setCalibrationVal('${kind}',${i},'rir',this.value)`)}</div>`};"
+          rep(old_cal,new_cal,'calibration pickers')
+
+          old_live="<div class=\"live-input-wrap\"><label>Carga</label><input id=\"liveKg\" inputmode=\"decimal\" placeholder=\"kg\" value=\"${esc(val.kg)}\"></div>\n        <div class=\"live-input-wrap\"><label>Reps</label><input id=\"liveReps\" inputmode=\"numeric\" placeholder=\"reps\" value=\"${esc(val.reps)}\"></div>\n        <div class=\"live-input-wrap\"><label>RIR</label><input id=\"liveRir\" placeholder=\"RIR\" value=\"${esc(val.rir||'')}\"></div>"
+          new_live="<div class=\"live-input-wrap\"><label>Carga</label>${setPicker('kg',val.kg,'','liveKg')}</div>\n        <div class=\"live-input-wrap\"><label>Reps</label>${setPicker('reps',val.reps,'','liveReps')}</div>\n        <div class=\"live-input-wrap\"><label>RIR</label>${setPicker('rir',val.rir||'','','liveRir')}</div>"
+          rep(old_live,new_live,'guided mode pickers')
+
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit update
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "feat: use dropdown pickers for workout values"
+          git push
