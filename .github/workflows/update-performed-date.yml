@@ -1,0 +1,83 @@
+name: Apply performed date support
+
+on:
+  push:
+    paths:
+      - '.github/workflows/update-performed-date.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch index.html
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          def rep(old, new, label):
+              global s
+              if old not in s:
+                  raise SystemExit(f'Patch anchor not found: {label}')
+              s = s.replace(old, new, 1)
+
+          rep(
+              '  <div id="lastWorkoutBox" class="training-only"></div>\n  <div class="first-time-note training-only" id="firstTimeNote">',
+              '  <div id="lastWorkoutBox" class="training-only"></div>\n  <div class="field training-only live-hide" id="performedDateField"><label>📅 Dia realizado</label><input id="performedDate" type="date" class="input"><small style="display:block;color:#7f8997;font-size:9px;margin-top:6px;line-height:1.4">Use a data em que você realmente fez este exercício. Pode registrar hoje um treino de dias atrás.</small></div>\n  <div class="first-time-note training-only" id="firstTimeNote">',
+              'performed date field'
+          )
+
+          rep(
+              "function todayKey(){return new Date().toLocaleDateString('sv-SE')}\nfunction load(){",
+              "function todayKey(){return new Date().toLocaleDateString('sv-SE')}\nfunction isoForPerformedDate(day,baseIso=null){const d=/^\\d{4}-\\d{2}-\\d{2}$/.test(day||'')?day:todayKey();const base=baseIso?new Date(baseIso):new Date();const parts=d.split('-').map(Number);return new Date(parts[0],parts[1]-1,parts[2],base.getHours(),base.getMinutes(),base.getSeconds(),base.getMilliseconds()).toISOString()}\nfunction performedDayFromIso(iso){return iso?new Date(iso).toLocaleDateString('sv-SE'):todayKey()}\nfunction load(){",
+              'date helper functions'
+          )
+
+          rep(
+              "  document.getElementById('exerciseName').value='';document.getElementById('exerciseNote').value='';document.getElementById('targetKg').value='';document.getElementById('targetReps').value='';document.getElementById('deleteExerciseBtn').style.display='none';",
+              "  document.getElementById('exerciseName').value='';document.getElementById('exerciseNote').value='';document.getElementById('targetKg').value='';document.getElementById('targetReps').value='';document.getElementById('performedDate').value=todayKey();document.getElementById('deleteExerciseBtn').style.display='none';",
+              'new exercise date default'
+          )
+
+          rep(
+              "    document.getElementById('exerciseNote').value=e.note||'';\n    document.getElementById('targetKg').value=e.targetKg||'';",
+              "    document.getElementById('exerciseNote').value=e.note||'';\n    document.getElementById('performedDate').value=todayKey();\n    document.getElementById('targetKg').value=e.targetKg||'';",
+              'edit exercise date default'
+          )
+
+          rep(
+              "  const usePrep=document.getElementById('usePrep').checked;const now=new Date().toISOString();",
+              "  const usePrep=document.getElementById('usePrep').checked;const now=new Date().toISOString();const performedDay=(document.getElementById('performedDate')?.value||todayKey());",
+              'save performed day'
+          )
+
+          rep(
+              "    if(idx>=0){const old=state.history[idx];state.history[idx]={...old,exerciseId:ex.id,gymId:state.activeGym,muscle,name,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate,editedAt:now}}\n  }else{state.history.push({id:uid(),exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:now,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate})}\n  if(usePrep&&!referenceOnly){markPrepared(muscle);if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle]}recomputePreparedToday();state.activeMuscle=muscle;if(!state.muscleStartedAt)state.muscleStartedAt=now;persist();closeModal('exerciseModal');render();toast(currentEditingHistoryId?'Registro atualizado':referenceOnly?'Referência salva':flags.length?flags[0]+'!':'Carga salva');currentEditingHistoryId=null",
+              "    if(idx>=0){const old=state.history[idx];state.history[idx]={...old,exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay,old.date),workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate,editedAt:now}}\n  }else{state.history.push({id:uid(),exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay),createdAt:now,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate})}\n  if(usePrep&&!referenceOnly&&performedDay===todayKey()){markPrepared(muscle);if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle]}recomputePreparedToday();state.activeMuscle=muscle;if(!state.muscleStartedAt)state.muscleStartedAt=now;persist();closeModal('exerciseModal');render();toast(currentEditingHistoryId?'Registro atualizado':performedDay!==todayKey()?'Treino de '+new Date(isoForPerformedDate(performedDay)).toLocaleDateString('pt-BR')+' salvo':referenceOnly?'Referência salva':flags.length?flags[0]+'!':'Carga salva');currentEditingHistoryId=null",
+              'history date save behavior'
+          )
+
+          rep(
+              "    document.getElementById('usePrep').checked=recordHasPrep(h);document.getElementById('firstTimeNote').classList.remove('show');document.getElementById('targetKgField').style.display='';document.getElementById('targetRepsLabel').textContent='Meta de hoje · reps';\n    document.getElementById('modalTitle').textContent='✎ Editar registro';document.getElementById('modalSubtitle').textContent='Altere apenas o que precisar. A data original será mantida.';",
+              "    document.getElementById('usePrep').checked=recordHasPrep(h);document.getElementById('performedDate').value=performedDayFromIso(h.date);document.getElementById('firstTimeNote').classList.remove('show');document.getElementById('targetKgField').style.display='';document.getElementById('targetRepsLabel').textContent='Meta de reps';\n    document.getElementById('modalTitle').textContent='✎ Editar registro';document.getElementById('modalSubtitle').textContent='Altere cargas, séries ou o dia realizado se precisar.';",
+              'edit historical date'
+          )
+
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit update
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "feat: allow recording workouts on the actual performed date"
+          git push
