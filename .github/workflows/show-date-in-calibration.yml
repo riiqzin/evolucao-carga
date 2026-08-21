@@ -1,0 +1,38 @@
+name: Show performed date in calibration
+
+on:
+  push:
+    paths:
+      - '.github/workflows/show-date-in-calibration.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch calibration date visibility
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          anchor = ".exercise-modal-calibration .calibration-guide{display:block}"
+          if anchor not in s:
+              raise SystemExit('Calibration CSS anchor not found')
+          if ".exercise-modal-calibration #performedDateField{display:block!important}" not in s:
+              s = s.replace(anchor, anchor + ".exercise-modal-calibration #performedDateField{display:block!important}", 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit update
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "fix: show performed date in calibration mode"
+          git push
