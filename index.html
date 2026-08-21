@@ -173,6 +173,7 @@
   <div class="field live-hide"><label>Exercício</label><input id="exerciseName" class="input" placeholder="Ex.: Supino inclinado máquina"></div>
   <div class="toggle live-hide"><input type="checkbox" id="usePrep" onchange="renderSetEditors();if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}"><label for="usePrep">Este exercício começa o músculo e precisa de preparação</label></div>
   <div id="lastWorkoutBox" class="training-only"></div>
+  <div class="field training-only live-hide" id="performedDateField"><label>📅 Dia realizado</label><input id="performedDate" type="date" class="input"><small style="display:block;color:#7f8997;font-size:9px;margin-top:6px;line-height:1.4">Use a data em que você realmente fez este exercício. Pode registrar hoje um treino de dias atrás.</small></div>
   <div class="first-time-note training-only" id="firstTimeNote"><strong>🧭 PRIMEIRA VEZ NESTE EXERCÍCIO NA <span id="firstTimeGym">ACADEMIA</span></strong>Você ainda não tem carga de referência aqui. <b>Não precisa adivinhar.</b> Faça o exercício, descubra suas cargas e registre o que realmente usou. Se a máquina também é nova para você ou o treino saiu do plano, use <b>≈ Referência / calibração</b>.</div>
   <div class="row live-hide">
     <div class="field training-only" id="targetKgField"><label>Carga de trabalho prevista</label><input id="targetKg" class="input" inputmode="decimal" placeholder="Ex.: 70 kg" oninput="updateMethodPreview()"></div>
@@ -233,6 +234,8 @@ let state=load(), restTimer=null, restEnd=0, currentEditingHistoryId=null;
 const SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 function todayKey(){return new Date().toLocaleDateString('sv-SE')}
+function isoForPerformedDate(day,baseIso=null){const d=/^\d{4}-\d{2}-\d{2}$/.test(day||'')?day:todayKey();const base=baseIso?new Date(baseIso):new Date();const parts=d.split('-').map(Number);return new Date(parts[0],parts[1]-1,parts[2],base.getHours(),base.getMinutes(),base.getSeconds(),base.getMilliseconds()).toISOString()}
+function performedDayFromIso(iso){return iso?new Date(iso).toLocaleDateString('sv-SE'):todayKey()}
 function load(){try{const x=JSON.parse(localStorage.getItem('loadProgressApp'));const z=x?{...structuredClone(DEFAULT),...x}:structuredClone(DEFAULT);z.preparedByGym=z.preparedByGym||{};z.exercises=z.exercises||[];z.history=z.history||[];z.sessionMuscles=z.sessionMuscles||[];z.sessionFirstByMuscle=z.sessionFirstByMuscle||{};if(!Array.isArray(z.sessionExerciseIds)){z.sessionExerciseIds=z.sessionMuscles.length?z.exercises.filter(e=>e.gymId===z.activeGym&&z.sessionMuscles.includes(e.muscle)).map(e=>e.id):[]}if(z.sessionDate!==todayKey()){z.sessionDate=todayKey();z.preparedByGym={};z.activeMuscle=null;z.muscleStartedAt=null;z.sessionMuscles=[];z.sessionExerciseIds=[];z.sessionFirstByMuscle={}}return z}catch(e){const z=structuredClone(DEFAULT);z.sessionDate=todayKey();return z}}
 function persist(syncCloud=true){localStorage.setItem('loadProgressApp',JSON.stringify(state));if(syncCloud&&!suppressCloudSync)scheduleCloudSync()}
 
@@ -546,7 +549,7 @@ function openExerciseModal(){
   const modal=document.getElementById('exerciseModal');
   modal.classList.add('new-exercise-mode');modal.classList.remove('exercise-modal-later','exercise-modal-live','exercise-modal-calibration');
   document.getElementById('editId').value='';document.getElementById('entryModeBox').style.display='none';currentEntryMode='later';
-  document.getElementById('exerciseName').value='';document.getElementById('exerciseNote').value='';document.getElementById('targetKg').value='';document.getElementById('targetReps').value='';document.getElementById('deleteExerciseBtn').style.display='none';
+  document.getElementById('exerciseName').value='';document.getElementById('exerciseNote').value='';document.getElementById('targetKg').value='';document.getElementById('targetReps').value='';document.getElementById('performedDate').value=todayKey();document.getElementById('deleteExerciseBtn').style.display='none';
   fillMuscleSelect();if(state.activeMuscle)document.getElementById('exerciseMuscle').value=state.activeMuscle;
   const m=document.getElementById('exerciseMuscle').value;document.getElementById('usePrep').checked=!isPrepared(m);
   window.currentSets={warmup:[blankSet()],feeder:[blankSet(),blankSet()],pap:[blankSet()],work:[{kg:'',reps:'',rir:'1-2'},{kg:'',reps:'',rir:'0'}]};
@@ -588,6 +591,7 @@ function editExercise(id){
     document.getElementById('exerciseMuscle').value=e.muscle;
     document.getElementById('exerciseName').value=e.name;
     document.getElementById('exerciseNote').value=e.note||'';
+    document.getElementById('performedDate').value=todayKey();
     document.getElementById('targetKg').value=e.targetKg||'';
     document.getElementById('targetReps').value=e.targetReps||'';
 
@@ -625,7 +629,7 @@ function removeSet(type,i){if(currentSets[type].length<=1)return;currentSets[typ
 function calcPRs(ex,sets,excludeHistoryId=null){const old=state.history.filter(h=>h.exerciseId===ex.id&&h.id!==excludeHistoryId&&!h.referenceOnly);if(!old.length)return ['PR inicial'];const newMax=Math.max(0,...(sets.work||[]).map(s=>normalizeNum(s.kg)));const oldMax=Math.max(0,...old.map(h=>h.workMax||0));const newVol=(sets.work||[]).reduce((a,s)=>a+normalizeNum(s.kg)*normalizeNum(s.reps),0);const oldVol=Math.max(0,...old.map(h=>(h.sets?.work||[]).reduce((a,s)=>a+normalizeNum(s.kg)*normalizeNum(s.reps),0)));let flags=[];if(newMax>oldMax)flags.push('PR de carga');if(newVol>oldVol)flags.push('PR de volume');const bestRepAtLoad={};old.forEach(h=>(h.sets?.work||[]).forEach(s=>{const k=normalizeNum(s.kg),r=normalizeNum(s.reps);bestRepAtLoad[k]=Math.max(bestRepAtLoad[k]||0,r)}));if((sets.work||[]).some(s=>normalizeNum(s.reps)>(bestRepAtLoad[normalizeNum(s.kg)]||0)&&normalizeNum(s.kg)>0))flags.push('PR de reps');return [...new Set(flags)]}
 function saveExercise(){
   const id=document.getElementById('editId').value;const muscle=document.getElementById('exerciseMuscle').value;const name=document.getElementById('exerciseName').value.trim();if(!name)return toast('Digite o exercício');
-  const usePrep=document.getElementById('usePrep').checked;const now=new Date().toISOString();
+  const usePrep=document.getElementById('usePrep').checked;const now=new Date().toISOString();const performedDay=(document.getElementById('performedDate')?.value||todayKey());
   if(!id){
     const ex={id:uid(),gymId:state.activeGym,muscle,name,usePrep,sets:{warmup:[],feeder:[],pap:[],work:[]},note:document.getElementById('exerciseNote').value.trim(),targetKg:'',targetReps:document.getElementById('targetReps').value.trim(),createdAt:now,updatedAt:now};
     state.exercises.push(ex);persist();closeModal('exerciseModal');render();toast('Exercício cadastrado');return;
@@ -635,9 +639,9 @@ function saveExercise(){
   const referenceOnly=currentEntryMode==='calibration';const approximate=referenceOnly?!!currentCalibration?.approx:false;const flags=referenceOnly?[]:calcPRs(ex,sets,currentEditingHistoryId);const wm=Math.max(0,...(sets.work||[]).map(s=>normalizeNum(s.kg)));
   if(currentEditingHistoryId){
     const idx=state.history.findIndex(h=>h.id===currentEditingHistoryId);
-    if(idx>=0){const old=state.history[idx];state.history[idx]={...old,exerciseId:ex.id,gymId:state.activeGym,muscle,name,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate,editedAt:now}}
-  }else{state.history.push({id:uid(),exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:now,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate})}
-  if(usePrep&&!referenceOnly){markPrepared(muscle);if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle]}recomputePreparedToday();state.activeMuscle=muscle;if(!state.muscleStartedAt)state.muscleStartedAt=now;persist();closeModal('exerciseModal');render();toast(currentEditingHistoryId?'Registro atualizado':referenceOnly?'Referência salva':flags.length?flags[0]+'!':'Carga salva');currentEditingHistoryId=null
+    if(idx>=0){const old=state.history[idx];state.history[idx]={...old,exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay,old.date),workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate,editedAt:now}}
+  }else{state.history.push({id:uid(),exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay),createdAt:now,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate})}
+  if(usePrep&&!referenceOnly&&performedDay===todayKey()){markPrepared(muscle);if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle]}recomputePreparedToday();state.activeMuscle=muscle;if(!state.muscleStartedAt)state.muscleStartedAt=now;persist();closeModal('exerciseModal');render();toast(currentEditingHistoryId?'Registro atualizado':performedDay!==todayKey()?'Treino de '+new Date(isoForPerformedDate(performedDay)).toLocaleDateString('pt-BR')+' salvo':referenceOnly?'Referência salva':flags.length?flags[0]+'!':'Carga salva');currentEditingHistoryId=null
 }
 function openHistoryRecord(historyId){
   try{
@@ -648,8 +652,8 @@ function openHistoryRecord(historyId){
     if(!currentSets.warmup.length)currentSets.warmup.push(blankSet());while(currentSets.feeder.length<2)currentSets.feeder.push(blankSet());if(!currentSets.pap.length)currentSets.pap.push(blankSet());while(currentSets.work.length<2)currentSets.work.push(blankSet());
     const modal=document.getElementById('exerciseModal');modal.classList.remove('new-exercise-mode');document.getElementById('editId').value=e.id;document.getElementById('entryModeBox').style.display='grid';
     fillMuscleSelect();document.getElementById('exerciseMuscle').value=h.muscle||e.muscle;document.getElementById('exerciseName').value=h.name||e.name;document.getElementById('exerciseNote').value=e.note||'';document.getElementById('targetKg').value=e.targetKg||'';document.getElementById('targetReps').value=e.targetReps||'';
-    document.getElementById('usePrep').checked=recordHasPrep(h);document.getElementById('firstTimeNote').classList.remove('show');document.getElementById('targetKgField').style.display='';document.getElementById('targetRepsLabel').textContent='Meta de hoje · reps';
-    document.getElementById('modalTitle').textContent='✎ Editar registro';document.getElementById('modalSubtitle').textContent='Altere apenas o que precisar. A data original será mantida.';document.getElementById('saveExerciseBtn').textContent='Salvar alterações';document.getElementById('deleteExerciseBtn').style.display='none';
+    document.getElementById('usePrep').checked=recordHasPrep(h);document.getElementById('performedDate').value=performedDayFromIso(h.date);document.getElementById('firstTimeNote').classList.remove('show');document.getElementById('targetKgField').style.display='';document.getElementById('targetRepsLabel').textContent='Meta de reps';
+    document.getElementById('modalTitle').textContent='✎ Editar registro';document.getElementById('modalSubtitle').textContent='Altere cargas, séries ou o dia realizado se precisar.';document.getElementById('saveExerciseBtn').textContent='Salvar alterações';document.getElementById('deleteExerciseBtn').style.display='none';
     const rb=document.getElementById('recordBanner');rb.classList.add('show');document.getElementById('recordBannerText').textContent=`${fmtDate(h.date)} · ${e.name}${h.editedAt?' · já editado':''}`;document.getElementById('recordActions').classList.add('show');
     currentCalibration={tests:JSON.parse(JSON.stringify(h.sets?.calibration||[blankSet(),blankSet(),blankSet()])),work:JSON.parse(JSON.stringify(h.sets?.work||[blankSet(),blankSet()])),approx:!!h.approximate};ensureCalibration();
     renderLastWorkoutBox(e);renderSetEditors();updateMethodPreview();setEntryMode(h.referenceOnly?'calibration':'later');openModal('exerciseModal');
