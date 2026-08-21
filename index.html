@@ -101,7 +101,9 @@
     @media(max-width:700px){#historyModal{padding:0;align-items:flex-end}#historyModal .progress-sheet{width:100%;max-height:94vh;border-radius:28px 28px 0 0;border-bottom:0;padding:18px 15px 26px}.progress-top{grid-template-columns:1fr}.progress-overview-stats{grid-template-columns:repeat(2,1fr)}.progress-grid{grid-template-columns:1fr}.progress-history-row{grid-template-columns:72px 1fr}.progress-history-actions{grid-column:1/-1;justify-content:flex-end}.completion-stats{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:420px){.quick-action{padding:11px 5px}.hero{padding:18px}.hero h2{font-size:25px}.hero-symbol{width:44px;height:44px}.gym-switch select{max-width:125px}}
     @media (min-width:620px){.muscles{grid-template-columns:repeat(3,1fr)}.app{padding-top:24px}.fab{bottom:24px}}
-  </style>
+  
+    .sync-card{border:1px solid #33401f;background:linear-gradient(145deg,rgba(216,255,62,.08),#12151a);border-radius:18px;padding:14px;margin:14px 0}.sync-card .sync-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.sync-card strong{font-size:14px}.sync-badge{font-size:10px;font-weight:900;border-radius:999px;padding:6px 8px;background:#1b1f26;color:#aeb7c6;border:1px solid #303642}.sync-badge.ok{color:#9ff3c7;border-color:#27523b;background:#102219}.sync-badge.warn{color:#ffe19a;border-color:#5a4721;background:#221b0f}.sync-help{font-size:11px;line-height:1.45;color:var(--muted);margin:6px 0 10px}.sync-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sync-user{display:none;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:#11141a;margin-top:10px}.sync-user.show{display:flex}.sync-user small{display:block;color:var(--muted);font-size:10px}.sync-user b{display:block;font-size:12px;margin-top:2px;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sync-statusline{font-size:10px;color:var(--muted);margin-top:8px;min-height:14px}
+</style>
 </head>
 <body>
 <div class="app">
@@ -196,10 +198,28 @@
 <div class="modal" id="settingsModal" onclick="backdropClose(event,'settingsModal')"><div class="sheet">
   <div class="grab"></div><div class="sheethead"><div><h3>⚙ Academias e dados</h3><p>Cada academia mantém suas próprias cargas.</p></div><button class="close" onclick="closeModal('settingsModal')">✕</button></div>
   <div class="field"><label>Nova academia</label><div class="row"><input id="newGym" class="input" placeholder="Nome da academia"><button class="btn primary" onclick="addGym()">Adicionar</button></div></div>
+  <div class="sync-card">
+    <div class="sync-head"><strong>☁ Sincronização Supabase</strong><span id="syncBadge" class="sync-badge warn">não configurado</span></div>
+    <div class="sync-help">Salva academias, exercícios, treinos e histórico na nuvem para aparecerem iguais no celular, PC e outros navegadores. O app continua mantendo uma cópia local.</div>
+    <div id="supabaseConfigFields">
+      <div class="field"><label>Project URL</label><input id="supabaseUrl" class="input" placeholder="https://xxxx.supabase.co"></div>
+      <div class="field"><label>Publishable / anon key</label><input id="supabaseKey" class="input" placeholder="sb_publishable_... ou anon key"></div>
+      <button class="btn secondary" style="width:100%" onclick="saveSupabaseConfig()">Salvar conexão</button>
+    </div>
+    <div id="authFields">
+      <div class="field"><label>E-mail</label><input id="syncEmail" type="email" class="input" autocomplete="email" placeholder="seu@email.com"></div>
+      <div class="field"><label>Senha</label><input id="syncPassword" type="password" class="input" autocomplete="current-password" placeholder="mínimo 6 caracteres"></div>
+      <div class="sync-grid"><button class="btn primary" onclick="signInSupabase()">Entrar</button><button class="btn secondary" onclick="signUpSupabase()">Criar conta</button></div>
+    </div>
+    <div id="syncUser" class="sync-user"><div><small>Conectado como</small><b id="syncUserEmail">—</b></div><button class="btn secondary" style="padding:9px 11px" onclick="signOutSupabase()">Sair</button></div>
+    <div id="syncActions" class="sync-grid" style="display:none;margin-top:9px"><button class="btn secondary" onclick="loadCloudState(true)">↓ Baixar da nuvem</button><button class="btn secondary" onclick="syncNow(true)">↑ Enviar agora</button></div>
+    <div id="syncStatusLine" class="sync-statusline">Configure o projeto Supabase para ativar.</div>
+  </div>
   <div class="field"><label>Backup</label><div class="row"><button class="btn secondary" onclick="exportData()">Exportar JSON</button><button class="btn secondary" onclick="document.getElementById('importFile').click()">Importar JSON</button></div><input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)"></div>
   <div class="field"><label>Perigo</label><button class="btn danger" style="width:100%" onclick="resetData()">Apagar todos os dados</button></div>
 </div></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const MUSCLES=['Peito','Costas','Quadríceps','Posterior','Ombros','Bíceps','Tríceps','Panturrilha','Glúteos','Abdômen'];
 const TYPES=[
@@ -210,9 +230,109 @@ const TYPES=[
 ];
 const DEFAULT={gyms:[{id:'evoque',name:'EVOQUE'}],activeGym:'evoque',activeMuscle:null,muscleStartedAt:null,sessionDate:null,sessionMuscles:[],sessionExerciseIds:[],sessionFirstByMuscle:{},preparedByGym:{},exercises:[],history:[]};
 let state=load(), restTimer=null, restEnd=0, currentEditingHistoryId=null;
+const SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
+let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 function todayKey(){return new Date().toLocaleDateString('sv-SE')}
 function load(){try{const x=JSON.parse(localStorage.getItem('loadProgressApp'));const z=x?{...structuredClone(DEFAULT),...x}:structuredClone(DEFAULT);z.preparedByGym=z.preparedByGym||{};z.exercises=z.exercises||[];z.history=z.history||[];z.sessionMuscles=z.sessionMuscles||[];z.sessionFirstByMuscle=z.sessionFirstByMuscle||{};if(!Array.isArray(z.sessionExerciseIds)){z.sessionExerciseIds=z.sessionMuscles.length?z.exercises.filter(e=>e.gymId===z.activeGym&&z.sessionMuscles.includes(e.muscle)).map(e=>e.id):[]}if(z.sessionDate!==todayKey()){z.sessionDate=todayKey();z.preparedByGym={};z.activeMuscle=null;z.muscleStartedAt=null;z.sessionMuscles=[];z.sessionExerciseIds=[];z.sessionFirstByMuscle={}}return z}catch(e){const z=structuredClone(DEFAULT);z.sessionDate=todayKey();return z}}
-function persist(){localStorage.setItem('loadProgressApp',JSON.stringify(state))}
+function persist(syncCloud=true){localStorage.setItem('loadProgressApp',JSON.stringify(state));if(syncCloud&&!suppressCloudSync)scheduleCloudSync()}
+
+function getSupabaseConfig(){
+  try{return JSON.parse(localStorage.getItem(SUPABASE_CONFIG_KEY)||'{}')}catch(e){return {}}
+}
+function setSyncStatus(text,type=''){
+  const line=document.getElementById('syncStatusLine');if(line)line.textContent=text;
+  const badge=document.getElementById('syncBadge');if(!badge)return;
+  badge.className='sync-badge'+(type?' '+type:'');
+  badge.textContent=type==='ok'?'sincronizado':type==='warn'?'atenção':'offline';
+}
+function hydrateSupabaseFields(){
+  const c=getSupabaseConfig();
+  const u=document.getElementById('supabaseUrl'),k=document.getElementById('supabaseKey');
+  if(u&&!u.value)u.value=c.url||''; if(k&&!k.value)k.value=c.key||'';
+}
+function saveSupabaseConfig(){
+  const url=(document.getElementById('supabaseUrl')?.value||'').trim();
+  const key=(document.getElementById('supabaseKey')?.value||'').trim();
+  if(!/^https:\/\/.+\.supabase\.co\/?$/i.test(url))return toast('Project URL inválida');
+  if(key.length<20)return toast('Cole a publishable / anon key');
+  localStorage.setItem(SUPABASE_CONFIG_KEY,JSON.stringify({url,key}));
+  initSupabase(true);toast('Conexão Supabase salva');
+}
+async function initSupabase(reconnect=false){
+  hydrateSupabaseFields();
+  const c=getSupabaseConfig();
+  if(!c.url||!c.key||!window.supabase){setSyncStatus('Configure Project URL e publishable/anon key.','warn');return}
+  try{
+    if(!supabaseClient||reconnect){
+      supabaseClient=window.supabase.createClient(c.url,c.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+      supabaseClient.auth.onAuthStateChange((event,session)=>{currentUser=session?.user||null;refreshSyncUI();if(event==='SIGNED_IN'&&currentUser)loadCloudState(false)});
+    }
+    const {data}=await supabaseClient.auth.getSession();currentUser=data?.session?.user||null;refreshSyncUI();
+    if(currentUser)await loadCloudState(false); else setSyncStatus('Conexão pronta. Entre na sua conta para sincronizar.','warn');
+  }catch(e){console.error('Supabase init',e);setSyncStatus('Falha ao conectar ao Supabase.','warn')}
+}
+function refreshSyncUI(){
+  hydrateSupabaseFields();
+  const signed=!!currentUser;
+  const auth=document.getElementById('authFields'),user=document.getElementById('syncUser'),actions=document.getElementById('syncActions');
+  if(auth)auth.style.display=signed?'none':'block';
+  if(user)user.classList.toggle('show',signed);
+  if(actions)actions.style.display=signed?'grid':'none';
+  const em=document.getElementById('syncUserEmail');if(em)em.textContent=currentUser?.email||'conta conectada';
+  if(signed)setSyncStatus('Conta conectada. Alterações serão enviadas automaticamente.','ok');
+}
+async function signUpSupabase(){
+  if(!supabaseClient){await initSupabase();if(!supabaseClient)return toast('Configure o Supabase primeiro')}
+  const email=(document.getElementById('syncEmail')?.value||'').trim(),password=document.getElementById('syncPassword')?.value||'';
+  if(!email||password.length<6)return toast('Informe e-mail e senha com 6+ caracteres');
+  setSyncStatus('Criando conta…','warn');
+  const {data,error}=await supabaseClient.auth.signUp({email,password});
+  if(error){console.error(error);setSyncStatus(error.message,'warn');return toast('Não foi possível criar a conta')}
+  if(data?.session){currentUser=data.user;refreshSyncUI();await loadCloudState(false);toast('Conta criada e conectada')}
+  else {setSyncStatus('Conta criada. Confirme o e-mail e depois faça login.','warn');toast('Confira seu e-mail para confirmar')}
+}
+async function signInSupabase(){
+  if(!supabaseClient){await initSupabase();if(!supabaseClient)return toast('Configure o Supabase primeiro')}
+  const email=(document.getElementById('syncEmail')?.value||'').trim(),password=document.getElementById('syncPassword')?.value||'';
+  if(!email||!password)return toast('Digite e-mail e senha');
+  setSyncStatus('Entrando…','warn');
+  const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+  if(error){console.error(error);setSyncStatus('Login não realizado: '+error.message,'warn');return toast('E-mail ou senha incorretos')}
+  currentUser=data.user;refreshSyncUI();await loadCloudState(false);toast('Sincronização ativada')
+}
+async function signOutSupabase(){
+  if(!supabaseClient)return;
+  await supabaseClient.auth.signOut();currentUser=null;refreshSyncUI();setSyncStatus('Saiu da conta. Os dados locais continuam neste aparelho.','warn');toast('Conta desconectada')
+}
+function scheduleCloudSync(){
+  if(!supabaseClient||!currentUser)return;
+  clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncNow(false),700)
+}
+async function syncNow(manual=false){
+  if(!supabaseClient||!currentUser){if(manual)toast('Entre na conta primeiro');return}
+  if(syncBusy)return;syncBusy=true;
+  try{
+    setSyncStatus('Enviando alterações…','warn');
+    const updatedAt=new Date().toISOString();
+    const {error}=await supabaseClient.from('workout_app_state').upsert({user_id:currentUser.id,state:state,updated_at:updatedAt},{onConflict:'user_id'});
+    if(error)throw error;cloudUpdatedAt=updatedAt;setSyncStatus('Tudo salvo na nuvem.','ok');if(manual)toast('Dados enviados para a nuvem')
+  }catch(e){console.error('Cloud sync',e);setSyncStatus('Não foi possível sincronizar: '+(e.message||'erro'),'warn');if(manual)toast('Erro ao sincronizar')}
+  finally{syncBusy=false}
+}
+function normalizeLoadedState(raw){
+  const z={...structuredClone(DEFAULT),...(raw||{})};z.preparedByGym=z.preparedByGym||{};z.exercises=z.exercises||[];z.history=z.history||[];z.sessionMuscles=z.sessionMuscles||[];z.sessionFirstByMuscle=z.sessionFirstByMuscle||{};z.sessionExerciseIds=Array.isArray(z.sessionExerciseIds)?z.sessionExerciseIds:[];if(z.sessionDate!==todayKey()){z.sessionDate=todayKey();z.preparedByGym={};z.activeMuscle=null;z.muscleStartedAt=null;z.sessionMuscles=[];z.sessionExerciseIds=[];z.sessionFirstByMuscle={}}return z
+}
+async function loadCloudState(manual=false){
+  if(!supabaseClient||!currentUser){if(manual)toast('Entre na conta primeiro');return}
+  try{
+    setSyncStatus('Buscando dados na nuvem…','warn');
+    const {data,error}=await supabaseClient.from('workout_app_state').select('state,updated_at').eq('user_id',currentUser.id).maybeSingle();
+    if(error)throw error;
+    if(!data){await syncNow(false);setSyncStatus('Primeiro backup criado na nuvem.','ok');if(manual)toast('Seus dados locais foram enviados');return}
+    suppressCloudSync=true;state=normalizeLoadedState(data.state);cloudUpdatedAt=data.updated_at||null;persist(false);suppressCloudSync=false;render();setSyncStatus('Dados carregados e sincronizados.','ok');if(manual)toast('Dados baixados da nuvem')
+  }catch(e){suppressCloudSync=false;console.error('Cloud load',e);setSyncStatus('Erro ao baixar: '+(e.message||'erro'),'warn');if(manual)toast('Erro ao baixar dados')}
+}
+
 function uid(){return Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-4)}
 function muscleIcon(m){return ({'Peito':'◇','Costas':'↔','Quadríceps':'▲','Posterior':'▼','Ombros':'◆','Bíceps':'⌁','Tríceps':'⌁','Panturrilha':'◒','Glúteos':'●','Abdômen':'▦'})[m]||'●'}
 function toggleLibrary(forceOpen=false){const box=document.getElementById('libraryContent'),btn=document.getElementById('libraryToggle');if(!box)return;const open=forceOpen||box.classList.contains('hidden');box.classList.toggle('hidden',!open);btn.textContent=open?'Ocultar':'Mostrar';if(open&&forceOpen)document.querySelector('.library-wrap')?.scrollIntoView({behavior:'smooth',block:'start'})}
@@ -582,7 +702,7 @@ function renderHistory(){
 function startRest(sec){stopRest(false);restEnd=Date.now()+sec*1000;updateRest();restTimer=setInterval(updateRest,250)}
 function updateRest(){const left=Math.max(0,Math.ceil((restEnd-Date.now())/1000));const m=String(Math.floor(left/60)).padStart(2,'0'),s=String(left%60).padStart(2,'0');document.querySelectorAll('.timerdisplay').forEach(el=>el.textContent=`${m}:${s}`);if(left<=0&&restTimer){clearInterval(restTimer);restTimer=null;toast('Descanso finalizado');if(navigator.vibrate)navigator.vibrate([120,80,120])}}
 function stopRest(reset=true){if(restTimer)clearInterval(restTimer);restTimer=null;if(reset)document.querySelectorAll('.timerdisplay').forEach(el=>el.textContent='00:00')}
-function openSettings(){openModal('settingsModal')}
+function openSettings(){openModal('settingsModal');hydrateSupabaseFields();refreshSyncUI()}
 function addGym(){const name=document.getElementById('newGym').value.trim();if(!name)return toast('Digite o nome da academia');const id=uid();state.gyms.push({id,name});state.activeGym=id;state.activeMuscle=null;state.sessionMuscles=[];state.sessionExerciseIds=[];document.getElementById('newGym').value='';persist();render();closeModal('settingsModal');toast('Academia adicionada')}
 function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='evolucao-carga-backup.json';a.click();URL.revokeObjectURL(a.href)}
 function importData(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state={...structuredClone(DEFAULT),...JSON.parse(r.result)};state.preparedByGym=state.preparedByGym||{};state.sessionMuscles=state.sessionMuscles||[];state.sessionExerciseIds=state.sessionExerciseIds||[];state.sessionFirstByMuscle=state.sessionFirstByMuscle||{};persist();render();closeModal('settingsModal');toast('Backup importado')}catch(e){toast('Arquivo inválido')}};r.readAsText(f)}
@@ -592,6 +712,7 @@ function closeModal(id){document.getElementById(id).classList.remove('show');doc
 function backdropClose(ev,id){if(ev.target.id===id)closeModal(id)}
 function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 render();
+initSupabase();
 </script>
 </body>
 </html>
