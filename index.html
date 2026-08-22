@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0b0c0f" />
-  <title>Evolução de Carga</title>
+  <title>Momentum — Treino & Evolução</title>
   <style>
     :root{
       --bg:#090a0d; --card:#111318; --card2:#161922; --line:#242834;
@@ -131,12 +131,101 @@ html{background:#07090c}body{padding-bottom:98px;background:radial-gradient(circ
 @media(max-width:620px){.app{padding:10px 10px 30px}.hero{padding:18px;border-radius:24px}.hero h2{font-size:26px}.hero-symbol{width:42px;height:42px}.progress-overview-stats{grid-template-columns:repeat(2,1fr)}.progress-grid{grid-template-columns:1fr}.progress-highlight-row{grid-template-columns:repeat(3,1fr)}.progress-hero h4{font-size:20px}.cal-day{min-height:34px}}
 @media(min-width:900px){#historyModal{align-items:center;padding:20px}#historyModal .progress-sheet{height:auto;max-height:92vh;border-radius:28px}}
 
+
+/* ===== MOMENTUM 2.0 — COMPLETE VISUAL SYSTEM ===== */
+:root{
+  --bg:#f4f6fb;--card:#ffffff;--card2:#f7f8fc;--line:#e7eaf1;
+  --text:#172033;--muted:#7b8495;--accent:#635bff;--accent2:#8b83ff;
+  --good:#10b981;--danger:#ef5d78;--warning:#f59e0b;
+  --violet:#635bff;--cyan:#2ec5ce;--ink:#172033;--soft:#eef0ff;
+  --radius:24px;--shadow:0 18px 48px rgba(27,39,74,.08)
+}
+*{scrollbar-width:thin;scrollbar-color:#d9ddec transparent}
+html,body{background:#f4f6fb;color:var(--text)}
+body{padding-bottom:112px;background:
+  radial-gradient(circle at 12% -5%,rgba(99,91,255,.12),transparent 26%),
+  radial-gradient(circle at 100% 18%,rgba(46,197,206,.10),transparent 24%),
+  linear-gradient(180deg,#fafbff 0%,#f4f6fb 55%,#f6f7fb 100%)}
+.app{width:min(100%,980px);padding:16px 14px 38px}
+
+/* Top / identity */
+.topbar{position:relative;top:auto;z-index:2;margin:0 0 12px;padding:4px 2px;background:transparent;backdrop-filter:none}
+.brand{gap:10px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#635bff,#8e86ff);color:#fff;font-size:17px;box-shadow:0 10px 24px rgba(99,91,255,.22)}
+.brand h1{font-size:17px;letter-spacing:-.03em;color:#111827}.brand small{font-size:10px;color:#8a93a3;letter-spacing:.03em}
+.iconbtn{width:42px;height:42px;border-radius:14px;border:1px solid #e5e8f0;background:rgba(255,255,255,.82);color:#394155;box-shadow:0 8px 24px rgba(31,41,55,.05)}
+
+/* Gym pill */
+.gym-switch{margin:0 0 12px;padding:9px 10px;border:1px solid #e5e8f0;border-radius:18px;background:rgba(255,255,255,.78);box-shadow:0 8px 24px rgba(31,41,55,.04);backdrop-filter:blur(16px)}
+.gym-switch:before{content:'⌖';width:34px;height:34px;border:0;border-radius:11px;background:#f0efff;color:#635bff}
+.gym-switch .eyebrow{font-size:8px;color:#9ba3b1}.gym-switch .gymname{font-size:14px;color:#232b3d}.gym-switch select{max-width:142px;padding:8px 10px;border:0;border-radius:11px;background:#f3f4f8;color:#343b4d;font-size:11px;font-weight:800;outline:none}
+
+/* New dashboard pulse */
+.v2-dashboard{position:relative;overflow:hidden;display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:center;margin:10px 0 14px;padding:22px;border:1px solid rgba(99,91,255,.16);border-radius:30px;background:linear-gradient(135deg,#ffffff 0%,#f7f5ff 52%,#eef9fb 100%);box-shadow:0 22px 50px rgba(70,73,132,.10);animation:v2Rise .55s cubic-bezier(.2,.75,.25,1) both}
+.v2-dashboard:before{content:'';position:absolute;width:220px;height:220px;border-radius:50%;right:-90px;top:-120px;background:radial-gradient(circle,rgba(99,91,255,.18),rgba(99,91,255,0) 68%)}
+.v2-kicker{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:900;letter-spacing:.15em;color:#635bff}.v2-kicker:before{content:'';width:7px;height:7px;border-radius:50%;background:#635bff;box-shadow:0 0 0 5px rgba(99,91,255,.09)}
+.v2-dashboard h2{margin:8px 0 5px;font-size:27px;line-height:1.05;letter-spacing:-.045em;color:#172033}.v2-dashboard p{margin:0;max-width:470px;color:#7c8595;font-size:11px;line-height:1.5}
+.v2-dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;position:relative;z-index:1}.v2-dash-stats div{padding:12px 9px;border:1px solid rgba(99,91,255,.11);border-radius:16px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px)}.v2-dash-stats strong{display:block;font-size:20px;color:#232b3d;letter-spacing:-.04em}.v2-dash-stats span{display:block;margin-top:3px;color:#8b94a3;font-size:8px;line-height:1.25;text-transform:uppercase;letter-spacing:.06em}
+.v2-ring{position:absolute;right:18px;bottom:-54px;width:105px;height:105px;border-radius:50%;border:14px solid rgba(46,197,206,.09);pointer-events:none}.v2-ring span{position:absolute;inset:14px;border-radius:50%;border:1px solid rgba(99,91,255,.12)}
+
+/* Main workout card = editorial, not old dark dashboard */
+.hero{position:relative;overflow:hidden;border:1px solid #e7eaf2;border-radius:28px;padding:22px;background:#fff;box-shadow:var(--shadow);animation:v2Rise .6s .04s cubic-bezier(.2,.75,.25,1) both}
+.hero:after{content:'';position:absolute;width:150px;height:150px;border-radius:50%;right:-58px;bottom:-72px;background:linear-gradient(145deg,rgba(99,91,255,.10),rgba(46,197,206,.07))}
+.hero.completed{background:linear-gradient(145deg,#fff,#f0fff8);border-color:#d8f2e6}.hero-symbol{width:46px;height:46px;border-radius:15px;background:#171f31;color:#fff;box-shadow:none;font-size:16px}.hero .eyebrow{color:#7b8495;font-size:8px;letter-spacing:.14em}.hero h2{margin:7px 0 6px;color:#141b2d;font-size:30px;letter-spacing:-.05em}.hero p{max-width:520px;color:#7c8595;font-size:12px;line-height:1.5}
+.btn{border-radius:14px;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}.btn:active{transform:scale(.975)}.btn.primary{background:linear-gradient(135deg,#635bff,#756dff);color:#fff;box-shadow:0 12px 28px rgba(99,91,255,.18)}.btn.primary:hover{box-shadow:0 16px 32px rgba(99,91,255,.25);transform:translateY(-1px)}.btn.secondary{background:#f6f7fa;color:#31394b;border:1px solid #e6e9f0}
+
+/* Quick actions = horizontal utility dock */
+.quick-actions{display:flex;gap:8px;margin:12px 0 16px;overflow:auto;padding-bottom:2px;scrollbar-width:none;animation:v2Rise .6s .08s both}.quick-actions::-webkit-scrollbar{display:none}.quick-action{min-width:132px;display:flex;align-items:center;justify-content:flex-start;gap:9px;padding:10px 12px;border-radius:16px;border:1px solid #e6e9f0;background:#fff;color:#323a4c;text-align:left;box-shadow:0 6px 20px rgba(31,41,55,.035);font-size:10px}.quick-action .qi{width:29px;height:29px;flex:0 0 29px;margin:0;border-radius:10px;background:#f1f0ff;color:#635bff;font-size:13px}.quick-action:active{transform:scale(.98)}
+
+/* Library */
+.library-wrap{margin-top:0;padding:15px;border:1px solid #e6e9f1;border-radius:24px;background:rgba(255,255,255,.88);box-shadow:0 14px 40px rgba(31,41,55,.045);animation:v2Rise .6s .12s both}.library-head .visual-icon{background:#eff8fa;border:0;color:#2aaeb7}.library-head h3{color:#20283a;font-size:15px}.library-head p{color:#929aaa}.library-toggle{border:0;background:#f2f3f7;color:#515a6c}.section-title h3{color:#222a3d}.section-title span,.library-note{color:#929aaa}
+.muscle{min-height:78px;border:1px solid #e7eaf1;border-radius:17px;background:#fafbfc;color:#2b3447;box-shadow:none}.muscle.active{border-color:#b9b4ff;background:#f1f0ff;box-shadow:inset 0 0 0 1px rgba(99,91,255,.08)}.muscle.active:after{display:none}.muscle .muscle-icon{background:#eef1f5;color:#6f798a}.muscle.active .muscle-icon{background:#635bff;color:#fff}.muscle small{color:#929aaa}
+.exercise-card{border:1px solid #e6e9f1;border-radius:18px;background:#fff;color:#263044;box-shadow:0 7px 22px rgba(31,41,55,.035)}.exercise-index{background:#f1f0ff;color:#635bff}.exercise-index:before{color:#635bff}.exercise-title small,.chip{color:#8b94a4}.exercise-load{color:#1e2638}.refitem{background:#f7f8fa;border-color:#eceef3}.progressline{background:#eceef4}.progressline i{background:linear-gradient(90deg,#635bff,#2ec5ce)}
+.chip{background:#f6f7fa;border-color:#e8ebf1}.chip.prep{background:#f0efff;border-color:#dedbff;color:#665fc2}.chip.work{background:#eef8fa;border-color:#d9eff2;color:#288b92}
+
+/* Bottom navigation: floating glass dock */
+.fab{display:none!important}.app-nav{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);width:min(calc(100% - 20px),590px);height:72px;padding:6px;border:1px solid rgba(225,228,237,.9);border-radius:24px;background:rgba(255,255,255,.90);box-shadow:0 20px 55px rgba(32,43,75,.14);backdrop-filter:blur(22px);z-index:80}.app-nav button{position:relative;color:#9098a7;border-radius:17px;transition:.2s ease}.app-nav button .nav-ico{font-size:18px}.app-nav button.active{background:#f0efff;color:#635bff}.app-nav button.active:after{content:'';position:absolute;bottom:5px;width:18px;height:3px;border-radius:999px;background:#635bff;animation:v2Nav .25s ease-out}
+
+/* Forms / sheets */
+.modal{background:rgba(22,29,44,.34);backdrop-filter:blur(10px)}.modal.show .sheet{animation:v2Sheet .32s cubic-bezier(.2,.82,.2,1)}.sheet{background:#fff;color:#20283a;border:1px solid #e5e8ef;border-radius:30px 30px 0 0;box-shadow:0 -20px 70px rgba(31,41,55,.12)}.grab{background:#d9dde5}.sheethead h3{color:#1c2435}.sheethead p{color:#8a93a2}.close{background:#f2f3f7;color:#687183}.entry-mode{background:#f4f5f8}.entry-mode button{background:transparent;color:#8a93a2}.entry-mode button.active{background:#fff;color:#635bff;box-shadow:0 5px 15px rgba(31,41,55,.06)}
+.field label{color:#8a93a2}.input,.select,.picker-select{border-color:#e5e8ef;background:#f8f9fb;color:#2a3346}.input:focus,.select:focus,.picker-select:focus{border-color:#a9a4ff;box-shadow:0 0 0 4px rgba(99,91,255,.08)}.picker-select option{background:#fff;color:#283044}.toggle{background:#fafbfc;border-color:#e6e9f0}.toggle label{color:#50596b}.set-group{background:#fbfbfd;border-color:#e8eaf0}.set-group.final-set{background:#fff8fa;border-color:#f2dde3}.set-row input{background:#f8f9fb;color:#273044;border-color:#e4e7ed}.addset{border-color:#d8dce5;color:#6f788a}.remove-set{background:#fff0f3;color:#e65b72}.methodbox{background:#f4f2ff;border-color:#dfdbff}.methodbox strong{color:#635bff}.methodbox p{color:#6f7290}.methodbox button{background:#fff;border-color:#d9d5ff;color:#635bff}.last-workout{background:#f7f8fb;border-color:#e8ebf1}.last-workout small{color:#939baa}.last-workout strong{color:#2c3446}.quick-note,.guidebox,.first-time-note{background:#f8f9fb;border-color:#e5e8ef;color:#717b8c}
+
+/* Today sequence */
+.today-card{border:1px solid #e6e9f0;background:#fff;color:#2a3345;border-radius:18px;box-shadow:0 7px 20px rgba(31,41,55,.035)}.today-card.next{border-color:#bbb6ff;background:linear-gradient(135deg,#f5f3ff,#fff)}.today-card.done{background:#f4fbf7;border-color:#dcefe4}.today-num{background:#eef1f5;color:#606b7d}.today-card.next .today-num{background:#635bff;color:#fff}.today-action{background:#635bff;color:#fff}.today-card.done .today-action{background:#e8ecef;color:#6f7888}.today-main small{color:#8c95a4}.nextbox{background:#f4f2ff;border-color:#dedaff}.nextbox:before{background:#635bff;color:#fff}.nextbox small,.nextbox p{color:#7f7d99}.nextbox strong{color:#282740}.today-progress .bar{background:#eceef4}.today-progress .bar i{background:linear-gradient(90deg,#635bff,#2ec5ce)}
+
+/* Completion */
+.completion-card{background:linear-gradient(145deg,#f1fff7,#fff);border-color:#d8f2e5}.completion-icon{background:#e6f8ef;color:#10b981}.completion-head strong{color:#243041}.completion-head small{color:#81908a}.completion-stat{background:#fff;border-color:#e4eee8}.completion-stat small{color:#8b9893}.primary-mini{background:#635bff!important;color:#fff!important}.secondary-mini{background:#f4f5f8!important;color:#475064!important;border-color:#e6e9f0!important}
+
+/* Progress = new light analytics canvas */
+#historyModal{background:rgba(18,25,39,.32)}#historyModal .progress-sheet{background:#f7f8fc;border-color:#e6e9f0;box-shadow:0 28px 90px rgba(25,35,60,.16)}
+.progress-hero{border:0;border-radius:24px;background:linear-gradient(135deg,#635bff,#827aff 52%,#6bb7d5);color:#fff;box-shadow:0 18px 38px rgba(99,91,255,.20)}.progress-hero small,.progress-hero p{color:rgba(255,255,255,.74)}.progress-hero h4{color:#fff}.progress-score{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(10px)}
+.progress-calendar{background:#fff;border-color:#e6e9f0;border-radius:22px;box-shadow:0 10px 28px rgba(31,41,55,.045)}.cal-head strong{color:#2b3447}.cal-head span{color:#8c95a4}.cal-weekday{color:#a0a8b5}.cal-day{background:#f8f9fb;border-color:#edf0f4;color:#8c95a4}.cal-day.trained{background:#eeecff;border-color:#d2ceff;color:#5f58d7}.cal-day.trained:after{background:#635bff}.cal-day.today{outline:2px solid #b5b1ff;color:#39347a}.cal-stat{background:#f7f8fb}.cal-stat b{color:#283145}.cal-stat span{color:#8e97a5}
+.progress-highlight{background:#fff;border-color:#e7eaf0}.progress-highlight small{color:#919aaa}.progress-highlight strong{color:#2b3446}.progress-highlight .up{color:#10b981}.progress-bigstat{background:#fff;border-color:#e7eaf1}.progress-bigstat small{color:#929baa}.progress-bigstat strong{color:#253044}.progress-bigstat em{color:#919aaa}.progress-ex-card{background:#fff;border-color:#e7eaf1;color:#283145;box-shadow:0 8px 24px rgba(31,41,55,.04)}.progress-ex-card:hover{border-color:#c8c4ff;transform:translateY(-2px);box-shadow:0 12px 30px rgba(99,91,255,.08)}.progress-ex-icon{background:#f1efff;color:#635bff}.progress-ex-main small{color:#919aaa}.progress-ex-load{color:#253044}.progress-ex-meta div{background:#f7f8fb}.progress-ex-meta small{color:#8e97a5}.progress-chart-wrap{background:#fff;border-color:#e6e9f0}.progress-chart .grid{stroke:#eceef4}.progress-chart .line{stroke:#635bff}.progress-chart .dot{fill:#fff;stroke:#635bff}.progress-chart text{fill:#8a93a2}.progress-history-row{background:#fff;border-color:#e7eaf0}.progress-history-actions button{background:#f5f6f8;color:#586174;border-color:#e4e7ed}.progress-back{background:#fff;color:#5d6677;border-color:#e4e7ed}.progress-detail-title strong{color:#283145}.progress-detail-title small{color:#8f98a6}.progress-detail-badge{background:#f0efff;border-color:#dcd8ff;color:#635bff}
+
+/* Guided mode */
+.live-card{border-color:#dfdcff;background:linear-gradient(155deg,#f4f2ff,#fff 48%);box-shadow:0 16px 38px rgba(99,91,255,.08)}.live-phase{border-color:#d7d3ff;background:#eeecff;color:#635bff}.live-card h4{color:#20283a}.live-card .live-hint{color:#7e8796}.live-reference{background:#f7f8fb;border-color:#e6e9f0;color:#7e8796}.live-reference b{color:#283145}.live-input-wrap label{color:#8d96a5}.live-rest{border-color:#e9ebf0}.live-rest-buttons button,.live-secondary-actions button{background:#f5f6f8;color:#5c6577;border-color:#e4e7ed}.live-main-action{background:linear-gradient(135deg,#635bff,#756dff);color:#fff}.timerdisplay{color:#283145}
+
+/* Animations */
+@keyframes v2Rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes v2Sheet{from{opacity:.5;transform:translateY(28px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes v2Nav{from{width:0;opacity:0}to{width:18px;opacity:1}}
+@keyframes v2Pulse{0%,100%{box-shadow:0 12px 28px rgba(99,91,255,.18)}50%{box-shadow:0 16px 36px rgba(99,91,255,.30)}}
+@keyframes v2Pop{0%{transform:scale(.92);opacity:.4}100%{transform:scale(1);opacity:1}}
+.hero .btn.primary{animation:v2Pulse 3.2s ease-in-out infinite}.cal-day.trained{animation:v2Pop .28s ease-out both}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+@media(max-width:700px){
+  .app{padding:12px 10px 34px}.v2-dashboard{grid-template-columns:1fr;padding:18px;border-radius:25px}.v2-dashboard h2{font-size:24px}.v2-dash-stats{gap:6px}.v2-dash-stats div{padding:10px 8px}.v2-dash-stats strong{font-size:18px}.hero{padding:18px;border-radius:24px}.hero h2{font-size:26px}.quick-action{min-width:124px}.app-nav{bottom:9px;height:70px}.progress-overview-stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(min-width:920px){
+  body{padding-bottom:30px}.app{padding:22px 28px 48px 118px;max-width:1180px}.app-nav{left:22px;top:50%;bottom:auto;transform:translateY(-50%);width:76px;height:auto;grid-template-columns:1fr;padding:8px;border-radius:25px}.app-nav button{height:70px}.v2-dashboard{grid-template-columns:1.35fr .9fr}.quick-actions{overflow:visible}.quick-action{flex:1}.library-content .muscles{grid-template-columns:repeat(4,1fr)}#historyModal{align-items:center;padding:24px}#historyModal .progress-sheet{border-radius:30px;height:auto;max-height:92vh}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
   <div class="topbar">
-    <div class="brand"><div class="logo">↗</div><div><h1>Evolução de Carga</h1><small>progressão sem achismo</small></div></div>
+    <div class="brand"><div class="logo">M</div><div><h1>Momentum</h1><small>treino & evolução</small></div></div>
     <button class="iconbtn" onclick="openSettings()" aria-label="Configurações">⚙</button>
   </div>
 
@@ -144,6 +233,20 @@ html{background:#07090c}body{padding-bottom:98px;background:radial-gradient(circ
     <div class="label"><div class="eyebrow">Academia atual</div><div class="gymname" id="gymName">EVOQUE</div></div>
     <select id="gymSelect" onchange="changeGym(this.value)"></select>
   </div>
+
+  <section class="v2-dashboard" id="v2Dashboard">
+    <div class="v2-dash-copy">
+      <span class="v2-kicker">SEU RITMO</span>
+      <h2 id="v2DashTitle">Construindo consistência.</h2>
+      <p id="v2DashSub">Seu treino fica mais claro quando tudo importante aparece primeiro.</p>
+    </div>
+    <div class="v2-dash-stats">
+      <div><strong id="v2WeekCount">0</strong><span>treinos<br>na semana</span></div>
+      <div><strong id="v2MonthCount">0</strong><span>treinos<br>no mês</span></div>
+      <div><strong id="v2PrCount">0</strong><span>PRs<br>registrados</span></div>
+    </div>
+    <div class="v2-ring" aria-hidden="true"><span></span></div>
+  </section>
 
   <section class="hero">
     <div class="hero-top"><div class="hero-symbol">▶</div><div class="hero-copy"><div class="eyebrow" id="todayEyebrow">TREINO DE HOJE</div><h2 id="heroTitle">O que você vai treinar hoje?</h2></div></div>
@@ -175,7 +278,7 @@ html{background:#07090c}body{padding-bottom:98px;background:radial-gradient(circ
 
 <div class="fab"><button class="btn primary" id="fabMain" onclick="doNextAction()">▶ Começar treino</button><button class="btn secondary" onclick="openHistoryModal()">↗ Progresso</button></div>
 <div class="toast" id="toast"></div>
-<nav class="app-nav" id="appNav"><button class="active" onclick="navHome(this)"><span class="nav-ico">⌂</span>Hoje</button><button onclick="navHistory(this)"><span class="nav-ico">▦</span>Histórico</button><button onclick="navProgress(this)"><span class="nav-ico">↗</span>Progresso</button><button onclick="navExercises(this)"><span class="nav-ico">◎</span>Exercícios</button></nav>
+<nav class="app-nav" id="appNav"><button class="active" onclick="navHome(this)"><span class="nav-ico">◉</span>Hoje</button><button onclick="navHistory(this)"><span class="nav-ico">◫</span>Histórico</button><button onclick="navProgress(this)"><span class="nav-ico">⌁</span>Progresso</button><button onclick="navExercises(this)"><span class="nav-ico">◇</span>Exercícios</button></nav>
 
 <div class="modal" id="todayModal" onclick="backdropClose(event,'todayModal')"><div class="sheet">
   <div class="grab"></div><div class="sheethead"><div><h3>▶ Treino de hoje</h3><p>Marque tudo o que vai treinar nesta sessão.</p></div><button class="close" onclick="closeModal('todayModal')">✕</button></div>
@@ -783,6 +886,23 @@ renderProgressOverview=function(){
   const cards=stats.length?stats.map(x=>{const d=x.delta,deltaText=x.first?`${d>0?'+':''}${d.toFixed(1).replace('.0','')} kg`:'—';const lastSummary=x.last?setSummary(x.last.sets):'Sem registro ainda';return `<button class="progress-ex-card" onclick="document.getElementById('historyExercise').value='${x.e.id}';renderHistory()"><div class="progress-ex-head"><div class="progress-ex-icon">${muscleIcon(x.e.muscle)}</div><div class="progress-ex-main"><strong>${esc(x.e.name)}</strong><small>${esc(x.e.muscle)} · ${x.sessions} registro${x.sessions===1?'':'s'}</small></div><div class="progress-ex-load">${x.current||'—'}<small>${x.current?'kg atual':'sem carga'}</small></div></div><div class="progress-ex-meta"><div><small>Melhor</small><b>${x.best?x.best+' kg':'—'}</b></div><div><small>Evolução</small><b class="${d>0?'progress-up':d<0?'progress-down':''}">${deltaText}</b></div><div><small>Último</small><b>${x.last?fmtDate(x.last.date):'—'}</b></div></div><div style="margin-top:8px;color:#75808d;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(lastSummary)}</div></button>`}).join(''):'<div class="empty"><strong>Nenhum exercício cadastrado</strong>Cadastre exercícios para começar a acompanhar sua evolução.</div>';
   document.getElementById('historyContent').innerHTML=`${progressHeroHTML(stats,records)}${monthCalendarHTML()}${progressHighlightsHTML(stats,records)}<div class="progress-overview-stats"><div class="progress-bigstat"><small>Exercícios</small><strong>${xs.length}</strong><em>na ${esc(gym()?.name||'academia')}</em></div><div class="progress-bigstat"><small>Registros</small><strong>${totalSessions}</strong><em>${lastDate?'último '+fmtDate(lastDate):'ainda sem histórico'}</em></div><div class="progress-bigstat"><small>Evoluindo</small><strong>${improved}</strong><em>acima da carga inicial</em></div><div class="progress-bigstat"><small>PRs</small><strong>${prs}</strong><em>marcas registradas</em></div></div><div class="progress-section-label">Todos os exercícios</div><div class="progress-grid">${cards}</div>`
 }
+
+
+function renderV2Dashboard(){
+  const now=new Date(),day=now.getDay(),diff=(day===0?-6:1-day),startWeek=new Date(now);startWeek.setHours(0,0,0,0);startWeek.setDate(now.getDate()+diff);
+  const startMonth=new Date(now.getFullYear(),now.getMonth(),1);
+  const recs=state.history.filter(h=>h.gymId===state.activeGym);
+  const uniqueDays=(arr)=>new Set(arr.map(h=>new Date(h.date).toLocaleDateString('sv-SE'))).size;
+  const week=recs.filter(h=>new Date(h.date)>=startWeek),month=recs.filter(h=>new Date(h.date)>=startMonth);
+  const prs=recs.reduce((n,h)=>n+(h.prFlags||[]).length,0);
+  const wc=uniqueDays(week),mc=uniqueDays(month);
+  const w=document.getElementById('v2WeekCount'),m=document.getElementById('v2MonthCount'),p=document.getElementById('v2PrCount');if(w)w.textContent=wc;if(m)m.textContent=mc;if(p)p.textContent=prs;
+  const title=document.getElementById('v2DashTitle'),sub=document.getElementById('v2DashSub');
+  if(title) title.textContent=wc>=4?'Semana forte. Mantém o ritmo.':wc>=2?'Você entrou no ritmo.':'Começa pequeno. Evolui sempre.';
+  if(sub) sub.textContent=mc?`${mc} dia${mc===1?'':'s'} de treino neste mês · ${prs} PR${prs===1?'':'s'} registrado${prs===1?'':'s'}.`:'Seu histórico começa no primeiro treino registrado.';
+}
+const __momentumRender=render;
+render=function(){__momentumRender();requestAnimationFrame(renderV2Dashboard)};
 
 render();
 initSupabase();
