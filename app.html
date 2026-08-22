@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#080a0d">
+  <title>Evolução de Carga</title>
+  <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#080a0d}iframe{display:block;width:100%;height:100dvh;border:0;background:#080a0d}</style>
+</head>
+<body>
+<iframe id="appFrame" src="/index.html" title="Evolução de Carga"></iframe>
+<script>
+const frame=document.getElementById('appFrame');
+frame.addEventListener('load',()=>{
+  try{
+    const doc=frame.contentDocument;
+    if(!doc)return;
+    if(!doc.querySelector('link[data-redesign]')){
+      const link=doc.createElement('link');link.rel='stylesheet';link.href='/redesign.css';link.dataset.redesign='1';doc.head.appendChild(link);
+    }
+    if(!doc.querySelector('script[data-redesign]')){
+      const script=doc.createElement('script');script.src='/redesign.js';script.dataset.redesign='1';doc.body.appendChild(script);
+    }
+  }catch(e){console.error('Não foi possível aplicar o redesign',e)}
+});
+</script>
+</body>
+</html>
