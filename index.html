@@ -77,7 +77,18 @@
     .exercise-modal-live .quick-note{display:none!important}
     .live-progress{display:flex;align-items:center;gap:10px;margin:8px 0 14px}.live-progress .track{height:7px;flex:1;background:#20242c;border-radius:999px;overflow:hidden}.live-progress .track i{height:100%;display:block;background:var(--accent);border-radius:999px;transition:.2s}.live-progress span{font-size:10px;color:#9da6b4;font-weight:900;white-space:nowrap}
     .live-card{border:1px solid #343b28;background:linear-gradient(155deg,rgba(216,255,62,.08),#11141a 46%);border-radius:24px;padding:16px;box-shadow:0 18px 45px rgba(0,0,0,.18)}
-    .live-phase{display:inline-flex;align-items:center;gap:6px;border:1px solid #4b5820;background:#171c0f;color:var(--accent);border-radius:999px;padding:6px 9px;font-size:9px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.live-card h4{font-size:24px;letter-spacing:-.04em;margin:10px 0 5px}.live-card .live-hint{margin:0;color:#9da6b4;font-size:11px;line-height:1.45}.live-reference{margin:13px 0 2px;padding:10px 11px;background:#0d1015;border:1px solid #292f38;border-radius:14px;color:#9fa8b7;font-size:10px}.live-reference b{color:#e3e8ef}
+    .live-phase{display:inline-flex;align-items:center;gap:6px;border:1px solid #4b5820;background:#171c0f;color:var(--accent);border-radius:999px;padding:6px 9px;font-size:9px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.live-card h4{font-size:24px;letter-spacing:-.04em;margin:10px 0 5px}.live-card .live-hint{margin:0;color:#9da6b4;font-size:11px;line-height:1.45}.live-reference{margin:13px 0 2px;padding:10px 11px;background:#0d1015;border:1px solid #292f38;border-radius:14px;color:#9fa8b7;font-size:10px}.live-reference b{color:#e3e8ef}.live-reference{margin:14px 0 3px;padding:13px 14px;background:linear-gradient(135deg,#11171d,#0b0e12);border:1px solid #35404d;border-radius:16px}.live-last-label{font-size:8px;font-weight:950;letter-spacing:.11em;color:#8f9aaa}.live-last-values{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin-top:6px}.live-last-values strong{font-size:15px;color:#f5f7fb;letter-spacing:-.02em}.live-last-values span{color:#586271}.live-last-stage{margin-top:5px;color:#8f99a7;font-size:9px}
+.live-progress-advice{margin:10px 0 3px;padding:12px 13px;border-radius:15px;border:1px solid #343c2b;background:linear-gradient(135deg,rgba(216,255,62,.08),#0d1013)}
+.live-progress-advice .pa-kicker{font-size:8px;font-weight:950;letter-spacing:.11em;text-transform:uppercase;color:#98a37f}
+.live-progress-advice .pa-title{font-size:14px;font-weight:950;color:#f3f7e7;margin-top:4px}
+.live-progress-advice .pa-text{font-size:9px;line-height:1.45;color:#9fa995;margin-top:4px}
+.live-progress-advice.ready{border-color:#617321;background:linear-gradient(135deg,rgba(216,255,62,.12),#0d100b)}
+.live-progress-advice.ready .pa-kicker,.live-progress-advice.ready .pa-title{color:var(--accent)}
+.live-progress-advice.near{border-color:#4e4a2e;background:linear-gradient(135deg,rgba(255,202,92,.08),#11100c)}
+.live-progress-advice.near .pa-kicker,.live-progress-advice.near .pa-title{color:var(--warning)}
+.chip.progress-ready{color:#e7ff8b;border-color:#65751f;background:rgba(216,255,62,.10)}
+.chip.progress-near{color:#ffd987;border-color:#5b4b24;background:rgba(255,202,92,.08)}
+
     .live-inputs{display:grid;grid-template-columns:1.1fr .85fr .8fr;gap:8px;margin:14px 0}.live-input-wrap label{display:block;color:#7f8998;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px 3px}.live-input-wrap input{width:100%;min-width:0;border:1px solid #343a45;background:#0b0d11;color:#fff;border-radius:14px;padding:14px 10px;font-size:17px;font-weight:900;outline:none}.live-input-wrap input:focus{border-color:#69791f;box-shadow:0 0 0 3px rgba(216,255,62,.06)}
     .live-rest{border-top:1px solid #2a2f38;margin-top:14px;padding-top:13px}.live-rest-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.live-rest-head small{color:#8d96a5;font-size:10px;font-weight:800}.live-rest-head .timerdisplay{font-size:28px;color:#f2f5f8}.live-rest-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:9px}.live-rest-buttons button{border:1px solid #2c323c;background:#15181f;color:#d3d9e2;border-radius:11px;padding:9px 4px;font-size:10px;font-weight:900}
     .live-main-action{width:100%;border:0;border-radius:15px;background:var(--accent);color:#080a04;padding:14px;font-size:13px;font-weight:950;margin-top:14px}.live-secondary-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.live-secondary-actions button{border:1px solid #2e343e;background:#15181f;color:#aeb7c4;border-radius:12px;padding:10px;font-size:10px;font-weight:850}.live-secondary-actions button:disabled{opacity:.35}.live-final-note{margin-top:11px;color:#ffadb8;font-size:10px;font-weight:850}.live-upnext{margin-top:9px;color:#a7b09a;font-size:10px}.live-upnext b{color:#e9f4d1}
@@ -386,6 +397,50 @@ function setPicker(kind,value,handler,id=''){const opts=kind==='kg'?kgOptions(va
 function setSummary(sets){return (sets?.work||[]).filter(s=>s.kg!==''||s.reps!=='').map((s,i)=>`T${i+1}: ${s.kg||'?'}kg × ${s.reps||'?'}${s.rir!==undefined&&s.rir!==''?` · RIR ${s.rir}`:''}`).join(' / ')||'sem registro'}
 function latestHistoryForExercise(id){return state.history.filter(h=>h.exerciseId===id).sort((a,b)=>b.date.localeCompare(a.date))[0]||null}
 function priorHistoryForExercise(id){return state.history.filter(h=>h.exerciseId===id).sort((a,b)=>b.date.localeCompare(a.date))}
+function parseRirValue(v){
+  if(v===undefined||v===null||v==='')return null;
+  if(String(v)==='1-2')return 1.5;
+  const n=normalizeNum(v);return Number.isFinite(n)?n:null;
+}
+function progressionAdviceFromSets(sets){
+  const s=sets?.work?.[0];if(!s)return null;
+  const kg=normalizeNum(s.kg),reps=normalizeNum(s.reps),rir=parseRirValue(s.rir);
+  if(!kg||!reps)return null;
+
+  if(reps>=11){
+    if(rir===0){
+      return {state:'hold',title:'11 reps, mas no limite',text:`Repita ${fmtKg(kg)} kg e tente chegar a 11 reps mantendo 1–2 RIR antes de subir.`,kg,reps,rir};
+    }
+    const next=kg+2.5;
+    return {state:'ready',title:'Carga dominada ✓',text:`Você chegou a ${reps} reps com ${fmtKg(kg)} kg. No próximo treino, experimente ${fmtKg(next)} kg — ou o próximo peso disponível na máquina.`,kg,reps,rir,nextKg:next};
+  }
+
+  const goal=Math.min(11,reps+1);
+  if(reps>=9){
+    return {state:'near',title:reps===10?'Falta só 1 rep':'Quase lá',text:`Mantenha ${fmtKg(kg)} kg e busque ${goal} reps no próximo treino. Ao chegar a 11 com boa execução, suba a carga.`,kg,reps,rir,goal};
+  }
+  return {state:'build',title:'Consolidando a carga',text:`Mantenha ${fmtKg(kg)} kg e tente superar ${reps} reps. Meta imediata: ${goal} reps.`,kg,reps,rir,goal};
+}
+function latestRealHistoryForExercise(id,excludeToday=false){
+  const arr=state.history.filter(h=>h.exerciseId===id&&h.gymId===state.activeGym&&!h.referenceOnly&&(!excludeToday||!isHistoryToday(h))).sort((a,b)=>b.date.localeCompare(a.date));
+  return arr[0]||null;
+}
+function progressionAdviceForExercise(id,excludeToday=false){
+  const h=latestRealHistoryForExercise(id,excludeToday);
+  const advice=progressionAdviceFromSets(h?.sets);
+  return advice?{...advice,history:h}:null;
+}
+function progressionChipHTML(id){
+  const a=progressionAdviceForExercise(id,false);if(!a)return '';
+  if(a.state==='ready')return '<span class="chip progress-ready">↑ SUBIR CARGA</span>';
+  if(a.state==='near')return '<span class="chip progress-near">11 REPS À VISTA</span>';
+  return '';
+}
+function progressionNextStepText(id){
+  const a=progressionAdviceForExercise(id,false);
+  return a?a.title+' · '+a.text:'Continue registrando para o app sugerir o próximo passo.';
+}
+
 function isHistoryToday(h){return h&&new Date(h.date).toLocaleDateString('sv-SE')===todayKey()}
 function doneToday(id){return state.history.some(h=>h.exerciseId===id&&h.gymId===state.activeGym&&isHistoryToday(h))}
 function todayHistoryForExercise(id){return state.history.filter(h=>h.exerciseId===id&&h.gymId===state.activeGym&&isHistoryToday(h)).sort((a,b)=>b.date.localeCompare(a.date))[0]||null}
@@ -432,7 +487,7 @@ function renderExercises(){
   document.getElementById('exerciseSectionTitle').textContent=state.activeMuscle?state.activeMuscle:'Todos os exercícios';
   document.getElementById('exerciseCount').textContent=arr.length+' cadastrado'+(arr.length===1?'':'s');
   if(!arr.length){root.innerHTML=`<div class="empty"><strong>Nenhum exercício por aqui</strong>${state.activeMuscle?'Cadastre o primeiro exercício de '+state.activeMuscle+'.':'Cadastre seus exercícios para começar.'}</div>`;return}
-  root.innerHTML=arr.map((e,i)=>{const hist=priorHistoryForExercise(e.id);const last=hist[0];const cur=last?.workMax??workMax(e);const best=Math.max(0,...hist.map(h=>h.workMax||0));const lastText=last?setSummary(last.sets):setSummary(e.sets);const target=(e.targetKg||e.targetReps)?`${e.targetKg?e.targetKg+' kg':''}${e.targetKg&&e.targetReps?' · ':''}${e.targetReps?e.targetReps+' reps':''}`:'não definida';const pr=last?.prFlags?.length?`<span class="prbadge">★ ${last.prFlags[0]}</span>`:'';const pct=best?Math.max(8,Math.min(100,(cur/best)*100)):45;return `<div class="exercise-card" onclick="editExercise('${e.id}')"><div class="exercise-head"><div class="exercise-index">${i+1}</div><div class="exercise-title"><strong>${esc(e.name)}</strong><small>${e.muscle}${e.note?' · '+esc(e.note):''}</small></div><div class="exercise-load">${cur||'—'}<small>${cur?'kg':''}</small></div></div><div class="chips">${doneToday(e.id)?'<span class="chip prep">FEITO HOJE ✓</span>':isPrepared(e.muscle)?'<span class="chip prep">PREPARADO ✓</span>':e.usePrep?'<span class="chip prep">PREPARAÇÃO</span>':''}<span class="chip work">TRABALHO</span>${pr}</div><div class="refbox"><div class="refitem"><small>Último registro</small><strong>${esc(lastText)}</strong></div><div class="refitem"><small>Meta</small><strong>${esc(target)}</strong></div></div><div class="progressline"><i style="width:${pct}%"></i></div></div>`}).join('');
+  root.innerHTML=arr.map((e,i)=>{const hist=priorHistoryForExercise(e.id);const last=hist[0];const cur=last?.workMax??workMax(e);const best=Math.max(0,...hist.map(h=>h.workMax||0));const lastText=last?setSummary(last.sets):setSummary(e.sets);const target=(e.targetKg||e.targetReps)?`${e.targetKg?e.targetKg+' kg':''}${e.targetKg&&e.targetReps?' · ':''}${e.targetReps?e.targetReps+' reps':''}`:'não definida';const pr=last?.prFlags?.length?`<span class="prbadge">★ ${last.prFlags[0]}</span>`:'';const progression=progressionChipHTML(e.id);const nextStep=progressionNextStepText(e.id);const pct=best?Math.max(8,Math.min(100,(cur/best)*100)):45;return `<div class="exercise-card" onclick="editExercise('${e.id}')"><div class="exercise-head"><div class="exercise-index">${i+1}</div><div class="exercise-title"><strong>${esc(e.name)}</strong><small>${e.muscle}${e.note?' · '+esc(e.note):''}</small></div><div class="exercise-load">${cur||'—'}<small>${cur?'kg':''}</small></div></div><div class="chips">${doneToday(e.id)?'<span class="chip prep">FEITO HOJE ✓</span>':isPrepared(e.muscle)?'<span class="chip prep">PREPARADO ✓</span>':e.usePrep?'<span class="chip prep">PREPARAÇÃO</span>':''}<span class="chip work">TRABALHO</span>${progression}${pr}</div><div class="refbox"><div class="refitem"><small>Último registro</small><strong>${esc(lastText)}</strong></div><div class="refitem"><small>Próximo passo</small><strong>${esc(nextStep)}</strong></div></div><div class="progressline"><i style="width:${pct}%"></i></div></div>`}).join('');
 }
 function filterMuscle(m){state.activeMuscle=state.activeMuscle===m?null:m;persist();render()}
 function startExercise(id){
@@ -482,9 +537,37 @@ function liveSteps(){
 }
 function livePreviousReference(step){
   const id=document.getElementById('editId')?.value;
-  const h=latestHistoryForExercise(id); const s=h?.sets?.[step.type]?.[step.index];
-  if(!s || (s.kg===''&&s.reps==='')) return '';
-  return `Última vez nesta etapa: <b>${esc(s.kg||'?')} kg × ${esc(s.reps||'?')}${s.rir!==''&&s.rir!==undefined?' · RIR '+esc(s.rir):''}</b>`;
+  if(!id)return '';
+
+  // Prioriza o último treino REAL deste exercício na academia atual.
+  // Se só existir calibração/referência, usa ela como fallback.
+  const history=state.history
+    .filter(h=>h.exerciseId===id&&h.gymId===state.activeGym&&!isHistoryToday(h))
+    .sort((a,b)=>b.date.localeCompare(a.date));
+  const h=history.find(x=>!x.referenceOnly)||history[0]||null;
+  const s=h?.sets?.[step.type]?.[step.index];
+
+  if(!s || (s.kg===''&&s.reps===''&&s.rir===''))return '';
+
+  const bits=[];
+  if(s.kg!=='')bits.push(`<strong>${esc(s.kg)} kg</strong>`);
+  if(s.reps!=='')bits.push(`<strong>${esc(s.reps)} reps</strong>`);
+  if(s.rir!==''&&s.rir!==undefined)bits.push(`<strong>RIR ${esc(s.rir)}</strong>`);
+
+  return `<div class="live-last-label">ÚLTIMO TREINO · ${fmtDate(h.date)}</div>
+    <div class="live-last-values">${bits.join('<span>·</span>')}</div>
+    <div class="live-last-stage">${esc(step.label)} anterior${h.referenceOnly?' · referência aproximada':''}</div>`;
+}
+function liveProgressionAdvice(step){
+  if(step.type!=='work'||step.index!==0)return '';
+  const id=document.getElementById('editId')?.value;if(!id)return '';
+  const a=progressionAdviceForExercise(id,true);if(!a)return '';
+  const cls=a.state==='ready'?'ready':a.state==='near'?'near':'';
+  return `<div class="live-progress-advice ${cls}">
+    <div class="pa-kicker">${a.state==='ready'?'PRÓXIMO PASSO':a.state==='near'?'META DE HOJE':'PROGRESSÃO'}</div>
+    <div class="pa-title">${esc(a.title)}</div>
+    <div class="pa-text">${esc(a.text)}</div>
+  </div>`;
 }
 function renderLiveGuide(){
   const root=document.getElementById('liveGuide'); if(!root||currentEntryMode!=='live')return;
@@ -499,7 +582,8 @@ function renderLiveGuide(){
       <span class="live-phase">${st.icon} ${esc(st.label)}</span>
       <h4>${esc(document.getElementById('exerciseName')?.value||'Exercício')}</h4>
       <p class="live-hint">${esc(st.hint)}</p>
-      ${ref?`<div class="live-reference">↺ ${ref}</div>`:''}
+      ${ref?`<div class="live-reference">${ref}</div>`:''}
+      ${liveProgressionAdvice(st)}
       <div class="live-inputs">
         <div class="live-input-wrap"><label>Carga</label>${setPicker('kg',val.kg,'','liveKg')}</div>
         <div class="live-input-wrap"><label>Reps</label>${setPicker('reps',val.reps,'','liveReps')}</div>
@@ -675,7 +759,7 @@ function saveExercise(){
     const idx=state.history.findIndex(h=>h.id===currentEditingHistoryId);
     if(idx>=0){const old=state.history[idx];state.history[idx]={...old,exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay,old.date),workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate,editedAt:now}}
   }else{state.history.push({id:uid(),exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay),createdAt:now,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate})}
-  if(usePrep&&!referenceOnly&&performedDay===todayKey()){markPrepared(muscle);if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle]}recomputePreparedToday();state.activeMuscle=muscle;if(!state.muscleStartedAt)state.muscleStartedAt=now;persist();closeModal('exerciseModal');render();toast(currentEditingHistoryId?'Registro atualizado':performedDay!==todayKey()?'Treino de '+new Date(isoForPerformedDate(performedDay)).toLocaleDateString('pt-BR')+' salvo':referenceOnly?'Referência salva':flags.length?flags[0]+'!':'Carga salva');currentEditingHistoryId=null
+  if(usePrep&&!referenceOnly&&performedDay===todayKey()){markPrepared(muscle);if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle]}recomputePreparedToday();state.activeMuscle=muscle;if(!state.muscleStartedAt)state.muscleStartedAt=now;const progressionNow=!referenceOnly?progressionAdviceFromSets(sets):null;persist();closeModal('exerciseModal');render();toast(currentEditingHistoryId?'Registro atualizado':performedDay!==todayKey()?'Treino de '+new Date(isoForPerformedDate(performedDay)).toLocaleDateString('pt-BR')+' salvo':referenceOnly?'Referência salva':progressionNow?.state==='ready'?'Carga dominada! Próximo treino: subir peso ↑':progressionNow?.state==='near'?'Quase lá — falta pouco para subir a carga':flags.length?flags[0]+'!':'Carga salva');currentEditingHistoryId=null
 }
 function openHistoryRecord(historyId){
   try{
