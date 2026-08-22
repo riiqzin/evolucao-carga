@@ -1,0 +1,123 @@
+name: Redesign workout app UI
+
+on:
+  push:
+    paths:
+      - '.github/workflows/redesign-app-ui.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  redesign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply redesign
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+
+          css = r'''
+/* ===== APP REDESIGN 2026 ===== */
+:root{
+  --bg:#080a0d;--card:#11151a;--card2:#151a20;--line:#242b34;
+  --text:#f7f8fa;--muted:#8b95a3;--accent:#cfff39;--accent2:#b7ff00;
+  --good:#62e6a6;--danger:#ff6b7d;--warning:#ffd166;--radius:24px;
+}
+body{padding-bottom:104px;background:radial-gradient(circle at 30% -10%,rgba(207,255,57,.08),transparent 32%),#080a0d}
+.app{width:min(100%,920px);padding:14px 14px 40px}
+.topbar{margin-bottom:12px;position:sticky;top:0;z-index:12;padding:8px 0;background:linear-gradient(180deg,rgba(8,10,13,.97),rgba(8,10,13,.82),transparent);backdrop-filter:blur(14px)}
+.logo{width:38px;height:38px;border-radius:13px;font-size:17px;box-shadow:none}.brand h1{font-size:15px}.brand small{font-size:10px}.iconbtn{width:40px;height:40px;border-radius:13px;background:#11151a}
+.gym-switch{margin:2px 0 12px;padding:8px 9px 8px 12px;border-radius:16px;background:#0f1318}.gym-switch:before{width:30px;height:30px;border-radius:10px}.gym-switch .eyebrow{font-size:9px}.gym-switch .gymname{font-size:14px}.gym-switch select{padding:8px 10px;border-radius:10px;font-size:12px}
+.hero{padding:22px;border-radius:28px;border:1px solid #293126;background:linear-gradient(145deg,rgba(207,255,57,.13),rgba(17,21,26,.98) 50%);box-shadow:0 18px 55px rgba(0,0,0,.25)}
+.hero-top{align-items:center}.hero-symbol{width:46px;height:46px;border-radius:15px;font-size:18px}.hero h2{font-size:30px;margin:7px 0 6px}.hero p{font-size:13px;line-height:1.5;color:#a8b1bd;margin-bottom:16px}.hero .eyebrow{font-size:10px}
+.hero-actions .btn{min-width:0}.btn{border-radius:14px;padding:13px 15px}.btn.primary{box-shadow:0 8px 22px rgba(207,255,57,.12)}
+.quick-actions{margin:12px 0 18px;gap:8px}.quick-action{padding:10px 7px;border-radius:15px;background:#101419;border-color:#222933}.quick-action .qi{width:28px;height:28px;margin-bottom:5px}
+.library-wrap{padding:13px;border-radius:22px;background:#0d1115;border-color:#202730}.library-head h3{font-size:15px}.library-head p{font-size:9px}.library-toggle{padding:8px 10px;border-radius:10px}
+.muscles{gap:8px}.muscle{min-height:76px;padding:12px;border-radius:17px;background:#101419}.exercise-list{gap:8px}.exercise-card{border-radius:18px;padding:13px;background:#101419}.exercise-card:hover{border-color:#3c4622}.exercise-load{font-size:18px}.refbox{gap:6px}.refitem{padding:8px;border-radius:11px}
+
+/* App-like bottom navigation */
+.fab{display:none!important}
+.app-nav{position:fixed;left:50%;bottom:10px;transform:translateX(-50%);width:min(calc(100% - 18px),560px);height:68px;background:rgba(16,20,25,.96);border:1px solid #272e38;border-radius:22px;padding:7px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;z-index:45;box-shadow:0 18px 60px rgba(0,0,0,.45);backdrop-filter:blur(18px)}
+.app-nav button{border:0;background:transparent;color:#7f8996;border-radius:15px;font-size:9px;font-weight:850;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.app-nav button span{font-size:18px;line-height:1}.app-nav button.active{background:rgba(207,255,57,.11);color:var(--accent)}
+
+/* Today workout feels like a real app */
+.today-progress{margin-top:12px}.nextbox{border-radius:16px;padding:12px}.today-list{gap:7px}.today-card{border-radius:16px;padding:11px}.today-card.next{box-shadow:inset 0 0 0 1px rgba(207,255,57,.08)}.today-num{width:32px;height:32px;flex-basis:32px}.today-action{padding:8px 9px}
+.completion-card{border-radius:18px}.completion-stats{gap:6px}.completion-stat{border-radius:11px}
+
+/* Forms: tactile, less spreadsheet-like */
+.sheet{border-radius:30px 30px 0 0;padding:18px 15px 32px}.sheethead h3{font-size:21px}.entry-mode{background:#0c1014;padding:4px;border-radius:14px;gap:4px}.entry-mode button{border:0;border-radius:11px;padding:11px 7px}.entry-mode button.active{background:#202719;color:var(--accent);box-shadow:none}.set-group{border-radius:17px}.picker-select{min-height:43px}
+
+/* Progress rebuilt as an insight-first screen */
+#historyModal{padding:0;align-items:flex-end;background:rgba(3,5,7,.86)}
+#historyModal .progress-sheet{width:min(100%,980px);height:min(94vh,900px);max-height:94vh;border-radius:30px 30px 0 0;padding:18px 15px 34px;background:#0b0e12;border-color:#252c35}
+.progress-top{grid-template-columns:1fr;gap:10px;margin-bottom:10px}.progress-top>div:first-child{display:none}.progress-top .field{margin:0}.progress-top .field label{font-size:9px}.progress-top select{background:#11161b}
+.progress-overview-stats{grid-template-columns:repeat(4,1fr);gap:7px;margin:8px 0 14px}.progress-bigstat{padding:11px;border-radius:15px;background:#11161b}.progress-bigstat strong{font-size:19px}.progress-bigstat em{font-size:8px}
+.progress-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.progress-ex-card{border-radius:17px;padding:12px;background:#101419}.progress-ex-meta{gap:5px}.progress-ex-meta div{padding:6px;border-radius:9px}.progress-ex-load{font-size:17px}
+.progress-section-label{margin:17px 2px 8px;font-size:9px;letter-spacing:.12em}
+.progress-hero{border:1px solid #34421f;background:linear-gradient(140deg,rgba(207,255,57,.14),rgba(15,20,24,.96));border-radius:22px;padding:16px;margin-bottom:10px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.progress-hero small{display:block;color:#a9b59b;font-size:9px;text-transform:uppercase;letter-spacing:.12em;font-weight:900}.progress-hero h4{margin:5px 0 0;font-size:23px;letter-spacing:-.04em}.progress-hero p{margin:5px 0 0;color:#9ca7b3;font-size:10px}.progress-score{width:54px;height:54px;border-radius:17px;background:var(--accent);color:#0a0d06;display:grid;place-items:center;font-size:18px;font-weight:950}.progress-score span{font-size:8px;display:block;font-weight:900;text-align:center;margin-top:-8px}
+.progress-calendar{border:1px solid #222a33;background:#0f1419;border-radius:20px;padding:13px;margin:10px 0 14px}.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.cal-head strong{font-size:13px}.cal-head span{font-size:9px;color:#8c96a4}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.cal-weekday{text-align:center;font-size:8px;color:#687382;font-weight:900;padding:2px 0}.cal-day{aspect-ratio:1;min-height:30px;border-radius:10px;background:#0c1014;border:1px solid #1b222a;display:grid;place-items:center;font-size:9px;color:#798391;position:relative}.cal-day.trained{background:rgba(207,255,57,.12);border-color:#4a5723;color:#e9ffc1;font-weight:900}.cal-day.trained:after{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);position:absolute;bottom:4px}.cal-day.today{outline:1px solid #9ebd2e;color:#fff}.cal-day.empty{visibility:hidden}.cal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}.cal-stat{padding:8px;background:#0b0f13;border-radius:10px;text-align:center}.cal-stat b{display:block;font-size:13px}.cal-stat span{display:block;color:#75808d;font-size:8px;margin-top:2px}
+.progress-highlight-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:9px 0 14px}.progress-highlight{padding:10px;border:1px solid #242b34;background:#11161b;border-radius:14px}.progress-highlight small{display:block;color:#7e8996;font-size:8px}.progress-highlight strong{display:block;font-size:12px;margin-top:3px}.progress-highlight .up{color:var(--good)}
+.progress-chart-wrap{border-radius:17px;padding:11px}.progress-chart{height:210px}.progress-history-row{border-radius:14px;background:#101419}
+
+@media(max-width:620px){
+  .app{padding:10px 10px 32px}.hero{padding:18px;border-radius:24px}.hero h2{font-size:26px}.hero-symbol{width:42px;height:42px}.quick-actions{grid-template-columns:repeat(3,1fr)}
+  .progress-overview-stats{grid-template-columns:repeat(2,1fr)}.progress-grid{grid-template-columns:1fr}.progress-highlight-row{grid-template-columns:1fr 1fr 1fr}.progress-hero h4{font-size:20px}.cal-day{min-height:34px}.app-nav{bottom:8px}
+}
+@media(min-width:900px){#historyModal{align-items:center;padding:20px}#historyModal .progress-sheet{height:auto;max-height:92vh;border-radius:28px}}
+'''
+          if '/* ===== APP REDESIGN 2026 ===== */' not in s:
+              s=s.replace('</style>',css+'\n</style>',1)
+
+          nav='''<nav class="app-nav" id="appNav"><button class="active" onclick="navHome(this)"><span>⌂</span>Hoje</button><button onclick="navHistory(this)"><span>▦</span>Histórico</button><button onclick="navProgress(this)"><span>↗</span>Progresso</button><button onclick="navExercises(this)"><span>◎</span>Exercícios</button></nav>'''
+          if 'id="appNav"' not in s:
+              s=s.replace('<div class="toast" id="toast"></div>','<div class="toast" id="toast"></div>\n'+nav,1)
+
+          helper_anchor="function muscleIcon(m){"
+          helpers=r'''function setNavActive(btn){document.querySelectorAll('#appNav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active')}
+function navHome(btn){setNavActive(btn);document.querySelector('.hero')?.scrollIntoView({behavior:'smooth',block:'start'})}
+function navHistory(btn){setNavActive(btn);openHistoryModal();setTimeout(()=>document.querySelector('.progress-calendar')?.scrollIntoView({behavior:'smooth',block:'start'}),120)}
+function navProgress(btn){setNavActive(btn);openHistoryModal()}
+function navExercises(btn){setNavActive(btn);toggleLibrary(true)}
+function monthCalendarHTML(){
+  const now=new Date(),y=now.getFullYear(),m=now.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0),days=last.getDate();
+  const trained=new Set(state.history.filter(h=>h.gymId===state.activeGym).map(h=>new Date(h.date).toLocaleDateString('sv-SE')));
+  const monthKeys=[...trained].filter(k=>{const d=new Date(k+'T12:00:00');return d.getFullYear()===y&&d.getMonth()===m});
+  const weekdays=['D','S','T','Q','Q','S','S'];let cells=weekdays.map(x=>`<div class="cal-weekday">${x}</div>`).join('');
+  for(let i=0;i<first.getDay();i++)cells+='<div class="cal-day empty"></div>';
+  for(let d=1;d<=days;d++){const key=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;cells+=`<div class="cal-day ${trained.has(key)?'trained':''} ${key===todayKey()?'today':''}">${d}</div>`}
+  const weeks=Math.max(1,Math.round(days/7)),freq=(monthKeys.length/weeks).toFixed(1).replace('.0','');
+  const ordered=[...trained].sort();let streak=0;for(let i=ordered.length-1;i>=0;i--){const cur=new Date(ordered[i]+'T12:00:00');const prev=i>0?new Date(ordered[i-1]+'T12:00:00'):null;if(i===ordered.length-1)streak=1;else if(prev&&(cur-prev)<=86400000*2)streak++;else break}
+  const monthName=now.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+  return `<div class="progress-calendar"><div class="cal-head"><strong>Frequência de treino</strong><span>${monthName}</span></div><div class="cal-grid">${cells}</div><div class="cal-stats"><div class="cal-stat"><b>${monthKeys.length}</b><span>treinos no mês</span></div><div class="cal-stat"><b>${freq}x</b><span>média por semana</span></div><div class="cal-stat"><b>${streak}</b><span>sequência recente</span></div></div></div>`
+}
+function progressHeroHTML(stats,records){
+  const withData=stats.filter(x=>x.sessions>0),improved=withData.filter(x=>x.delta>0).length,prs=records.reduce((n,h)=>n+(h.prFlags||[]).length,0),score=Math.min(99,Math.max(0,Math.round((improved*12)+(prs*4)+(records.length*1.5))));
+  const best=withData.slice().sort((a,b)=>b.delta-a.delta)[0];
+  return `<div class="progress-hero"><div><small>SEU MOMENTO</small><h4>${improved?improved+' exercícios evoluindo':'Construindo sua base'}</h4><p>${best&&best.delta>0?`Maior avanço: ${esc(best.e.name)} +${best.delta.toFixed(1).replace('.0','')} kg`:'Continue registrando para enxergar sua evolução.'}</p></div><div class="progress-score"><div>${score}<span>score</span></div></div></div>`
+}
+'''
+          if 'function monthCalendarHTML()' not in s:
+              s=s.replace(helper_anchor,helpers+helper_anchor,1)
+
+          old="""document.getElementById('historyContent').innerHTML=`<div class=\"progress-overview-stats\"><div class=\"progress-bigstat\"><small>Exercícios</small><strong>${xs.length}</strong><em>na ${esc(gym()?.name||'academia')}</em></div><div class=\"progress-bigstat\"><small>Registros</small><strong>${totalSessions}</strong><em>${lastDate?'último '+fmtDate(lastDate):'ainda sem histórico'}</em></div><div class=\"progress-bigstat\"><small>Evoluindo</small><strong>${improved}</strong><em>exercícios acima do início</em></div><div class=\"progress-bigstat\"><small>PRs</small><strong>${prs}</strong><em>marcas registradas</em></div></div><div class=\"progress-section-label\">Todos os exercícios</div><div class=\"progress-grid\">${cards}</div>`;"""
+          new="""document.getElementById('historyContent').innerHTML=`${progressHeroHTML(stats,records)}${monthCalendarHTML()}<div class=\"progress-highlight-row\"><div class=\"progress-highlight\"><small>Treinos registrados</small><strong>${totalSessions}</strong></div><div class=\"progress-highlight\"><small>PRs conquistados</small><strong class=\"up\">${prs}</strong></div><div class=\"progress-highlight\"><small>Evoluindo</small><strong>${improved}/${xs.length}</strong></div></div><div class=\"progress-section-label\">EXERCÍCIOS E EVOLUÇÃO</div><div class=\"progress-grid\">${cards}</div>`;"""
+          if old in s:
+              s=s.replace(old,new,1)
+          elif 'progressHeroHTML(stats,records)' not in s:
+              raise SystemExit('renderProgressOverview anchor changed')
+
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit redesign
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "feat: redesign app navigation and progress experience"
+          git push
