@@ -77,7 +77,7 @@
     .exercise-modal-live .quick-note{display:none!important}
     .live-progress{display:flex;align-items:center;gap:10px;margin:8px 0 14px}.live-progress .track{height:7px;flex:1;background:#20242c;border-radius:999px;overflow:hidden}.live-progress .track i{height:100%;display:block;background:var(--accent);border-radius:999px;transition:.2s}.live-progress span{font-size:10px;color:#9da6b4;font-weight:900;white-space:nowrap}
     .live-card{border:1px solid #343b28;background:linear-gradient(155deg,rgba(216,255,62,.08),#11141a 46%);border-radius:24px;padding:16px;box-shadow:0 18px 45px rgba(0,0,0,.18)}
-    .live-phase{display:inline-flex;align-items:center;gap:6px;border:1px solid #4b5820;background:#171c0f;color:var(--accent);border-radius:999px;padding:6px 9px;font-size:9px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.live-card h4{font-size:24px;letter-spacing:-.04em;margin:10px 0 5px}.live-card .live-hint{margin:0;color:#9da6b4;font-size:11px;line-height:1.45}.live-reference{margin:13px 0 2px;padding:10px 11px;background:#0d1015;border:1px solid #292f38;border-radius:14px;color:#9fa8b7;font-size:10px}.live-reference b{color:#e3e8ef}.live-reference{margin:14px 0 3px;padding:13px 14px;background:linear-gradient(135deg,#11171d,#0b0e12);border:1px solid #35404d;border-radius:16px}.live-last-label{font-size:8px;font-weight:950;letter-spacing:.11em;color:#8f9aaa}.live-last-values{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin-top:6px}.live-last-values strong{font-size:15px;color:#f5f7fb;letter-spacing:-.02em}.live-last-values span{color:#586271}.live-last-stage{margin-top:5px;color:#8f99a7;font-size:9px}
+    .live-phase{display:inline-flex;align-items:center;gap:6px;border:1px solid #4b5820;background:#171c0f;color:var(--accent);border-radius:999px;padding:6px 9px;font-size:9px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.live-card h4{font-size:24px;letter-spacing:-.04em;margin:10px 0 5px}.live-card .live-hint{margin:0;color:#9da6b4;font-size:11px;line-height:1.45}.live-reference{margin:13px 0 2px;padding:10px 11px;background:#0d1015;border:1px solid #292f38;border-radius:14px;color:#9fa8b7;font-size:10px}.live-reference b{color:#e3e8ef}.live-reference{margin:14px 0 3px;padding:13px 14px;background:linear-gradient(135deg,#11171d,#0b0e12);border:1px solid #35404d;border-radius:16px}.live-last-label{font-size:8px;font-weight:950;letter-spacing:.11em;color:#8f9aaa}.live-last-values{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin-top:6px}.live-last-values strong{font-size:15px;color:#f5f7fb;letter-spacing:-.02em}.live-last-values span{color:#586271}.live-last-stage{margin-top:5px;color:#8f99a7;font-size:9px}.live-last-stage.missing{color:#c7a66a}
 .live-progress-advice{margin:10px 0 3px;padding:12px 13px;border-radius:15px;border:1px solid #343c2b;background:linear-gradient(135deg,rgba(216,255,62,.08),#0d1013)}
 .live-progress-advice .pa-kicker{font-size:8px;font-weight:950;letter-spacing:.11em;text-transform:uppercase;color:#98a37f}
 .live-progress-advice .pa-title{font-size:14px;font-weight:950;color:#f3f7e7;margin-top:4px}
@@ -397,6 +397,14 @@ function setPicker(kind,value,handler,id=''){const opts=kind==='kg'?kgOptions(va
 function setSummary(sets){return (sets?.work||[]).filter(s=>s.kg!==''||s.reps!=='').map((s,i)=>`T${i+1}: ${s.kg||'?'}kg × ${s.reps||'?'}${s.rir!==undefined&&s.rir!==''?` · RIR ${s.rir}`:''}`).join(' / ')||'sem registro'}
 function latestHistoryForExercise(id){return state.history.filter(h=>h.exerciseId===id).sort((a,b)=>b.date.localeCompare(a.date))[0]||null}
 function priorHistoryForExercise(id){return state.history.filter(h=>h.exerciseId===id).sort((a,b)=>b.date.localeCompare(a.date))}
+function priorHistoryForExerciseRobust(id){
+  const ex=state.exercises.find(e=>e.id===id);
+  const byId=state.history.filter(h=>h.exerciseId===id&&h.gymId===state.activeGym).sort((a,b)=>b.date.localeCompare(a.date));
+  if(byId.length||!ex)return byId;
+  const name=normalizeExerciseName(ex.name);
+  return state.history.filter(h=>h.gymId===state.activeGym&&normalizeExerciseName(h.name)===name&&(h.muscle||'')===ex.muscle).sort((a,b)=>b.date.localeCompare(a.date));
+}
+
 function parseRirValue(v){
   if(v===undefined||v===null||v==='')return null;
   if(String(v)==='1-2')return 1.5;
@@ -535,28 +543,52 @@ function liveSteps(){
   (currentSets.work||[]).slice(0,2).forEach((_,i)=>out.push({type:'work',index:i,label:'Trabalho '+(i+1),hint:i===0?'Série forte. Termine com aproximadamente 1–2 RIR.':'SÉRIE FINAL. Vá até a falha técnica mantendo a execução.',rest:i===0?180:0,icon:i===0?'●':'🔥'}));
   return out;
 }
+function normalizeExerciseName(v){
+  return String(v||'').trim().toLocaleLowerCase('pt-BR').replace(/\s+/g,' ');
+}
+function historyCandidatesForCurrentExercise(){
+  const id=document.getElementById('editId')?.value||'';
+  const name=normalizeExerciseName(document.getElementById('exerciseName')?.value||'');
+  const muscle=document.getElementById('exerciseMuscle')?.value||'';
+  const byId=state.history.filter(h=>h.gymId===state.activeGym&&h.exerciseId===id&&!isHistoryToday(h));
+  if(byId.length)return byId.sort((a,b)=>b.date.localeCompare(a.date));
+
+  // Fallback for exercises recreated/duplicated while keeping the same identity to the user.
+  return state.history.filter(h=>
+    h.gymId===state.activeGym &&
+    !isHistoryToday(h) &&
+    normalizeExerciseName(h.name)===name &&
+    (h.muscle||'')===muscle
+  ).sort((a,b)=>b.date.localeCompare(a.date));
+}
 function livePreviousReference(step){
-  const id=document.getElementById('editId')?.value;
-  if(!id)return '';
+  const candidates=historyCandidatesForCurrentExercise();
+  if(!candidates.length)return '';
 
-  // Prioriza o último treino REAL deste exercício na academia atual.
-  // Se só existir calibração/referência, usa ela como fallback.
-  const history=state.history
-    .filter(h=>h.exerciseId===id&&h.gymId===state.activeGym&&!isHistoryToday(h))
-    .sort((a,b)=>b.date.localeCompare(a.date));
-  const h=history.find(x=>!x.referenceOnly)||history[0]||null;
-  const s=h?.sets?.[step.type]?.[step.index];
+  // Prefer the latest REAL workout that actually has this stage populated.
+  const withStage=candidates.find(h=>{
+    const s=h?.sets?.[step.type]?.[step.index];
+    return !!s && (s.kg!==''||s.reps!==''||s.rir!=='');
+  }) || candidates.find(h=>{
+    const s=h?.sets?.[step.type]?.[step.index];
+    return !!s && (s.kg!==''||s.reps!==''||s.rir!=='');
+  });
 
-  if(!s || (s.kg===''&&s.reps===''&&s.rir===''))return '';
+  if(withStage){
+    const s=withStage.sets[step.type][step.index];
+    const bits=[];
+    if(s.kg!=='')bits.push(`<strong>${esc(s.kg)} kg</strong>`);
+    if(s.reps!=='')bits.push(`<strong>${esc(s.reps)} reps</strong>`);
+    if(s.rir!==''&&s.rir!==undefined)bits.push(`<strong>RIR ${esc(s.rir)}</strong>`);
+    return `<div class="live-last-label">${withStage.referenceOnly?'ÚLTIMA REFERÊNCIA':'ÚLTIMO TREINO'} · ${fmtDate(withStage.date)}</div>
+      <div class="live-last-values">${bits.join('<span>·</span>')}</div>
+      <div class="live-last-stage">${esc(step.label)} anterior${withStage.referenceOnly?' · referência aproximada':''}</div>`;
+  }
 
-  const bits=[];
-  if(s.kg!=='')bits.push(`<strong>${esc(s.kg)} kg</strong>`);
-  if(s.reps!=='')bits.push(`<strong>${esc(s.reps)} reps</strong>`);
-  if(s.rir!==''&&s.rir!==undefined)bits.push(`<strong>RIR ${esc(s.rir)}</strong>`);
-
+  // We did find previous history, but this exact stage was never stored.
+  const h=candidates[0];
   return `<div class="live-last-label">ÚLTIMO TREINO · ${fmtDate(h.date)}</div>
-    <div class="live-last-values">${bits.join('<span>·</span>')}</div>
-    <div class="live-last-stage">${esc(step.label)} anterior${h.referenceOnly?' · referência aproximada':''}</div>`;
+    <div class="live-last-stage">Sem ${esc(step.label.toLowerCase())} registrado nesse histórico.</div>`;
 }
 function liveProgressionAdvice(step){
   if(step.type!=='work'||step.index!==0)return '';
@@ -736,30 +768,15 @@ function editExercise(id){
     toast('Erro ao abrir o exercício. Atualizei a tela para evitar esse bug.');
   }
 }
-function renderLastWorkoutBox(e){const root=document.getElementById('lastWorkoutBox');if(!e){root.innerHTML='';document.getElementById('copyLastBtn').style.display='none';return}const h=latestHistoryForExercise(e.id);document.getElementById('copyLastBtn').style.display=h?'block':'none';root.innerHTML=h?`<div class="last-workout"><small>${h.referenceOnly?'≈ Última referência':'Último treino'} · ${fmtDate(h.date)}</small><strong>${esc(setSummary(h.sets))}</strong>${h.referenceOnly?'<span class="refbadge">carga aproximada</span>':''}</div>`:`<div class="last-workout"><small>Último treino</small><strong>Ainda sem histórico.</strong></div>`}
-function updateMethodPreview(){const el=document.getElementById('methodPreview');if(!el)return;const kg=normalizeNum(document.getElementById('targetKg')?.value);if(!kg){el.textContent='Feeder 1 ≈ 50% · Feeder 2 ≈ 70% · PAP 90–95% · Trabalho 1 em RIR 1–2 · Trabalho 2 até a falha técnica.';return}const feeder1=kg*.50,feeder2=kg*.70,papLo=kg*.90,papHi=kg*.95;el.textContent=`Para ${fmtKg(kg)} kg de trabalho: F1 ≈ ${fmtKg(feeder1)} kg · F2 ≈ ${fmtKg(feeder2)} kg · PAP ≈ ${fmtKg(papLo)}–${fmtKg(papHi)} kg · T1 RIR 1–2 · T2 RIR 0.`}
-function applyMethodSuggestions(){if(!window.currentSets)return;const kg=normalizeNum(document.getElementById('targetKg')?.value);if(!currentSets.work)currentSets.work=[];while(currentSets.work.length<2)currentSets.work.push(blankSet());currentSets.work[0].rir='1-2';currentSets.work[1].rir='0';if(kg){if(!currentSets.feeder)currentSets.feeder=[];while(currentSets.feeder.length<2)currentSets.feeder.push(blankSet());if(!currentSets.pap||!currentSets.pap.length)currentSets.pap=[blankSet()];currentSets.feeder[0].kg=fmtKg(kg*.50);currentSets.feeder[1].kg=fmtKg(kg*.70);currentSets.pap[0].kg=fmtKg(kg*.925);if(currentSets.feeder[0].reps==='')currentSets.feeder[0].reps='5-6';if(currentSets.feeder[1].reps==='')currentSets.feeder[1].reps='3-5';if(currentSets.pap[0].reps==='')currentSets.pap[0].reps='1-2';currentSets.work[0].kg=currentSets.work[0].kg||fmtKg(kg);currentSets.work[1].kg=currentSets.work[1].kg||fmtKg(kg)}renderSetEditors();updateMethodPreview();toast(kg?'Método aplicado':'RIR das séries de trabalho aplicado')}
-function onMuscleFormChange(){const id=document.getElementById('editId').value;const m=document.getElementById('exerciseMuscle').value;document.getElementById('usePrep').checked=!isPrepared(m)&&!muscleHasPrep(m,id);renderSetEditors();if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}}
-function renderSetEditors(){const prep=document.getElementById('usePrep').checked;const root=document.getElementById('setsEditor');const types=TYPES.filter(t=>prep||t.key==='work');root.innerHTML=types.map(t=>{const arr=currentSets[t.key]||[];const isWork=t.key==='work';return `<div class="set-group ${isWork?'final-set':''}"><div class="set-group-head"><div><strong>${t.label}</strong><small> · ${t.hint}</small></div><small>${arr.length} série(s)</small></div><div>${arr.map((sv,i)=>`${isWork?`<div class="series-label ${i===0?'work1':'work2'}">${i===0?'Trabalho 1 · forte, guardar 1–2 reps':'Trabalho 2 · série final, falha técnica'}</div>`:''}<div class="set-row">${setPicker('kg',sv.kg,`setVal('${t.key}',${i},'kg',this.value)`)}${setPicker('reps',sv.reps,`setVal('${t.key}',${i},'reps',this.value)`)}${setPicker('rir',sv.rir||'',`setVal('${t.key}',${i},'rir',this.value)`)}<button class="remove-set" onclick="removeSet('${t.key}',${i})">−</button></div>`).join('')}</div>${isWork?'':`<button class="addset" onclick="addSet('${t.key}')">+ adicionar série</button>`}</div>`}).join('')}
-function setVal(type,i,key,val){currentSets[type][i][key]=val}
-function addSet(type){currentSets[type].push(blankSet());renderSetEditors()}
-function removeSet(type,i){if(currentSets[type].length<=1)return;currentSets[type].splice(i,1);renderSetEditors()}
-function calcPRs(ex,sets,excludeHistoryId=null){const old=state.history.filter(h=>h.exerciseId===ex.id&&h.id!==excludeHistoryId&&!h.referenceOnly);if(!old.length)return ['PR inicial'];const newMax=Math.max(0,...(sets.work||[]).map(s=>normalizeNum(s.kg)));const oldMax=Math.max(0,...old.map(h=>h.workMax||0));const newVol=(sets.work||[]).reduce((a,s)=>a+normalizeNum(s.kg)*normalizeNum(s.reps),0);const oldVol=Math.max(0,...old.map(h=>(h.sets?.work||[]).reduce((a,s)=>a+normalizeNum(s.kg)*normalizeNum(s.reps),0)));let flags=[];if(newMax>oldMax)flags.push('PR de carga');if(newVol>oldVol)flags.push('PR de volume');const bestRepAtLoad={};old.forEach(h=>(h.sets?.work||[]).forEach(s=>{const k=normalizeNum(s.kg),r=normalizeNum(s.reps);bestRepAtLoad[k]=Math.max(bestRepAtLoad[k]||0,r)}));if((sets.work||[]).some(s=>normalizeNum(s.reps)>(bestRepAtLoad[normalizeNum(s.kg)]||0)&&normalizeNum(s.kg)>0))flags.push('PR de reps');return [...new Set(flags)]}
-function saveExercise(){
-  const id=document.getElementById('editId').value;const muscle=document.getElementById('exerciseMuscle').value;const name=document.getElementById('exerciseName').value.trim();if(!name)return toast('Digite o exercício');
-  const usePrep=document.getElementById('usePrep').checked;const now=new Date().toISOString();const performedDay=(document.getElementById('performedDate')?.value||todayKey());
-  if(!id){
-    const ex={id:uid(),gymId:state.activeGym,muscle,name,usePrep,sets:{warmup:[],feeder:[],pap:[],work:[]},note:document.getElementById('exerciseNote').value.trim(),targetKg:'',targetReps:document.getElementById('targetReps').value.trim(),createdAt:now,updatedAt:now};
-    state.exercises.push(ex);persist();closeModal('exerciseModal');render();toast('Exercício cadastrado');return;
-  }
-  const sets={};TYPES.forEach(t=>sets[t.key]=(currentSets[t.key]||[]).filter(s=>s.kg!==''||s.reps!==''||s.rir!==''));if(Array.isArray(currentSets.calibration))sets.calibration=currentSets.calibration.filter(s=>s.kg!==''||s.reps!==''||s.rir!=='');if(!usePrep){sets.warmup=[];sets.feeder=[];sets.pap=[]}
-  let ex;if(id){ex=state.exercises.find(e=>e.id===id);Object.assign(ex,{muscle,name,usePrep:usePrep||isPrepared(muscle),sets,note:document.getElementById('exerciseNote').value.trim(),targetKg:document.getElementById('targetKg').value.trim(),targetReps:document.getElementById('targetReps').value.trim(),updatedAt:now})}
-  const referenceOnly=currentEntryMode==='calibration';const approximate=referenceOnly?!!currentCalibration?.approx:false;const flags=referenceOnly?[]:calcPRs(ex,sets,currentEditingHistoryId);const wm=Math.max(0,...(sets.work||[]).map(s=>normalizeNum(s.kg)));
-  if(currentEditingHistoryId){
-    const idx=state.history.findIndex(h=>h.id===currentEditingHistoryId);
-    if(idx>=0){const old=state.history[idx];state.history[idx]={...old,exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay,old.date),workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate,editedAt:now}}
-  }else{state.history.push({id:uid(),exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay),createdAt:now,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate})}
-  if(usePrep&&!referenceOnly&&performedDay===todayKey()){markPrepared(muscle);if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle]}recomputePreparedToday();state.activeMuscle=muscle;if(!state.muscleStartedAt)state.muscleStartedAt=now;const progressionNow=!referenceOnly?progressionAdviceFromSets(sets):null;persist();closeModal('exerciseModal');render();toast(currentEditingHistoryId?'Registro atualizado':performedDay!==todayKey()?'Treino de '+new Date(isoForPerformedDate(performedDay)).toLocaleDateString('pt-BR')+' salvo':referenceOnly?'Referência salva':progressionNow?.state==='ready'?'Carga dominada! Próximo treino: subir peso ↑':progressionNow?.state==='near'?'Quase lá — falta pouco para subir a carga':flags.length?flags[0]+'!':'Carga salva');currentEditingHistoryId=null
+function renderLastWorkoutBox(e){
+  const root=document.getElementById('lastWorkoutBox');
+  if(!e){root.innerHTML='';document.getElementById('copyLastBtn').style.display='none';return}
+  const list=priorHistoryForExerciseRobust(e.id);
+  const h=list[0]||null;
+  document.getElementById('copyLastBtn').style.display=h?'block':'none';
+  root.innerHTML=h
+    ?`<div class="last-workout"><small>${h.referenceOnly?'≈ Última referência':'Último treino'} · ${fmtDate(h.date)}</small><strong>${esc(setSummary(h.sets))}</strong>${h.referenceOnly?'<span class="refbadge">carga aproximada</span>':''}</div>`
+    :`<div class="last-workout"><small>Último treino</small><strong>Ainda sem histórico.</strong></div>`;
 }
 function openHistoryRecord(historyId){
   try{
