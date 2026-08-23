@@ -2078,6 +2078,447 @@ body:before{display:none!important}
 .heatmap-copy>p{
   max-width:470px;
 }
+
+/* =========================================================
+   APP VISUAL SYSTEM 5.5 — exercise identity everywhere
+   ========================================================= */
+.app-ex-thumb{
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  flex:0 0 auto;
+  background:#eef1f2;
+  border:1px solid #222c34;
+  border-radius:12px;
+}
+.app-ex-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+.app-ex-thumb>b{
+  display:none;
+  color:var(--app-accent);
+  font-size:14px;
+}
+.app-ex-thumb.placeholder,
+.app-ex-thumb.broken{
+  background:#10171d;
+}
+.app-ex-thumb.placeholder>b,
+.app-ex-thumb.broken>b{display:block}
+.app-ex-thumb.small{width:50px;height:50px;border-radius:14px}
+.app-ex-thumb.tiny{width:38px;height:38px;border-radius:11px}
+.app-ex-thumb.picker{width:48px;height:48px;border-radius:13px}
+.app-ex-thumb.list{width:54px;height:54px;border-radius:14px}
+.app-ex-thumb.progress{width:58px;height:58px;border-radius:15px}
+.app-ex-thumb.context{
+  width:100%;
+  height:100%;
+  border:0;
+  border-radius:12px;
+  background:#f1f3f4;
+}
+
+/* concise "where it hits" language reused all over the app */
+.app-ex-emphasis-inline{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  margin-top:6px;
+}
+.app-ex-emphasis-inline>span{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  min-width:0;
+  padding:3px 6px;
+  border:1px solid #253039;
+  border-radius:999px;
+  background:#11171c;
+  color:#7f8b96;
+  font-size:6px;
+  line-height:1;
+  white-space:nowrap;
+}
+.app-ex-emphasis-inline>span.main{
+  border-color:rgba(203,255,56,.18);
+  background:#141b0f;
+  color:#cde87e;
+}
+.app-ex-emphasis-inline b{
+  max-width:120px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-weight:850;
+}
+.app-ex-emphasis-inline i{
+  font-style:normal;
+  color:var(--app-accent);
+  font-weight:950;
+}
+
+/* universal exercise context panel */
+.app-ex-context{
+  display:grid;
+  grid-template-columns:96px minmax(0,1fr);
+  gap:12px;
+  margin-top:13px;
+  padding:10px;
+  border:1px solid #202a31;
+  border-radius:17px;
+  background:#0b1014;
+}
+.app-ex-context.compact{
+  grid-template-columns:92px minmax(0,1fr);
+  margin-top:13px;
+  background:linear-gradient(130deg,#0e1512,#0b1014 48%);
+  border-color:rgba(203,255,56,.14);
+}
+.app-ex-context.full{
+  grid-template-columns:minmax(150px,.9fr) minmax(0,1.1fr);
+  padding:12px;
+}
+.app-ex-context-visual{min-width:0}
+.app-ex-context.compact .app-ex-context-visual>.app-ex-thumb{
+  width:92px;height:92px;border-radius:13px;
+}
+.app-ex-context-pair{
+  height:148px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+.app-ex-context-pair>div{
+  min-width:0;
+  display:grid;
+  grid-template-rows:18px 1fr;
+  padding:6px;
+  border:1px solid #1d252c;
+  border-radius:13px;
+  background:#f0f2f3;
+  overflow:hidden;
+}
+.app-ex-context-pair>div>small{
+  color:#5c6670;
+  font-size:6px;
+  font-weight:950;
+  letter-spacing:.12em;
+  z-index:1;
+}
+.app-ex-context-copy{min-width:0}
+.app-ex-context-copy>small{
+  display:block;
+  color:var(--app-accent);
+  font-size:6px;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+.app-ex-context-copy>strong{
+  display:block;
+  margin-top:3px;
+  color:#edf2f5;
+  font-size:11px;
+  line-height:1.15;
+}
+.app-ex-region-list{
+  display:grid;
+  gap:5px;
+  margin-top:9px;
+}
+.app-ex-region-list>div{
+  display:grid;
+  grid-template-columns:minmax(72px,1fr) minmax(48px,.8fr) 27px;
+  gap:6px;
+  align-items:center;
+}
+.app-ex-region-list span{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:#788590;
+  font-size:6px;
+  font-weight:800;
+}
+.app-ex-region-list>div.primary span{color:#dceeb1}
+.app-ex-region-list em{
+  height:5px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#182027;
+}
+.app-ex-region-list em i{
+  display:block;
+  height:100%;
+  border-radius:inherit;
+  background:var(--app-accent);
+}
+.app-ex-region-list b{
+  text-align:right;
+  color:#7a8691;
+  font-size:6px;
+}
+.app-ex-region-list>div.primary b{color:var(--app-accent)}
+.app-ex-context-copy>button{
+  width:100%;
+  min-height:33px;
+  margin-top:9px;
+  padding:0 10px;
+  border:1px solid #27323a;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#11181d;
+  color:#cfd7de;
+  font-size:7px;
+  font-weight:900;
+}
+.app-ex-context-copy>button span{font-size:15px;color:#69747f}
+
+/* registration modal: make visual identity part of the workout itself */
+.exercise-context-host{
+  margin:-2px 0 14px;
+}
+.exercise-context-host:empty{display:none!important}
+#exerciseModal .exercise-context-host .app-ex-context{
+  margin-top:0;
+}
+#exerciseModal.exercise-modal-live .exercise-context-host{
+  margin-top:8px;
+}
+
+/* HOME current exercise */
+.now-exercise-card>.app-ex-context{
+  margin-top:14px;
+}
+.now-exercise-card>.app-ex-context .app-ex-context-copy>strong{
+  display:none;
+}
+
+/* HOME upcoming */
+.upcoming-row{
+  grid-template-columns:52px minmax(0,1fr) auto!important;
+}
+.upcoming-visual{
+  position:relative;
+  width:50px;height:50px;
+}
+.upcoming-visual>span{
+  position:absolute;
+  left:-3px;bottom:-3px;
+  min-width:18px;height:18px;
+  padding:0 4px;
+  border-radius:7px;
+  display:grid;place-items:center;
+  background:#111820;
+  border:1px solid #29333c;
+  color:#d9e1e7;
+  font-size:6px;
+  font-weight:950;
+  z-index:2;
+}
+.upcoming-copy .app-ex-emphasis-inline{
+  margin-top:5px;
+}
+.upcoming-copy .app-ex-emphasis-inline>span{
+  max-width:135px;
+}
+
+/* completed workout rows */
+.finished-visual{
+  position:relative;
+  width:38px;height:38px;
+}
+.finished-visual>b{
+  position:absolute;
+  right:-3px;bottom:-3px;
+  width:17px;height:17px;
+  border-radius:7px;
+  display:grid;place-items:center;
+  background:#17220e;
+  border:1px solid rgba(203,255,56,.23);
+  color:var(--app-accent);
+  font-size:7px;
+}
+.finished-copy .app-ex-emphasis-inline{margin-top:4px}
+.finished-copy .app-ex-emphasis-inline>span{font-size:5.5px;padding:2px 5px}
+
+/* drag/reorder */
+.reorder-item{
+  grid-template-columns:42px 42px minmax(0,1fr)!important;
+}
+.reorder-thumb{
+  position:relative;
+  width:38px;height:38px;
+}
+.reorder-thumb>span{
+  position:absolute;
+  left:-3px;bottom:-3px;
+  width:16px;height:16px;
+  display:grid;place-items:center;
+  border-radius:6px;
+  background:#0d1318;
+  border:1px solid #263039;
+  color:#798591;
+  font-size:6px;
+  font-weight:950;
+}
+
+/* today exercise picker */
+.exercise-pick label{
+  min-height:62px;
+  padding:7px!important;
+  gap:9px!important;
+}
+.exercise-pick label:before{
+  order:3;
+  margin-left:auto;
+  flex:0 0 22px;
+}
+.exercise-pick-copy{
+  min-width:0;
+  display:flex;
+  flex:1;
+  flex-direction:column;
+}
+.exercise-pick-copy strong{
+  color:#e6ebef;
+  font-size:10px;
+  line-height:1.2;
+}
+.exercise-pick-copy small{
+  margin-top:4px;
+  color:#75818c;
+  font-size:6.5px;
+  line-height:1.25;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* regular exercise list */
+.exercise-card-visual{
+  position:relative;
+  width:54px;height:54px;
+  flex:0 0 54px;
+}
+.exercise-card-visual>span{
+  position:absolute;
+  left:-4px;bottom:-4px;
+  min-width:18px;height:18px;
+  display:grid;place-items:center;
+  border-radius:7px;
+  background:#111820;
+  border:1px solid #29333c;
+  color:#d9e1e7;
+  font-size:6px;
+  font-weight:950;
+}
+.exercise-title .app-ex-emphasis-inline{margin-top:5px}
+.exercise-title .app-ex-emphasis-inline>span{font-size:5.5px}
+.exercise-head{align-items:center!important}
+
+/* Progress muscle exercise rows */
+.progress-exercise-thumb{
+  position:relative;
+  width:58px;height:58px;
+  flex:0 0 58px;
+}
+.progress-exercise-thumb>span{
+  position:absolute;
+  left:-4px;bottom:-3px;
+  min-width:20px;height:18px;
+  padding:0 4px;
+  border-radius:7px;
+  display:grid;place-items:center;
+  background:#10171d;
+  border:1px solid #29343c;
+  color:#cbd4dc;
+  font-size:6px;
+  font-weight:950;
+}
+.progress-exercise-name .app-ex-emphasis-inline{
+  margin-top:5px;
+}
+.progress-exercise-name .app-ex-emphasis-inline>span{
+  font-size:5.5px;
+  padding:2px 5px;
+}
+
+/* Progress detail gets a proper exercise identity panel before the charts */
+.progress-exercise-visual{
+  margin:8px 0 12px;
+  padding:13px;
+  border:1px solid #202a31;
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 0 0,rgba(203,255,56,.05),transparent 46%),
+    #0d1216;
+}
+.progress-exercise-visual-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.progress-exercise-visual-head small{
+  display:block;
+  color:var(--app-accent);
+  font-size:6px;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+.progress-exercise-visual-head strong{
+  display:block;
+  margin-top:3px;
+  color:#e8edf1;
+  font-size:10px;
+}
+.progress-exercise-visual-head>button{
+  min-height:30px;
+  padding:0 9px;
+  border:1px solid #29343c;
+  border-radius:9px;
+  background:#12191e;
+  color:#bfc8d0;
+  font-size:6.5px;
+  font-weight:900;
+}
+.progress-exercise-visual>.app-ex-context{
+  margin-top:10px;
+  border:0;
+  padding:0;
+  background:transparent;
+}
+
+/* responsive */
+@media(max-width:430px){
+  .app-ex-context.full{
+    grid-template-columns:1fr;
+  }
+  .app-ex-context-pair{height:155px}
+  .app-ex-context.full .app-ex-context-copy{
+    padding-top:2px;
+  }
+  .app-ex-context.compact{
+    grid-template-columns:82px minmax(0,1fr);
+  }
+  .app-ex-context.compact .app-ex-context-visual>.app-ex-thumb{
+    width:82px;height:82px;
+  }
+  .upcoming-row{
+    grid-template-columns:50px minmax(0,1fr) auto!important;
+    gap:9px!important;
+  }
+  .upcoming-action{min-width:58px!important;padding-inline:7px!important}
+  .progress-exercise-top{gap:8px!important}
+  .progress-exercise-thumb{width:52px;height:52px;flex-basis:52px}
+  .app-ex-thumb.progress{width:52px;height:52px}
+}
 </style>
 </head>
 <body>
@@ -2272,6 +2713,7 @@ body:before{display:none!important}
       <i>›</i>
     </button>
   </div>
+  <div id="exerciseContextCard" class="exercise-context-host"></div>
   <div class="toggle live-hide"><input type="checkbox" id="usePrep" onchange="renderSetEditors();if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}"><label for="usePrep">Primeiro exercício do músculo · fazer preparação completa</label></div>
   <div id="lastWorkoutBox" class="training-only"></div>
   <div class="field training-only live-hide" id="performedDateField"><label>📅 Dia realizado</label><input id="performedDate" type="date" class="input"><small style="display:block;color:#7f8997;font-size:9px;margin-top:6px;line-height:1.4">Use a data em que você realmente fez este exercício. Pode registrar hoje um treino de dias atrás.</small></div>
@@ -2832,10 +3274,10 @@ function renderToday(){
               aria-label="Arrastar ${esc(e.name)}">
               <span>⋮⋮</span>
             </button>
-            <div class="reorder-number">${i+1}</div>
+            <div class="reorder-thumb">${exerciseVisualThumbHTML(e,'peak','tiny')}<span>${i+1}</span></div>
             <div class="reorder-copy">
               <strong>${esc(e.name)}</strong>
-              <small>${esc(e.muscle)}</small>
+              <small>${esc(e.muscle)}${exerciseEmphasisText(e,1)?' · '+esc(exerciseEmphasisText(e,1)):''}</small>
               ${prep?'<em>★ preparação começa aqui</em>':''}
             </div>
           </article>`;
@@ -2880,6 +3322,7 @@ function renderToday(){
             <p>${esc(exerciseTodayModeText(next,false,isFirst))}</p>
           </div>
         </div>
+        ${exerciseVisualSummaryHTML(next,'compact')}
         ${!isPrepared(next.muscle)?`
           <button class="prep-choice active" onclick="setFirstToday('${next.id}')">
             <span class="prep-choice-dot">★</span>
@@ -2904,10 +3347,11 @@ function renderToday(){
       const isFirst=!ready&&firstId===e.id;
 
       html+=`<article class="upcoming-row ${isFirst?'prep-selected':''}">
-        <div class="upcoming-index">${originalIndex}</div>
+        <div class="upcoming-visual">${exerciseVisualThumbHTML(e,'peak','small')}<span>${originalIndex}</span></div>
         <div class="upcoming-copy">
           <strong>${esc(e.name)}</strong>
           <small>${esc(e.muscle)} · ${esc(exerciseTodayModeText(e,false,isFirst))}</small>
+          ${exerciseEmphasisInlineHTML(e,2)}
           ${!ready?`
             <button class="upcoming-first ${isFirst?'active':''}" onclick="event.stopPropagation();setFirstToday('${e.id}')">
               <span>${isFirst?'★':'○'}</span>
@@ -2929,8 +3373,8 @@ function renderToday(){
     finished.forEach((e)=>{
       const h=todayHistoryForExercise(e.id);
       html+=`<button class="finished-row" onclick="startExercise('${e.id}')">
-        <span class="finished-check">✓</span>
-        <span class="finished-copy"><strong>${esc(e.name)}</strong><small>${esc(e.muscle)}${h?` · ${esc(setSummary(h.sets))}`:''}</small></span>
+        <span class="finished-visual">${exerciseVisualThumbHTML(e,'peak','tiny')}<b>✓</b></span>
+        <span class="finished-copy"><strong>${esc(e.name)}</strong><small>${esc(e.muscle)}${h?` · ${esc(setSummary(h.sets))}`:''}</small>${exerciseEmphasisInlineHTML(e,2)}</span>
         <i>Editar</i>
       </button>`;
     });
@@ -2948,7 +3392,7 @@ function renderExercises(){
   document.getElementById('exerciseSectionTitle').textContent=state.activeMuscle?state.activeMuscle:'Todos os exercícios';
   document.getElementById('exerciseCount').textContent=arr.length+' cadastrado'+(arr.length===1?'':'s');
   if(!arr.length){root.innerHTML=`<div class="empty"><strong>Nenhum exercício por aqui</strong>${state.activeMuscle?'Cadastre o primeiro exercício de '+state.activeMuscle+'.':'Cadastre seus exercícios para começar.'}</div>`;return}
-  root.innerHTML=arr.map((e,i)=>{const hist=priorHistoryForExercise(e.id);const last=hist[0];const cur=last?.workMax??workMax(e);const best=Math.max(0,...hist.map(h=>h.workMax||0));const lastText=last?setSummary(last.sets):setSummary(e.sets);const target=(e.targetKg||e.targetReps)?`${e.targetKg?e.targetKg+' kg':''}${e.targetKg&&e.targetReps?' · ':''}${e.targetReps?e.targetReps+' reps':''}`:'não definida';const pr=last?.prFlags?.length?`<span class="prbadge">★ ${last.prFlags[0]}</span>`:'';const progression=progressionChipHTML(e.id);const nextStep=progressionNextStepText(e.id);const pct=best?Math.max(8,Math.min(100,(cur/best)*100)):45;return `<div class="exercise-card" onclick="editExercise('${e.id}')"><div class="exercise-head"><div class="exercise-index">${i+1}</div><div class="exercise-title"><strong>${esc(e.name)}</strong><small>${e.muscle}${e.note?' · '+esc(e.note):''}</small></div><div class="exercise-load">${cur||'—'}<small>${cur?'kg':''}</small></div></div><div class="chips">${doneToday(e.id)?'<span class="chip prep">FEITO HOJE ✓</span>':isPrepared(e.muscle)?'<span class="chip prep">PREPARADO ✓</span>':e.usePrep?'<span class="chip prep">PREPARAÇÃO</span>':''}<span class="chip work">TRABALHO</span>${progression}${pr}</div><div class="refbox"><div class="refitem"><small>Último registro</small><strong>${esc(lastText)}</strong></div><div class="refitem"><small>Próximo passo</small><strong>${esc(nextStep)}</strong></div></div><div class="progressline"><i style="width:${pct}%"></i></div></div>`}).join('');
+  root.innerHTML=arr.map((e,i)=>{const hist=priorHistoryForExercise(e.id);const last=hist[0];const cur=last?.workMax??workMax(e);const best=Math.max(0,...hist.map(h=>h.workMax||0));const lastText=last?setSummary(last.sets):setSummary(e.sets);const target=(e.targetKg||e.targetReps)?`${e.targetKg?e.targetKg+' kg':''}${e.targetKg&&e.targetReps?' · ':''}${e.targetReps?e.targetReps+' reps':''}`:'não definida';const pr=last?.prFlags?.length?`<span class="prbadge">★ ${last.prFlags[0]}</span>`:'';const progression=progressionChipHTML(e.id);const nextStep=progressionNextStepText(e.id);const pct=best?Math.max(8,Math.min(100,(cur/best)*100)):45;return `<div class="exercise-card" onclick="editExercise('${e.id}')"><div class="exercise-head"><div class="exercise-card-visual">${exerciseVisualThumbHTML(e,'peak','list')}<span>${i+1}</span></div><div class="exercise-title"><strong>${esc(e.name)}</strong><small>${e.muscle}${e.note?' · '+esc(e.note):''}</small>${exerciseEmphasisInlineHTML(e,2)}</div><div class="exercise-load">${cur||'—'}<small>${cur?'kg':''}</small></div></div><div class="chips">${doneToday(e.id)?'<span class="chip prep">FEITO HOJE ✓</span>':isPrepared(e.muscle)?'<span class="chip prep">PREPARADO ✓</span>':e.usePrep?'<span class="chip prep">PREPARAÇÃO</span>':''}<span class="chip work">TRABALHO</span>${progression}${pr}</div><div class="refbox"><div class="refitem"><small>Último registro</small><strong>${esc(lastText)}</strong></div><div class="refitem"><small>Próximo passo</small><strong>${esc(nextStep)}</strong></div></div><div class="progressline"><i style="width:${pct}%"></i></div></div>`}).join('');
 }
 function filterMuscle(m){state.activeMuscle=state.activeMuscle===m?null:m;persist();render()}
 function startExercise(id){
@@ -2998,7 +3442,7 @@ function renderTodayExercisePicker(initial=false){
   const root=document.getElementById('todayExercisePicker');if(!root)return;
   const existingChecked=new Set([...document.querySelectorAll('#todayExercisePicker input:checked')].map(x=>x.value));
   const saved=new Set(state.sessionExerciseIds||[]);
-  root.innerHTML=selectedMuscles.map(m=>{const xs=state.exercises.filter(e=>e.gymId===state.activeGym&&e.muscle===m).sort((a,b)=>(a.createdAt||'').localeCompare(b.createdAt||''));if(!xs.length)return `<div class="picker-group"><div class="picker-group-head"><strong>${esc(m)}</strong><small>0 exercícios</small></div><div class="picker-empty">Você ainda não cadastrou exercícios de ${esc(m)}.</div></div>`;return `<div class="picker-group"><div class="picker-group-head"><strong>${esc(m)}</strong><small>${xs.length} disponível${xs.length===1?'':'is'}</small></div>${xs.map(e=>{const checked=initial?(saved.size?saved.has(e.id):true):(existingChecked.has(e.id)||(!saved.size&&!existingChecked.size));return `<div class="exercise-pick"><input type="checkbox" id="today_ex_${e.id}" value="${e.id}" ${checked?'checked':''}><label for="today_ex_${e.id}"><span style="color:var(--accent)">↗</span>${esc(e.name)}</label></div>`}).join('')}</div>`}).join('');
+  root.innerHTML=selectedMuscles.map(m=>{const xs=state.exercises.filter(e=>e.gymId===state.activeGym&&e.muscle===m).sort((a,b)=>(a.createdAt||'').localeCompare(b.createdAt||''));if(!xs.length)return `<div class="picker-group"><div class="picker-group-head"><strong>${esc(m)}</strong><small>0 exercícios</small></div><div class="picker-empty">Você ainda não cadastrou exercícios de ${esc(m)}.</div></div>`;return `<div class="picker-group"><div class="picker-group-head"><strong>${esc(m)}</strong><small>${xs.length} disponível${xs.length===1?'':'is'}</small></div>${xs.map(e=>{const checked=initial?(saved.size?saved.has(e.id):true):(existingChecked.has(e.id)||(!saved.size&&!existingChecked.size));return `<div class="exercise-pick"><input type="checkbox" id="today_ex_${e.id}" value="${e.id}" ${checked?'checked':''}><label for="today_ex_${e.id}">${exerciseVisualThumbHTML(e,'peak','picker')}<span class="exercise-pick-copy"><strong>${esc(e.name)}</strong><small>${esc(exerciseEmphasisText(e,2)||e.muscle)}</small></span></label></div>`}).join('')}</div>`}).join('');
   if(!selectedMuscles.length)root.innerHTML='<div class="picker-empty">Escolha um grupo muscular acima para ver seus exercícios.</div>';
 }
 function openTodayModal(){const chosen=new Set(state.sessionMuscles||[]);document.getElementById('todayMusclePicker').innerHTML=MUSCLES.map(m=>`<div class="pick"><input type="checkbox" id="pick_${m}" value="${m}" ${chosen.has(m)?'checked':''} onchange="renderTodayExercisePicker(false)"><label for="pick_${m}"><span style="margin-right:7px;color:var(--accent)">${muscleIcon(m)}</span>${m}</label></div>`).join('');document.getElementById('finishWorkoutBtn').style.display=chosen.size?'block':'none';renderTodayExercisePicker(true);openModal('todayModal')}
@@ -3262,6 +3706,91 @@ function repdbSourceNote(item){
     <span>Imagem específica ainda indisponível</span>
   </div>`;
 }
+function exerciseCatalogFor(value){
+  if(!value)return null;
+  if(typeof value==='string')return catalogItem(value);
+  if(value.key&&catalogItem(value.key))return catalogItem(value.key);
+  const key=catalogKeyFromExercise(value);
+  return key?catalogItem(key):null;
+}
+function exerciseVisualThumbHTML(value,stage='peak',cls=''){
+  const item=exerciseCatalogFor(value);
+  if(!item){
+    const muscle=(value&&value.muscle)||'';
+    return `<span class="app-ex-thumb placeholder ${cls}"><b>${catalogMuscleIcon(muscle)}</b></span>`;
+  }
+  const url=exerciseImageUrl(item,stage);
+  if(!url){
+    return `<span class="app-ex-thumb placeholder ${cls}"><b>${catalogMuscleIcon(item.muscle)}</b></span>`;
+  }
+  return `<span class="app-ex-thumb ${cls}">
+    <img src="${url}" alt="${esc(item.name)}" loading="lazy" decoding="async"
+      onerror="this.parentElement.classList.add('broken');this.remove()">
+    <b>${catalogMuscleIcon(item.muscle)}</b>
+  </span>`;
+}
+function exerciseEmphasisRows(value){
+  const item=exerciseCatalogFor(value);
+  return item?regionEmphasisFor(item):[];
+}
+function exerciseEmphasisInlineHTML(value,limit=3){
+  const rows=exerciseEmphasisRows(value).slice(0,limit);
+  if(!rows.length)return '';
+  return `<div class="app-ex-emphasis-inline">${rows.map(([name,pct],i)=>
+    `<span class="${i===0?'main':''}"><b>${esc(name)}</b><i>${pct}%</i></span>`
+  ).join('')}</div>`;
+}
+function exerciseEmphasisText(value,limit=2){
+  const rows=exerciseEmphasisRows(value).slice(0,limit);
+  return rows.map(([name,pct])=>`${name} ${pct}%`).join(' · ');
+}
+function exerciseVisualSummaryHTML(value,mode='compact'){
+  const item=exerciseCatalogFor(value);
+  if(!item)return '';
+  const rows=exerciseEmphasisRows(item).slice(0,mode==='full'?5:3);
+  const imgs=exerciseImageUrl(item,'start')||exerciseImageUrl(item,'peak');
+  return `<div class="app-ex-context ${mode}">
+    <div class="app-ex-context-visual">
+      ${mode==='full'
+        ? `<div class="app-ex-context-pair">
+            <div><small>INÍCIO</small>${exerciseVisualThumbHTML(item,'start','context')}</div>
+            <div><small>FIM</small>${exerciseVisualThumbHTML(item,'peak','context')}</div>
+          </div>`
+        : exerciseVisualThumbHTML(item,'peak','context')}
+    </div>
+    <div class="app-ex-context-copy">
+      <small>ONDE PEGA MAIS</small>
+      <strong>${esc(item.name)}</strong>
+      <div class="app-ex-region-list">
+        ${rows.map(([name,pct],i)=>`<div class="${i===0?'primary':''}">
+          <span>${esc(name)}</span>
+          <em><i style="width:${pct}%"></i></em>
+          <b>${pct}%</b>
+        </div>`).join('')}
+      </div>
+      ${mode==='full'?`<button type="button" onclick="openCatalogDetail('${item.key}')">Ver execução completa <span>›</span></button>`:''}
+    </div>
+  </div>`;
+}
+function renderExerciseContextCard(key){
+  const host=document.getElementById('exerciseContextCard');
+  if(!host)return;
+  const item=key?catalogItem(key):null;
+  host.innerHTML=item?exerciseVisualSummaryHTML(item,'full'):'';
+  host.style.display=item?'block':'none';
+}
+function progressExerciseVisualHTML(e){
+  const item=exerciseCatalogFor(e);
+  if(!item)return '';
+  return `<section class="progress-exercise-visual">
+    <div class="progress-exercise-visual-head">
+      <div><small>GUIA DO EXERCÍCIO</small><strong>Execução + regiões mais exigidas</strong></div>
+      <button onclick="openCatalogDetail('${item.key}')">Ver guia completo</button>
+    </div>
+    ${exerciseVisualSummaryHTML(item,'full')}
+  </section>`;
+}
+
 function openExerciseCatalog(){
   catalogMuscleFilter=state.activeMuscle||'Todos';
   document.getElementById('catalogSearch').value='';
@@ -3378,8 +3907,8 @@ function renderCatalogLinkedInfo(key){
   const box=document.getElementById('catalogLinkedInfo');
   const input=document.getElementById('catalogKey');
   if(input)input.value=key||'';
-  if(!box)return;
-  box.style.display=key&&catalogItem(key)?'block':'none';
+  if(box)box.style.display=key&&catalogItem(key)?'block':'none';
+  renderExerciseContextCard(key||'');
 }
 function openLinkedCatalogInfo(){
   const key=document.getElementById('catalogKey')?.value||'';
@@ -3982,7 +4511,7 @@ function progressRenderOverviewV3(){
 }
 function showProgressMuscle(muscle){
   progressViewMuscle=muscle;progressViewExercise='';
-  const mi=progressMuscleInfo(muscle),rows=mi.infos.length?mi.infos.map((x,i)=>`<button class="progress-exercise-row" style="animation-delay:${Math.min(i,8)*.035}s" onclick="openProgressExercise('${x.e.id}')"><div class="progress-exercise-top"><div class="progress-exercise-rank">${String(i+1).padStart(2,'0')}</div><div class="progress-exercise-name"><strong>${esc(x.e.name)}</strong><small>${x.sessions} registro${x.sessions===1?'':'s'}${x.last?' · último '+fmtDate(x.last.date):''}</small></div><div class="progress-exercise-now"><strong>${x.currentLoad?fmtKg(x.currentLoad):'—'}</strong><small>${x.currentLoad?'kg agora':'sem carga'}</small></div></div><div class="progress-exercise-bottom"><div class="progress-exercise-message"><strong class="${x.statusClass==='good'?'progress-up':''}">${esc(x.status)}</strong><span>${esc(x.message)}</span></div>${progressSparklineHTML(x)}</div></button>`).join(''):`<div class="progress-empty-state"><div class="ico">◎</div><strong>Nenhum exercício aqui</strong><span>Cadastre um exercício de ${esc(muscle)} para acompanhar a evolução.</span></div>`;
+  const mi=progressMuscleInfo(muscle),rows=mi.infos.length?mi.infos.map((x,i)=>`<button class="progress-exercise-row" style="animation-delay:${Math.min(i,8)*.035}s" onclick="openProgressExercise('${x.e.id}')"><div class="progress-exercise-top"><div class="progress-exercise-thumb">${exerciseVisualThumbHTML(x.e,'peak','progress')}<span>${String(i+1).padStart(2,'0')}</span></div><div class="progress-exercise-name"><strong>${esc(x.e.name)}</strong><small>${x.sessions} registro${x.sessions===1?'':'s'}${x.last?' · último '+fmtDate(x.last.date):''}</small>${exerciseEmphasisInlineHTML(x.e,2)}</div><div class="progress-exercise-now"><strong>${x.currentLoad?fmtKg(x.currentLoad):'—'}</strong><small>${x.currentLoad?'kg agora':'sem carga'}</small></div></div><div class="progress-exercise-bottom"><div class="progress-exercise-message"><strong class="${x.statusClass==='good'?'progress-up':''}">${esc(x.status)}</strong><span>${esc(x.message)}</span></div>${progressSparklineHTML(x)}</div></button>`).join(''):`<div class="progress-empty-state"><div class="ico">◎</div><strong>Nenhum exercício aqui</strong><span>Cadastre um exercício de ${esc(muscle)} para acompanhar a evolução.</span></div>`;
   const label=mi.ready?`${mi.ready} pronto${mi.ready===1?'':'s'} para subir`:mi.improving?`${mi.improving} evoluindo`:mi.records.length?'Acompanhamento ativo':'Sem histórico';
   document.getElementById('historyContent').innerHTML=`<div class="progress-muscle-screen"><div class="progress-screen-head"><button class="progress-screen-back" onclick="renderProgressOverview()" aria-label="Voltar">←</button><div class="progress-screen-icon">${muscleIcon(muscle)}</div><div class="progress-screen-copy"><small>GRUPO MUSCULAR</small><strong>${esc(muscle)}</strong><span>Escolha um exercício para abrir o gráfico.</span></div><div class="progress-screen-pill">${esc(label)}</div></div><div class="progress-muscle-summary"><div class="progress-muscle-summary-main"><small>LEITURA RÁPIDA</small><strong>${mi.improving?`${mi.improving} exercício${mi.improving===1?' está':'s estão'} melhorando`:'Veja exercício por exercício'}</strong><span>${mi.ready?'Há carga que já pode estar pronta para subir.':mi.records.length?'Compare o número atual com os treinos anteriores.':'Quando você registrar este músculo, os dados aparecem aqui.'}</span></div><div class="progress-muscle-summary-side"><small>REGISTROS</small>${progressCount(mi.records.length,'neste músculo')}</div></div><div class="progress-section-head"><div><strong>Exercícios de ${esc(muscle)}</strong><span>Toque em um exercício para entender a evolução.</span></div></div><div class="progress-exercise-list">${rows}</div></div>`;
   animateProgressNumbers();document.querySelector('#historyModal .progress-sheet')?.scrollTo({top:0,behavior:'smooth'});
@@ -4021,7 +4550,7 @@ function renderProgressExerciseDetail(e,scrollTop=true){
   const latestSets=last?`<div class="progress-latest-card"><div class="progress-latest-head"><small>ÚLTIMO TREINO · ${fmtDate(last.date)}</small><strong>${esc(x.status)}</strong></div><div class="progress-latest-sets">${[0,1].map(i=>{const s=work[i];return `<div class="progress-latest-set"><small>TRABALHO ${i+1}</small><strong>${s?(s.kg?esc(s.kg)+' kg':'peso corporal')+(s.reps?' × '+esc(s.reps):'')+(s.rir!==''&&s.rir!==undefined?' · RIR '+esc(s.rir):''):'—'}</strong></div>`}).join('')}</div></div>`:'';
   const rows=arrDesc.slice(0,12).map((h,i)=>{const value=progressMetricValue(h,'load'),prev=arrDesc[i+1]?progressMetricValue(arrDesc[i+1],'load'):0,d=prev&&value?value-prev:0;return `<div class="progress-history-simple-row"><div class="date"><strong>${fmtDate(h.date)}</strong><small>${h.referenceOnly?'referência':'treino'}</small></div><div class="result"><strong>${value?fmtKg(value)+' kg':'Sem carga'}${d?` <span class="${d>0?'progress-up':'progress-down'}">${d>0?'+':''}${fmtKg(d)} kg</span>`:''}</strong><span>${esc(setSummary(h.sets))}</span></div><div class="actions"><button onclick="openHistoryRecord('${h.id}')" aria-label="Editar registro">✎</button><button class="danger" onclick="deleteHistoryRecord('${h.id}')" aria-label="Excluir registro">⌫</button></div></div>`}).join('');
   const chart=progressGraphHTML(x,progressMetric);
-  document.getElementById('historyContent').innerHTML=`<div class="progress-detail-screen"><div class="progress-screen-head"><button class="progress-screen-back" onclick="showProgressMuscle('${esc(e.muscle)}')" aria-label="Voltar">←</button><div class="progress-screen-icon">${muscleIcon(e.muscle)}</div><div class="progress-screen-copy"><small>${esc(e.muscle)}</small><strong>${esc(e.name)}</strong><span>${x.sessions} registro${x.sessions===1?'':'s'} neste aparelho</span></div></div><div class="progress-simple-banner"><small>EM PORTUGUÊS CLARO</small><strong>${esc(bannerTitle)}</strong><p>${esc(bannerText)}</p></div><div class="progress-detail-stats"><div class="progress-detail-stat"><small>AGORA</small><strong>${x.currentLoad?fmtKg(x.currentLoad)+' kg':'—'}</strong><span>${x.last?'último treino '+fmtDate(x.last.date):'sem registro'}</span></div><div class="progress-detail-stat"><small>MELHOR CARGA</small><strong>${x.bestLoad?fmtKg(x.bestLoad)+' kg':'—'}</strong><span>maior carga registrada</span></div><div class="progress-detail-stat"><small>MELHOR REP</small><strong>${x.bestReps||'—'}</strong><span>maior número em trabalho</span></div></div><div class="progress-chart-panel"><div class="progress-chart-toolbar"><div><strong>${progressMetricLabel(progressMetric)} ao longo do tempo</strong><span>Quanto mais a linha sobe, maior foi o resultado.</span></div><div class="progress-metric-tabs"><button class="${progressMetric==='load'?'active':''}" onclick="setProgressMetric('load','${e.id}')">Carga</button><button class="${progressMetric==='reps'?'active':''}" onclick="setProgressMetric('reps','${e.id}')">Reps</button><button class="${progressMetric==='volume'?'active':''}" onclick="setProgressMetric('volume','${e.id}')">Volume</button></div></div>${chart}</div>${latestSets}<div class="progress-section-head"><div><strong>Treinos anteriores</strong><span>Do mais recente para o mais antigo.</span></div></div><div class="progress-history-simple">${rows||'<div class="progress-empty-state"><div class="ico">◎</div><strong>Sem registros</strong><span>Seu histórico aparecerá aqui.</span></div>'}</div></div>`;
+  document.getElementById('historyContent').innerHTML=`<div class="progress-detail-screen"><div class="progress-screen-head"><button class="progress-screen-back" onclick="showProgressMuscle('${esc(e.muscle)}')" aria-label="Voltar">←</button><div class="progress-screen-icon">${muscleIcon(e.muscle)}</div><div class="progress-screen-copy"><small>${esc(e.muscle)}</small><strong>${esc(e.name)}</strong><span>${x.sessions} registro${x.sessions===1?'':'s'} neste aparelho</span></div></div>${progressExerciseVisualHTML(e)}<div class="progress-simple-banner"><small>EM PORTUGUÊS CLARO</small><strong>${esc(bannerTitle)}</strong><p>${esc(bannerText)}</p></div><div class="progress-detail-stats"><div class="progress-detail-stat"><small>AGORA</small><strong>${x.currentLoad?fmtKg(x.currentLoad)+' kg':'—'}</strong><span>${x.last?'último treino '+fmtDate(x.last.date):'sem registro'}</span></div><div class="progress-detail-stat"><small>MELHOR CARGA</small><strong>${x.bestLoad?fmtKg(x.bestLoad)+' kg':'—'}</strong><span>maior carga registrada</span></div><div class="progress-detail-stat"><small>MELHOR REP</small><strong>${x.bestReps||'—'}</strong><span>maior número em trabalho</span></div></div><div class="progress-chart-panel"><div class="progress-chart-toolbar"><div><strong>${progressMetricLabel(progressMetric)} ao longo do tempo</strong><span>Quanto mais a linha sobe, maior foi o resultado.</span></div><div class="progress-metric-tabs"><button class="${progressMetric==='load'?'active':''}" onclick="setProgressMetric('load','${e.id}')">Carga</button><button class="${progressMetric==='reps'?'active':''}" onclick="setProgressMetric('reps','${e.id}')">Reps</button><button class="${progressMetric==='volume'?'active':''}" onclick="setProgressMetric('volume','${e.id}')">Volume</button></div></div>${chart}</div>${latestSets}<div class="progress-section-head"><div><strong>Treinos anteriores</strong><span>Do mais recente para o mais antigo.</span></div></div><div class="progress-history-simple">${rows||'<div class="progress-empty-state"><div class="ico">◎</div><strong>Sem registros</strong><span>Seu histórico aparecerá aqui.</span></div>'}</div></div>`;
   if(scrollTop)document.querySelector('#historyModal .progress-sheet')?.scrollTo({top:0,behavior:'smooth'});
 }
 function renderHistory(){
