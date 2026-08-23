@@ -1337,6 +1337,747 @@ body:before{display:none!important}
     grid-template-columns:42px 28px minmax(0,1fr);
   }
 }
+
+/* =========================================================
+   EXERCISE LIBRARY 5.0 — visual catalog
+   ========================================================= */
+
+.catalog-sheet,.catalog-detail-sheet{
+  width:min(100%,620px)!important;
+  max-height:94dvh!important;
+  padding:0 17px calc(24px + env(safe-area-inset-bottom))!important;
+  overflow:auto!important;
+}
+.catalog-head{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:start;
+  padding:4px 0 16px;
+}
+.catalog-head small,.catalog-detail-head>div small{
+  color:var(--app-accent);
+  font-size:8px;
+  letter-spacing:.14em;
+  font-weight:950;
+}
+.catalog-head h3,.catalog-detail-head h3{
+  margin:4px 0 0;
+  font-size:25px;
+  line-height:1;
+  letter-spacing:-.045em;
+}
+.catalog-head p{
+  max-width:420px;
+  margin:8px 0 0;
+  color:#77828e;
+  font-size:9px;
+  line-height:1.45;
+}
+.catalog-search{
+  height:48px;
+  display:grid;
+  grid-template-columns:26px 1fr;
+  align-items:center;
+  padding:0 12px;
+  border:1px solid #202832;
+  border-radius:15px;
+  background:#0d1217;
+}
+.catalog-search>span{color:#75808c;font-size:18px}
+.catalog-search input{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#eef2f5;
+  font-size:11px;
+}
+.catalog-search input::placeholder{color:#58626d}
+.catalog-filter-row{
+  display:flex;
+  gap:7px;
+  overflow:auto;
+  margin:12px -17px 0;
+  padding:0 17px 4px;
+  scrollbar-width:none;
+}
+.catalog-filter-row::-webkit-scrollbar{display:none}
+.catalog-filter-row button{
+  flex:0 0 auto;
+  min-height:32px;
+  padding:0 12px;
+  border:1px solid #202832;
+  border-radius:999px;
+  background:#0c1116;
+  color:#798490;
+  font-size:8px;
+  font-weight:900;
+}
+.catalog-filter-row button.active{
+  background:var(--app-accent);
+  border-color:var(--app-accent);
+  color:#090b05;
+}
+.catalog-top-actions{margin:13px 0 18px}
+.catalog-top-actions>button{
+  width:100%;
+  min-height:56px;
+  display:grid;
+  grid-template-columns:35px 1fr 16px;
+  align-items:center;
+  gap:10px;
+  padding:9px 11px;
+  border:1px dashed #28323b;
+  border-radius:15px;
+  background:#0a0f13;
+  color:#d6dde4;
+  text-align:left;
+}
+.catalog-top-actions>button>span:first-child{
+  width:35px;height:35px;border-radius:11px;
+  display:grid;place-items:center;
+  background:#111920;
+  color:var(--app-accent);
+  font-size:16px;
+}
+.catalog-top-actions>button>span:nth-child(2){display:flex;flex-direction:column;gap:3px}
+.catalog-top-actions strong{font-size:9px}
+.catalog-top-actions small{font-size:7px;color:#68737f}
+.catalog-top-actions i{font-style:normal;font-size:17px;color:#5c6670}
+.catalog-results-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:12px;
+  margin-bottom:8px;
+}
+.catalog-results-head strong{font-size:12px}
+.catalog-results-head span{font-size:8px;color:#66717c}
+.catalog-grid{
+  display:grid;
+  gap:9px;
+}
+.catalog-card{
+  width:100%;
+  min-height:112px;
+  display:grid;
+  grid-template-columns:92px 1fr;
+  gap:12px;
+  padding:10px;
+  border:1px solid #1d252d;
+  border-radius:18px;
+  background:#0d1217;
+  color:#edf1f4;
+  text-align:left;
+  transition:transform .16s ease,border-color .16s ease,background .16s ease;
+}
+.catalog-card:active{transform:scale(.99);background:#10171c}
+.catalog-card-visual{
+  position:relative;
+  min-height:90px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 25%,rgba(203,255,56,.08),transparent 55%),
+    #080c0f;
+  border:1px solid #182127;
+}
+.catalog-card-muscle{
+  position:absolute;
+  left:7px;top:7px;
+  width:23px;height:23px;
+  border-radius:8px;
+  display:grid;place-items:center;
+  background:#17200d;
+  color:var(--app-accent);
+  font-size:10px;
+  z-index:2;
+}
+.catalog-mini-pose{width:76px;height:78px;overflow:hidden}
+.catalog-mini-pose .pose-svg{width:100%;height:100%}
+.catalog-card-copy{min-width:0;padding:3px 2px}
+.catalog-card-copy>small{
+  color:#6e7985;
+  font-size:7px;
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.catalog-card-copy>strong{
+  display:block;
+  margin-top:4px;
+  font-size:13px;
+  letter-spacing:-.025em;
+}
+.catalog-card-copy>p{
+  margin:5px 0 0;
+  color:#7a8591;
+  font-size:8px;
+  line-height:1.4;
+}
+.catalog-card-tags{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:8px;
+}
+.catalog-card-tags span{
+  color:var(--app-accent);
+  font-size:7px;
+  font-weight:900;
+}
+.catalog-card-tags i{
+  font-style:normal;
+  color:#5f6974;
+  font-size:17px;
+}
+.catalog-empty{
+  padding:30px 16px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  border:1px dashed #25303a;
+  border-radius:18px;
+}
+.catalog-empty strong{font-size:12px}
+.catalog-empty span{margin-top:5px;font-size:8px;color:#707b87}
+.catalog-empty button{
+  margin-top:13px;
+  border:0;border-radius:12px;
+  background:var(--app-accent);
+  color:#090b05;
+  padding:10px 13px;
+  font-size:8px;font-weight:950;
+}
+
+.catalog-detail-head{
+  display:grid;
+  grid-template-columns:36px 1fr 36px;
+  gap:10px;
+  align-items:center;
+  padding:4px 0 14px;
+}
+.catalog-back{
+  width:34px;height:34px;
+  border:1px solid #202832;
+  border-radius:11px;
+  background:#0d1217;
+  color:#b6c0ca;
+  font-size:20px;
+}
+.catalog-detail-head h3{font-size:21px}
+.catalog-detail-hero{
+  padding:14px;
+  border:1px solid #1e272f;
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 50% 0,rgba(203,255,56,.055),transparent 45%),
+    #0c1115;
+}
+.catalog-detail-summary{
+  color:#8a95a0;
+  font-size:9px;
+  line-height:1.45;
+}
+.catalog-pose-pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:12px;
+}
+.catalog-pose-pair>div{
+  min-height:170px;
+  border-radius:15px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:#080c0f;
+  border:1px solid #182027;
+  overflow:hidden;
+}
+.catalog-pose-pair>div>span{
+  align-self:flex-start;
+  margin:9px 0 0 10px;
+  color:#697480;
+  font-size:7px;
+  letter-spacing:.12em;
+  font-weight:950;
+}
+.pose-svg{width:100%;height:140px}
+.pose-person{
+  fill:none;
+  stroke:#d7dde3;
+  stroke-width:5;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.pose-machine{
+  fill:none;
+  stroke:#35404a;
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.pose-arrow{
+  fill:none;
+  stroke:var(--app-accent);
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-dasharray:4 5;
+}
+.pose-joint{fill:var(--app-accent)}
+
+.catalog-detail-section{margin-top:20px}
+.catalog-detail-title{
+  display:grid;
+  grid-template-columns:31px 1fr;
+  gap:9px;
+  align-items:center;
+  margin-bottom:10px;
+}
+.catalog-detail-title>span{
+  width:31px;height:31px;border-radius:10px;
+  display:grid;place-items:center;
+  background:#11181e;
+  color:var(--app-accent);
+  font-size:8px;
+  font-weight:950;
+}
+.catalog-detail-title>div{display:flex;flex-direction:column;gap:2px}
+.catalog-detail-title strong{font-size:11px}
+.catalog-detail-title small{font-size:7px;color:#68737f}
+
+.heatmap-card{
+  display:grid;
+  grid-template-columns:minmax(0,1.3fr) minmax(100px,.7fr);
+  align-items:center;
+  gap:10px;
+  padding:11px;
+  border:1px solid #1c252d;
+  border-radius:18px;
+  background:#0a0f13;
+}
+.heat-svg{width:100%;height:auto;max-height:190px}
+.heatmap-legend{
+  display:grid;
+  gap:12px;
+}
+.heatmap-legend>div{
+  padding:9px 0;
+  border-bottom:1px solid #1a2229;
+}
+.heatmap-legend>div:last-child{border-bottom:0}
+.heatmap-legend small{
+  display:block;
+  color:#66717c;
+  font-size:6px;
+  letter-spacing:.12em;
+  font-weight:950;
+}
+.heatmap-legend strong{
+  display:block;
+  margin-top:4px;
+  color:#e8edf1;
+  font-size:8px;
+  line-height:1.35;
+}
+
+.catalog-steps{
+  list-style:none;
+  padding:0;margin:0;
+  border-top:1px solid #192128;
+}
+.catalog-steps li{
+  display:grid;
+  grid-template-columns:25px 1fr;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid #192128;
+}
+.catalog-steps li>span{
+  width:24px;height:24px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#111820;
+  position:relative;
+}
+.catalog-steps li>span:after{
+  content:'';
+  width:6px;height:6px;border-radius:50%;
+  background:var(--app-accent);
+}
+.catalog-steps p{
+  margin:0;
+  color:#b6c0c9;
+  font-size:9px;
+  line-height:1.48;
+}
+.catalog-tips{
+  display:grid;
+  gap:7px;
+}
+.catalog-tips>div{
+  display:grid;
+  grid-template-columns:25px 1fr;
+  gap:9px;
+  align-items:start;
+  padding:10px;
+  border-radius:13px;
+  background:#0d1317;
+  border:1px solid #1b242b;
+}
+.catalog-tips>div>span{
+  width:24px;height:24px;border-radius:8px;
+  display:grid;place-items:center;
+  background:#17210c;color:var(--app-accent);
+  font-size:8px;font-weight:950;
+}
+.catalog-tips p{margin:2px 0 0;color:#8b96a1;font-size:8px;line-height:1.4}
+.catalog-detail-footer{
+  position:sticky;
+  bottom:-1px;
+  margin:22px -17px -24px;
+  padding:11px 17px calc(14px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(11,15,19,.4),#0b0f13 24%);
+  z-index:3;
+}
+.catalog-add{
+  width:100%;
+  min-height:52px;
+  display:grid;
+  grid-template-columns:32px 1fr 18px;
+  gap:9px;
+  align-items:center;
+  border:0;
+  border-radius:15px;
+  padding:8px 12px;
+  background:var(--app-accent);
+  color:#090b05;
+  text-align:left;
+}
+.catalog-add>span{
+  width:31px;height:31px;border-radius:10px;
+  display:grid;place-items:center;
+  background:rgba(9,11,5,.1);
+  font-size:14px;font-weight:950;
+}
+.catalog-add b{font-size:10px}
+.catalog-add i{font-style:normal;font-size:18px;opacity:.58}
+.catalog-add.existing{
+  background:#151c21;
+  color:#dbe2e8;
+  border:1px solid #25303a;
+}
+.catalog-add.existing>span{
+  color:var(--app-accent);
+  background:#17200d;
+}
+
+.catalog-linked-info{margin:-3px 0 13px}
+.catalog-linked-info>button{
+  width:100%;
+  min-height:52px;
+  display:grid;
+  grid-template-columns:34px 1fr 18px;
+  align-items:center;
+  gap:9px;
+  padding:8px 10px;
+  border:1px solid rgba(203,255,56,.14);
+  border-radius:14px;
+  background:#0e1510;
+  color:#dfe6da;
+  text-align:left;
+}
+.catalog-linked-icon{
+  width:33px;height:33px;border-radius:11px;
+  display:grid;place-items:center;
+  background:#17210c;
+  color:var(--app-accent);
+  font-weight:950;
+}
+.catalog-linked-info>button>span:nth-child(2){display:flex;flex-direction:column;gap:2px}
+.catalog-linked-info strong{font-size:9px}
+.catalog-linked-info small{font-size:7px;color:#73806e}
+.catalog-linked-info i{font-style:normal;color:#6b7768;font-size:17px}
+
+@media(max-width:430px){
+  .catalog-grid{gap:8px}
+  .catalog-card{grid-template-columns:82px 1fr}
+  .catalog-card-visual{min-height:88px}
+  .heatmap-card{grid-template-columns:1fr}
+  .heatmap-legend{grid-template-columns:1fr 1fr}
+  .heatmap-legend>div{border-bottom:0;border-right:1px solid #1a2229}
+  .heatmap-legend>div:last-child{border-right:0}
+}
+
+/* =========================================================
+   EXERCISE LIBRARY 5.1 — RepDB-specific visuals
+   ========================================================= */
+
+.catalog-mini-pose{
+  width:82px!important;
+  height:86px!important;
+  display:grid;
+  place-items:center;
+}
+.repdb-image-wrap{
+  width:100%;
+  height:100%;
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border-radius:12px;
+  background:#f5f6f7;
+}
+.repdb-image-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+.repdb-image-wrap.compact{
+  background:#f1f3f4;
+  min-height:80px;
+}
+.repdb-image-error{
+  display:none;
+  position:absolute;
+  inset:0;
+  padding:10px;
+  place-items:center;
+  align-content:center;
+  text-align:center;
+  background:#0c1115;
+  color:#8a95a0;
+}
+.repdb-image-wrap.image-error img{display:none}
+.repdb-image-wrap.image-error .repdb-image-error{display:grid}
+.repdb-image-error span{font-size:8px;font-weight:900}
+.repdb-image-error small{margin-top:3px;font-size:6px;color:#67727e}
+
+.repdb-missing{
+  width:100%;
+  min-height:145px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:16px;
+  text-align:center;
+  border:1px dashed #29323a;
+  border-radius:12px;
+  background:#0a0f13;
+  color:#88939d;
+}
+.repdb-missing span{font-size:8px;font-weight:900}
+.repdb-missing small{
+  max-width:220px;
+  color:#606b76;
+  font-size:7px;
+  line-height:1.45;
+}
+.repdb-missing.compact{
+  min-height:78px;
+  padding:8px;
+}
+.repdb-missing.compact small{display:none}
+.catalog-card:has(.repdb-missing) .catalog-card-visual{
+  background:#090d11;
+}
+.catalog-card:has(.repdb-image-wrap) .catalog-card-visual{
+  background:#f2f4f5;
+}
+.catalog-card-muscle{
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+
+.catalog-pose-pair>div{
+  min-height:210px!important;
+  padding-bottom:9px;
+}
+.catalog-pose-pair>div>.repdb-image-wrap{
+  height:180px;
+  margin-top:4px;
+  border-radius:12px;
+}
+.catalog-pose-pair>div>.repdb-missing{
+  min-height:180px;
+  margin:4px 8px 0;
+}
+.catalog-pose-pair>div>span{z-index:2}
+
+.repdb-source-note{
+  margin:12px 0 0;
+  padding:9px 10px;
+  border-radius:11px;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  border:1px solid #22303a;
+  background:#0d1418;
+}
+.repdb-source-note.exact{
+  border-color:rgba(203,255,56,.16);
+  background:#10170d;
+}
+.repdb-source-note>span{
+  color:var(--app-accent);
+  font-size:7px;
+  font-weight:950;
+}
+.repdb-source-note.equivalent>span{color:#d7c878}
+.repdb-source-note small{
+  color:#727d88;
+  font-size:7px;
+  line-height:1.4;
+}
+
+/* Replace the old generic body silhouette with a readable intensity map. */
+.heatmap-card.repdb-data-map{
+  display:block!important;
+  padding:13px!important;
+}
+.heatmap-copy{
+  padding-bottom:11px;
+  margin-bottom:6px;
+  border-bottom:1px solid #192128;
+}
+.heatmap-copy>small{
+  display:block;
+  color:#68737f;
+  font-size:6px;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+.heatmap-copy>strong{
+  display:block;
+  margin-top:3px;
+  color:#e8edf1;
+  font-size:11px;
+}
+.heatmap-copy>p{
+  margin:5px 0 0;
+  color:#6f7a85;
+  font-size:7px;
+  line-height:1.4;
+}
+.repdb-muscle-map{
+  display:grid;
+  gap:8px;
+  padding-top:8px;
+}
+.muscle-map-row{
+  display:grid;
+  grid-template-columns:minmax(72px,.9fr) minmax(90px,1.5fr) 30px;
+  gap:8px;
+  align-items:center;
+}
+.muscle-map-label{min-width:0}
+.muscle-map-label strong{
+  display:block;
+  color:#dfe5ea;
+  font-size:8px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.muscle-map-label small{
+  display:block;
+  margin-top:2px;
+  color:#5f6b76;
+  font-size:6px;
+}
+.muscle-map-track{
+  height:7px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#151c22;
+}
+.muscle-map-track i{
+  display:block;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#93bd26,var(--app-accent));
+  animation:muscleBarIn .45s cubic-bezier(.2,.8,.2,1);
+  transform-origin:left;
+}
+@keyframes muscleBarIn{
+  from{transform:scaleX(0);opacity:.35}
+  to{transform:scaleX(1);opacity:1}
+}
+.muscle-map-row>b{
+  color:#76828e;
+  font-size:7px;
+  text-align:right;
+}
+.muscle-map-empty{
+  color:#707b87;
+  font-size:8px;
+  padding:12px 0;
+}
+
+.repdb-attribution{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:4px;
+  margin:18px 0 4px;
+  color:#59646f;
+  font-size:7px;
+}
+.repdb-attribution a,
+.repdb-detail-credit{
+  color:#77838e;
+  text-decoration:none;
+  font-weight:900;
+}
+.repdb-attribution a:hover,
+.repdb-detail-credit:hover{color:var(--app-accent)}
+.repdb-detail-credit{
+  display:block;
+  margin-top:9px;
+  text-align:center;
+  font-size:6px;
+}
+
+@media(max-width:430px){
+  .catalog-pose-pair>div{min-height:185px!important}
+  .catalog-pose-pair>div>.repdb-image-wrap{height:155px}
+  .catalog-pose-pair>div>.repdb-missing{min-height:155px}
+  .muscle-map-row{grid-template-columns:74px 1fr 27px}
+}
+
+/* =========================================================
+   EXERCISE LIBRARY 5.2 — expanded catalog + regional emphasis
+   ========================================================= */
+.catalog-results-head>div{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.catalog-library-size{
+  color:#5f6a75;
+  font-size:6px;
+  font-weight:800;
+}
+.muscle-map-row.primary-region .muscle-map-label strong{
+  color:var(--app-accent);
+}
+.muscle-map-row.primary-region .muscle-map-track{
+  box-shadow:0 0 0 1px rgba(203,255,56,.08);
+}
+.muscle-map-row.primary-region>b{
+  color:var(--app-accent);
+}
+.heatmap-copy>p{
+  max-width:470px;
+}
 </style>
 </head>
 <body>
@@ -1461,6 +2202,53 @@ body:before{display:none!important}
   <button class="btn danger" id="finishWorkoutBtn" style="width:100%;margin-top:10px;display:none" onclick="finishWorkout()">Finalizar treino de hoje</button>
 </div></div>
 
+
+<div class="modal" id="exerciseCatalogModal" onclick="backdropClose(event,'exerciseCatalogModal')">
+  <div class="sheet catalog-sheet">
+    <div class="grab"></div>
+    <div class="catalog-head">
+      <div>
+        <small>BIBLIOTECA DE EXERCÍCIOS</small>
+        <h3>O que você quer fazer?</h3>
+        <p>Escolha um exercício, veja como executar e depois adicione à sua biblioteca.</p>
+      </div>
+      <button class="close" onclick="closeModal('exerciseCatalogModal')">✕</button>
+    </div>
+
+    <div class="catalog-search">
+      <span>⌕</span>
+      <input id="catalogSearch" placeholder="Buscar exercício ou aparelho..." oninput="renderExerciseCatalog()">
+    </div>
+
+    <div class="catalog-filter-row" id="catalogFilters"></div>
+
+    <div class="catalog-top-actions">
+      <button onclick="openBlankExerciseModal()">
+        <span>＋</span>
+        <span><strong>Criar exercício manualmente</strong><small>Use se não encontrar na biblioteca.</small></span>
+        <i>›</i>
+      </button>
+    </div>
+
+    <div class="catalog-results-head">
+      <div><strong id="catalogResultTitle">Exercícios</strong><small class="catalog-library-size">Biblioteca expandida · ${EXERCISE_CATALOG.length} exercícios</small></div>
+      <span id="catalogResultCount"></span>
+    </div>
+    <div class="catalog-grid" id="catalogGrid"></div>
+    <div class="repdb-attribution">
+      <span>Imagens e dados de exercícios por</span>
+      <a href="https://repdb.co" target="_blank" rel="noopener noreferrer">RepDB ↗</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="exerciseCatalogDetailModal" onclick="backdropClose(event,'exerciseCatalogDetailModal')">
+  <div class="sheet catalog-detail-sheet">
+    <div class="grab"></div>
+    <div id="catalogDetailContent"></div>
+  </div>
+</div>
+
 <div class="modal" id="exerciseModal" onclick="backdropClose(event,'exerciseModal')"><div class="sheet">
   <div class="grab"></div><div class="sheethead"><div><h3 id="modalTitle">＋ Registrar exercício</h3><p id="modalSubtitle">As cargas ficam separadas por academia.</p></div><button class="close" onclick="closeModal('exerciseModal')">✕</button></div>
   <input type="hidden" id="editId"><div class="record-banner" id="recordBanner"><small>Editando registro</small><strong id="recordBannerText"></strong></div>
@@ -1474,6 +2262,14 @@ body:before{display:none!important}
   <div class="calibration-guide training-only" id="calibrationGuide"></div>
   <div class="field live-hide"><label>Grupo muscular</label><select id="exerciseMuscle" class="select" onchange="onMuscleFormChange()"></select></div>
   <div class="field live-hide"><label>Exercício</label><input id="exerciseName" class="input" placeholder="Ex.: Supino inclinado máquina"></div>
+  <input type="hidden" id="catalogKey">
+  <div class="catalog-linked-info live-hide" id="catalogLinkedInfo" style="display:none">
+    <button type="button" onclick="openLinkedCatalogInfo()">
+      <span class="catalog-linked-icon">?</span>
+      <span><strong>Ver execução e músculos trabalhados</strong><small>Ilustrações, mapa muscular e instruções.</small></span>
+      <i>›</i>
+    </button>
+  </div>
   <div class="toggle live-hide"><input type="checkbox" id="usePrep" onchange="renderSetEditors();if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}"><label for="usePrep">Primeiro exercício do músculo · fazer preparação completa</label></div>
   <div id="lastWorkoutBox" class="training-only"></div>
   <div class="field training-only live-hide" id="performedDateField"><label>📅 Dia realizado</label><input id="performedDate" type="date" class="input"><small style="display:block;color:#7f8997;font-size:9px;margin-top:6px;line-height:1.4">Use a data em que você realmente fez este exercício. Pode registrar hoje um treino de dias atrás.</small></div>
@@ -1535,6 +2331,43 @@ const TYPES=[
   {key:'pap',label:'PAP',hint:'90–95% da carga de trabalho · 1 série curta'},
   {key:'work',label:'Trabalho',hint:'2 séries · T1 RIR 1–2 · T2 falha técnica'}
 ];
+const MOVEMENT_GUIDES={"press":{"summary":"Empurre a carga mantendo o tronco estável e controle a volta.","steps":["Ajuste a posição para começar confortável e estável.","Empurre a carga mantendo punhos e cotovelos bem alinhados.","Retorne de forma controlada sem perder a posição."],"tips":["Evite tirar as escápulas ou costas do apoio quando houver encosto.","Use amplitude confortável para seus ombros."]},"fly":{"summary":"Aproxime os braços em arco mantendo tensão contínua no peitoral.","steps":["Comece com o peito aberto e leve flexão nos cotovelos.","Feche os braços em arco sem transformar o movimento em um supino.","Retorne devagar até sentir alongamento confortável."],"tips":["Mantenha a dobra do cotovelo relativamente estável.","Não force amplitude que incomode a frente do ombro."]},"dip":{"summary":"Desça controlando entre as barras e empurre o corpo de volta.","steps":["Estabilize os ombros antes de iniciar a descida.","Desça em amplitude confortável com leve inclinação do tronco.","Empurre até voltar ao topo sem perder o controle."],"tips":["Não despenque na parte de baixo.","A inclinação do tronco muda a ênfase entre peito e tríceps."]},"pushup":{"summary":"Desça o corpo em bloco e empurre o chão mantendo o tronco firme.","steps":["Apoie mãos e pés mantendo o corpo alinhado.","Desça o peito controlando sem deixar o quadril cair.","Empurre o chão até voltar à posição inicial."],"tips":["Mantenha abdômen e glúteos ativos.","Posição das mãos e inclinação alteram a ênfase."]},"row":{"summary":"Puxe a carga em direção ao tronco conduzindo o movimento pelos cotovelos.","steps":["Comece com braços estendidos e tronco estável.","Puxe levando os cotovelos para trás.","Retorne controlando até alongar as costas."],"tips":["Evite transformar a repetição em balanço do tronco.","Pense em puxar com os cotovelos, não apenas com as mãos."]},"rowwide":{"summary":"Remada com maior ênfase na parte média/alta das costas.","steps":["Mantenha peito e tronco firmes.","Puxe abrindo um pouco mais os cotovelos.","Controle a volta sem deixar os ombros despencarem."],"tips":["Evite encolher os ombros.","Concentre-se em aproximar as escápulas."]},"pulldown":{"summary":"Puxe a barra ou alça para baixo conduzindo os cotovelos.","steps":["Comece com braços elevados e tronco estável.","Puxe os cotovelos para baixo sem exagerar na inclinação do corpo.","Retorne controlando até alongar as costas."],"tips":["Não transforme o exercício em uma remada.","Evite puxar atrás da cabeça."]},"pullup":{"summary":"Eleve o corpo puxando os cotovelos para baixo e controle a descida.","steps":["Comece pendurado com ombros organizados.","Puxe o corpo conduzindo pelos cotovelos.","Desça controlando até a extensão confortável."],"tips":["Evite chutar ou balançar para completar a repetição.","Mantenha o pescoço neutro."]},"pullover":{"summary":"Leve os braços para baixo ou para trás mantendo o cotovelo quase fixo.","steps":["Estabilize o tronco antes de iniciar.","Mova os braços em arco sem transformar em uma puxada de bíceps.","Controle o retorno mantendo tensão nas costas."],"tips":["Evite exagerar na amplitude do ombro.","Mantenha o abdômen firme."]},"shoulderpress":{"summary":"Empurre a carga acima da cabeça mantendo tronco e ombros estáveis.","steps":["Comece com as mãos próximas à linha dos ombros.","Empurre para cima sem perder o controle do tronco.","Desça devagar até uma amplitude confortável."],"tips":["Não arqueie excessivamente a lombar.","Evite elevar os ombros para completar a repetição."]},"lateral":{"summary":"Eleve os braços lateralmente para trabalhar o deltoide lateral.","steps":["Comece com os braços ao lado do corpo.","Eleve lateralmente com leve flexão do cotovelo.","Desça lentamente sem deixar a carga cair."],"tips":["Não precisa passar muito da linha dos ombros.","Use carga que permita controlar a descida."]},"frontraise":{"summary":"Eleve os braços à frente mantendo o tronco estável.","steps":["Comece com os braços à frente do corpo.","Eleve até uma altura confortável sem embalar.","Retorne devagar mantendo tensão."],"tips":["Evite usar impulso do tronco.","Mantenha os ombros longe das orelhas."]},"reardelt":{"summary":"Abra os braços para trabalhar a parte posterior dos ombros.","steps":["Estabilize o tronco e deixe os braços à frente.","Abra os braços sem transformar em uma remada pesada.","Retorne devagar mantendo tensão."],"tips":["Use carga moderada para não roubar com o tronco.","Pense em afastar os braços, não em encolher as escápulas."]},"facepull":{"summary":"Puxe em direção ao rosto com cotovelos altos e controle a volta.","steps":["Ajuste a polia próxima da altura do rosto.","Puxe abrindo a corda e levando cotovelos para trás.","Retorne sem deixar os ombros avançarem bruscamente."],"tips":["Priorize controle e rotação externa.","Não use carga que obrigue o tronco a balançar."]},"uprightrow":{"summary":"Eleve a carga conduzindo pelos cotovelos.","steps":["Comece com braços estendidos à frente.","Puxe os cotovelos para cima até amplitude confortável.","Desça controlando."],"tips":["Não force amplitude se o ombro incomodar.","Use pegada confortável."]},"shrug":{"summary":"Eleve os ombros diretamente para cima focando no trapézio.","steps":["Segure a carga com braços estendidos.","Eleve os ombros para cima sem rodá-los.","Desça controlando até alongar o trapézio."],"tips":["Não faça círculos com os ombros.","Evite flexionar os cotovelos para ajudar."]},"curl":{"summary":"Flexione os cotovelos mantendo o braço estável.","steps":["Comece com braços estendidos e tronco firme.","Flexione os cotovelos sem jogar os ombros para frente.","Desça lentamente até a extensão confortável."],"tips":["Evite balançar o tronco.","Controle principalmente a descida."]},"curlincline":{"summary":"Rosca com o braço atrás do tronco, aumentando o alongamento do bíceps.","steps":["Apoie as costas no banco inclinado.","Flexione o cotovelo sem avançar o ombro.","Desça controlando até sentir alongamento confortável."],"tips":["Use menos carga do que numa rosca em pé.","Não tire o ombro do banco."]},"preacher":{"summary":"Flexione o cotovelo com o braço apoiado no banco Scott.","steps":["Ajuste o apoio para o braço ficar firme.","Faça a flexão sem levantar o braço do banco.","Desça controlando sem relaxar bruscamente no final."],"tips":["Evite esticar violentamente o cotovelo no fundo.","Não use o tronco para levantar a carga."]},"hammer":{"summary":"Faça a rosca com pegada neutra para enfatizar braquial e antebraço.","steps":["Mantenha as palmas voltadas uma para a outra.","Flexione os cotovelos mantendo os braços próximos ao corpo.","Desça controlando."],"tips":["Não deixe o cotovelo viajar para frente.","Mantenha a pegada neutra durante toda a repetição."]},"reversecurl":{"summary":"Rosca com pegada pronada, aumentando a participação do antebraço.","steps":["Segure a carga com as palmas voltadas para baixo.","Flexione os cotovelos sem balançar o tronco.","Desça controlando."],"tips":["Use carga moderada para manter os punhos alinhados.","Não dobre os punhos para compensar."]},"pushdown":{"summary":"Estenda os cotovelos para baixo mantendo o braço estável.","steps":["Mantenha os cotovelos próximos ao corpo.","Estenda até a posição final sem mover o ombro.","Retorne controlando."],"tips":["Não transforme em movimento de ombro.","Evite inclinar o corpo excessivamente."]},"overheadtriceps":{"summary":"Estenda os cotovelos com os braços acima da cabeça.","steps":["Estabilize tronco e braços.","Estenda os cotovelos sem abrir demais os braços.","Retorne devagar mantendo tensão."],"tips":["A posição alongada aumenta a exigência da cabeça longa do tríceps.","Escolha amplitude confortável para os cotovelos."]},"skullcrusher":{"summary":"Flexione e estenda os cotovelos mantendo o braço relativamente fixo.","steps":["Posicione os braços estáveis sobre o tronco ou levemente inclinados.","Flexione os cotovelos levando a carga em direção à cabeça.","Estenda sem deixar os ombros dominarem o movimento."],"tips":["Controle bem a fase de descida.","Evite abrir excessivamente os cotovelos."]},"kickback":{"summary":"Estenda o cotovelo para trás mantendo o braço fixo.","steps":["Incline o tronco e fixe o braço junto ao corpo.","Estenda o cotovelo até alinhar o braço.","Retorne sem deixar o braço cair."],"tips":["Use carga leve/moderada.","Evite movimentar o ombro."]},"diptriceps":{"summary":"Mergulho com maior ênfase no tríceps.","steps":["Apoie as mãos e mantenha o tronco próximo do apoio.","Flexione os cotovelos controlando a descida.","Empurre até estender os braços."],"tips":["Não desça além da amplitude confortável do ombro.","Mantenha os cotovelos apontando para trás."]},"pushuptriceps":{"summary":"Flexão com mãos próximas para aumentar a exigência do tríceps.","steps":["Posicione as mãos mais próximas sob o tronco.","Desça mantendo cotovelos relativamente próximos.","Empurre até voltar ao topo."],"tips":["Mantenha o corpo alinhado.","Ajuste a largura das mãos se os punhos incomodarem."]},"legpress":{"summary":"Empurre a plataforma com os pés mantendo joelhos alinhados.","steps":["Ajuste banco e pés para uma amplitude confortável.","Desça a plataforma controlando os joelhos.","Empurre sem travar violentamente os joelhos."],"tips":["Mantenha quadril apoiado.","Não deixe os joelhos colapsarem para dentro."]},"squat":{"summary":"Agache mantendo pés, joelhos e tronco estáveis.","steps":["Organize a base e crie tensão antes de descer.","Desça controlando joelhos e quadril.","Suba empurrando o chão e mantendo a postura."],"tips":["Use amplitude que você controla.","Mantenha joelhos acompanhando a direção dos pés."]},"frontsquat":{"summary":"Agachamento com maior demanda anterior e ênfase nos quadríceps.","steps":["Mantenha o tronco mais ereto e a carga bem posicionada.","Desça mantendo os joelhos acompanhando os pés.","Suba sem perder a posição do tronco."],"tips":["Calcanhar elevado pode facilitar a profundidade para algumas pessoas.","Não deixe o tronco colapsar à frente."]},"split":{"summary":"Agachamento unilateral com uma perna à frente.","steps":["Posicione os pés em base estável.","Desça verticalmente controlando o joelho da frente.","Suba empurrando o chão com a perna da frente."],"tips":["Evite perder o equilíbrio com pressa.","A distância dos pés muda a ênfase entre quadríceps e glúteos."]},"lunge":{"summary":"Afundo unilateral para quadríceps e glúteos.","steps":["Dê um passo ou posicione-se em base dividida.","Desça controlando ambos os joelhos.","Empurre o chão para voltar."],"tips":["Mantenha o joelho alinhado com o pé.","Use passo maior para maior participação de glúteos."]},"legextension":{"summary":"Estenda os joelhos contra a resistência da máquina.","steps":["Ajuste encosto e rolo da máquina.","Estenda os joelhos sem tirar o quadril do banco.","Desça lentamente até a posição inicial."],"tips":["Controle o topo sem bater a carga.","Ajuste o eixo da máquina próximo ao eixo do joelho."]},"legcurl":{"summary":"Flexione os joelhos para trabalhar a parte posterior da coxa.","steps":["Ajuste o rolo na parte inferior da perna.","Flexione os joelhos mantendo quadril estável.","Retorne devagar até a extensão confortável."],"tips":["Evite levantar o quadril para completar a repetição.","Controle a fase de alongamento."]},"rdl":{"summary":"Faça uma dobradiça de quadril mantendo a coluna estável.","steps":["Destrave os joelhos e leve o quadril para trás.","Desça a carga próxima das pernas até alongar os posteriores.","Estenda o quadril para voltar."],"tips":["Não transforme em agachamento.","Pare a descida antes de perder a posição da coluna."]},"hipthrust":{"summary":"Estenda o quadril contra a carga focando nos glúteos.","steps":["Apoie a parte alta das costas e posicione os pés.","Eleve o quadril até alinhar tronco e coxas.","Desça controlando sem perder a base."],"tips":["Evite hiperestender a lombar no topo.","Mantenha o queixo levemente recolhido."]},"glutekick":{"summary":"Estenda o quadril levando a perna para trás.","steps":["Estabilize tronco e pelve.","Leve a perna para trás sem girar o quadril.","Retorne devagar mantendo tensão."],"tips":["Não arqueie a lombar para ganhar amplitude.","Priorize o movimento do quadril."]},"abduction":{"summary":"Afaste as pernas contra a resistência para trabalhar glúteo médio.","steps":["Ajuste a máquina e sente-se estável.","Abra as pernas sem embalar o tronco.","Retorne lentamente."],"tips":["Evite bater as placas.","Controle o fechamento."]},"adduction":{"summary":"Aproxime as pernas contra a resistência para trabalhar os adutores.","steps":["Ajuste a amplitude da máquina.","Feche as pernas de forma controlada.","Retorne lentamente até alongar os adutores."],"tips":["Não force amplitude desconfortável.","Mantenha o quadril apoiado."]},"calfstanding":{"summary":"Eleve os calcanhares focando na panturrilha.","steps":["Comece com o pé bem apoiado e tornozelo estável.","Suba o máximo que controlar.","Desça lentamente até alongar a panturrilha."],"tips":["Evite quicar no fundo.","Use amplitude completa e controlada."]},"calfseated":{"summary":"Eleve os calcanhares sentado, enfatizando o sóleo.","steps":["Apoie a carga sobre as coxas.","Eleve os calcanhares mantendo os pés estáveis.","Desça controlando até alongar."],"tips":["Faça pausa curta no topo.","Não use balanço."]},"crunch":{"summary":"Flexione o tronco aproximando costelas e pelve.","steps":["Prepare o abdômen antes de iniciar.","Faça a flexão do tronco sem puxar o pescoço.","Retorne controlando."],"tips":["Pense em fechar as costelas sobre a pelve.","Evite usar impulso."]},"plank":{"summary":"Mantenha o tronco rígido resistindo à extensão da coluna.","steps":["Apoie antebraços e pés.","Contraia abdômen e glúteos mantendo corpo alinhado.","Sustente sem deixar a lombar afundar."],"tips":["Respire durante a posição.","Encerre quando perder o alinhamento."]},"sideplank":{"summary":"Mantenha o corpo alinhado de lado resistindo à flexão lateral.","steps":["Apoie o antebraço e a lateral do pé.","Eleve o quadril até alinhar o corpo.","Sustente mantendo o tronco firme."],"tips":["Não deixe o quadril cair.","Mantenha ombro longe da orelha."]},"legraise":{"summary":"Eleve joelhos ou pernas controlando a pelve com o abdômen.","steps":["Comece suspenso com tronco estável.","Eleve joelhos/pernas sem balançar.","Desça controlando."],"tips":["Evite usar impulso.","Pense em enrolar levemente a pelve no topo."]},"rotation":{"summary":"Movimento de rotação do tronco com controle abdominal.","steps":["Prepare o abdômen e mantenha o tronco estável.","Faça a rotação sem acelerar demais.","Retorne controlando."],"tips":["Não force a lombar.","Use amplitude que consegue controlar."]},"stability":{"summary":"Exercício de estabilidade para manter a coluna controlada enquanto braços/pernas se movem.","steps":["Posicione a lombar de forma neutra.","Mova os membros sem perder a posição do tronco.","Retorne e repita do outro lado quando aplicável."],"tips":["Movimento lento vale mais do que amplitude grande.","Pare se perder o controle lombar."]}};
+const CATALOG_ITEMS=[{"key":"supino-maquina","name":"Supino Máquina","muscle":"Peito","equipment":"Máquina","repdbId":"chest-press-machine","movement":"press","aliases":[]},{"key":"supino-reto-barra","name":"Supino Reto com Barra","muscle":"Peito","equipment":"Barra / banco","repdbId":"bench-press","movement":"press","aliases":[]},{"key":"supino-reto-halteres","name":"Supino Reto com Halteres","muscle":"Peito","equipment":"Halteres / banco","repdbId":"db-bench-press","movement":"press","aliases":[]},{"key":"supino-inclinado-barra","name":"Supino Inclinado com Barra","muscle":"Peito","equipment":"Barra / banco inclinado","repdbId":"incline-bench-press","movement":"press","aliases":[]},{"key":"supino-inclinado-halteres","name":"Supino Inclinado com Halteres","muscle":"Peito","equipment":"Halteres / banco inclinado","repdbId":"incline-db-press","movement":"press","aliases":[]},{"key":"supino-declinado","name":"Supino Declinado","muscle":"Peito","equipment":"Barra / banco declinado","repdbId":"decline-bench-press","movement":"press","aliases":[]},{"key":"supino-fechado","name":"Supino Fechado","muscle":"Peito","equipment":"Barra / banco","repdbId":"close-grip-bench-press","movement":"press","aliases":[]},{"key":"supino-pegada-aberta","name":"Supino Pegada Aberta","muscle":"Peito","equipment":"Barra / banco","repdbId":"wide-grip-bench-press","movement":"press","aliases":[]},{"key":"floor-press","name":"Floor Press","muscle":"Peito","equipment":"Barra","repdbId":"floor-press","movement":"press","aliases":[]},{"key":"floor-press-halteres","name":"Floor Press com Halteres","muscle":"Peito","equipment":"Halteres","repdbId":"dumbbell-floor-press","movement":"press","aliases":[]},{"key":"chest-press-cabo","name":"Chest Press na Polia","muscle":"Peito","equipment":"Polia","repdbId":"cable-chest-press","movement":"press","aliases":[]},{"key":"crucifixo-90","name":"Crucifixo 90 Graus","muscle":"Peito","equipment":"Máquina / Peck deck","repdbId":"machine-chest-fly","movement":"fly","aliases":[]},{"key":"crucifixo-halteres","name":"Crucifixo com Halteres","muscle":"Peito","equipment":"Halteres / banco","repdbId":"db-fly","movement":"fly","aliases":[]},{"key":"crucifixo-inclinado","name":"Crucifixo Inclinado","muscle":"Peito","equipment":"Halteres / banco inclinado","repdbId":"incline-dumbbell-fly","movement":"fly","aliases":[]},{"key":"crucifixo-declinado","name":"Crucifixo Declinado","muscle":"Peito","equipment":"Halteres / banco declinado","repdbId":"decline-db-fly","movement":"fly","aliases":[]},{"key":"crucifixo-polia","name":"Crucifixo na Polia","muscle":"Peito","equipment":"Polia","repdbId":"cable-fly","movement":"fly","aliases":[]},{"key":"crucifixo-polia-inferior","name":"Crucifixo Polia Inferior","muscle":"Peito","equipment":"Polia","repdbId":"cable-fly","movement":"fly","aliases":[]},{"key":"paralelas","name":"Paralelas","muscle":"Peito","equipment":"Peso corporal","repdbId":"dips","movement":"dip","aliases":[]},{"key":"paralelas-assistida","name":"Paralelas Assistida","muscle":"Peito","equipment":"Máquina assistida","repdbId":"assisted-dips","movement":"dip","aliases":[]},{"key":"flexao","name":"Flexão de Braço","muscle":"Peito","equipment":"Peso corporal","repdbId":"push-up","movement":"pushup","aliases":[]},{"key":"flexao-inclinada","name":"Flexão Inclinada","muscle":"Peito","equipment":"Peso corporal / banco","repdbId":"incline-push-ups","movement":"pushup","aliases":[]},{"key":"flexao-declinada","name":"Flexão Declinada","muscle":"Peito","equipment":"Peso corporal / banco","repdbId":"decline-push-up","movement":"pushup","aliases":[]},{"key":"flexao-deficit","name":"Flexão em Déficit","muscle":"Peito","equipment":"Peso corporal / apoios","repdbId":"deficit-push-ups","movement":"pushup","aliases":[]},{"key":"puxada-alta","name":"Puxada Alta","muscle":"Costas","equipment":"Polia / máquina","repdbId":"lat-pulldown","movement":"pulldown","aliases":[]},{"key":"puxada-fechada","name":"Puxada Fechada","muscle":"Costas","equipment":"Polia / triângulo","repdbId":"close-grip-lat-pulldown","movement":"pulldown","aliases":[]},{"key":"barra-fixa","name":"Barra Fixa","muscle":"Costas","equipment":"Peso corporal","repdbId":"pull-up","movement":"pullup","aliases":[]},{"key":"barra-fixa-neutra","name":"Barra Fixa Neutra","muscle":"Costas","equipment":"Peso corporal","repdbId":"neutral-grip-pull-ups","movement":"pullup","aliases":[]},{"key":"barra-fixa-fechada","name":"Barra Fixa Fechada","muscle":"Costas","equipment":"Peso corporal","repdbId":"close-grip-pull-ups","movement":"pullup","aliases":[]},{"key":"chin-up","name":"Chin-up","muscle":"Costas","equipment":"Peso corporal","repdbId":"chin-ups","movement":"pullup","aliases":[]},{"key":"barra-fixa-assistida","name":"Barra Fixa Assistida","muscle":"Costas","equipment":"Máquina assistida","repdbId":"assisted-pull-ups","movement":"pullup","aliases":[]},{"key":"pulldown-braco-reto","name":"Pulldown Braço Reto","muscle":"Costas","equipment":"Polia","repdbId":"straight-arm-pulldown","movement":"pullover","aliases":[]},{"key":"remada-barra","name":"Remada Curvada com Barra","muscle":"Costas","equipment":"Barra","repdbId":"barbell-row","movement":"row","aliases":[]},{"key":"remada-ez","name":"Remada Curvada com Barra EZ","muscle":"Costas","equipment":"Barra EZ","repdbId":"bent-over-ez-bar-row","movement":"row","aliases":[]},{"key":"remada-polia-curvada","name":"Remada Curvada na Polia","muscle":"Costas","equipment":"Polia","repdbId":"cable-bent-over-row","movement":"row","aliases":[]},{"key":"remada-baixa-aberta","name":"Remada Baixa Pegada Aberta","muscle":"Costas","equipment":"Polia","repdbId":"wide-grip-seated-cable-row","movement":"rowwide","aliases":[]},{"key":"remada-unilateral-halter","name":"Remada Unilateral com Halter","muscle":"Costas","equipment":"Halter","repdbId":"single-arm-db-row","movement":"row","aliases":[]},{"key":"remada-peito-apoiado","name":"Remada com Peito Apoiado","muscle":"Costas","equipment":"Halteres / banco","repdbId":"chest-supported-db-row","movement":"rowwide","aliases":[]},{"key":"remada-invertida","name":"Remada Invertida","muscle":"Costas","equipment":"Peso corporal","repdbId":"inverted-row","movement":"row","aliases":[]},{"key":"bench-pull","name":"Remada Deitada no Banco","muscle":"Costas","equipment":"Barra / banco","repdbId":"bench-pull","movement":"rowwide","aliases":[]},{"key":"bench-pull-halter","name":"Remada Deitada com Halteres","muscle":"Costas","equipment":"Halteres / banco","repdbId":"dumbbell-bench-pull","movement":"rowwide","aliases":[]},{"key":"pullover-barra","name":"Pullover com Barra","muscle":"Costas","equipment":"Barra / banco","repdbId":"barbell-pullover","movement":"pullover","aliases":[]},{"key":"pullover-halter","name":"Pullover com Halter","muscle":"Costas","equipment":"Halter / banco","repdbId":"db-pullover","movement":"pullover","aliases":[]},{"key":"cavalinho-t","name":"Cavalinho T","muscle":"Costas","equipment":"Máquina / T-bar","repdbId":"","movement":"row","aliases":[]},{"key":"remada-baixa-triangulo","name":"Remada Baixa Triângulo","muscle":"Costas","equipment":"Polia","repdbId":"","movement":"row","aliases":[]},{"key":"desenvolvimento-maquina","name":"Desenvolvimento Máquina","muscle":"Ombros","equipment":"Máquina","repdbId":"machine-shoulder-press","movement":"shoulderpress","aliases":[]},{"key":"desenvolvimento-halteres","name":"Desenvolvimento com Halteres","muscle":"Ombros","equipment":"Halteres","repdbId":"dumbbell-shoulder-press","movement":"shoulderpress","aliases":[]},{"key":"desenvolvimento-sentado","name":"Desenvolvimento Sentado com Halteres","muscle":"Ombros","equipment":"Halteres / banco","repdbId":"seated-db-press","movement":"shoulderpress","aliases":[]},{"key":"desenvolvimento-barra","name":"Desenvolvimento Militar","muscle":"Ombros","equipment":"Barra","repdbId":"ohp","movement":"shoulderpress","aliases":[]},{"key":"arnold-press","name":"Arnold Press","muscle":"Ombros","equipment":"Halteres","repdbId":"arnold-press","movement":"shoulderpress","aliases":[]},{"key":"landmine-press","name":"Landmine Press","muscle":"Ombros","equipment":"Barra / landmine","repdbId":"landmine-press","movement":"shoulderpress","aliases":[]},{"key":"elevacao-lateral","name":"Elevação Lateral","muscle":"Ombros","equipment":"Halteres","repdbId":"lateral-raise","movement":"lateral","aliases":[]},{"key":"elevacao-lateral-polia","name":"Elevação Lateral na Polia","muscle":"Ombros","equipment":"Polia","repdbId":"cable-lateral-raise","movement":"lateral","aliases":[]},{"key":"elevacao-frontal-halter","name":"Elevação Frontal com Halteres","muscle":"Ombros","equipment":"Halteres","repdbId":"dumbbell-front-raise","movement":"frontraise","aliases":[]},{"key":"elevacao-frontal-polia","name":"Elevação Frontal na Polia","muscle":"Ombros","equipment":"Polia","repdbId":"cable-front-raise","movement":"frontraise","aliases":[]},{"key":"posterior-halter","name":"Crucifixo Inverso com Halteres","muscle":"Ombros","equipment":"Halteres","repdbId":"dumbbell-reverse-fly","movement":"reardelt","aliases":[]},{"key":"posterior-maquina","name":"Crucifixo Inverso / Posterior","muscle":"Ombros","equipment":"Máquina / halteres","repdbId":"rear-delt-fly","movement":"reardelt","aliases":[]},{"key":"posterior-uni-polia","name":"Posterior Uni. Polia","muscle":"Ombros","equipment":"Polia","repdbId":"","movement":"reardelt","aliases":[]},{"key":"face-pull","name":"Face Pull","muscle":"Ombros","equipment":"Polia / corda","repdbId":"face-pull","movement":"facepull","aliases":[]},{"key":"remada-alta","name":"Remada Alta","muscle":"Ombros","equipment":"Barra / cabo","repdbId":"upright-row","movement":"uprightrow","aliases":[]},{"key":"remada-alta-polia","name":"Remada Alta na Polia","muscle":"Ombros","equipment":"Polia","repdbId":"cable-upright-row","movement":"uprightrow","aliases":[]},{"key":"encolhimento","name":"Encolhimento","muscle":"Ombros","equipment":"Barra","repdbId":"shrug","movement":"shrug","aliases":[]},{"key":"encolhimento-halter","name":"Encolhimento com Halteres","muscle":"Ombros","equipment":"Halteres","repdbId":"db-shrug","movement":"shrug","aliases":[]},{"key":"rosca-direta","name":"Rosca Direta","muscle":"Bíceps","equipment":"Barra","repdbId":"bicep-curl","movement":"curl","aliases":[]},{"key":"rosca-barra","name":"Rosca Direta com Barra","muscle":"Bíceps","equipment":"Barra","repdbId":"barbell-curl","movement":"curl","aliases":[]},{"key":"rosca-ez","name":"Rosca Direta Barra EZ","muscle":"Bíceps","equipment":"Barra EZ","repdbId":"ez-bar-curl","movement":"curl","aliases":[]},{"key":"rosca-direta-polia","name":"Rosca Direta na Polia","muscle":"Bíceps","equipment":"Polia","repdbId":"cable-curl","movement":"curl","aliases":[]},{"key":"rosca-martelo","name":"Rosca Martelo","muscle":"Bíceps","equipment":"Halteres","repdbId":"hammer-curl","movement":"hammer","aliases":[]},{"key":"rosca-martelo-polia","name":"Rosca Martelo na Polia","muscle":"Bíceps","equipment":"Polia / corda","repdbId":"cable-hammer-curl","movement":"hammer","aliases":[]},{"key":"rosca-inclinada","name":"Rosca Inclinada","muscle":"Bíceps","equipment":"Halteres / banco inclinado","repdbId":"incline-db-curl","movement":"curlincline","aliases":[]},{"key":"rosca-concentrada","name":"Rosca Concentrada","muscle":"Bíceps","equipment":"Halter","repdbId":"concentration-curl","movement":"curl","aliases":[]},{"key":"rosca-scott-maquina","name":"Rosca Scott Máquina","muscle":"Bíceps","equipment":"Máquina / banco Scott","repdbId":"preacher-curl","movement":"preacher","aliases":[]},{"key":"rosca-spider","name":"Rosca Spider Barra EZ","muscle":"Bíceps","equipment":"Barra EZ / banco","repdbId":"ez-bar-spider-curl","movement":"curl","aliases":[]},{"key":"rosca-inversa","name":"Rosca Inversa","muscle":"Bíceps","equipment":"Barra","repdbId":"reverse-curl","movement":"reversecurl","aliases":[]},{"key":"rosca-inversa-halter","name":"Rosca Inversa com Halteres","muscle":"Bíceps","equipment":"Halteres","repdbId":"db-reverse-curl","movement":"reversecurl","aliases":[]},{"key":"triceps-corda","name":"Tríceps Corda","muscle":"Tríceps","equipment":"Polia / corda","repdbId":"tricep-pushdown","movement":"pushdown","aliases":[]},{"key":"triceps-pushdown","name":"Tríceps Pushdown","muscle":"Tríceps","equipment":"Polia","repdbId":"tricep-pushdown","movement":"pushdown","aliases":[]},{"key":"triceps-overhead","name":"Tríceps Acima da Cabeça","muscle":"Tríceps","equipment":"Polia / halter","repdbId":"overhead-tricep-extension","movement":"overheadtriceps","aliases":[]},{"key":"triceps-maquina","name":"Tríceps Máquina","muscle":"Tríceps","equipment":"Máquina","repdbId":"machine-triceps-extension","movement":"pushdown","aliases":[]},{"key":"triceps-halter","name":"Tríceps Francês com Halter","muscle":"Tríceps","equipment":"Halter","repdbId":"dumbbell-tricep-extension","movement":"overheadtriceps","aliases":[]},{"key":"triceps-testa","name":"Tríceps Testa","muscle":"Tríceps","equipment":"Barra","repdbId":"skull-crusher","movement":"skullcrusher","aliases":[]},{"key":"triceps-testa-halter","name":"Tríceps Testa com Halteres","muscle":"Tríceps","equipment":"Halteres","repdbId":"db-skull-crusher","movement":"skullcrusher","aliases":[]},{"key":"triceps-testa-polia","name":"Tríceps Testa na Polia","muscle":"Tríceps","equipment":"Polia","repdbId":"overhead-tricep-extension","movement":"skullcrusher","aliases":[]},{"key":"triceps-deitado","name":"Extensão de Tríceps Deitado","muscle":"Tríceps","equipment":"Barra / halteres","repdbId":"lying-tricep-extension","movement":"skullcrusher","aliases":[]},{"key":"triceps-coice","name":"Tríceps Coice","muscle":"Tríceps","equipment":"Halter","repdbId":"tricep-kickback","movement":"kickback","aliases":[]},{"key":"triceps-coice-polia","name":"Tríceps Coice na Polia","muscle":"Tríceps","equipment":"Polia","repdbId":"cable-tricep-kickback","movement":"kickback","aliases":[]},{"key":"mergulho-banco","name":"Mergulho no Banco","muscle":"Tríceps","equipment":"Peso corporal / banco","repdbId":"bench-dips","movement":"diptriceps","aliases":[]},{"key":"flexao-diamante","name":"Flexão Diamante","muscle":"Tríceps","equipment":"Peso corporal","repdbId":"diamond-push-ups","movement":"pushuptriceps","aliases":[]},{"key":"leg-press","name":"Leg Press","muscle":"Quadríceps","equipment":"Máquina","repdbId":"leg-press","movement":"legpress","aliases":[]},{"key":"leg-press-horizontal","name":"Leg Press Horizontal","muscle":"Quadríceps","equipment":"Máquina","repdbId":"horizontal-leg-press","movement":"legpress","aliases":[]},{"key":"hack-squat","name":"Hack Squat","muscle":"Quadríceps","equipment":"Máquina","repdbId":"hack-squat","movement":"squat","aliases":[]},{"key":"agachamento","name":"Agachamento Livre","muscle":"Quadríceps","equipment":"Barra","repdbId":"squat","movement":"squat","aliases":[]},{"key":"agachamento-frontal","name":"Agachamento Frontal","muscle":"Quadríceps","equipment":"Barra","repdbId":"front-squat","movement":"frontsquat","aliases":[]},{"key":"agachamento-goblet","name":"Agachamento Goblet","muscle":"Quadríceps","equipment":"Halter / kettlebell","repdbId":"goblet-squat","movement":"squat","aliases":[]},{"key":"agachamento-calcanhar-elevado","name":"Agachamento com Calcanhar Elevado","muscle":"Quadríceps","equipment":"Barra / peso corporal","repdbId":"heel-elevated-squat","movement":"frontsquat","aliases":[]},{"key":"bulgaro","name":"Agachamento Búlgaro","muscle":"Quadríceps","equipment":"Halteres / banco","repdbId":"bulgarian-split-squat","movement":"split","aliases":[]},{"key":"bulgaro-smith","name":"Agachamento Búlgaro no Smith","muscle":"Quadríceps","equipment":"Smith / banco","repdbId":"smith-machine-bulgarian-split","movement":"split","aliases":[]},{"key":"afundo","name":"Afundo","muscle":"Quadríceps","equipment":"Peso corporal / halteres","repdbId":"lunge","movement":"lunge","aliases":[]},{"key":"afundo-reverso","name":"Afundo Reverso","muscle":"Quadríceps","equipment":"Peso corporal / halteres","repdbId":"reverse-lunge","movement":"lunge","aliases":[]},{"key":"split-squat-halter","name":"Split Squat com Halteres","muscle":"Quadríceps","equipment":"Halteres","repdbId":"dumbbell-split-squat","movement":"split","aliases":[]},{"key":"cadeira-extensora","name":"Cadeira Extensora","muscle":"Quadríceps","equipment":"Máquina","repdbId":"leg-extension","movement":"legextension","aliases":[]},{"key":"mesa-flexora","name":"Mesa / Cadeira Flexora","muscle":"Posterior","equipment":"Máquina","repdbId":"leg-curl","movement":"legcurl","aliases":[]},{"key":"nordic","name":"Nordic Curl","muscle":"Posterior","equipment":"Peso corporal","repdbId":"nordic-hamstring-curl","movement":"legcurl","aliases":[]},{"key":"romeno","name":"Levantamento Romeno","muscle":"Posterior","equipment":"Barra","repdbId":"romanian-deadlift","movement":"rdl","aliases":[]},{"key":"romeno-halter","name":"Romeno com Halteres","muscle":"Posterior","equipment":"Halteres","repdbId":"dumbbell-romanian-deadlift","movement":"rdl","aliases":[]},{"key":"hip-thrust","name":"Hip Thrust","muscle":"Glúteos","equipment":"Barra / banco","repdbId":"hip-thrust","movement":"hipthrust","aliases":[]},{"key":"ponte-gluteo","name":"Ponte de Glúteo","muscle":"Glúteos","equipment":"Peso corporal / barra","repdbId":"glute-bridge","movement":"hipthrust","aliases":[]},{"key":"glute-kickback","name":"Coice de Glúteo","muscle":"Glúteos","equipment":"Máquina / polia","repdbId":"glute-kickback","movement":"glutekick","aliases":[]},{"key":"cable-kickback","name":"Coice de Glúteo na Polia","muscle":"Glúteos","equipment":"Polia","repdbId":"cable-kickback","movement":"glutekick","aliases":[]},{"key":"abdutora","name":"Abdutora","muscle":"Glúteos","equipment":"Máquina","repdbId":"hip-abduction","movement":"abduction","aliases":[]},{"key":"adutora","name":"Adutora","muscle":"Glúteos","equipment":"Máquina","repdbId":"hip-adduction","movement":"adduction","aliases":[]},{"key":"panturrilha-em-pe","name":"Panturrilha em Pé","muscle":"Panturrilha","equipment":"Máquina / peso corporal","repdbId":"standing-calf-raise","movement":"calfstanding","aliases":[]},{"key":"panturrilha-sentado","name":"Panturrilha Sentado","muscle":"Panturrilha","equipment":"Máquina","repdbId":"seated-calf-raise","movement":"calfseated","aliases":[]},{"key":"panturrilha-maquina","name":"Panturrilha Máquina","muscle":"Panturrilha","equipment":"Máquina","repdbId":"machine-calf-raise","movement":"calfstanding","aliases":[]},{"key":"panturrilha-halter","name":"Panturrilha com Halteres","muscle":"Panturrilha","equipment":"Halteres","repdbId":"dumbbell-calf-raise","movement":"calfstanding","aliases":[]},{"key":"panturrilha-corporal","name":"Panturrilha Peso Corporal","muscle":"Panturrilha","equipment":"Peso corporal","repdbId":"bodyweight-calf-raise","movement":"calfstanding","aliases":[]},{"key":"donkey-calf","name":"Donkey Calf Raise","muscle":"Panturrilha","equipment":"Máquina / peso corporal","repdbId":"donkey-calf-raise","movement":"calfstanding","aliases":[]},{"key":"crunch","name":"Crunch","muscle":"Abdômen","equipment":"Peso corporal","repdbId":"crunches","movement":"crunch","aliases":[]},{"key":"crunch-polia","name":"Crunch na Polia","muscle":"Abdômen","equipment":"Polia","repdbId":"cable-crunch","movement":"crunch","aliases":[]},{"key":"crunch-maquina","name":"Crunch Máquina","muscle":"Abdômen","equipment":"Máquina","repdbId":"machine-seated-crunch","movement":"crunch","aliases":[]},{"key":"crunch-declinado","name":"Crunch Declinado","muscle":"Abdômen","equipment":"Banco declinado","repdbId":"decline-crunch","movement":"crunch","aliases":[]},{"key":"prancha","name":"Prancha","muscle":"Abdômen","equipment":"Peso corporal","repdbId":"plank","movement":"plank","aliases":[]},{"key":"prancha-lateral","name":"Prancha Lateral","muscle":"Abdômen","equipment":"Peso corporal","repdbId":"side-plank","movement":"sideplank","aliases":[]},{"key":"elevacao-joelhos-barra","name":"Elevação de Joelhos Suspenso","muscle":"Abdômen","equipment":"Barra fixa","repdbId":"hanging-knee-raise","movement":"legraise","aliases":[]},{"key":"elevacao-pernas-barra","name":"Elevação de Pernas Suspenso","muscle":"Abdômen","equipment":"Barra fixa","repdbId":"hanging-leg-raise","movement":"legraise","aliases":[]},{"key":"elevacao-joelhos-cadeira","name":"Elevação de Joelhos na Cadeira Romana","muscle":"Abdômen","equipment":"Cadeira romana","repdbId":"captains-chair-knee-raise","movement":"legraise","aliases":[]},{"key":"elevacao-pernas-cadeira","name":"Elevação de Pernas na Cadeira Romana","muscle":"Abdômen","equipment":"Cadeira romana","repdbId":"captains-chair-leg-raise","movement":"legraise","aliases":[]},{"key":"bicicleta","name":"Abdominal Bicicleta","muscle":"Abdômen","equipment":"Peso corporal","repdbId":"bicycle-crunch","movement":"rotation","aliases":[]},{"key":"russian-twist","name":"Russian Twist","muscle":"Abdômen","equipment":"Peso corporal / carga","repdbId":"russian-twist","movement":"rotation","aliases":[]},{"key":"dead-bug","name":"Dead Bug","muscle":"Abdômen","equipment":"Peso corporal","repdbId":"dead-bug","movement":"stability","aliases":[]}];
+
+function catalogPrimarySecondary(item){
+  const m=item.muscle;
+  if(m==='Peito')return {primary:['Peito'],secondary:['Tríceps','Ombros']};
+  if(m==='Costas')return {primary:['Costas'],secondary:['Bíceps','Ombros']};
+  if(m==='Ombros')return {primary:['Ombros'],secondary:item.movement==='shoulderpress'?['Tríceps']:['Costas']};
+  if(m==='Bíceps')return {primary:['Bíceps'],secondary:['Antebraços']};
+  if(m==='Tríceps')return {primary:['Tríceps'],secondary:['Ombros']};
+  if(m==='Quadríceps')return {primary:['Quadríceps'],secondary:['Glúteos','Posterior']};
+  if(m==='Posterior')return {primary:['Posterior'],secondary:['Glúteos']};
+  if(m==='Glúteos')return {primary:['Glúteos'],secondary:['Posterior']};
+  if(m==='Panturrilha')return {primary:['Panturrilha'],secondary:[]};
+  if(m==='Abdômen')return {primary:['Abdômen'],secondary:[]};
+  return {primary:[m],secondary:[]};
+}
+function makeCatalogExercise(raw){
+  const guide=MOVEMENT_GUIDES[raw.movement]||MOVEMENT_GUIDES.press;
+  const ms=catalogPrimarySecondary(raw);
+  return {
+    ...raw,
+    aliases:[raw.name,raw.repdbId,...(raw.aliases||[])].filter(Boolean),
+    primary:ms.primary,
+    secondary:ms.secondary,
+    summary:guide.summary,
+    steps:[...guide.steps],
+    tips:[...guide.tips],
+    repdbExact:!!raw.repdbId,
+    repdbNote:raw.repdbId?'':'Ainda não há uma imagem específica deste exercício no RepDB gratuito.'
+  };
+}
+const EXERCISE_CATALOG=CATALOG_ITEMS.map(makeCatalogExercise);
+
+let catalogMuscleFilter='Todos';
+let activeCatalogKey='';
+
 const DEFAULT={gyms:[{id:'evoque',name:'EVOQUE'}],activeGym:'evoque',activeMuscle:null,muscleStartedAt:null,sessionDate:null,sessionMuscles:[],sessionExerciseIds:[],sessionFirstByMuscle:{},preparedByGym:{},exercises:[],history:[]};
 let state=load(), restTimer=null, restEnd=0, currentEditingHistoryId=null;
 let workoutReorderMode=false;
@@ -2169,6 +3002,345 @@ function finishWorkout(){if(!confirm('Finalizar o treino de hoje? Os registros f
 function startMuscle(m){filterMuscle(m)}
 function finishMuscle(){if(!state.activeMuscle)return toast('Nenhum músculo ativo');state.activeMuscle=null;persist();render();toast('Grupo muscular finalizado')}
 function changeGym(id){state.activeGym=id;state.activeMuscle=null;state.muscleStartedAt=null;state.sessionMuscles=[];state.sessionExerciseIds=[];state.sessionFirstByMuscle={};persist();render();toast('Academia alterada')}
+
+function normCatalog(v){
+  return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim().replace(/\s+/g,' ');
+}
+function catalogItem(key){return EXERCISE_CATALOG.find(x=>x.key===key)||null}
+function catalogKeyFromExercise(e){
+  if(!e)return '';
+  if(e.catalogKey&&catalogItem(e.catalogKey))return e.catalogKey;
+  const n=normCatalog(e.name);
+  return EXERCISE_CATALOG.find(x=>[x.name,...(x.aliases||[])].some(a=>normCatalog(a)===n))?.key||'';
+}
+function existingExerciseForCatalog(item){
+  return state.exercises.find(e=>e.gymId===state.activeGym&&catalogKeyFromExercise(e)===item.key)||null;
+}
+function catalogMuscleIcon(m){
+  const map={Peito:'◆',Costas:'↔',Ombros:'◇','Bíceps':'⌁','Tríceps':'⇣',Quadríceps:'▥',Posterior:'◒',Panturrilha:'△',Glúteos:'⬡','Abdômen':'▦'};
+  return map[m]||'●';
+}
+function bodyHeatSVG(primary=[],secondary=[]){
+  const p=new Set(primary),s=new Set(secondary);
+  const fill=(m)=>p.has(m)?'#cbff38':s.has(m)?'rgba(203,255,56,.42)':'#20272e';
+  const stroke='#46515b';
+  return `<svg class="heat-svg" viewBox="0 0 250 165" aria-label="Mapa muscular">
+    <g transform="translate(19,8)">
+      <text x="45" y="8" text-anchor="middle" fill="#66717c" font-size="6" font-weight="800">FRENTE</text>
+      <circle cx="45" cy="24" r="10" fill="#20272e" stroke="${stroke}" stroke-width="1"/>
+      <path d="M34 38 Q45 33 56 38 L61 82 Q45 92 29 82Z" fill="#20272e" stroke="${stroke}" stroke-width="1"/>
+      <rect x="21" y="42" width="10" height="45" rx="5" fill="#20272e" stroke="${stroke}"/>
+      <rect x="59" y="42" width="10" height="45" rx="5" fill="#20272e" stroke="${stroke}"/>
+      <path d="M32 85 L43 85 L41 145 L27 145Z" fill="#20272e" stroke="${stroke}"/>
+      <path d="M47 85 L58 85 L63 145 L49 145Z" fill="#20272e" stroke="${stroke}"/>
+      <path d="M32 42 Q45 34 45 58 Q38 62 31 57Z" fill="${fill('Peito')}" opacity=".95"/>
+      <path d="M58 42 Q45 34 45 58 Q52 62 59 57Z" fill="${fill('Peito')}" opacity=".95"/>
+      <circle cx="27" cy="44" r="7" fill="${fill('Ombros')}"/>
+      <circle cx="63" cy="44" r="7" fill="${fill('Ombros')}"/>
+      <rect x="22" y="52" width="7" height="19" rx="3.5" fill="${fill('Bíceps')}"/>
+      <rect x="61" y="52" width="7" height="19" rx="3.5" fill="${fill('Bíceps')}"/>
+      <rect x="36" y="58" width="18" height="24" rx="6" fill="${fill('Abdômen')}"/>
+      <path d="M31 88 L42 88 L40 119 L29 119Z" fill="${fill('Quadríceps')}"/>
+      <path d="M48 88 L59 88 L61 119 L50 119Z" fill="${fill('Quadríceps')}"/>
+      <rect x="29" y="122" width="11" height="20" rx="5" fill="${fill('Panturrilha')}"/>
+      <rect x="50" y="122" width="11" height="20" rx="5" fill="${fill('Panturrilha')}"/>
+    </g>
+    <g transform="translate(139,8)">
+      <text x="45" y="8" text-anchor="middle" fill="#66717c" font-size="6" font-weight="800">COSTAS</text>
+      <circle cx="45" cy="24" r="10" fill="#20272e" stroke="${stroke}" stroke-width="1"/>
+      <path d="M34 38 Q45 33 56 38 L61 82 Q45 92 29 82Z" fill="#20272e" stroke="${stroke}" stroke-width="1"/>
+      <rect x="21" y="42" width="10" height="45" rx="5" fill="#20272e" stroke="${stroke}"/>
+      <rect x="59" y="42" width="10" height="45" rx="5" fill="#20272e" stroke="${stroke}"/>
+      <path d="M32 85 L43 85 L41 145 L27 145Z" fill="#20272e" stroke="${stroke}" stroke-width="1"/>
+      <path d="M47 85 L58 85 L63 145 L49 145Z" fill="#20272e" stroke="${stroke}" stroke-width="1"/>
+      <path d="M32 42 Q45 37 58 42 L56 73 Q45 83 34 73Z" fill="${fill('Costas')}" opacity=".95"/>
+      <circle cx="27" cy="44" r="7" fill="${fill('Ombros')}"/>
+      <circle cx="63" cy="44" r="7" fill="${fill('Ombros')}"/>
+      <rect x="22" y="52" width="7" height="19" rx="3.5" fill="${fill('Tríceps')}"/>
+      <rect x="61" y="52" width="7" height="19" rx="3.5" fill="${fill('Tríceps')}"/>
+      <ellipse cx="38" cy="88" rx="8" ry="8" fill="${fill('Glúteos')}"/>
+      <ellipse cx="52" cy="88" rx="8" ry="8" fill="${fill('Glúteos')}"/>
+      <path d="M31 96 L42 96 L40 121 L29 121Z" fill="${fill('Posterior')}"/>
+      <path d="M48 96 L59 96 L61 121 L50 121Z" fill="${fill('Posterior')}"/>
+      <rect x="29" y="124" width="11" height="18" rx="5" fill="${fill('Panturrilha')}"/>
+      <rect x="50" y="124" width="11" height="18" rx="5" fill="${fill('Panturrilha')}"/>
+    </g>
+  </svg>`;
+}
+function repdbImageUrl(item,stage='start'){
+  if(!item?.repdbId)return '';
+  const suffix=stage==='peak'?'peak':'start';
+  return `https://raw.githubusercontent.com/RepDB/exercise-dataset/main/images/flat/${item.repdbId}-${suffix}.webp`;
+}
+function repdbExerciseUrl(item){
+  return item?.repdbId?`https://exercise-dataset.com/exercise/${item.repdbId}/`:'';
+}
+function repdbPoseHTML(item,stage='start',compact=false){
+  if(!item?.repdbId){
+    return `<div class="repdb-missing ${compact?'compact':''}">
+      <span>Imagem específica indisponível</span>
+      ${compact?'':`<small>${esc(item?.repdbNote||'Ainda não há um visual exato deste exercício no RepDB gratuito.')}</small>`}
+    </div>`;
+  }
+  const label=stage==='peak'?'posição final':'posição inicial';
+  return `<div class="repdb-image-wrap ${compact?'compact':''}">
+    <img src="${repdbImageUrl(item,stage)}"
+      alt="${esc(item.name)} — ${label}"
+      loading="lazy"
+      decoding="async"
+      onerror="this.closest('.repdb-image-wrap').classList.add('image-error')">
+    <div class="repdb-image-error">
+      <span>Não foi possível carregar a imagem</span>
+      <small>O restante do exercício continua disponível.</small>
+    </div>
+  </div>`;
+}
+function regionEmphasisFor(item){
+  const id=item.repdbId||item.key||'';
+  const mv=item.movement||'';
+
+  // These are relative emphasis estimates for simple visual guidance.
+  // They are not EMG measurements and should not be read as literal activation percentages.
+  if(item.muscle==='Peito'){
+    if(id.includes('incline')||item.key.includes('inclinado'))
+      return [['Peito superior',100],['Peito médio',72],['Peito inferior',35],['Deltoide anterior',58],['Tríceps',52]];
+    if(id.includes('decline')||mv==='dip'||item.key.includes('inferior'))
+      return [['Peito inferior',100],['Peito médio',72],['Peito superior',30],['Tríceps',58],['Deltoide anterior',38]];
+    if(id.includes('close-grip'))
+      return [['Tríceps',100],['Peito médio',72],['Peito superior',52],['Peito inferior',45],['Deltoide anterior',48]];
+    if(mv==='fly')
+      return [['Peito médio',100],['Peito superior',65],['Peito inferior',62],['Deltoide anterior',35]];
+    return [['Peito médio',100],['Peito superior',66],['Peito inferior',58],['Tríceps',55],['Deltoide anterior',52]];
+  }
+
+  if(item.muscle==='Costas'){
+    if(mv==='pulldown'||mv==='pullup')
+      return [['Latíssimo / largura',100],['Redondo maior',72],['Bíceps',58],['Romboides / meio',48],['Trapézio inferior',42]];
+    if(mv==='pullover')
+      return [['Latíssimo / largura',100],['Redondo maior',70],['Serrátil',46],['Peito',28]];
+    if(mv==='rowwide')
+      return [['Romboides / meio das costas',100],['Trapézio médio',90],['Deltoide posterior',72],['Latíssimo',65],['Bíceps',52]];
+    return [['Latíssimo',92],['Romboides / meio das costas',88],['Trapézio médio',72],['Bíceps',55],['Deltoide posterior',48]];
+  }
+
+  if(item.muscle==='Ombros'){
+    if(mv==='lateral')return [['Deltoide lateral',100],['Supraespinal',46],['Trapézio superior',28]];
+    if(mv==='frontraise')return [['Deltoide anterior',100],['Peito superior',35],['Deltoide lateral',25]];
+    if(mv==='reardelt')return [['Deltoide posterior',100],['Romboides',58],['Trapézio médio',48]];
+    if(mv==='facepull')return [['Deltoide posterior',100],['Manguito rotador',85],['Trapézio médio',68],['Romboides',62]];
+    if(mv==='uprightrow')return [['Deltoide lateral',92],['Trapézio superior',86],['Deltoide anterior',42]];
+    if(mv==='shrug')return [['Trapézio superior',100],['Elevador da escápula',58],['Trapézio médio',28]];
+    return [['Deltoide anterior',100],['Deltoide lateral',76],['Tríceps',62],['Trapézio superior',34]];
+  }
+
+  if(item.muscle==='Bíceps'){
+    if(mv==='hammer'||mv==='reversecurl')
+      return [['Braquial',100],['Braquiorradial / antebraço',92],['Bíceps braquial',62]];
+    if(mv==='curlincline')
+      return [['Bíceps — cabeça longa',100],['Bíceps — cabeça curta',72],['Braquial',48],['Antebraço',30]];
+    if(mv==='preacher')
+      return [['Bíceps — cabeça curta',96],['Bíceps — cabeça longa',78],['Braquial',45],['Antebraço',28]];
+    return [['Bíceps braquial',100],['Braquial',55],['Antebraço',34]];
+  }
+
+  if(item.muscle==='Tríceps'){
+    if(mv==='overheadtriceps')
+      return [['Tríceps — cabeça longa',100],['Cabeça lateral',66],['Cabeça medial',58]];
+    if(mv==='pushdown')
+      return [['Tríceps — cabeça lateral',100],['Cabeça medial',72],['Cabeça longa',62]];
+    if(mv==='skullcrusher')
+      return [['Tríceps — cabeça longa',92],['Cabeça lateral',78],['Cabeça medial',64]];
+    if(mv==='diptriceps'||mv==='pushuptriceps')
+      return [['Tríceps — cabeça lateral',92],['Cabeça longa',78],['Cabeça medial',68],['Peito',45]];
+    return [['Tríceps',100],['Cabeça lateral',82],['Cabeça longa',72]];
+  }
+
+  if(item.muscle==='Quadríceps'){
+    if(mv==='legextension')
+      return [['Vasto lateral',100],['Vasto medial',96],['Reto femoral',88]];
+    if(mv==='frontsquat')
+      return [['Quadríceps',100],['Glúteo máximo',58],['Adutores',46],['Posterior',28]];
+    if(mv==='split'||mv==='lunge')
+      return [['Quadríceps',100],['Glúteo máximo',78],['Adutores',46],['Posterior',38]];
+    return [['Quadríceps',100],['Glúteo máximo',70],['Adutores',45],['Posterior',34]];
+  }
+
+  if(item.muscle==='Posterior'){
+    if(mv==='legcurl')
+      return [['Posterior da coxa',100],['Bíceps femoral',92],['Semitendíneo / semimembranoso',88],['Panturrilha',28]];
+    return [['Posterior da coxa',100],['Glúteo máximo',78],['Adutores',42],['Eretores da coluna',36]];
+  }
+
+  if(item.muscle==='Glúteos'){
+    if(mv==='abduction')
+      return [['Glúteo médio',100],['Glúteo mínimo',78],['Glúteo máximo — fibras superiores',52]];
+    if(mv==='adduction')
+      return [['Adutores',100],['Adutor magno',92],['Grácil',60],['Glúteo máximo',25]];
+    if(mv==='glutekick')
+      return [['Glúteo máximo',100],['Posterior da coxa',48],['Glúteo médio',32]];
+    return [['Glúteo máximo',100],['Posterior da coxa',48],['Adutor magno',32]];
+  }
+
+  if(item.muscle==='Panturrilha'){
+    if(mv==='calfseated')return [['Sóleo',100],['Gastrocnêmio',58]];
+    return [['Gastrocnêmio',100],['Sóleo',62]];
+  }
+
+  if(item.muscle==='Abdômen'){
+    if(mv==='sideplank')return [['Oblíquos',100],['Transverso do abdômen',82],['Glúteo médio',48]];
+    if(mv==='rotation')return [['Oblíquos',100],['Reto abdominal',62],['Transverso do abdômen',58]];
+    if(mv==='legraise')return [['Reto abdominal — ênfase inferior',100],['Flexores do quadril',74],['Transverso do abdômen',55]];
+    if(mv==='stability'||mv==='plank')return [['Transverso do abdômen / estabilidade',100],['Reto abdominal',78],['Oblíquos',68]];
+    return [['Reto abdominal',100],['Reto abdominal — ênfase superior',88],['Oblíquos',38]];
+  }
+
+  return [[item.muscle,100]];
+}
+function repdbMuscleMapHTML(item){
+  const rows=regionEmphasisFor(item);
+  return `<div class="repdb-muscle-map">
+    ${rows.map(([name,pct],idx)=>`<div class="muscle-map-row ${idx===0?'primary-region':''}">
+      <div class="muscle-map-label">
+        <strong>${esc(name)}</strong>
+        <small>${idx===0?'maior ênfase':'ênfase secundária'}</small>
+      </div>
+      <div class="muscle-map-track"><i style="width:${pct}%"></i></div>
+      <b>${pct}%</b>
+    </div>`).join('')}
+  </div>`;
+}
+function repdbSourceNote(item){
+  if(!item?.repdbId)return '';
+  return `<div class="repdb-source-note ${item.repdbExact?'exact':'equivalent'}">
+    <span>${item.repdbExact?'✓ Visual específico do exercício':'≈ Movimento equivalente no RepDB'}</span>
+    ${item.repdbNote?`<small>${esc(item.repdbNote)}</small>`:''}
+  </div>`;
+}
+function openExerciseCatalog(){
+  catalogMuscleFilter=state.activeMuscle||'Todos';
+  document.getElementById('catalogSearch').value='';
+  renderExerciseCatalog();
+  openModal('exerciseCatalogModal');
+}
+function renderExerciseCatalog(){
+  const root=document.getElementById('catalogGrid');
+  const q=normCatalog(document.getElementById('catalogSearch')?.value||'');
+  const muscles=['Todos',...MUSCLES.filter(m=>EXERCISE_CATALOG.some(x=>x.muscle===m))];
+  document.getElementById('catalogFilters').innerHTML=muscles.map(m=>`<button class="${catalogMuscleFilter===m?'active':''}" onclick="catalogMuscleFilter='${m}';renderExerciseCatalog()">${esc(m)}</button>`).join('');
+
+  const arr=EXERCISE_CATALOG.filter(x=>{
+    const muscleOk=catalogMuscleFilter==='Todos'||x.muscle===catalogMuscleFilter;
+    const hay=normCatalog([x.name,x.muscle,x.equipment,...(x.aliases||[])].join(' '));
+    return muscleOk&&(!q||hay.includes(q));
+  });
+
+  document.getElementById('catalogResultTitle').textContent=catalogMuscleFilter==='Todos'?'Exercícios':'Exercícios de '+catalogMuscleFilter;
+  document.getElementById('catalogResultCount').textContent=arr.length+' de '+EXERCISE_CATALOG.length+' exercícios';
+
+  if(!arr.length){
+    root.innerHTML=`<div class="catalog-empty"><strong>Nada encontrado</strong><span>Tente outro nome ou crie o exercício manualmente.</span><button onclick="openBlankExerciseModal()">＋ Criar manualmente</button></div>`;
+    return;
+  }
+
+  root.innerHTML=arr.map(item=>{
+    const exists=existingExerciseForCatalog(item);
+    return `<button class="catalog-card" onclick="openCatalogDetail('${item.key}')">
+      <div class="catalog-card-visual">
+        <div class="catalog-card-muscle">${catalogMuscleIcon(item.muscle)}</div>
+        <div class="catalog-mini-pose">${repdbPoseHTML(item,'peak',true)}</div>
+      </div>
+      <div class="catalog-card-copy">
+        <small>${esc(item.muscle)} · ${esc(item.equipment)}</small>
+        <strong>${esc(item.name)}</strong>
+        <p>${esc(item.summary)}</p>
+        <div class="catalog-card-tags">
+          <span>${exists?'✓ já adicionado':'ver execução'}</span>
+          <i>›</i>
+        </div>
+      </div>
+    </button>`;
+  }).join('');
+}
+function openCatalogDetail(key){
+  const item=catalogItem(key);if(!item)return;
+  activeCatalogKey=key;
+  const exists=existingExerciseForCatalog(item);
+  const second=item.secondary?.length?item.secondary.join(' · '):'—';
+
+  document.getElementById('catalogDetailContent').innerHTML=`
+    <div class="catalog-detail-head">
+      <button class="catalog-back" onclick="closeModal('exerciseCatalogDetailModal')">‹</button>
+      <div><small>${esc(item.muscle)} · ${esc(item.equipment)}</small><h3>${esc(item.name)}</h3></div>
+      <button class="close" onclick="closeModal('exerciseCatalogDetailModal')">✕</button>
+    </div>
+
+    <div class="catalog-detail-hero">
+      <div class="catalog-detail-summary">${esc(item.summary)}</div>
+      ${repdbSourceNote(item)}
+      <div class="catalog-pose-pair">
+        <div><span>INÍCIO</span>${repdbPoseHTML(item,'start')}</div>
+        <div><span>FIM</span>${repdbPoseHTML(item,'peak')}</div>
+      </div>
+    </div>
+
+    <section class="catalog-detail-section">
+      <div class="catalog-detail-title"><span>01</span><div><strong>Onde trabalha</strong><small>músculos principais e secundários</small></div></div>
+      <div class="heatmap-card repdb-data-map">
+        <div class="heatmap-copy">
+          <small>ÊNFASE REGIONAL ESTIMADA</small>
+          <strong>Onde este exercício tende a enfatizar mais</strong>
+          <p>100% representa a maior ênfase relativa deste exercício. Não é uma medição de EMG nem porcentagem literal de ativação muscular.</p>
+        </div>
+        ${repdbMuscleMapHTML(item)}
+      </div>
+    </section>
+
+    <section class="catalog-detail-section">
+      <div class="catalog-detail-title"><span>02</span><div><strong>Como executar</strong><small>passo a passo curto</small></div></div>
+      <ol class="catalog-steps">${item.steps.map(x=>`<li><span></span><p>${esc(x)}</p></li>`).join('')}</ol>
+    </section>
+
+    <section class="catalog-detail-section">
+      <div class="catalog-detail-title"><span>03</span><div><strong>Preste atenção</strong><small>detalhes que melhoram a execução</small></div></div>
+      <div class="catalog-tips">${item.tips.map(x=>`<div><span>✓</span><p>${esc(x)}</p></div>`).join('')}</div>
+    </section>
+
+    <div class="catalog-detail-footer">
+      <button class="catalog-add ${exists?'existing':''}" onclick="addCatalogExercise('${item.key}')">
+        <span>${exists?'✓':'＋'}</span>
+        <b>${exists?'Já está na biblioteca · abrir':'Adicionar à minha biblioteca'}</b>
+        <i>›</i>
+      </button>
+      <a class="repdb-detail-credit" href="https://repdb.co" target="_blank" rel="noopener noreferrer">Exercise data & images by RepDB ↗</a>
+    </div>`;
+  openModal('exerciseCatalogDetailModal');
+}
+function addCatalogExercise(key){
+  const item=catalogItem(key);if(!item)return;
+  const existing=existingExerciseForCatalog(item);
+  if(existing){
+    closeModal('exerciseCatalogDetailModal');
+    closeModal('exerciseCatalogModal');
+    editExercise(existing.id);
+    return;
+  }
+  closeModal('exerciseCatalogDetailModal');
+  closeModal('exerciseCatalogModal');
+  openBlankExerciseModal(item);
+}
+function renderCatalogLinkedInfo(key){
+  const box=document.getElementById('catalogLinkedInfo');
+  const input=document.getElementById('catalogKey');
+  if(input)input.value=key||'';
+  if(!box)return;
+  box.style.display=key&&catalogItem(key)?'block':'none';
+}
+function openLinkedCatalogInfo(){
+  const key=document.getElementById('catalogKey')?.value||'';
+  if(key&&catalogItem(key))openCatalogDetail(key);
+  else toast('Este exercício ainda não tem guia visual');
+}
+
 function fillMuscleSelect(){const el=document.getElementById('exerciseMuscle');if(!el)return;el.innerHTML=MUSCLES.map(m=>`<option ${m===state.activeMuscle?'selected':''}>${m}</option>`).join('')}
 function muscleHasPrep(muscle,excludeId=''){return isPrepared(muscle)||state.exercises.some(e=>e.gymId===state.activeGym&&e.muscle===muscle&&e.usePrep&&e.id!==excludeId&&e.updatedAt&&state.muscleStartedAt&&e.updatedAt>=state.muscleStartedAt)}
 function currentExercisePrepMode(){
@@ -2356,18 +3528,54 @@ function saveCalibrationResult(){
   saveExercise();
 }
 function openExerciseModal(){
+  openExerciseCatalog();
+}
+function openBlankExerciseModal(prefill=null){
   currentEditingHistoryId=null;
-  document.getElementById('recordBanner')?.classList.remove('show');document.getElementById('recordActions')?.classList.remove('show');
+  document.getElementById('recordBanner')?.classList.remove('show');
+  document.getElementById('recordActions')?.classList.remove('show');
+  closeModal('exerciseCatalogModal');
+  closeModal('exerciseCatalogDetailModal');
+
   const modal=document.getElementById('exerciseModal');
-  modal.classList.add('new-exercise-mode');modal.classList.remove('exercise-modal-later','exercise-modal-live','exercise-modal-calibration');
-  document.getElementById('editId').value='';document.getElementById('entryModeBox').style.display='none';currentEntryMode='later';
-  document.getElementById('exerciseName').value='';document.getElementById('exerciseNote').value='';document.getElementById('targetKg').value='';document.getElementById('targetReps').value='';document.getElementById('performedDate').value=todayKey();document.getElementById('deleteExerciseBtn').style.display='none';
-  fillMuscleSelect();if(state.activeMuscle)document.getElementById('exerciseMuscle').value=state.activeMuscle;
-  const m=document.getElementById('exerciseMuscle').value;document.getElementById('usePrep').checked=!isPrepared(m);
-  window.currentSets={warmup:[blankSet()],feeder:[blankSet(),blankSet()],pap:[blankSet()],work:[{kg:'',reps:'',rir:'1-2'},{kg:'',reps:'',rir:'0'}]};
-  document.getElementById('modalTitle').textContent='＋ Cadastrar exercício';document.getElementById('modalSubtitle').textContent='Só cadastre o exercício agora. As cargas vêm depois.';
-  document.getElementById('targetRepsLabel').textContent='Meta de reps · opcional';document.getElementById('saveExerciseBtn').textContent='Cadastrar exercício';
-  renderLastWorkoutBox(null);renderSetEditors();updateMethodPreview();openModal('exerciseModal')
+  modal.classList.add('new-exercise-mode');
+  modal.classList.remove('exercise-modal-later','exercise-modal-live','exercise-modal-calibration');
+
+  document.getElementById('editId').value='';
+  document.getElementById('entryModeBox').style.display='none';
+  currentEntryMode='later';
+
+  document.getElementById('exerciseName').value=prefill?.name||'';
+  document.getElementById('exerciseNote').value='';
+  document.getElementById('targetKg').value='';
+  document.getElementById('targetReps').value='';
+  document.getElementById('performedDate').value=todayKey();
+  document.getElementById('deleteExerciseBtn').style.display='none';
+
+  fillMuscleSelect();
+  if(prefill?.muscle)document.getElementById('exerciseMuscle').value=prefill.muscle;
+  else if(state.activeMuscle)document.getElementById('exerciseMuscle').value=state.activeMuscle;
+
+  const m=document.getElementById('exerciseMuscle').value;
+  document.getElementById('usePrep').checked=!isPrepared(m);
+
+  window.currentSets={
+    warmup:[blankSet()],
+    feeder:[blankSet(),blankSet()],
+    pap:[blankSet()],
+    work:[{kg:'',reps:'',rir:'1-2'},{kg:'',reps:'',rir:'0'}]
+  };
+
+  renderCatalogLinkedInfo(prefill?.key||'');
+  document.getElementById('modalTitle').textContent=prefill?'＋ Adicionar exercício':'＋ Criar exercício';
+  document.getElementById('modalSubtitle').textContent=prefill?'O nome já veio da biblioteca, mas você pode editar.':'Crie um exercício personalizado para esta academia.';
+  document.getElementById('targetRepsLabel').textContent='Meta de reps · opcional';
+  document.getElementById('saveExerciseBtn').textContent='Adicionar à biblioteca';
+
+  renderLastWorkoutBox(null);
+  renderSetEditors();
+  updateMethodPreview();
+  openModal('exerciseModal');
 }
 function editExercise(id){
   try{
@@ -2402,6 +3610,7 @@ function editExercise(id){
     fillMuscleSelect();
     document.getElementById('exerciseMuscle').value=e.muscle;
     document.getElementById('exerciseName').value=e.name;
+    renderCatalogLinkedInfo(catalogKeyFromExercise(e));
     document.getElementById('exerciseNote').value=e.note||'';
     document.getElementById('performedDate').value=todayKey();
     document.getElementById('targetKg').value=e.targetKg||'';
@@ -2481,11 +3690,11 @@ function saveExercise(){
   const id=document.getElementById('editId').value;const muscle=document.getElementById('exerciseMuscle').value;const name=document.getElementById('exerciseName').value.trim();if(!name)return toast('Digite o exercício');
   const usePrep=document.getElementById('usePrep').checked;const now=new Date().toISOString();const performedDay=(document.getElementById('performedDate')?.value||todayKey());
   if(!id){
-    const ex={id:uid(),gymId:state.activeGym,muscle,name,usePrep,sets:{warmup:[],feeder:[],pap:[],work:[]},note:document.getElementById('exerciseNote').value.trim(),targetKg:'',targetReps:document.getElementById('targetReps').value.trim(),createdAt:now,updatedAt:now};
+    const ex={id:uid(),gymId:state.activeGym,muscle,name,catalogKey:document.getElementById('catalogKey')?.value||'',usePrep,sets:{warmup:[],feeder:[],pap:[],work:[]},note:document.getElementById('exerciseNote').value.trim(),targetKg:'',targetReps:document.getElementById('targetReps').value.trim(),createdAt:now,updatedAt:now};
     state.exercises.push(ex);persist();closeModal('exerciseModal');render();toast('Exercício cadastrado');return;
   }
   const prepMode=currentExercisePrepMode();const sets={};TYPES.forEach(t=>sets[t.key]=(currentSets[t.key]||[]).map(s=>t.key==='warmup'||t.key==='feeder'?{...s,rir:''}:s).filter(s=>s.kg!==''||s.reps!==''||s.rir!==''));if(Array.isArray(currentSets.calibration))sets.calibration=currentSets.calibration.filter(s=>s.kg!==''||s.reps!==''||s.rir!=='');if(prepMode==='recognition'){sets.warmup=[];sets.feeder=(sets.feeder||[]).slice(0,1);sets.pap=[]}else if(prepMode==='work'){sets.warmup=[];sets.feeder=[];sets.pap=[]}
-  let ex;if(id){ex=state.exercises.find(e=>e.id===id);Object.assign(ex,{muscle,name,usePrep:usePrep||isPrepared(muscle),sets,note:document.getElementById('exerciseNote').value.trim(),targetKg:document.getElementById('targetKg').value.trim(),targetReps:document.getElementById('targetReps').value.trim(),updatedAt:now})}
+  let ex;if(id){ex=state.exercises.find(e=>e.id===id);Object.assign(ex,{muscle,name,catalogKey:document.getElementById('catalogKey')?.value||catalogKeyFromExercise(ex),usePrep:usePrep||isPrepared(muscle),sets,note:document.getElementById('exerciseNote').value.trim(),targetKg:document.getElementById('targetKg').value.trim(),targetReps:document.getElementById('targetReps').value.trim(),updatedAt:now})}
   const referenceOnly=currentEntryMode==='calibration';const approximate=referenceOnly?!!currentCalibration?.approx:false;const flags=referenceOnly?[]:calcPRs(ex,sets,currentEditingHistoryId);const wm=Math.max(0,...(sets.work||[]).map(s=>normalizeNum(s.kg)));
   if(currentEditingHistoryId){
     const idx=state.history.findIndex(h=>h.id===currentEditingHistoryId);
@@ -2501,7 +3710,7 @@ function openHistoryRecord(historyId){
     window.currentSets=JSON.parse(JSON.stringify(h.sets||{}));TYPES.forEach(t=>{if(!Array.isArray(currentSets[t.key]))currentSets[t.key]=[]});
     if(!currentSets.warmup.length)currentSets.warmup.push(blankSet());while(currentSets.feeder.length<2)currentSets.feeder.push(blankSet());if(!currentSets.pap.length)currentSets.pap.push(blankSet());while(currentSets.work.length<2)currentSets.work.push(blankSet());
     const modal=document.getElementById('exerciseModal');modal.classList.remove('new-exercise-mode');document.getElementById('editId').value=e.id;document.getElementById('entryModeBox').style.display='grid';
-    fillMuscleSelect();document.getElementById('exerciseMuscle').value=h.muscle||e.muscle;document.getElementById('exerciseName').value=h.name||e.name;document.getElementById('exerciseNote').value=e.note||'';document.getElementById('targetKg').value=e.targetKg||'';document.getElementById('targetReps').value=e.targetReps||'';
+    fillMuscleSelect();document.getElementById('exerciseMuscle').value=h.muscle||e.muscle;document.getElementById('exerciseName').value=h.name||e.name;renderCatalogLinkedInfo(catalogKeyFromExercise(e));document.getElementById('exerciseNote').value=e.note||'';document.getElementById('targetKg').value=e.targetKg||'';document.getElementById('targetReps').value=e.targetReps||'';
     document.getElementById('usePrep').checked=recordHasPrep(h);document.getElementById('performedDate').value=performedDayFromIso(h.date);document.getElementById('firstTimeNote').classList.remove('show');document.getElementById('targetKgField').style.display='';document.getElementById('targetRepsLabel').textContent='Meta de reps';
     document.getElementById('modalTitle').textContent='✎ Editar registro';document.getElementById('modalSubtitle').textContent='Altere cargas, séries ou o dia realizado se precisar.';document.getElementById('saveExerciseBtn').textContent='Salvar alterações';document.getElementById('deleteExerciseBtn').style.display='none';
     const rb=document.getElementById('recordBanner');rb.classList.add('show');document.getElementById('recordBannerText').textContent=`${fmtDate(h.date)} · ${e.name}${h.editedAt?' · já editado':''}`;document.getElementById('recordActions').classList.add('show');
