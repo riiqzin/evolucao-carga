@@ -1016,6 +1016,117 @@ body:before{display:none!important}
   .upcoming-row{grid-template-columns:36px minmax(0,1fr) auto}
   .upcoming-action{min-width:62px;padding-inline:9px}
 }
+
+/* =========================================================
+   HOME 4.2 — setup button + preparation selector
+   ========================================================= */
+
+/* The old broad selector styled BOTH spans like icons.
+   Reset the copy span explicitly so text can use the full row. */
+.home-main-action > .home-action-copy{
+  width:auto!important;
+  height:auto!important;
+  border-radius:0!important;
+  background:transparent!important;
+  display:flex!important;
+  place-items:initial!important;
+  font-size:inherit!important;
+  font-weight:inherit!important;
+  min-width:0!important;
+}
+.home-main-action > .home-action-icon{
+  width:38px!important;
+  height:38px!important;
+  flex:none!important;
+}
+.home-main-action .home-action-copy small,
+.home-main-action .home-action-copy b{
+  width:100%!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.home-main-action .home-action-copy b{
+  font-size:13px!important;
+  line-height:1.2!important;
+}
+.home-main-action.has-training{
+  min-height:62px!important;
+}
+
+/* Preparation choice is now an actual control, not tiny helper text. */
+.prep-choice{
+  width:100%;
+  margin-top:14px;
+  padding:11px 12px;
+  border-radius:14px;
+  display:grid;
+  grid-template-columns:28px 1fr;
+  align-items:center;
+  gap:9px;
+  text-align:left;
+  border:1px solid rgba(203,255,56,.22);
+  background:rgba(203,255,56,.075);
+  color:#e9f0dd;
+}
+.prep-choice-dot{
+  width:28px;height:28px;border-radius:10px;
+  display:grid;place-items:center;
+  background:var(--app-accent);
+  color:#090b05;
+  font-size:10px;font-weight:950;
+}
+.prep-choice>span:last-child{
+  display:flex;
+  min-width:0;
+  flex-direction:column;
+  gap:2px;
+}
+.prep-choice b{
+  font-size:9px;
+  color:var(--app-accent);
+  font-weight:950;
+}
+.prep-choice small{
+  font-size:7px;
+  color:#7f8a76;
+  line-height:1.3;
+}
+
+.upcoming-first{
+  width:max-content!important;
+  max-width:100%;
+  margin-top:8px!important;
+  min-height:27px;
+  padding:0 9px!important;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border:1px solid #29323a!important;
+  border-radius:999px!important;
+  background:#11171c!important;
+  color:#8a95a0!important;
+  font-size:7px!important;
+  line-height:1!important;
+  transition:background .18s ease,border-color .18s ease,color .18s ease,transform .16s ease;
+}
+.upcoming-first:active{transform:scale(.975)}
+.upcoming-first span{font-size:8px}
+.upcoming-first b{font-size:7px;font-weight:950}
+.upcoming-first.active{
+  color:#0a0d05!important;
+  background:var(--app-accent)!important;
+  border-color:var(--app-accent)!important;
+  box-shadow:0 6px 18px rgba(203,255,56,.10);
+}
+.upcoming-row.prep-selected{
+  background:linear-gradient(90deg,rgba(203,255,56,.025),transparent 58%);
+}
+.upcoming-row.prep-selected .upcoming-index{
+  color:var(--app-accent)!important;
+  border-color:rgba(203,255,56,.18)!important;
+  background:#141c0d!important;
+}
 </style>
 </head>
 <body>
@@ -1413,7 +1524,34 @@ function doneToday(id){return state.history.some(h=>h.exerciseId===id&&h.gymId==
 function todayHistoryForExercise(id){return state.history.filter(h=>h.exerciseId===id&&h.gymId===state.activeGym&&isHistoryToday(h)).sort((a,b)=>b.date.localeCompare(a.date))[0]||null}
 function recordHasPrep(h){return !!h&&!h.referenceOnly&&['warmup','feeder','pap'].some(k=>(h.sets?.[k]||[]).some(s=>s.kg!==''||s.reps!==''||s.rir!==''))}
 function recomputePreparedToday(){const set=new Set();state.history.filter(h=>h.gymId===state.activeGym&&isHistoryToday(h)&&recordHasPrep(h)).forEach(h=>set.add(h.muscle));state.preparedByGym[state.activeGym]=[...set]}
-function sessionExercises(){const chosen=state.sessionMuscles||[], ids=new Set(state.sessionExerciseIds||[]);return state.exercises.filter(e=>e.gymId===state.activeGym&&chosen.includes(e.muscle)&&ids.has(e.id)).sort((a,b)=>{const ma=chosen.indexOf(a.muscle),mb=chosen.indexOf(b.muscle);if(ma!==mb)return ma-mb;return (a.createdAt||'').localeCompare(b.createdAt||'')})}
+function sessionExercises(){
+  const chosen=state.sessionMuscles||[];
+  const orderedIds=state.sessionExerciseIds||[];
+  const ids=new Set(orderedIds);
+  return state.exercises
+    .filter(e=>e.gymId===state.activeGym&&chosen.includes(e.muscle)&&ids.has(e.id))
+    .sort((a,b)=>{
+      const ma=chosen.indexOf(a.muscle),mb=chosen.indexOf(b.muscle);
+      if(ma!==mb)return ma-mb;
+
+      const forced=state.sessionFirstByMuscle?.[a.muscle];
+      if(forced){
+        if(a.id===forced&&b.id!==forced)return -1;
+        if(b.id===forced&&a.id!==forced)return 1;
+      }
+
+      const ia=orderedIds.indexOf(a.id),ib=orderedIds.indexOf(b.id);
+      if(ia!==ib)return ia-ib;
+      return (a.createdAt||'').localeCompare(b.createdAt||'');
+    });
+}
+function effectiveFirstExerciseId(muscle){
+  if(isPrepared(muscle))return null;
+  const forced=state.sessionFirstByMuscle?.[muscle];
+  if(forced&&!doneToday(forced))return forced;
+  const first=sessionExercises().find(e=>e.muscle===muscle&&!doneToday(e.id));
+  return first?.id||null;
+}
 function nextSessionExercise(){return sessionExercises().find(e=>!doneToday(e.id))||null}
 function render(){
   document.getElementById('gymName').textContent=gym().name;
@@ -1505,7 +1643,7 @@ function renderToday(){
       </div>
     </div>`;
   }else{
-    desc.textContent='Siga a ordem abaixo. O próximo exercício fica destacado para você não precisar pensar no que vem agora.';
+    desc.textContent='Siga a ordem abaixo. Você pode escolher em qual exercício começa a preparação de cada músculo.';
     summary.innerHTML=`<div class="today-progress-wrap">
       <div class="today-progress-head"><span>Seu progresso hoje</span><strong>${done} de ${xs.length}</strong></div>
       <div class="today-progress"><div class="bar"><i style="width:${pct}%"></i></div><span>${pct}%</span></div>
@@ -1519,7 +1657,9 @@ function renderToday(){
   let html='';
 
   if(next){
-    const forced=state.sessionFirstByMuscle?.[next.muscle]===next.id;
+    const firstId=effectiveFirstExerciseId(next.muscle);
+    const isFirst=!isPrepared(next.muscle)&&firstId===next.id;
+
     html+=`<section class="today-section now-section">
       <div class="today-section-label"><span>AGORA</span><small>próximo exercício</small></div>
       <article class="now-exercise-card">
@@ -1528,9 +1668,14 @@ function renderToday(){
           <div class="now-copy">
             <small>${esc(next.muscle)}</small>
             <strong>${esc(next.name)}</strong>
-            <p>${esc(exerciseTodayModeText(next,false,forced))}</p>
+            <p>${esc(exerciseTodayModeText(next,false,isFirst))}</p>
           </div>
         </div>
+        ${!isPrepared(next.muscle)?`
+          <button class="prep-choice active" onclick="setFirstToday('${next.id}')">
+            <span class="prep-choice-dot">★</span>
+            <span><b>Preparação começa aqui</b><small>toque em outro exercício abaixo para trocar</small></span>
+          </button>`:''}
         <button class="now-primary-action" onclick="startExercise('${next.id}')">
           <span>Registrar resultado</span><i>›</i>
         </button>
@@ -1546,14 +1691,19 @@ function renderToday(){
     upcoming.forEach((e)=>{
       const originalIndex=xs.findIndex(x=>x.id===e.id)+1;
       const ready=isPrepared(e.muscle);
-      const forced=state.sessionFirstByMuscle?.[e.muscle]===e.id;
-      const canFirst=!ready;
-      html+=`<article class="upcoming-row">
+      const firstId=effectiveFirstExerciseId(e.muscle);
+      const isFirst=!ready&&firstId===e.id;
+
+      html+=`<article class="upcoming-row ${isFirst?'prep-selected':''}">
         <div class="upcoming-index">${originalIndex}</div>
         <div class="upcoming-copy">
           <strong>${esc(e.name)}</strong>
-          <small>${esc(e.muscle)} · ${esc(exerciseTodayModeText(e,false,forced))}</small>
-          ${canFirst?`<button class="upcoming-first ${forced?'active':''}" onclick="event.stopPropagation();setFirstToday('${e.id}')">${forced?'★ Preparação começa aqui':'Definir como primeiro deste músculo'}</button>`:''}
+          <small>${esc(e.muscle)} · ${esc(exerciseTodayModeText(e,false,isFirst))}</small>
+          ${!ready?`
+            <button class="upcoming-first ${isFirst?'active':''}" onclick="event.stopPropagation();setFirstToday('${e.id}')">
+              <span>${isFirst?'★':'○'}</span>
+              <b>${isFirst?'Preparação começa aqui':'Começar preparação aqui'}</b>
+            </button>`:''}
         </div>
         <button class="upcoming-action" onclick="startExercise('${e.id}')" aria-label="Registrar ${esc(e.name)}">Registrar</button>
       </article>`;
@@ -1607,7 +1757,17 @@ function startExercise(id){
     toast('Não consegui abrir o registro. Recarregue o app e tente novamente.');
   }
 }
-function setFirstToday(id){const e=state.exercises.find(x=>x.id===id);if(!e)return;if(isPrepared(e.muscle))return toast(e.muscle+' já está preparado hoje');const ids=[...(state.sessionExerciseIds||[])];const pos=ids.indexOf(id);if(pos<0)return toast('Este exercício não está no treino de hoje');const samePending=ids.filter(x=>{const ex=state.exercises.find(y=>y.id===x);return ex&&ex.muscle===e.muscle&&!doneToday(x)});const firstPos=Math.min(...samePending.map(x=>ids.indexOf(x)).filter(x=>x>=0));ids.splice(pos,1);ids.splice(firstPos,0,id);state.sessionExerciseIds=ids;state.sessionFirstByMuscle=state.sessionFirstByMuscle||{};state.sessionFirstByMuscle[e.muscle]=id;persist();render();toast(e.name+' vai abrir '+e.muscle+' hoje')}
+function setFirstToday(id){
+  const e=state.exercises.find(x=>x.id===id);
+  if(!e)return;
+  if(isPrepared(e.muscle))return toast(e.muscle+' já está preparado hoje');
+  if(!(state.sessionExerciseIds||[]).includes(id))return toast('Este exercício não está no treino de hoje');
+  state.sessionFirstByMuscle=state.sessionFirstByMuscle||{};
+  state.sessionFirstByMuscle[e.muscle]=id;
+  persist();
+  render();
+  toast('Preparação de '+e.muscle+' começa em '+e.name);
+}
 function doNextAction(){const chosen=state.sessionMuscles||[];if(!chosen.length)return openTodayModal();const next=nextSessionExercise();if(next)return startExercise(next.id);openTodayModal()}
 function renderTodayExercisePicker(initial=false){
   const selectedMuscles=[...document.querySelectorAll('#todayMusclePicker input:checked')].map(x=>x.value);
