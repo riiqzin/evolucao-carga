@@ -2520,53 +2520,178 @@ body:before{display:none!important}
   .app-ex-thumb.progress{width:52px;height:52px}
 }
 
-/* 5.7 — explicit recovery fallback */
-.recovery-card{
-  margin-top:10px;
-  padding:12px;
-  border:1px solid rgba(203,255,56,.18);
-  border-radius:14px;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) auto;
-  gap:12px;
-  align-items:center;
-  background:linear-gradient(135deg,#11190d,#0d1317 65%);
+
+/* =========================================================
+   5.8 — Trabalho 2 progression + editable today's workout
+   ========================================================= */
+.live-progress-advice.final{
+  border-color:rgba(255,182,45,.20);
+  background:linear-gradient(135deg,rgba(255,182,45,.07),rgba(203,255,56,.025));
 }
-.recovery-card small{
-  display:block;
+.live-progress-advice.final .pa-kicker{
+  color:#ffc95c;
+}
+.live-final-progress-preview{
+  min-height:0;
+  margin:0 3px;
+  padding:0;
+  display:grid;
+  gap:3px;
+  overflow:hidden;
+  color:#85919b;
+  transition:.18s ease;
+}
+.live-final-progress-preview:not(:empty){
+  margin-top:10px;
+  padding:9px 11px;
+  border:1px solid #28333c;
+  border-radius:11px;
+  background:#0d1318;
+}
+.live-final-progress-preview strong{
+  color:#dce4ea;
+  font-size:8px;
+}
+.live-final-progress-preview span{
+  color:#78848f;
+  font-size:7px;
+  line-height:1.4;
+}
+.live-final-progress-preview.ready{
+  border-color:rgba(203,255,56,.22);
+  background:#11190d;
+}
+.live-final-progress-preview.ready strong{
   color:var(--app-accent);
+}
+
+.today-selection-status{
+  margin:5px 0 12px;
+  padding:10px 11px;
+  border:1px solid #242e36;
+  border-radius:12px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  background:#0d1216;
+}
+.today-selection-status span{
+  color:#e0e6eb;
+  font-size:8px;
+  font-weight:900;
+}
+.today-selection-status small{
+  max-width:330px;
+  color:#71808c;
+  font-size:6.5px;
+  line-height:1.4;
+  text-align:right;
+}
+.exercise-pick label{
+  position:relative;
+}
+.exercise-pick .today-pick-state{
+  margin-left:auto;
+  flex:0 0 auto;
+  min-width:61px;
+  padding:5px 7px;
+  border:1px solid #29343c;
+  border-radius:999px;
+  color:#77848f;
   font-size:6px;
   font-weight:950;
-  letter-spacing:.12em;
+  text-align:center;
 }
-.recovery-card strong{
-  display:block;
-  margin-top:3px;
-  color:#edf2f5;
-  font-size:10px;
+.exercise-pick.selected label{
+  border-color:rgba(203,255,56,.24)!important;
+  background:linear-gradient(135deg,rgba(203,255,56,.055),rgba(17,23,28,.35));
 }
-.recovery-card p{
-  margin:5px 0 0;
-  max-width:460px;
-  color:#74808a;
-  font-size:7px;
-  line-height:1.45;
+.exercise-pick.selected .today-pick-state{
+  border-color:rgba(203,255,56,.22);
+  background:#16200f;
+  color:var(--app-accent);
 }
-.recovery-card button{
-  min-height:36px;
-  padding:0 11px;
-  border:1px solid rgba(203,255,56,.28);
-  border-radius:10px;
-  background:var(--app-accent);
-  color:#0a0d0f;
-  font-size:7px;
-  font-weight:950;
-  white-space:nowrap;
+.exercise-pick.selected .exercise-pick-copy strong{
+  color:#f0f5f7;
 }
 @media(max-width:430px){
-  .recovery-card{grid-template-columns:1fr}
-  .recovery-card button{width:100%}
+  .today-selection-status{
+    flex-direction:column;
+    gap:4px;
+  }
+  .today-selection-status small{text-align:left}
+  .exercise-pick .today-pick-state{
+    min-width:55px;
+    padding-inline:5px;
+  }
 }
+
+/* =========================================================
+   5.9 — progression is trend + consolidation, not forced PRs
+   ========================================================= */
+.live-progress-advice.top{
+  border-color:rgba(203,255,56,.20);
+  background:linear-gradient(135deg,rgba(203,255,56,.07),#0d120d);
+}
+.live-progress-advice.top .pa-kicker,
+.live-progress-advice.top .pa-title{color:#d8ee91}
+
+.live-progress-advice.progress{
+  border-color:rgba(113,199,255,.20);
+  background:linear-gradient(135deg,rgba(113,199,255,.07),#0d1216);
+}
+.live-progress-advice.progress .pa-kicker,
+.live-progress-advice.progress .pa-title{color:#9ed8ff}
+
+.live-progress-advice.stable{
+  border-color:#303b43;
+  background:linear-gradient(135deg,rgba(150,165,177,.055),#0d1114);
+}
+.live-progress-advice.stable .pa-kicker{color:#9ba8b2}
+.live-progress-advice.stable .pa-title{color:#e3e9ed}
+
+.live-progress-advice.recover{
+  border-color:rgba(255,202,92,.17);
+  background:linear-gradient(135deg,rgba(255,202,92,.055),#11100d);
+}
+.live-progress-advice.recover .pa-kicker,
+.live-progress-advice.recover .pa-title{color:#e2c784}
+
+.chip.progress-top{
+  color:#d8ee91;
+  border-color:#536226;
+  background:rgba(203,255,56,.07);
+}
+.chip.progress-upreps{
+  color:#a8ddff;
+  border-color:#31566a;
+  background:rgba(113,199,255,.07);
+}
+
+.live-final-progress-preview.top{
+  border-color:rgba(203,255,56,.20);
+  background:#11170e;
+}
+.live-final-progress-preview.top strong{color:#d8ee91}
+
+.live-final-progress-preview.progress{
+  border-color:rgba(113,199,255,.20);
+  background:#0d151a;
+}
+.live-final-progress-preview.progress strong{color:#9ed8ff}
+
+.live-final-progress-preview.stable{
+  border-color:#303b43;
+  background:#10161a;
+}
+.live-final-progress-preview.stable strong{color:#e3e9ed}
+
+.live-final-progress-preview.recover{
+  border-color:rgba(255,202,92,.18);
+  background:#15130d;
+}
+.live-final-progress-preview.recover strong{color:#e2c784}
 </style>
 </head>
 <body>
@@ -2687,7 +2812,8 @@ body:before{display:none!important}
   <div class="muscle-picker" id="todayMusclePicker"></div>
   <div class="picker-hint">Agora escolha os exercícios que realmente entram hoje. Ter um exercício cadastrado não obriga você a fazê-lo em toda sessão.</div>
   <div class="today-exercise-picker" id="todayExercisePicker"></div>
-  <button class="btn primary" style="width:100%;margin-top:4px" onclick="saveTodayWorkout()">Montar meu treino</button>
+  <div class="today-selection-status" id="todaySelectionStatus"></div>
+  <button class="btn primary" style="width:100%;margin-top:4px" onclick="saveTodayWorkout()">Salvar treino de hoje</button>
   <button class="btn danger" id="finishWorkoutBtn" style="width:100%;margin-top:10px;display:none" onclick="finishWorkout()">Finalizar treino de hoje</button>
 </div></div>
 
@@ -2808,10 +2934,6 @@ body:before{display:none!important}
     </div>
     <div id="syncUser" class="sync-user"><div><small>Conectado como</small><b id="syncUserEmail">—</b></div><button class="btn secondary" style="padding:9px 11px" onclick="signOutSupabase()">Sair</button></div>
     <div id="syncActions" class="sync-grid" style="display:none;margin-top:9px"><button class="btn secondary" onclick="loadCloudState(true)">↓ Baixar da nuvem</button><button class="btn secondary" onclick="syncNow(true)">↑ Enviar agora</button></div>
-    <div class="recovery-card">
-      <div><small>RECUPERAÇÃO</small><strong>Treino de peito · 22/08</strong><p>Restaura Supino Máquina, Crucifixo Polia Inferior e Crucifixo 90 Graus usando os IDs e séries originais. Não duplica se já existirem.</p></div>
-      <button type="button" onclick="recoverChestWorkoutNow()">Recuperar agora</button>
-    </div>
     <div id="syncStatusLine" class="sync-statusline">Configure o projeto Supabase para ativar.</div>
   </div>
   <div class="field"><label>Backup</label><div class="row"><button class="btn secondary" onclick="exportData()">Exportar JSON</button><button class="btn secondary" onclick="document.getElementById('importFile').click()">Importar JSON</button></div><input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)"></div>
@@ -2870,6 +2992,8 @@ const DEFAULT={gyms:[{id:'evoque',name:'EVOQUE'}],activeGym:'evoque',activeMuscl
 let state=load(), restTimer=null, restEnd=0, currentEditingHistoryId=null;
 let workoutReorderMode=false;
 let workoutDrag=null;
+let todayDraftMuscles=new Set();
+let todayDraftExerciseIds=new Set();
 const SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 function todayKey(){return new Date().toLocaleDateString('sv-SE')}
@@ -2962,117 +3086,6 @@ async function syncNow(manual=false){
   finally{syncBusy=false}
 }
 
-const CHEST_RECOVERY_20260822=[
-  {
-    id:'y96s6c8358n',
-    date:'2026-08-22T00:27:54.311Z',
-    name:'Supino Máquina',
-    sets:{
-      pap:[{kg:'65',rir:'',reps:'2'}],
-      work:[{kg:'65',rir:'3',reps:'7'},{kg:'65',rir:'0',reps:'10'}],
-      feeder:[{kg:'45',rir:'',reps:'8'},{kg:'55',rir:'',reps:''}],
-      warmup:[{kg:'30',rir:'',reps:'12'}]
-    },
-    gymId:'evoque',
-    muscle:'Peito',
-    prFlags:['PR inicial'],
-    workMax:65,
-    createdAt:'2026-08-22T00:27:54.310Z',
-    exerciseId:'t1h45w0t6xw',
-    approximate:false,
-    referenceOnly:false
-  },
-  {
-    id:'qsslx13kwly',
-    date:'2026-08-22T00:41:42.934Z',
-    name:'Crucifixo Polia Inferior',
-    sets:{
-      pap:[],
-      work:[{kg:'24',rir:'1',reps:'8'},{kg:'24',rir:'0',reps:'10'}],
-      feeder:[],
-      warmup:[]
-    },
-    gymId:'evoque',
-    muscle:'Peito',
-    prFlags:['PR inicial'],
-    workMax:24,
-    createdAt:'2026-08-22T00:41:42.933Z',
-    exerciseId:'dw2atziv0gf',
-    approximate:false,
-    referenceOnly:false
-  },
-  {
-    id:'wvead5x2uxn',
-    date:'2026-08-22T00:55:40.571Z',
-    name:'Crucifixo 90 Graus',
-    sets:{
-      pap:[],
-      work:[{kg:'55',rir:'1',reps:'5'},{kg:'55',rir:'0',reps:'7'}],
-      feeder:[],
-      warmup:[]
-    },
-    gymId:'evoque',
-    muscle:'Peito',
-    prFlags:['PR inicial'],
-    workMax:55,
-    createdAt:'2026-08-22T00:55:40.571Z',
-    exerciseId:'08vt9a2tmdg',
-    approximate:false,
-    referenceOnly:false
-  }
-];
-
-function ensureChestWorkoutRecovered20260822(){
-  state.history=Array.isArray(state.history)?state.history:[];
-  state.exercises=Array.isArray(state.exercises)?state.exercises:[];
-
-  const existingIds=new Set(state.history.map(h=>h.id));
-  let restored=0;
-
-  CHEST_RECOVERY_20260822.forEach(record=>{
-    // Exact original history ID is the source of truth.
-    if(existingIds.has(record.id))return;
-
-    // Keep the original exercise relationship if the exercise still exists.
-    const ex=state.exercises.find(e=>e.id===record.exerciseId);
-    if(!ex)return;
-
-    state.history.push(structuredClone(record));
-    existingIds.add(record.id);
-    restored++;
-  });
-
-  state.migrations=state.migrations||{};
-  state.migrations.restoreChest20260822_v2={
-    checkedAt:new Date().toISOString(),
-    restored,
-    expectedIds:CHEST_RECOVERY_20260822.map(x=>x.id)
-  };
-  return restored;
-}
-
-async function recoverChestWorkoutNow(){
-  // Manual repair button. Safe to press more than once: exact IDs prevent duplicates.
-  const restored=ensureChestWorkoutRecovered20260822();
-  persist(false);
-  recomputePreparedToday();
-  render();
-
-  if(supabaseClient&&currentUser){
-    await syncNow(false);
-  }
-
-  if(restored){
-    toast(`${restored} registro${restored===1?'':'s'} recuperado${restored===1?'':'s'} com sucesso`);
-  }else{
-    const allThere=CHEST_RECOVERY_20260822.every(r=>state.history.some(h=>h.id===r.id));
-    toast(allThere?'Treino já está recuperado':'Não foi possível recuperar todos os registros');
-  }
-
-  if(document.getElementById('historyModal')?.classList.contains('show'))renderHistory();
-  return restored;
-}
-
 function normalizeLoadedState(raw){
   const z={...structuredClone(DEFAULT),...(raw||{})};z.preparedByGym=z.preparedByGym||{};z.exercises=z.exercises||[];z.history=z.history||[];z.sessionMuscles=z.sessionMuscles||[];z.sessionFirstByMuscle=z.sessionFirstByMuscle||{};z.sessionExerciseIds=Array.isArray(z.sessionExerciseIds)?z.sessionExerciseIds:[];if(z.sessionDate!==todayKey()){z.sessionDate=todayKey();z.preparedByGym={};z.activeMuscle=null;z.muscleStartedAt=null;z.sessionMuscles=[];z.sessionExerciseIds=[];z.sessionFirstByMuscle={}}return z
 }
@@ -3083,7 +3096,7 @@ async function loadCloudState(manual=false){
     const {data,error}=await supabaseClient.from('workout_app_state').select('state,updated_at').eq('user_id',currentUser.id).maybeSingle();
     if(error)throw error;
     if(!data){await syncNow(false);setSyncStatus('Primeiro backup criado na nuvem.','ok');if(manual)toast('Seus dados locais foram enviados');return}
-    suppressCloudSync=true;state=normalizeLoadedState(data.state);const recoveredChest=ensureChestWorkoutRecovered20260822();cloudUpdatedAt=data.updated_at||null;persist(false);suppressCloudSync=false;render();if(recoveredChest){await syncNow(false);toast(`${recoveredChest} registro${recoveredChest===1?'':'s'} de peito recuperado${recoveredChest===1?'':'s'}`)}setSyncStatus('Dados carregados e sincronizados.','ok');if(manual&&!recoveredChest)toast('Dados baixados da nuvem')
+    suppressCloudSync=true;state=normalizeLoadedState(data.state);cloudUpdatedAt=data.updated_at||null;persist(false);suppressCloudSync=false;render();setSyncStatus('Dados carregados e sincronizados.','ok');if(manual)toast('Dados baixados da nuvem')
   }catch(e){suppressCloudSync=false;console.error('Cloud load',e);setSyncStatus('Erro ao baixar: '+(e.message||'erro'),'warn');if(manual)toast('Erro ao baixar dados')}
 }
 
@@ -3135,43 +3148,260 @@ function parseRirValue(v){
   if(String(v)==='1-2')return 1.5;
   const n=normalizeNum(v);return Number.isFinite(n)?n:null;
 }
-function progressionAdviceFromSets(sets){
-  const s=sets?.work?.[0];if(!s)return null;
+function workSetPerformanceFromSets(sets,index){
+  const s=sets?.work?.[index];if(!s)return null;
   const kg=normalizeNum(s.kg),reps=normalizeNum(s.reps),rir=parseRirValue(s.rir);
   if(!kg||!reps)return null;
-
-  if(reps>=11){
-    if(rir===0){
-      return {state:'hold',title:'11 reps, mas no limite',text:`Repita ${fmtKg(kg)} kg e tente chegar a 11 reps mantendo 1–2 RIR antes de subir.`,kg,reps,rir};
-    }
-    const next=kg+2.5;
-    return {state:'ready',title:'Carga dominada ✓',text:`Você chegou a ${reps} reps com ${fmtKg(kg)} kg. No próximo treino, experimente ${fmtKg(next)} kg — ou o próximo peso disponível na máquina.`,kg,reps,rir,nextKg:next};
-  }
-
-  const goal=Math.min(11,reps+1);
-  if(reps>=9){
-    return {state:'near',title:reps===10?'Falta só 1 rep':'Quase lá',text:`Mantenha ${fmtKg(kg)} kg e busque ${goal} reps no próximo treino. Ao chegar a 11 com boa execução, suba a carga.`,kg,reps,rir,goal};
-  }
-  return {state:'build',title:'Consolidando a carga',text:`Mantenha ${fmtKg(kg)} kg e tente superar ${reps} reps. Meta imediata: ${goal} reps.`,kg,reps,rir,goal};
+  return {kg,reps,rir};
 }
-function latestRealHistoryForExercise(id,excludeToday=false){
-  const arr=state.history.filter(h=>h.exerciseId===id&&h.gymId===state.activeGym&&!h.referenceOnly&&(!excludeToday||!isHistoryToday(h))).sort((a,b)=>b.date.localeCompare(a.date));
-  return arr[0]||null;
+function workSetPerformanceFromHistory(h,index){
+  return h?workSetPerformanceFromSets(h.sets,index):null;
+}
+function sameWorkingLoad(a,b){
+  return !!a&&!!b&&Math.abs(a.kg-b.kg)<0.001;
+}
+function work1ReachedTop(s){
+  // Trabalho 1 deve preservar aproximadamente 1–2 RIR.
+  // Sem RIR registrado, o app não declara a carga "dominada".
+  return !!s&&s.reps>=11&&s.rir!==null&&s.rir>=1;
+}
+function work2ReachedTop(s){
+  // Trabalho 2 é a série de falha técnica.
+  // RIR em branco é aceito para compatibilidade com registros antigos.
+  return !!s&&s.reps>=11&&(s.rir===null||s.rir<=0.5);
+}
+function realHistoryForExercise(id,excludeToday=false){
+  return priorHistoryForExerciseRobust(id)
+    .filter(h=>!h.referenceOnly&&(!excludeToday||!isHistoryToday(h)))
+    .sort((a,b)=>b.date.localeCompare(a.date));
+}
+function consecutiveTopSessions(histories,index,topFn){
+  if(histories.length<2)return false;
+  const a=workSetPerformanceFromHistory(histories[0],index);
+  const b=workSetPerformanceFromHistory(histories[1],index);
+  return !!a&&!!b&&sameWorkingLoad(a,b)&&topFn(a)&&topFn(b);
+}
+function work1ConsolidatedAtLoad(histories,kg){
+  if(histories.length<2)return false;
+  const a=workSetPerformanceFromHistory(histories[0],0);
+  const b=workSetPerformanceFromHistory(histories[1],0);
+  return !!a&&!!b&&Math.abs(a.kg-kg)<0.001&&Math.abs(b.kg-kg)<0.001&&work1ReachedTop(a)&&work1ReachedTop(b);
+}
+function performanceComparisonAdvice(latest,previous,{label='carga',target=11,finalSet=false}={}){
+  if(!latest)return null;
+
+  // Aumento de carga recente: queda de reps é esperada e não é tratada como regressão.
+  if(previous&&latest.kg>previous.kg+0.001){
+    return {
+      state:'build',
+      title:'Nova carga em consolidação',
+      text:`Você subiu de ${fmtKg(previous.kg)} para ${fmtKg(latest.kg)} kg. É normal as reps caírem depois de aumentar o peso. Primeiro consolide ${latest.reps} reps antes de cobrar nova evolução.`,
+      kg:latest.kg,reps:latest.reps,rir:latest.rir
+    };
+  }
+
+  if(previous&&sameWorkingLoad(latest,previous)){
+    const diff=latest.reps-previous.reps;
+    if(diff>0){
+      return {
+        state:'progress',
+        title:`Evolução de reps +${diff}`,
+        text:`Você foi de ${previous.reps} para ${latest.reps} reps com ${fmtKg(latest.kg)} kg. Ótimo progresso — não precisa evoluir novamente já no próximo treino. Primeiro tente manter essa nova referência.`,
+        kg:latest.kg,reps:latest.reps,rir:latest.rir
+      };
+    }
+    if(diff===0){
+      return {
+        state:'stable',
+        title:'Performance mantida ✓',
+        text:`Você repetiu ${latest.reps} reps com ${fmtKg(latest.kg)} kg. Isso conta como consolidação. No próximo treino, igualar essa marca já é um bom resultado; se estiver bem, tente avançar 1 rep.`,
+        kg:latest.kg,reps:latest.reps,rir:latest.rir
+      };
+    }
+    return {
+      state:'recover',
+      title:'Abaixo da última referência',
+      text:`O último treino ficou em ${latest.reps} reps; antes você havia feito ${previous.reps} com ${fmtKg(latest.kg)} kg. Um treino isolado não significa regressão. Mantenha a carga e use ${previous.reps} reps como referência para recuperar.`,
+      kg:latest.kg,reps:latest.reps,rir:latest.rir
+    };
+  }
+
+  const goal=Math.min(target,latest.reps+1);
+  if(latest.reps>=target-1){
+    return {
+      state:'near',
+      title:latest.reps===target-1?'Falta só 1 rep':'Perto do topo',
+      text:`Mantenha ${fmtKg(latest.kg)} kg. Sua referência atual é ${latest.reps} reps; igualar já é válido e, se a sessão estiver boa, tente ${goal}.`,
+      kg:latest.kg,reps:latest.reps,rir:latest.rir,goal
+    };
+  }
+
+  return {
+    state:'build',
+    title:'Consolidando a carga',
+    text:`Sua referência atual é ${fmtKg(latest.kg)} kg × ${latest.reps} reps. Primeiro tente não ficar abaixo disso; quando estiver bem, busque ${goal} reps.`,
+    kg:latest.kg,reps:latest.reps,rir:latest.rir,goal
+  };
+}
+function progressionAdviceFromSets(sets){
+  // Avaliação isolada da série atual. Sem histórico suficiente,
+  // nunca manda subir carga só porque 11 reps apareceram uma vez.
+  const s=workSetPerformanceFromSets(sets,0);if(!s)return null;
+
+  if(s.reps>=11){
+    if(s.rir===0){
+      return {
+        state:'hold',
+        title:'11 reps, mas no limite',
+        text:`Você chegou a 11 reps com ${fmtKg(s.kg)} kg, porém no Trabalho 1 o alvo é guardar aproximadamente 1–2 RIR. Mantenha a carga e consolide antes de pensar em subir.`,
+        ...s
+      };
+    }
+    if(work1ReachedTop(s)){
+      return {
+        state:'top',
+        title:'Topo da faixa atingido',
+        text:`Você chegou a ${s.reps} reps com ${fmtKg(s.kg)} kg e RIR controlado. Ótimo. Não precisa subir imediatamente: repita essa performance em outra sessão para consolidar.`,
+        ...s
+      };
+    }
+  }
+
+  const goal=Math.min(11,s.reps+1);
+  if(s.reps>=9){
+    return {
+      state:'near',
+      title:s.reps===10?'Falta só 1 rep':'Perto do topo',
+      text:`Mantenha ${fmtKg(s.kg)} kg. Igualar ${s.reps} reps já é válido; se estiver bem, busque ${goal}.`,
+      ...s,goal
+    };
+  }
+  return {
+    state:'build',
+    title:'Consolidando a carga',
+    text:`Mantenha ${fmtKg(s.kg)} kg. Sua referência é ${s.reps} reps; tente pelo menos igualar e evolua quando a sessão permitir.`,
+    ...s,goal
+  };
+}
+function progressionAdviceFromFinalSet(sets){
+  const s=workSetPerformanceFromSets(sets,1);if(!s)return null;
+
+  if(work2ReachedTop(s)){
+    return {
+      state:'top',
+      title:'Topo da faixa atingido',
+      text:`Você chegou a ${s.reps} reps na série final com ${fmtKg(s.kg)} kg. Isso é progresso, mas não obriga aumento imediato. Repita essa marca em outra sessão para consolidar.`,
+      ...s,goal:11
+    };
+  }
+
+  const goal=Math.min(11,s.reps+1);
+  return {
+    state:s.reps>=10?'near':'build',
+    title:s.reps===10?'Falta só 1 rep':'Construindo até 11',
+    text:`Sua referência da série final é ${s.reps} reps com ${fmtKg(s.kg)} kg. Igualar essa marca já é um bom resultado; quando estiver bem, tente ${goal}.`,
+    ...s,goal
+  };
 }
 function progressionAdviceForExercise(id,excludeToday=false){
-  const h=latestRealHistoryForExercise(id,excludeToday);
-  const advice=progressionAdviceFromSets(h?.sets);
-  return advice?{...advice,history:h}:null;
+  const histories=realHistoryForExercise(id,excludeToday);
+  const latest=workSetPerformanceFromHistory(histories[0],0);
+  if(!latest)return null;
+  const previous=workSetPerformanceFromHistory(histories[1],0);
+
+  if(latest.reps>=11){
+    if(latest.rir===0){
+      return {
+        state:'hold',
+        title:'Topo atingido, mas no limite',
+        text:`Você fez ${latest.reps} reps com ${fmtKg(latest.kg)} kg, porém o Trabalho 1 terminou em RIR 0. Antes de subir, tente consolidar 11 reps mantendo aproximadamente 1–2 RIR.`,
+        ...latest,history:histories[0]
+      };
+    }
+
+    if(work1ReachedTop(latest)){
+      if(consecutiveTopSessions(histories,0,work1ReachedTop)){
+        return {
+          state:'ready',
+          title:'Carga consolidada',
+          text:`Você repetiu o topo da faixa em duas sessões com ${fmtKg(latest.kg)} kg e RIR controlado. Aumentar a carga no próximo treino agora é uma opção razoável — não uma obrigação.`,
+          ...latest,history:histories[0],consolidated:true
+        };
+      }
+      return {
+        state:'top',
+        title:'Topo da faixa atingido',
+        text:`Você chegou a ${latest.reps} reps com ${fmtKg(latest.kg)} kg e RIR controlado. Agora o objetivo é repetir essa performance em outra sessão antes de pensar em subir a carga.`,
+        ...latest,history:histories[0],consolidated:false
+      };
+    }
+  }
+
+  const a=performanceComparisonAdvice(latest,previous,{target:11});
+  return a?{...a,history:histories[0]}:null;
+}
+function progressionAdviceForFinalSet(id,excludeToday=false){
+  const histories=realHistoryForExercise(id,excludeToday);
+  const latest=workSetPerformanceFromHistory(histories[0],1);
+  if(!latest)return null;
+  const previous=workSetPerformanceFromHistory(histories[1],1);
+
+  if(work2ReachedTop(latest)){
+    if(consecutiveTopSessions(histories,1,work2ReachedTop)){
+      const work1Solid=work1ConsolidatedAtLoad(histories,latest.kg);
+      if(work1Solid){
+        return {
+          state:'ready',
+          title:'Carga consolidada nas duas séries',
+          text:`Você repetiu 11+ reps na série final em duas sessões e o Trabalho 1 também está sólido com ${fmtKg(latest.kg)} kg. Considerar o próximo incremento faz sentido, mas você não precisa subir se preferir consolidar mais uma sessão.`,
+          ...latest,history:histories[0],consolidated:true,work1Solid:true
+        };
+      }
+      return {
+        state:'top',
+        title:'Série final consolidada',
+        text:`Você repetiu 11+ reps na série final em duas sessões com ${fmtKg(latest.kg)} kg. Excelente. Se o Trabalho 1 ainda estiver consolidando, mantenha a carga por enquanto; quando as duas séries estiverem sólidas, considere subir.`,
+        ...latest,history:histories[0],consolidated:true,work1Solid:false
+      };
+    }
+
+    return {
+      state:'top',
+      title:'Topo da faixa atingido',
+      text:`Você chegou a ${latest.reps} reps na série final com ${fmtKg(latest.kg)} kg. Não precisa subir agora. Tente repetir 11+ reps em outra sessão para transformar esse pico em performance consolidada.`,
+      ...latest,history:histories[0],consolidated:false
+    };
+  }
+
+  const a=performanceComparisonAdvice(latest,previous,{target:11,finalSet:true});
+  return a?{...a,history:histories[0]}:null;
+}
+function latestRealHistoryForExercise(id,excludeToday=false){
+  return realHistoryForExercise(id,excludeToday)[0]||null;
 }
 function progressionChipHTML(id){
   const a=progressionAdviceForExercise(id,false);if(!a)return '';
-  if(a.state==='ready')return '<span class="chip progress-ready">↑ SUBIR CARGA</span>';
+  if(a.state==='ready')return '<span class="chip progress-ready">✓ CARGA CONSOLIDADA</span>';
+  if(a.state==='top')return '<span class="chip progress-top">CONSOLIDAR TOPO</span>';
+  if(a.state==='progress')return '<span class="chip progress-upreps">↑ REPS</span>';
   if(a.state==='near')return '<span class="chip progress-near">11 REPS À VISTA</span>';
   return '';
 }
 function progressionNextStepText(id){
   const a=progressionAdviceForExercise(id,false);
-  return a?a.title+' · '+a.text:'Continue registrando para o app sugerir o próximo passo.';
+  return a?a.title+' · '+a.text:'Continue registrando para o app aprender sua referência.';
+}
+function progressionToastText(id){
+  const w1=progressionAdviceForExercise(id,false);
+  const w2=progressionAdviceForFinalSet(id,false);
+  const arr=[w1,w2].filter(Boolean);
+
+  if(arr.some(a=>a.state==='ready'))return 'Carga consolidada — subir agora é uma opção, não uma obrigação';
+  if(arr.some(a=>a.state==='top'))return 'Topo da faixa atingido — agora consolide essa performance';
+  if(arr.some(a=>a.state==='progress'))return 'Evolução de reps registrada ✓';
+  if(arr.some(a=>a.state==='stable'))return 'Performance mantida — boa consolidação ✓';
+  if(arr.some(a=>a.state==='recover'))return 'Registro salvo — use a melhor marca recente como referência';
+  return 'Carga salva';
 }
 
 function isHistoryToday(h){return h&&new Date(h.date).toLocaleDateString('sv-SE')===todayKey()}
@@ -3601,16 +3831,142 @@ function setFirstToday(id){
   toast('Preparação de '+e.muscle+' começa em '+e.name);
 }
 function doNextAction(){const chosen=state.sessionMuscles||[];if(!chosen.length)return openTodayModal();const next=nextSessionExercise();if(next)return startExercise(next.id);openTodayModal()}
-function renderTodayExercisePicker(initial=false){
-  const selectedMuscles=[...document.querySelectorAll('#todayMusclePicker input:checked')].map(x=>x.value);
-  const root=document.getElementById('todayExercisePicker');if(!root)return;
-  const existingChecked=new Set([...document.querySelectorAll('#todayExercisePicker input:checked')].map(x=>x.value));
-  const saved=new Set(state.sessionExerciseIds||[]);
-  root.innerHTML=selectedMuscles.map(m=>{const xs=state.exercises.filter(e=>e.gymId===state.activeGym&&e.muscle===m).sort((a,b)=>(a.createdAt||'').localeCompare(b.createdAt||''));if(!xs.length)return `<div class="picker-group"><div class="picker-group-head"><strong>${esc(m)}</strong><small>0 exercícios</small></div><div class="picker-empty">Você ainda não cadastrou exercícios de ${esc(m)}.</div></div>`;return `<div class="picker-group"><div class="picker-group-head"><strong>${esc(m)}</strong><small>${xs.length} disponível${xs.length===1?'':'is'}</small></div>${xs.map(e=>{const checked=initial?(saved.size?saved.has(e.id):true):(existingChecked.has(e.id)||(!saved.size&&!existingChecked.size));return `<div class="exercise-pick"><input type="checkbox" id="today_ex_${e.id}" value="${e.id}" ${checked?'checked':''}><label for="today_ex_${e.id}">${exerciseVisualThumbHTML(e,'peak','picker')}<span class="exercise-pick-copy"><strong>${esc(e.name)}</strong><small>${esc(exerciseEmphasisText(e,2)||e.muscle)}</small></span></label></div>`}).join('')}</div>`}).join('');
-  if(!selectedMuscles.length)root.innerHTML='<div class="picker-empty">Escolha um grupo muscular acima para ver seus exercícios.</div>';
+function updateTodaySelectionStatus(){
+  const el=document.getElementById('todaySelectionStatus');if(!el)return;
+  const n=todayDraftExerciseIds.size;
+  if(!n){
+    el.innerHTML='<span>Nenhum exercício selecionado</span><small>Marque um exercício acima. Se estiver editando o treino, salvar assim remove todos.</small>';
+    return;
+  }
+  const names=[...todayDraftExerciseIds].map(id=>state.exercises.find(e=>e.id===id)?.name).filter(Boolean);
+  el.innerHTML=`<span>${n} exercício${n===1?'':'s'} selecionado${n===1?'':'s'}</span><small>Toque novamente em um exercício marcado para removê-lo${names.length<=2?' · '+esc(names.join(' + ')):''}.</small>`;
 }
-function openTodayModal(){const chosen=new Set(state.sessionMuscles||[]);document.getElementById('todayMusclePicker').innerHTML=MUSCLES.map(m=>`<div class="pick"><input type="checkbox" id="pick_${m}" value="${m}" ${chosen.has(m)?'checked':''} onchange="renderTodayExercisePicker(false)"><label for="pick_${m}"><span style="margin-right:7px;color:var(--accent)">${muscleIcon(m)}</span>${m}</label></div>`).join('');document.getElementById('finishWorkoutBtn').style.display=chosen.size?'block':'none';renderTodayExercisePicker(true);openModal('todayModal')}
-function saveTodayWorkout(){const vals=[...document.querySelectorAll('#todayMusclePicker input:checked')].map(x=>x.value);if(!vals.length)return toast('Escolha pelo menos um grupo muscular');const available=state.exercises.filter(e=>e.gymId===state.activeGym&&vals.includes(e.muscle));const exerciseIds=[...document.querySelectorAll('#todayExercisePicker input:checked')].map(x=>x.value);if(available.length&&!exerciseIds.length)return toast('Escolha pelo menos um exercício para hoje');state.sessionMuscles=vals;state.sessionExerciseIds=exerciseIds;state.sessionFirstByMuscle={};state.sessionDate=todayKey();state.activeMuscle=null;if(!state.muscleStartedAt)state.muscleStartedAt=new Date().toISOString();persist();closeModal('todayModal');render();toast(`${exerciseIds.length} exercício${exerciseIds.length===1?'':'s'} no treino de hoje`)}
+function toggleTodayMuscleDraft(m,checked){
+  if(checked){
+    todayDraftMuscles.add(m);
+  }else{
+    todayDraftMuscles.delete(m);
+    // Turning a muscle off explicitly removes its exercises from today's draft.
+    state.exercises
+      .filter(e=>e.gymId===state.activeGym&&e.muscle===m)
+      .forEach(e=>todayDraftExerciseIds.delete(e.id));
+  }
+  renderTodayExercisePicker();
+}
+function toggleTodayExerciseDraft(id,checked){
+  const ex=state.exercises.find(e=>e.id===id);if(!ex)return;
+  if(checked){
+    todayDraftExerciseIds.add(id);
+    todayDraftMuscles.add(ex.muscle);
+    const muscleInput=document.getElementById(`pick_${ex.muscle}`);
+    if(muscleInput)muscleInput.checked=true;
+  }else{
+    todayDraftExerciseIds.delete(id);
+  }
+  updateTodaySelectionStatus();
+}
+function renderTodayExercisePicker(){
+  const root=document.getElementById('todayExercisePicker');if(!root)return;
+  const selectedMuscles=[...todayDraftMuscles];
+
+  root.innerHTML=selectedMuscles.map(m=>{
+    const xs=state.exercises
+      .filter(e=>e.gymId===state.activeGym&&e.muscle===m)
+      .sort((a,b)=>(a.createdAt||'').localeCompare(b.createdAt||''));
+
+    if(!xs.length)return `<div class="picker-group"><div class="picker-group-head"><strong>${esc(m)}</strong><small>0 exercícios</small></div><div class="picker-empty">Você ainda não cadastrou exercícios de ${esc(m)}.</div></div>`;
+
+    return `<div class="picker-group">
+      <div class="picker-group-head"><strong>${esc(m)}</strong><small>${xs.length} disponível${xs.length===1?'':'is'}</small></div>
+      ${xs.map(e=>{
+        const checked=todayDraftExerciseIds.has(e.id);
+        return `<div class="exercise-pick ${checked?'selected':''}">
+          <input type="checkbox" id="today_ex_${e.id}" value="${e.id}" ${checked?'checked':''} onchange="toggleTodayExerciseDraft('${e.id}',this.checked)">
+          <label for="today_ex_${e.id}">
+            ${exerciseVisualThumbHTML(e,'peak','picker')}
+            <span class="exercise-pick-copy">
+              <strong>${esc(e.name)}</strong>
+              <small>${esc(exerciseEmphasisText(e,2)||e.muscle)}</small>
+            </span>
+            <span class="today-pick-state">${checked?'✓ No treino':'＋ Adicionar'}</span>
+          </label>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }).join('');
+
+  if(!selectedMuscles.length){
+    root.innerHTML='<div class="picker-empty">Escolha um grupo muscular acima para ver seus exercícios.</div>';
+  }
+  updateTodaySelectionStatus();
+}
+function openTodayModal(){
+  todayDraftMuscles=new Set(state.sessionMuscles||[]);
+  todayDraftExerciseIds=new Set(state.sessionExerciseIds||[]);
+
+  // If old data has selected exercise IDs but no saved muscle array,
+  // derive the muscle instead of showing an empty picker.
+  todayDraftExerciseIds.forEach(id=>{
+    const ex=state.exercises.find(e=>e.id===id);
+    if(ex)todayDraftMuscles.add(ex.muscle);
+  });
+
+  document.getElementById('todayMusclePicker').innerHTML=MUSCLES.map(m=>`
+    <div class="pick">
+      <input type="checkbox" id="pick_${m}" value="${m}" ${todayDraftMuscles.has(m)?'checked':''}
+        onchange="toggleTodayMuscleDraft('${m}',this.checked)">
+      <label for="pick_${m}"><span style="margin-right:7px;color:var(--accent)">${muscleIcon(m)}</span>${m}</label>
+    </div>`).join('');
+
+  document.getElementById('finishWorkoutBtn').style.display=(state.sessionExerciseIds||[]).length?'block':'none';
+  renderTodayExercisePicker();
+  openModal('todayModal');
+}
+function saveTodayWorkout(){
+  const exerciseIds=[...todayDraftExerciseIds].filter(id=>state.exercises.some(e=>e.id===id&&e.gymId===state.activeGym));
+
+  // Explicitly allow an existing workout to be cleared.
+  if(!exerciseIds.length){
+    if((state.sessionExerciseIds||[]).length){
+      state.sessionMuscles=[];
+      state.sessionExerciseIds=[];
+      state.sessionFirstByMuscle={};
+      state.activeMuscle=null;
+      state.muscleStartedAt=null;
+      persist();
+      closeModal('todayModal');
+      render();
+      toast('Exercícios removidos do treino de hoje');
+      return;
+    }
+    return toast('Escolha pelo menos um exercício para hoje');
+  }
+
+  // Muscles are derived from the actual selected exercises.
+  // This prevents the old "Escolha pelo menos um grupo muscular" dead-end.
+  const vals=[...new Set(exerciseIds.map(id=>state.exercises.find(e=>e.id===id)?.muscle).filter(Boolean))];
+
+  // Preserve the existing workout order for items that remain selected;
+  // append newly selected exercises afterward.
+  const oldOrder=state.sessionExerciseIds||[];
+  const oldSet=new Set(oldOrder);
+  const ordered=[
+    ...oldOrder.filter(id=>exerciseIds.includes(id)),
+    ...exerciseIds.filter(id=>!oldSet.has(id))
+  ];
+
+  state.sessionMuscles=vals;
+  state.sessionExerciseIds=ordered;
+  state.sessionFirstByMuscle={};
+  state.sessionDate=todayKey();
+  state.activeMuscle=null;
+  if(!state.muscleStartedAt)state.muscleStartedAt=new Date().toISOString();
+
+  persist();
+  closeModal('todayModal');
+  render();
+  toast(`${ordered.length} exercício${ordered.length===1?'':'s'} no treino de hoje`);
+}
 function finishWorkout(){if(!confirm('Finalizar o treino de hoje? Os registros feitos continuarão salvos.'))return;state.sessionMuscles=[];state.sessionExerciseIds=[];state.sessionFirstByMuscle={};state.activeMuscle=null;state.muscleStartedAt=null;clearPrepared();persist();closeModal('todayModal');render();toast('Treino finalizado')}
 function startMuscle(m){filterMuscle(m)}
 function finishMuscle(){if(!state.activeMuscle)return toast('Nenhum músculo ativo');state.activeMuscle=null;persist();render();toast('Grupo muscular finalizado')}
@@ -4164,15 +4520,121 @@ function livePreviousReference(step){
     <div class="live-last-stage">Sem ${esc(step.label.toLowerCase())} registrado nesse histórico.</div>`;
 }
 function liveProgressionAdvice(step){
-  if(step.type!=='work'||step.index!==0)return '';
+  if(step.type!=='work')return '';
   const id=document.getElementById('editId')?.value;if(!id)return '';
-  const a=progressionAdviceForExercise(id,true);if(!a)return '';
-  const cls=a.state==='ready'?'ready':a.state==='near'?'near':'';
-  return `<div class="live-progress-advice ${cls}">
-    <div class="pa-kicker">${a.state==='ready'?'PRÓXIMO PASSO':a.state==='near'?'META DE HOJE':'PROGRESSÃO'}</div>
+
+  const a=step.index===1
+    ?progressionAdviceForFinalSet(id,true)
+    :progressionAdviceForExercise(id,true);
+
+  if(!a){
+    if(step.index===1){
+      return `<div class="live-progress-advice final">
+        <div class="pa-kicker">SÉRIE FINAL</div>
+        <div class="pa-title">Construa sua referência</div>
+        <div class="pa-text">O objetivo de longo prazo é chegar a 11 reps em falha técnica. Quando isso acontecer pela primeira vez, não precisa subir a carga: primeiro repita a performance em outra sessão.</div>
+      </div>`;
+    }
+    return '';
+  }
+
+  const stateClass=['ready','near','top','progress','stable','recover'].includes(a.state)?a.state:(step.index===1?'final':'');
+  const work2Kickers={
+    ready:'CARGA CONSOLIDADA',
+    top:'CONSOLIDAR',
+    progress:'EVOLUÇÃO DE REPS',
+    stable:'PERFORMANCE MANTIDA',
+    recover:'REFERÊNCIA A RECUPERAR',
+    near:'META: 11 REPS',
+    build:'SÉRIE FINAL',
+    hold:'CONSOLIDAR'
+  };
+  const work1Kickers={
+    ready:'CARGA CONSOLIDADA',
+    top:'CONSOLIDAR',
+    progress:'EVOLUÇÃO DE REPS',
+    stable:'PERFORMANCE MANTIDA',
+    recover:'REFERÊNCIA A RECUPERAR',
+    near:'META DE HOJE',
+    build:'PROGRESSÃO',
+    hold:'CONSOLIDAR'
+  };
+  const kicker=(step.index===1?work2Kickers:work1Kickers)[a.state]||(step.index===1?'SÉRIE FINAL':'PROGRESSÃO');
+
+  return `<div class="live-progress-advice ${stateClass}">
+    <div class="pa-kicker">${kicker}</div>
     <div class="pa-title">${esc(a.title)}</div>
     <div class="pa-text">${esc(a.text)}</div>
   </div>`;
+}
+function liveFinalSetPreview(){
+  const box=document.getElementById('liveFinalProgressPreview');if(!box)return;
+  const id=document.getElementById('editId')?.value;
+  const kg=normalizeNum(document.getElementById('liveKg')?.value);
+  const reps=normalizeNum(document.getElementById('liveReps')?.value);
+  const rir=parseRirValue(document.getElementById('liveRir')?.value);
+
+  if(!reps){
+    box.innerHTML='';
+    box.className='live-final-progress-preview';
+    return;
+  }
+
+  const histories=id?realHistoryForExercise(id,true):[];
+  const previous=workSetPerformanceFromHistory(histories[0],1);
+  const current={kg,reps,rir};
+
+  // A carga mudou: não compare reps como se fossem equivalentes.
+  if(previous&&kg&&kg>previous.kg+0.001){
+    box.className='live-final-progress-preview stable';
+    box.innerHTML=`<strong>Nova carga em adaptação</strong><span>Você subiu de ${fmtKg(previous.kg)} para ${fmtKg(kg)} kg. É normal fazer menos reps. Consolide a nova carga antes de buscar outro aumento.</span>`;
+    return;
+  }
+
+  if(reps>=11){
+    const repeatedTop=!!previous&&sameWorkingLoad(current,previous)&&work2ReachedTop(previous);
+    const currentW1=workSetPerformanceFromSets(currentSets,0);
+    const work1SolidNow=!!currentW1&&kg&&Math.abs(currentW1.kg-kg)<0.001&&work1ReachedTop(currentW1);
+
+    if(repeatedTop&&work1SolidNow){
+      box.className='live-final-progress-preview ready';
+      box.innerHTML=`<strong>✓ Topo repetido — carga bem consolidada</strong><span>Você repetiu 11+ reps em outra sessão e o Trabalho 1 também está sólido. Aumentar a carga no próximo treino é uma opção; não é obrigatório.</span>`;
+      return;
+    }
+
+    if(repeatedTop){
+      box.className='live-final-progress-preview top';
+      box.innerHTML=`<strong>✓ Série final consolidada</strong><span>Você repetiu 11+ reps com a mesma carga. Excelente. Se o Trabalho 1 ainda estiver consolidando, mantenha o peso; depois considere o próximo incremento.</span>`;
+      return;
+    }
+
+    box.className='live-final-progress-preview top';
+    box.innerHTML=`<strong>✓ Topo da faixa atingido hoje</strong><span>Ótimo resultado. Não precisa subir a carga agora. Primeiro tente repetir 11+ reps em outra sessão para consolidar.</span>`;
+    return;
+  }
+
+  if(previous&&kg&&sameWorkingLoad(current,previous)){
+    const diff=reps-previous.reps;
+
+    if(diff>0){
+      box.className='live-final-progress-preview progress';
+      box.innerHTML=`<strong>↑ +${diff} rep${diff===1?'':'s'} vs. último treino</strong><span>Você evoluiu. Não precisa melhorar de novo já na próxima sessão; primeiro tente manter ${reps} reps como sua nova referência.</span>`;
+      return;
+    }
+
+    if(diff===0){
+      box.className='live-final-progress-preview stable';
+      box.innerHTML=`<strong>✓ Performance mantida</strong><span>Você igualou as ${previous.reps} reps do último treino. Isso é consolidação — não é necessário bater recorde em toda sessão.</span>`;
+      return;
+    }
+
+    box.className='live-final-progress-preview recover';
+    box.innerHTML=`<strong>${Math.abs(diff)} rep${Math.abs(diff)===1?'':'s'} abaixo da última referência</strong><span>Um treino isolado não significa regressão. Mantenha a carga e tente recuperar ${previous.reps} reps na próxima sessão.</span>`;
+    return;
+  }
+
+  box.className='live-final-progress-preview';
+  box.innerHTML=`<strong>${11-reps} rep${11-reps===1?'':'s'} até o topo da faixa</strong><span>Sua primeira meta é usar ${reps} reps como referência. Igualar no próximo treino já conta como consolidação; evolua quando a sessão permitir.</span>`;
 }
 function renderLiveGuide(){
   const root=document.getElementById('liveGuide'); if(!root||currentEntryMode!=='live')return;
@@ -4190,10 +4652,11 @@ function renderLiveGuide(){
       ${ref?`<div class="live-reference">${ref}</div>`:''}
       ${liveProgressionAdvice(st)}
       <div class="live-inputs ${st.type==='pap'||st.type==='work'?'':'no-rir'}">
-        <div class="live-input-wrap"><label>Carga</label>${setPicker('kg',val.kg,'','liveKg')}</div>
-        <div class="live-input-wrap"><label>Reps</label>${setPicker('reps',val.reps,'','liveReps')}</div>
-        ${st.type==='pap'||st.type==='work'?`<div class="live-input-wrap"><label>RIR</label>${setPicker('rir',val.rir||'','','liveRir')}</div>`:''}
+        <div class="live-input-wrap"><label>Carga</label>${setPicker('kg',val.kg,st.type==='work'&&st.index===1?'liveFinalSetPreview()':'','liveKg')}</div>
+        <div class="live-input-wrap"><label>Reps</label>${setPicker('reps',val.reps,st.type==='work'&&st.index===1?'liveFinalSetPreview()':'','liveReps')}</div>
+        ${st.type==='pap'||st.type==='work'?`<div class="live-input-wrap"><label>RIR</label>${setPicker('rir',val.rir||'',st.type==='work'&&st.index===1?'liveFinalSetPreview()':'','liveRir')}</div>`:''}
       </div>
+      ${st.type==='work'&&st.index===1?'<div id="liveFinalProgressPreview" class="live-final-progress-preview"></div>':''}
       ${st.label==='Feeder de reconhecimento'?'<div class="live-upnext">◎ Músculo já preparado. Esta série é só para reconhecer a máquina antes das séries de trabalho.</div>':''}${st.type==='work'&&st.index===1?'<div class="live-final-note">🔥 Sua série final: RIR 0 / falha técnica.</div>':''}
       ${next?`<div class="live-upnext">Depois: <b>${esc(next.label)}</b></div>`:'<div class="live-upnext"><b>Última série do exercício.</b> Ao concluir, o resultado será salvo.</div>'}
       <div class="live-rest">
@@ -4203,6 +4666,7 @@ function renderLiveGuide(){
       <button type="button" class="live-main-action" onclick="completeLiveSet()">${isLast?'✓ Concluir e salvar exercício':'✓ Concluir série e avançar'}</button>
       <div class="live-secondary-actions"><button type="button" onclick="previousLiveSet()" ${liveStepIndex===0?'disabled':''}>← Série anterior</button><button type="button" onclick="skipLiveSet()">Pular esta série →</button></div>
     </div>`;
+  if(st.type==='work'&&st.index===1)liveFinalSetPreview();
   if(restEnd>Date.now()) updateRest();
 }
 function syncLiveInputs(){
@@ -4439,7 +4903,7 @@ function saveExercise(){
     const idx=state.history.findIndex(h=>h.id===currentEditingHistoryId);
     if(idx>=0){const old=state.history[idx];state.history[idx]={...old,exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay,old.date),workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate,editedAt:now}}
   }else{state.history.push({id:uid(),exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay),createdAt:now,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate})}
-  if(usePrep&&!referenceOnly&&performedDay===todayKey()){markPrepared(muscle);if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle]}recomputePreparedToday();state.activeMuscle=muscle;if(!state.muscleStartedAt)state.muscleStartedAt=now;const progressionNow=!referenceOnly?progressionAdviceFromSets(sets):null;persist();closeModal('exerciseModal');render();toast(currentEditingHistoryId?'Registro atualizado':performedDay!==todayKey()?'Treino de '+new Date(isoForPerformedDate(performedDay)).toLocaleDateString('pt-BR')+' salvo':referenceOnly?'Referência salva':progressionNow?.state==='ready'?'Carga dominada! Próximo treino: subir peso ↑':progressionNow?.state==='near'?'Quase lá — falta pouco para subir a carga':flags.length?flags[0]+'!':'Carga salva');currentEditingHistoryId=null
+  if(usePrep&&!referenceOnly&&performedDay===todayKey()){markPrepared(muscle);if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle]}recomputePreparedToday();state.activeMuscle=muscle;if(!state.muscleStartedAt)state.muscleStartedAt=now;persist();closeModal('exerciseModal');render();toast(currentEditingHistoryId?'Registro atualizado':performedDay!==todayKey()?'Treino de '+new Date(isoForPerformedDate(performedDay)).toLocaleDateString('pt-BR')+' salvo':referenceOnly?'Referência salva':progressionToastText(ex.id));currentEditingHistoryId=null
 }
 function openHistoryRecord(historyId){
   try{
@@ -4726,10 +5190,7 @@ function renderHistory(){
 
 renderProgressOverview=progressRenderOverviewV3;
 
-const recoveredChestLocal=ensureChestWorkoutRecovered20260822();
-if(recoveredChestLocal)persist(false);
 render();
-if(recoveredChestLocal)setTimeout(()=>toast(`${recoveredChestLocal} registro${recoveredChestLocal===1?'':'s'} de peito recuperado${recoveredChestLocal===1?'':'s'}`),250);
 initSupabase();
 </script>
 </body>
