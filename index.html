@@ -2519,6 +2519,54 @@ body:before{display:none!important}
   .progress-exercise-thumb{width:52px;height:52px;flex-basis:52px}
   .app-ex-thumb.progress{width:52px;height:52px}
 }
+
+/* 5.7 — explicit recovery fallback */
+.recovery-card{
+  margin-top:10px;
+  padding:12px;
+  border:1px solid rgba(203,255,56,.18);
+  border-radius:14px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:12px;
+  align-items:center;
+  background:linear-gradient(135deg,#11190d,#0d1317 65%);
+}
+.recovery-card small{
+  display:block;
+  color:var(--app-accent);
+  font-size:6px;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+.recovery-card strong{
+  display:block;
+  margin-top:3px;
+  color:#edf2f5;
+  font-size:10px;
+}
+.recovery-card p{
+  margin:5px 0 0;
+  max-width:460px;
+  color:#74808a;
+  font-size:7px;
+  line-height:1.45;
+}
+.recovery-card button{
+  min-height:36px;
+  padding:0 11px;
+  border:1px solid rgba(203,255,56,.28);
+  border-radius:10px;
+  background:var(--app-accent);
+  color:#0a0d0f;
+  font-size:7px;
+  font-weight:950;
+  white-space:nowrap;
+}
+@media(max-width:430px){
+  .recovery-card{grid-template-columns:1fr}
+  .recovery-card button{width:100%}
+}
 </style>
 </head>
 <body>
@@ -2760,6 +2808,10 @@ body:before{display:none!important}
     </div>
     <div id="syncUser" class="sync-user"><div><small>Conectado como</small><b id="syncUserEmail">—</b></div><button class="btn secondary" style="padding:9px 11px" onclick="signOutSupabase()">Sair</button></div>
     <div id="syncActions" class="sync-grid" style="display:none;margin-top:9px"><button class="btn secondary" onclick="loadCloudState(true)">↓ Baixar da nuvem</button><button class="btn secondary" onclick="syncNow(true)">↑ Enviar agora</button></div>
+    <div class="recovery-card">
+      <div><small>RECUPERAÇÃO</small><strong>Treino de peito · 22/08</strong><p>Restaura Supino Máquina, Crucifixo Polia Inferior e Crucifixo 90 Graus usando os IDs e séries originais. Não duplica se já existirem.</p></div>
+      <button type="button" onclick="recoverChestWorkoutNow()">Recuperar agora</button>
+    </div>
     <div id="syncStatusLine" class="sync-statusline">Configure o projeto Supabase para ativar.</div>
   </div>
   <div class="field"><label>Backup</label><div class="row"><button class="btn secondary" onclick="exportData()">Exportar JSON</button><button class="btn secondary" onclick="document.getElementById('importFile').click()">Importar JSON</button></div><input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)"></div>
@@ -2970,35 +3022,54 @@ const CHEST_RECOVERY_20260822=[
   }
 ];
 
-function recoverDeletedChestRecords20260822(){
-  state.migrations=state.migrations||{};
-  const migrationKey='restoreChest20260822_v1';
-  if(state.migrations[migrationKey])return 0;
-
+function ensureChestWorkoutRecovered20260822(){
   state.history=Array.isArray(state.history)?state.history:[];
+  state.exercises=Array.isArray(state.exercises)?state.exercises:[];
+
   const existingIds=new Set(state.history.map(h=>h.id));
-  const existingSignatures=new Set(
-    state.history.map(h=>`${h.exerciseId||''}|${performedDayFromIso(h.date)}|${h.name||''}`)
-  );
-
   let restored=0;
-  CHEST_RECOVERY_20260822.forEach(record=>{
-    const sig=`${record.exerciseId}|2026-08-22|${record.name}`;
-    if(existingIds.has(record.id)||existingSignatures.has(sig))return;
 
-    // Only restore when the original exercise itself still exists.
-    // This preserves the old exercise ID/history relationship and avoids duplicates.
-    const ex=state.exercises?.find(e=>e.id===record.exerciseId);
+  CHEST_RECOVERY_20260822.forEach(record=>{
+    // Exact original history ID is the source of truth.
+    if(existingIds.has(record.id))return;
+
+    // Keep the original exercise relationship if the exercise still exists.
+    const ex=state.exercises.find(e=>e.id===record.exerciseId);
     if(!ex)return;
 
     state.history.push(structuredClone(record));
+    existingIds.add(record.id);
     restored++;
   });
 
-  state.migrations[migrationKey]={
-    completedAt:new Date().toISOString(),
-    restored
+  state.migrations=state.migrations||{};
+  state.migrations.restoreChest20260822_v2={
+    checkedAt:new Date().toISOString(),
+    restored,
+    expectedIds:CHEST_RECOVERY_20260822.map(x=>x.id)
   };
+  return restored;
+}
+
+async function recoverChestWorkoutNow(){
+  // Manual repair button. Safe to press more than once: exact IDs prevent duplicates.
+  const restored=ensureChestWorkoutRecovered20260822();
+  persist(false);
+  recomputePreparedToday();
+  render();
+
+  if(supabaseClient&&currentUser){
+    await syncNow(false);
+  }
+
+  if(restored){
+    toast(`${restored} registro${restored===1?'':'s'} recuperado${restored===1?'':'s'} com sucesso`);
+  }else{
+    const allThere=CHEST_RECOVERY_20260822.every(r=>state.history.some(h=>h.id===r.id));
+    toast(allThere?'Treino já está recuperado':'Não foi possível recuperar todos os registros');
+  }
+
+  if(document.getElementById('historyModal')?.classList.contains('show'))renderHistory();
   return restored;
 }
 
@@ -3012,7 +3083,7 @@ async function loadCloudState(manual=false){
     const {data,error}=await supabaseClient.from('workout_app_state').select('state,updated_at').eq('user_id',currentUser.id).maybeSingle();
     if(error)throw error;
     if(!data){await syncNow(false);setSyncStatus('Primeiro backup criado na nuvem.','ok');if(manual)toast('Seus dados locais foram enviados');return}
-    suppressCloudSync=true;state=normalizeLoadedState(data.state);const recoveredChest=recoverDeletedChestRecords20260822();cloudUpdatedAt=data.updated_at||null;persist(false);suppressCloudSync=false;render();if(recoveredChest){await syncNow(false);toast(`${recoveredChest} registro${recoveredChest===1?'':'s'} de peito recuperado${recoveredChest===1?'':'s'}`)}setSyncStatus('Dados carregados e sincronizados.','ok');if(manual&&!recoveredChest)toast('Dados baixados da nuvem')
+    suppressCloudSync=true;state=normalizeLoadedState(data.state);const recoveredChest=ensureChestWorkoutRecovered20260822();cloudUpdatedAt=data.updated_at||null;persist(false);suppressCloudSync=false;render();if(recoveredChest){await syncNow(false);toast(`${recoveredChest} registro${recoveredChest===1?'':'s'} de peito recuperado${recoveredChest===1?'':'s'}`)}setSyncStatus('Dados carregados e sincronizados.','ok');if(manual&&!recoveredChest)toast('Dados baixados da nuvem')
   }catch(e){suppressCloudSync=false;console.error('Cloud load',e);setSyncStatus('Erro ao baixar: '+(e.message||'erro'),'warn');if(manual)toast('Erro ao baixar dados')}
 }
 
@@ -4655,7 +4726,7 @@ function renderHistory(){
 
 renderProgressOverview=progressRenderOverviewV3;
 
-const recoveredChestLocal=recoverDeletedChestRecords20260822();
+const recoveredChestLocal=ensureChestWorkoutRecovered20260822();
 if(recoveredChestLocal)persist(false);
 render();
 if(recoveredChestLocal)setTimeout(()=>toast(`${recoveredChestLocal} registro${recoveredChestLocal===1?'':'s'} de peito recuperado${recoveredChestLocal===1?'':'s'}`),250);
