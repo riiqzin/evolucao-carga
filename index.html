@@ -734,6 +734,288 @@ body:before{display:none!important}
 @media(prefers-reduced-motion:reduce){
   *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
 }
+
+/* =========================================================
+   HOME COMPOSITION 4.1 — designed, not scattered
+   ========================================================= */
+
+.home-main-action{
+  min-height:62px!important;
+  grid-template-columns:38px 1fr 22px!important;
+  gap:11px!important;
+  padding:10px 14px!important;
+}
+.home-main-action .home-action-icon{
+  width:38px!important;height:38px!important;
+  border-radius:13px!important;
+  font-size:17px!important;
+}
+.home-main-action .home-action-copy{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:2px;
+}
+.home-main-action .home-action-copy small{
+  font-size:7px;
+  line-height:1;
+  letter-spacing:.14em;
+  font-weight:950;
+  opacity:.58;
+}
+.home-main-action .home-action-copy b{
+  font-size:13px;
+  line-height:1.2;
+  font-weight:950;
+  letter-spacing:-.02em;
+  text-align:left;
+}
+.home-main-action.has-training{
+  background:#0f151a!important;
+  color:#e8edf2!important;
+  border:1px solid #202832!important;
+  box-shadow:none!important;
+}
+.home-main-action.has-training .home-action-icon{
+  background:rgba(203,255,56,.09)!important;
+  color:var(--app-accent)!important;
+}
+.home-main-action.has-training .home-action-copy small{color:#6f7a86!important;opacity:1}
+.home-main-action.has-training i{color:#68737f!important}
+
+.today-progress-wrap{
+  margin-top:22px;
+  padding-bottom:18px;
+  border-bottom:1px solid #182027;
+}
+.today-progress-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:8px;
+}
+.today-progress-head span{
+  font-size:9px;color:#76818d;font-weight:850;
+}
+.today-progress-head strong{
+  font-size:10px;color:#cbd2da;font-weight:900;
+}
+.today-progress-wrap .today-progress{
+  display:grid!important;
+  grid-template-columns:1fr auto!important;
+  gap:10px!important;
+  margin:0!important;
+}
+.today-progress-wrap .today-progress .bar{height:5px!important}
+.today-progress-wrap .today-progress>span{
+  min-width:30px;text-align:right;
+  color:var(--app-accent)!important;
+  font-size:9px!important;
+  font-weight:950!important;
+}
+
+.mobile-timeline:before{display:none!important}
+.mobile-timeline{margin-top:0!important}
+
+.today-section{padding-top:22px}
+.today-section+.today-section{margin-top:4px}
+.today-section-label{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:10px;
+}
+.today-section-label span{
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.16em;
+  color:#707b87;
+}
+.today-section-label small{
+  font-size:8px;color:#555f6a;
+}
+
+/* Next exercise becomes one coherent primary block */
+.now-exercise-card{
+  border:1px solid rgba(203,255,56,.18);
+  border-radius:22px;
+  padding:16px;
+  background:
+    radial-gradient(circle at 0 0,rgba(203,255,56,.08),transparent 42%),
+    #0d1216;
+  box-shadow:0 12px 30px rgba(0,0,0,.14);
+  animation:nowCardIn .38s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes nowCardIn{
+  from{opacity:0;transform:translateY(8px) scale(.99)}
+  to{opacity:1;transform:none}
+}
+.now-exercise-top{
+  display:grid;
+  grid-template-columns:46px 1fr;
+  gap:13px;
+  align-items:center;
+}
+.now-play{
+  width:46px;height:46px;border-radius:16px;
+  display:grid;place-items:center;
+  background:#17210c;
+  border:1px solid rgba(203,255,56,.19);
+  color:var(--app-accent);
+  font-size:12px;
+}
+.now-copy{min-width:0}
+.now-copy>small{
+  display:block;
+  margin-bottom:3px;
+  color:#75818d;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.now-copy strong{
+  display:block;
+  color:#f3f6f8;
+  font-size:18px;
+  line-height:1.05;
+  letter-spacing:-.035em;
+}
+.now-copy p{
+  margin:6px 0 0;
+  color:#7c8793;
+  font-size:9px;
+  line-height:1.4;
+}
+.now-primary-action{
+  width:100%;
+  height:47px;
+  margin-top:15px;
+  padding:0 13px 0 16px;
+  border:0;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:var(--app-accent);
+  color:#090b05;
+  font-size:11px;
+  font-weight:950;
+  transition:transform .16s ease,filter .16s ease;
+}
+.now-primary-action:active{transform:scale(.985);filter:brightness(.95)}
+.now-primary-action i{font-style:normal;font-size:19px;opacity:.58}
+
+/* Upcoming exercises are rows with clear left-to-right hierarchy */
+.upcoming-list,.finished-list{
+  border-top:1px solid #171e24;
+}
+.upcoming-row{
+  min-height:74px;
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr) auto;
+  gap:11px;
+  align-items:center;
+  padding:13px 0;
+  border-bottom:1px solid #171e24;
+  animation:upcomingIn .28s both ease;
+}
+.upcoming-row:nth-child(2){animation-delay:.035s}
+.upcoming-row:nth-child(3){animation-delay:.07s}
+.upcoming-row:nth-child(4){animation-delay:.105s}
+@keyframes upcomingIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.upcoming-index{
+  width:36px;height:36px;border-radius:13px;
+  display:grid;place-items:center;
+  background:#10161c;
+  border:1px solid #202832;
+  color:#717c88;
+  font-size:10px;font-weight:900;
+}
+.upcoming-copy{min-width:0}
+.upcoming-copy strong{
+  display:block;
+  color:#eef2f5;
+  font-size:12px;
+  line-height:1.2;
+  letter-spacing:-.015em;
+}
+.upcoming-copy>small{
+  display:block;
+  margin-top:4px;
+  color:#6f7a86;
+  font-size:8px;
+  line-height:1.35;
+}
+.upcoming-action{
+  align-self:center;
+  min-width:68px;
+  height:34px;
+  padding:0 11px;
+  border:1px solid #27313a;
+  border-radius:11px;
+  background:#12181e;
+  color:#d8dee5;
+  font-size:8px;
+  font-weight:900;
+}
+.upcoming-action:active{background:#192128}
+.upcoming-first{
+  margin-top:7px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:#6b7682;
+  font-size:7px;
+  font-weight:850;
+  text-align:left;
+}
+.upcoming-first.active{color:var(--app-accent)}
+
+/* Finished = calm, compact, clearly secondary */
+.done-section{padding-bottom:8px}
+.finished-row{
+  width:100%;
+  min-height:60px;
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  padding:11px 0;
+  border:0;
+  border-bottom:1px solid #171e24;
+  background:transparent;
+  color:#e8edf2;
+  text-align:left;
+}
+.finished-check{
+  width:32px;height:32px;border-radius:11px;
+  display:grid;place-items:center;
+  background:#121a0d;
+  border:1px solid rgba(203,255,56,.13);
+  color:var(--app-accent);
+  font-size:11px;font-weight:950;
+}
+.finished-copy{min-width:0}
+.finished-copy strong{display:block;font-size:11px}
+.finished-copy small{
+  display:block;margin-top:3px;
+  color:#697480;font-size:8px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.finished-row i{
+  font-style:normal;color:#65707c;
+  font-size:8px;font-weight:850;
+}
+
+/* Remove old card styling from Today's list entirely */
+#todayWorkout .today-card,
+#todayWorkout .nextbox{display:none!important}
+
+@media(max-width:430px){
+  .now-exercise-card{padding:15px}
+  .now-copy strong{font-size:17px}
+  .upcoming-row{grid-template-columns:36px minmax(0,1fr) auto}
+  .upcoming-action{min-width:62px;padding-inline:9px}
+}
 </style>
 </head>
 <body>
@@ -764,8 +1046,8 @@ body:before{display:none!important}
         <p id="heroText">Escolha o treino e siga o próximo exercício destacado.</p>
 
         <button class="home-main-action" onclick="openTodayModal()" id="todaySetupBtn">
-          <span>＋</span>
-          <b>Escolher treino de hoje</b>
+          <span class="home-action-icon">＋</span>
+          <span class="home-action-copy"><small>COMEÇAR</small><b>Escolher treino de hoje</b></span>
           <i>›</i>
         </button>
 
@@ -1142,29 +1424,164 @@ function render(){
   document.getElementById('sessionInfo').textContent=state.activeMuscle?'filtrando '+state.activeMuscle:'toque para filtrar';
   renderExercises();fillMuscleSelect();fillHistorySelect();
 }
+function setTodaySetupButton(mode){
+  const btn=document.getElementById('todaySetupBtn');
+  if(!btn)return;
+  if(mode==='edit'){
+    btn.classList.add('has-training');
+    btn.innerHTML=`<span class="home-action-icon">✎</span><span class="home-action-copy"><small>SEU TREINO</small><b>Editar treino de hoje</b></span><i>›</i>`;
+  }else{
+    btn.classList.remove('has-training');
+    btn.innerHTML=`<span class="home-action-icon">＋</span><span class="home-action-copy"><small>COMEÇAR</small><b>Escolher treino de hoje</b></span><i>›</i>`;
+  }
+}
+function exerciseTodayModeText(e,done,forced=false){
+  if(done)return 'Registrado hoje';
+  if(isPrepared(e.muscle))return '1 feeder de reconhecimento + 2 séries de trabalho';
+  if(forced)return 'Vai fazer a preparação completa deste músculo';
+  return 'Ainda precisa preparar este músculo';
+}
 function renderToday(){
-  const chosen=state.sessionMuscles||[], xs=sessionExercises(), done=xs.filter(e=>doneToday(e.id)).length, next=nextSessionExercise();
-  const title=document.getElementById('heroTitle'),text=document.getElementById('heroText'),summary=document.getElementById('todaySummary'),root=document.getElementById('todayWorkout'),btn=document.getElementById('todaySetupBtn'),fab=document.getElementById('fabMain'),hero=document.querySelector('.hero');
+  const chosen=state.sessionMuscles||[];
+  const xs=sessionExercises();
+  const done=xs.filter(e=>doneToday(e.id)).length;
+  const next=nextSessionExercise();
+  const title=document.getElementById('heroTitle');
+  const desc=document.getElementById('heroText');
+  const summary=document.getElementById('todaySummary');
+  const root=document.getElementById('todayWorkout');
+  const fab=document.getElementById('fabMain');
+  const hero=document.querySelector('.hero');
+
   document.getElementById('todayEyebrow').textContent='TREINO DE HOJE · '+new Date().toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'2-digit'}).toUpperCase();
   hero?.classList.remove('completed');
-  if(!chosen.length){title.textContent='O que você vai treinar hoje?';text.textContent='Escolha os grupos musculares. Depois é só seguir a ordem e registrar cada exercício.';summary.innerHTML='';root.innerHTML='';btn.textContent='Escolher treino de hoje';fab.textContent='▶ Montar treino de hoje';fab.onclick=doNextAction;return}
-  title.textContent=chosen.join(' + ');btn.textContent='Editar treino de hoje';
-  if(!xs.length){text.textContent='Treino escolhido, mas nenhum exercício foi selecionado para hoje.';summary.innerHTML='';root.innerHTML=`<div class="empty"><strong>Nenhum exercício no treino de hoje</strong>Toque em “Editar treino de hoje” e escolha os exercícios que vai fazer.</div>`;fab.textContent='＋ Cadastrar exercício';fab.onclick=openExerciseModal;return}
-  const pct=Math.round(done/xs.length*100), completed=done===xs.length;
+
+  if(!chosen.length){
+    title.textContent='O que você vai treinar hoje?';
+    desc.textContent='Escolha os grupos musculares. Depois o app organiza o treino para você.';
+    summary.innerHTML='';
+    root.innerHTML='';
+    setTodaySetupButton('choose');
+    fab.textContent='▶ Montar treino de hoje';
+    fab.onclick=doNextAction;
+    return;
+  }
+
+  title.textContent=chosen.join(' + ');
+  setTodaySetupButton('edit');
+
+  if(!xs.length){
+    desc.textContent='Treino escolhido. Agora selecione quais exercícios vão entrar hoje.';
+    summary.innerHTML='';
+    root.innerHTML=`<div class="empty"><strong>Nenhum exercício selecionado</strong>Edite o treino de hoje e escolha os exercícios.</div>`;
+    fab.textContent='＋ Cadastrar exercício';
+    fab.onclick=openExerciseModal;
+    return;
+  }
+
+  const pct=Math.round(done/xs.length*100);
+  const completed=done===xs.length;
+
   if(completed){
     hero?.classList.add('completed');
-    text.textContent='Treino salvo. Agora você já tem referências reais para comparar nos próximos treinos.';
+    desc.textContent='Treino concluído. Seus resultados já estão salvos para a próxima sessão.';
     const todayRecords=state.history.filter(h=>h.gymId===state.activeGym&&isHistoryToday(h)&&xs.some(e=>e.id===h.exerciseId));
     const prs=todayRecords.reduce((n,h)=>n+(h.prFlags||[]).length,0);
     const refs=todayRecords.filter(h=>h.referenceOnly).length;
-    summary.innerHTML=`<div class="completion-card"><div class="completion-head"><div class="completion-icon">✓</div><div><strong>Treino concluído</strong><small>${xs.length} exercícios registrados · ${esc(chosen.join(' + '))}</small></div></div><div class="completion-stats"><div class="completion-stat"><small>Exercícios</small><strong>${xs.length}/${xs.length}</strong></div><div class="completion-stat"><small>PRs hoje</small><strong>${prs}</strong></div><div class="completion-stat"><small>Referências</small><strong>${refs}</strong></div></div><div class="completion-actions"><button class="primary-mini" onclick="openHistoryModal()">↗ Ver progresso</button><button class="secondary-mini" onclick="openTodayModal()">✎ Ajustar treino</button></div></div>`;
+
+    summary.innerHTML=`<div class="completion-card">
+      <div class="completion-head">
+        <div class="completion-icon">✓</div>
+        <div><strong>Treino concluído</strong><small>${xs.length} exercícios · ${esc(chosen.join(' + '))}</small></div>
+      </div>
+      <div class="completion-stats">
+        <div class="completion-stat"><small>Feitos</small><strong>${xs.length}/${xs.length}</strong></div>
+        <div class="completion-stat"><small>PRs</small><strong>${prs}</strong></div>
+        <div class="completion-stat"><small>Refs.</small><strong>${refs}</strong></div>
+      </div>
+      <div class="completion-actions">
+        <button class="primary-mini" onclick="openHistoryModal()">↗ Ver progresso</button>
+        <button class="secondary-mini" onclick="openTodayModal()">✎ Ajustar treino</button>
+      </div>
+    </div>`;
   }else{
-    text.textContent=`Próximo: ${next.name}. Faça o exercício e depois toque em “Registrar resultado”.`;
-    summary.innerHTML=`<div class="today-progress"><div class="bar"><i style="width:${pct}%"></i></div><span>${done}/${xs.length} exercícios</span></div>${next?`<div class="nextbox"><small>PRÓXIMO EXERCÍCIO</small><strong>${esc(next.name)}</strong><p>${esc(next.muscle)} · ${isPrepared(next.muscle)?'músculo já preparado → 2 séries de trabalho':'primeiro do músculo → preparação completa'}</p></div>`:''}`;
+    desc.textContent='Siga a ordem abaixo. O próximo exercício fica destacado para você não precisar pensar no que vem agora.';
+    summary.innerHTML=`<div class="today-progress-wrap">
+      <div class="today-progress-head"><span>Seu progresso hoje</span><strong>${done} de ${xs.length}</strong></div>
+      <div class="today-progress"><div class="bar"><i style="width:${pct}%"></i></div><span>${pct}%</span></div>
+    </div>`;
   }
-  root.innerHTML=xs.map((e,i)=>{const d=doneToday(e.id),n=next&&next.id===e.id,ready=isPrepared(e.muscle),forced=state.sessionFirstByMuscle?.[e.muscle]===e.id;const canFirst=!d&&!ready;return `<div class="today-card ${d?'done':''} ${n?'next':''}"><div class="today-num">${d?'✓':i+1}</div><div class="today-main"><strong>${esc(e.name)}</strong><small>${esc(e.muscle)} · ${d?'registrado hoje':(ready?'2 séries de trabalho':(forced?'vai preparar o músculo hoje':'pode começar por este hoje'))}</small></div><div class="today-actions"><button type="button" class="today-action" onclick="event.stopPropagation();startExercise('${e.id}')">${d?'Ver / editar':'Registrar resultado'}</button>${canFirst?`<button type="button" class="today-first ${forced?'active':''}" onclick="event.stopPropagation();setFirstToday('${e.id}')">${forced?'★ Primeiro hoje':'↥ Começar por este hoje'}</button>`:''}</div></div>`}).join('');
+
+  const undone=xs.filter(e=>!doneToday(e.id));
+  const finished=xs.filter(e=>doneToday(e.id));
+  const upcoming=undone.filter(e=>!next||e.id!==next.id);
+
+  let html='';
+
+  if(next){
+    const forced=state.sessionFirstByMuscle?.[next.muscle]===next.id;
+    html+=`<section class="today-section now-section">
+      <div class="today-section-label"><span>AGORA</span><small>próximo exercício</small></div>
+      <article class="now-exercise-card">
+        <div class="now-exercise-top">
+          <div class="now-play">▶</div>
+          <div class="now-copy">
+            <small>${esc(next.muscle)}</small>
+            <strong>${esc(next.name)}</strong>
+            <p>${esc(exerciseTodayModeText(next,false,forced))}</p>
+          </div>
+        </div>
+        <button class="now-primary-action" onclick="startExercise('${next.id}')">
+          <span>Registrar resultado</span><i>›</i>
+        </button>
+      </article>
+    </section>`;
+  }
+
+  if(upcoming.length){
+    html+=`<section class="today-section later-section">
+      <div class="today-section-label"><span>DEPOIS</span><small>${upcoming.length} restante${upcoming.length===1?'':'s'}</small></div>
+      <div class="upcoming-list">`;
+
+    upcoming.forEach((e)=>{
+      const originalIndex=xs.findIndex(x=>x.id===e.id)+1;
+      const ready=isPrepared(e.muscle);
+      const forced=state.sessionFirstByMuscle?.[e.muscle]===e.id;
+      const canFirst=!ready;
+      html+=`<article class="upcoming-row">
+        <div class="upcoming-index">${originalIndex}</div>
+        <div class="upcoming-copy">
+          <strong>${esc(e.name)}</strong>
+          <small>${esc(e.muscle)} · ${esc(exerciseTodayModeText(e,false,forced))}</small>
+          ${canFirst?`<button class="upcoming-first ${forced?'active':''}" onclick="event.stopPropagation();setFirstToday('${e.id}')">${forced?'★ Preparação começa aqui':'Definir como primeiro deste músculo'}</button>`:''}
+        </div>
+        <button class="upcoming-action" onclick="startExercise('${e.id}')" aria-label="Registrar ${esc(e.name)}">Registrar</button>
+      </article>`;
+    });
+
+    html+=`</div></section>`;
+  }
+
+  if(finished.length){
+    html+=`<section class="today-section done-section">
+      <div class="today-section-label"><span>CONCLUÍDOS</span><small>${finished.length}</small></div>
+      <div class="finished-list">`;
+
+    finished.forEach((e)=>{
+      const h=todayHistoryForExercise(e.id);
+      html+=`<button class="finished-row" onclick="startExercise('${e.id}')">
+        <span class="finished-check">✓</span>
+        <span class="finished-copy"><strong>${esc(e.name)}</strong><small>${esc(e.muscle)}${h?` · ${esc(setSummary(h.sets))}`:''}</small></span>
+        <i>Editar</i>
+      </button>`;
+    });
+
+    html+=`</div></section>`;
+  }
+
+  root.innerHTML=html;
   fab.textContent=next?'▶ '+next.name:'↗ Ver progresso';
-  if(completed) fab.onclick=openHistoryModal; else fab.onclick=doNextAction;
+  fab.onclick=completed?openHistoryModal:doNextAction;
 }
 function renderExercises(){
   const root=document.getElementById('exerciseList');
