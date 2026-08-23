@@ -142,51 +142,711 @@ html{background:#07090c}body{padding-bottom:98px;background:radial-gradient(circ
 @media(max-width:620px){.app{padding:10px 10px 30px}.hero{padding:18px;border-radius:24px}.hero h2{font-size:26px}.hero-symbol{width:42px;height:42px}.progress-overview-stats{grid-template-columns:repeat(2,1fr)}.progress-grid{grid-template-columns:1fr}.progress-highlight-row{grid-template-columns:repeat(3,1fr)}.progress-hero h4{font-size:20px}.cal-day{min-height:34px}}
 @media(min-width:900px){#historyModal{align-items:center;padding:20px}#historyModal .progress-sheet{height:auto;max-height:92vh;border-radius:28px}}
 
+
+/* ===== PROGRESSO 3.0 · leitura simples por músculo ===== */
+#historyModal{z-index:64;align-items:stretch;padding:0 0 78px;background:#080b0e}
+#historyModal .progress-sheet{width:100%;max-width:none;height:100%;max-height:none;overflow:auto;border:0;border-radius:0;padding:0 14px 34px;background:radial-gradient(circle at 50% -140px,rgba(203,255,56,.10),transparent 380px),#080b0e;box-shadow:none;scroll-behavior:smooth}
+.progress-appbar{position:sticky;top:0;z-index:8;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 2px 13px;background:linear-gradient(180deg,rgba(8,11,14,.98) 72%,rgba(8,11,14,.82));backdrop-filter:blur(16px)}
+.progress-appbar-copy small{display:block;color:var(--accent);font-size:9px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.progress-appbar-copy h3{margin:4px 0 0;font-size:24px;letter-spacing:-.045em}.progress-appbar-copy p{margin:4px 0 0;color:#8994a1;font-size:10px}.progress-close{width:40px;height:40px;flex:0 0 40px;border:1px solid #28313a;border-radius:14px;background:#11161b;color:#cbd2db;font-size:15px}
+.progress-content{max-width:980px;margin:0 auto;padding-top:3px}
+.progress-landing-hero{position:relative;overflow:hidden;border:1px solid #344021;border-radius:25px;padding:18px;background:linear-gradient(145deg,rgba(203,255,56,.14),#121812 38%,#0e1317 80%);animation:progFadeUp .38s ease both}.progress-landing-hero:after{content:'';position:absolute;width:180px;height:180px;border-radius:50%;right:-75px;top:-92px;background:rgba(203,255,56,.08);filter:blur(3px)}
+.progress-landing-kicker{font-size:9px;color:#aab78d;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.progress-landing-title{margin:6px 0 3px;font-size:26px;line-height:1.03;letter-spacing:-.055em}.progress-landing-copy{margin:0;color:#98a39d;font-size:11px;line-height:1.5;max-width:520px}.progress-landing-answer{display:flex;align-items:center;gap:11px;margin-top:16px;padding:12px;border:1px solid rgba(203,255,56,.17);border-radius:17px;background:rgba(6,9,7,.36)}.progress-answer-icon{width:39px;height:39px;flex:0 0 39px;border-radius:13px;background:var(--accent);color:#080b04;display:grid;place-items:center;font-weight:950;font-size:18px}.progress-answer-copy{min-width:0}.progress-answer-copy small{display:block;color:#8d9987;font-size:8px;text-transform:uppercase;letter-spacing:.09em;font-weight:900}.progress-answer-copy strong{display:block;margin-top:3px;font-size:13px;line-height:1.25}.progress-answer-copy span{display:block;margin-top:2px;color:#87918e;font-size:9px}
+.progress-glance{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 17px}.progress-glance-card{border:1px solid #222b32;border-radius:17px;padding:11px;background:#0f1418;animation:progFadeUp .42s ease both}.progress-glance-card:nth-child(2){animation-delay:.04s}.progress-glance-card:nth-child(3){animation-delay:.08s}.progress-glance-card small{display:block;color:#75818d;font-size:8px;text-transform:uppercase;letter-spacing:.07em}.progress-glance-card strong{display:block;margin-top:4px;font-size:18px;letter-spacing:-.04em}.progress-glance-card span{display:block;margin-top:2px;color:#88939e;font-size:8px;line-height:1.3}
+.progress-section-head{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:18px 2px 9px}.progress-section-head div strong{display:block;font-size:15px}.progress-section-head div span{display:block;color:#7d8996;font-size:9px;margin-top:3px}.progress-section-head>span{font-size:9px;color:#7e8996}
+.progress-muscle-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.progress-muscle-card{border:1px solid #242e36;background:#0f1418;border-radius:20px;padding:14px;text-align:left;color:#f3f6f8;transition:transform .18s ease,border-color .18s ease,background .18s ease;animation:progFadeUp .42s ease both}.progress-muscle-card:active{transform:scale(.985)}.progress-muscle-card:hover{border-color:#47562a;background:#111811}.progress-muscle-top{display:flex;align-items:center;gap:10px}.progress-muscle-icon{width:40px;height:40px;flex:0 0 40px;border-radius:13px;background:#1a2312;color:var(--accent);display:grid;place-items:center;font-size:18px;font-weight:950}.progress-muscle-main{flex:1;min-width:0}.progress-muscle-main strong{display:block;font-size:14px}.progress-muscle-main small{display:block;color:#7f8a96;font-size:9px;margin-top:3px}.progress-muscle-chevron{color:#65717d;font-size:18px}.progress-muscle-status{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:9px;font-weight:850;color:#a3adb6}.progress-muscle-status i{width:7px;height:7px;border-radius:50%;background:#56606b}.progress-muscle-status.good{color:#9edbad}.progress-muscle-status.good i{background:var(--good);box-shadow:0 0 0 4px rgba(99,230,168,.07)}.progress-muscle-status.ready{color:#d9ec93}.progress-muscle-status.ready i{background:var(--accent);box-shadow:0 0 0 4px rgba(203,255,56,.07)}
+.progress-muscle-screen,.progress-detail-screen{animation:progFadeUp .3s ease both}.progress-screen-head{display:flex;align-items:center;gap:11px;margin:5px 0 12px}.progress-screen-back{width:40px;height:40px;flex:0 0 40px;border:1px solid #29323a;border-radius:13px;background:#11161b;color:#e2e7ec;font-size:18px}.progress-screen-icon{width:42px;height:42px;flex:0 0 42px;border-radius:14px;background:#1a2312;color:var(--accent);display:grid;place-items:center;font-size:19px}.progress-screen-copy{flex:1;min-width:0}.progress-screen-copy small{display:block;color:#7d8995;font-size:8px;text-transform:uppercase;letter-spacing:.1em;font-weight:900}.progress-screen-copy strong{display:block;margin-top:2px;font-size:20px;letter-spacing:-.04em}.progress-screen-copy span{display:block;margin-top:3px;color:#89949f;font-size:9px}.progress-screen-pill{padding:7px 9px;border-radius:999px;border:1px solid #324023;background:#131911;color:#bcd66d;font-size:8px;font-weight:950;white-space:nowrap}
+.progress-muscle-summary{display:grid;grid-template-columns:1.35fr .65fr;gap:8px;margin-bottom:12px}.progress-muscle-summary-main,.progress-muscle-summary-side{border:1px solid #283238;border-radius:19px;background:#101519;padding:14px}.progress-muscle-summary-main small,.progress-muscle-summary-side small{display:block;color:#7e8993;font-size:8px;text-transform:uppercase;letter-spacing:.08em}.progress-muscle-summary-main strong{display:block;font-size:17px;margin-top:4px;line-height:1.2}.progress-muscle-summary-main span{display:block;color:#87928d;font-size:9px;margin-top:4px;line-height:1.4}.progress-muscle-summary-side strong{display:block;font-size:24px;margin-top:3px;letter-spacing:-.05em}.progress-muscle-summary-side span{display:block;color:#80908a;font-size:8px;margin-top:2px}
+.progress-exercise-list{display:grid;gap:8px}.progress-exercise-row{width:100%;border:1px solid #242d35;border-radius:18px;background:#0f1418;padding:13px;text-align:left;color:#f4f7f9;transition:.18s ease;animation:progFadeUp .35s ease both}.progress-exercise-row:hover{border-color:#465528;background:#111711}.progress-exercise-top{display:flex;align-items:center;gap:10px}.progress-exercise-rank{width:31px;height:31px;flex:0 0 31px;border-radius:10px;background:#171e14;color:var(--accent);display:grid;place-items:center;font-size:10px;font-weight:950}.progress-exercise-name{flex:1;min-width:0}.progress-exercise-name strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.progress-exercise-name small{display:block;color:#788490;font-size:8px;margin-top:3px}.progress-exercise-now{text-align:right}.progress-exercise-now strong{display:block;font-size:19px;letter-spacing:-.04em}.progress-exercise-now small{display:block;color:#74808c;font-size:7px}.progress-exercise-bottom{display:grid;grid-template-columns:1fr 94px;gap:10px;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid #1d252c}.progress-exercise-message strong{display:block;font-size:10px}.progress-exercise-message span{display:block;color:#7d8995;font-size:8px;margin-top:3px;line-height:1.35}.progress-spark svg{display:block;width:94px;height:32px;overflow:visible}.progress-spark .spark-line{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.progress-spark .spark-dot{fill:#0d1114;stroke:var(--accent);stroke-width:2}
+.progress-simple-banner{border:1px solid #34411f;border-radius:21px;background:linear-gradient(145deg,rgba(203,255,56,.11),#101612);padding:15px;margin-bottom:10px}.progress-simple-banner small{display:block;color:#a6b18d;font-size:8px;text-transform:uppercase;letter-spacing:.1em;font-weight:950}.progress-simple-banner strong{display:block;margin-top:5px;font-size:18px;line-height:1.2}.progress-simple-banner p{margin:5px 0 0;color:#8f9a94;font-size:9px;line-height:1.45}.progress-detail-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0}.progress-detail-stat{border:1px solid #222b32;border-radius:15px;background:#0f1418;padding:10px}.progress-detail-stat small{display:block;color:#75818c;font-size:7px;text-transform:uppercase;letter-spacing:.07em}.progress-detail-stat strong{display:block;margin-top:4px;font-size:16px}.progress-detail-stat span{display:block;margin-top:2px;color:#7d8993;font-size:7px;line-height:1.3}
+.progress-chart-panel{border:1px solid #263039;border-radius:21px;background:#0d1216;padding:13px;margin:11px 0}.progress-chart-toolbar{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:11px}.progress-chart-toolbar strong{display:block;font-size:13px}.progress-chart-toolbar span{display:block;color:#798591;font-size:8px;margin-top:3px}.progress-metric-tabs{display:flex;gap:4px;padding:3px;border:1px solid #252e35;border-radius:12px;background:#090d10}.progress-metric-tabs button{border:0;border-radius:9px;background:transparent;color:#7e8995;padding:7px 8px;font-size:8px;font-weight:900}.progress-metric-tabs button.active{background:#1a2213;color:var(--accent)}.progress-chart-stage{position:relative;overflow:hidden;border-radius:15px;background:linear-gradient(180deg,#0c1115,#0a0e11);padding:4px}.progress-chart-stage svg{display:block;width:100%;height:190px}.progress-chart-stage .gridline{stroke:#1d272e;stroke-width:1}.progress-chart-stage .axis-label{fill:#65727d;font-size:9px}.progress-chart-stage .chart-line{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(203,255,56,.22));stroke-dasharray:1400;stroke-dashoffset:1400;animation:progDraw 1s cubic-bezier(.2,.75,.25,1) forwards}.progress-chart-stage .chart-area{fill:url(#progressArea);opacity:.8}.progress-chart-stage .chart-dot{fill:#0b0f12;stroke:var(--accent);stroke-width:3;animation:progPop .35s ease both;transform-origin:center}.progress-chart-stage .point-label{fill:#dce4e8;font-size:9px;font-weight:900}.progress-chart-stage .date-label{fill:#63707b;font-size:8px}.progress-chart-story{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.progress-story-item{background:#10161a;border-radius:12px;padding:8px}.progress-story-item small{display:block;color:#727f8a;font-size:7px}.progress-story-item strong{display:block;margin-top:2px;font-size:10px}.progress-story-item.good strong{color:#a9dfb4}
+.progress-latest-card{border:1px solid #283139;border-radius:18px;background:#101519;padding:13px;margin:10px 0}.progress-latest-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.progress-latest-head small{color:#7c8894;font-size:8px;text-transform:uppercase;letter-spacing:.08em}.progress-latest-head strong{font-size:10px}.progress-latest-sets{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:9px}.progress-latest-set{border-radius:13px;background:#0b1013;padding:9px}.progress-latest-set small{display:block;color:#71808b;font-size:7px}.progress-latest-set strong{display:block;margin-top:3px;font-size:11px}.progress-history-simple{display:grid;gap:7px}.progress-history-simple-row{display:grid;grid-template-columns:70px 1fr auto;gap:8px;align-items:center;border:1px solid #222b32;border-radius:15px;background:#0f1418;padding:10px}.progress-history-simple-row .date strong{display:block;font-size:10px}.progress-history-simple-row .date small{display:block;color:#73808b;font-size:7px;margin-top:2px}.progress-history-simple-row .result strong{display:block;font-size:10px}.progress-history-simple-row .result span{display:block;color:#78848f;font-size:8px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.progress-history-simple-row .actions{display:flex;gap:4px}.progress-history-simple-row .actions button{width:30px;height:30px;border:1px solid #2b343c;border-radius:9px;background:#151a1f;color:#aeb8c1}.progress-history-simple-row .actions button.danger{color:#ff8796;background:#1e1418;border-color:#3a2229}
+.progress-empty-state{border:1px dashed #2d3740;border-radius:20px;padding:24px 16px;text-align:center;background:#0d1215}.progress-empty-state .ico{width:44px;height:44px;border-radius:15px;margin:0 auto 10px;background:#172011;color:var(--accent);display:grid;place-items:center;font-size:20px}.progress-empty-state strong{display:block;font-size:13px}.progress-empty-state span{display:block;color:#7f8b96;font-size:9px;line-height:1.5;margin-top:5px}
+#historyModal .progress-calendar{margin-top:16px;border-radius:20px;background:#0e1317}.progress-overview-tools{display:flex;gap:7px;overflow-x:auto;padding:0 0 3px;scrollbar-width:none}.progress-overview-tools::-webkit-scrollbar{display:none}.progress-overview-tools button{flex:0 0 auto;border:1px solid #28323a;border-radius:12px;background:#101519;color:#9aa5af;padding:8px 10px;font-size:8px;font-weight:900}.progress-overview-tools button.active{border-color:#48582a;background:#172012;color:var(--accent)}
+@keyframes progFadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes progDraw{to{stroke-dashoffset:0}}@keyframes progPop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+@media(min-width:760px){#historyModal{padding-bottom:0}.progress-content{padding-bottom:24px}.progress-muscle-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.progress-exercise-list{grid-template-columns:repeat(2,minmax(0,1fr))}.progress-chart-stage svg{height:240px}}
+@media(max-width:430px){.progress-landing-title{font-size:23px}.progress-glance{grid-template-columns:repeat(3,1fr)}.progress-glance-card{padding:9px}.progress-glance-card strong{font-size:16px}.progress-muscle-grid{grid-template-columns:1fr 1fr}.progress-muscle-card{padding:12px}.progress-screen-pill{display:none}.progress-chart-toolbar{display:block}.progress-metric-tabs{margin-top:9px;width:max-content}.progress-history-simple-row{grid-template-columns:62px 1fr auto}}
+
+
+/* =========================================================
+   MOBILE APP LAYOUT 4.0
+   Same palette, completely new composition.
+   ========================================================= */
+
+:root{
+  --app-bg:#07090c;
+  --app-surface:#0d1116;
+  --app-surface-2:#11161c;
+  --app-line:#202730;
+  --app-muted:#7f8997;
+  --app-soft:#aeb8c5;
+  --app-accent:#cbff38;
+}
+
+html{background:var(--app-bg);scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100dvh;
+  background:
+    radial-gradient(circle at 50% -10%,rgba(203,255,56,.065),transparent 28%),
+    var(--app-bg);
+  color:#f5f7fa;
+  overflow-x:hidden;
+}
+body:before{display:none!important}
+
+.mobile-app-shell{
+  width:min(100%,620px);
+  min-height:100dvh;
+  margin:0 auto;
+  padding-bottom:94px;
+  position:relative;
+  background:linear-gradient(180deg,rgba(10,13,17,.92),rgba(7,9,12,.98));
+}
+
+.mobile-header{
+  height:76px;
+  position:sticky;
+  top:0;
+  z-index:35;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:12px;
+  padding:10px 16px;
+  background:linear-gradient(180deg,rgba(7,9,12,.98) 70%,rgba(7,9,12,.82));
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+
+.mobile-brand{display:flex;align-items:center;gap:9px;min-width:0}
+.mobile-brand-mark{
+  width:35px;height:35px;border-radius:12px;
+  display:grid;place-items:center;
+  background:var(--app-accent);color:#080b04;
+  font-size:18px;font-weight:1000;
+  box-shadow:0 8px 26px rgba(203,255,56,.14);
+}
+.mobile-brand-copy{display:flex;flex-direction:column;line-height:1}
+.mobile-brand-copy small{font-size:7px;letter-spacing:.16em;font-weight:950;color:#77818e}
+.mobile-brand-copy strong{font-size:12px;letter-spacing:-.02em;margin-top:3px}
+
+.mobile-gym-pill{
+  justify-self:end;
+  width:min(148px,100%);
+  position:relative;
+  display:flex;flex-direction:column;
+  padding:8px 32px 8px 11px;
+  border-radius:14px;
+  background:#0d1116;
+  border:1px solid #1d242d;
+  overflow:hidden;
+}
+.mobile-gym-pill:after{
+  content:'⌄';position:absolute;right:11px;top:50%;transform:translateY(-48%);
+  color:#7f8997;font-size:12px;pointer-events:none;
+}
+.mobile-gym-pill span{font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:#66717f;font-weight:900}
+.mobile-gym-pill strong{font-size:11px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mobile-gym-pill select{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+
+.mobile-settings{
+  width:38px;height:38px;border:0;border-radius:13px;
+  background:#0d1116;color:#a6b0bd;font-size:16px;
+  border:1px solid #1d242d;
+}
+
+.mobile-pages{position:relative}
+.app-page{display:none;min-height:calc(100dvh - 170px)}
+.app-page.active{display:block}
+.app-page.page-enter{animation:appPageIn .34s cubic-bezier(.2,.8,.2,1)}
+@keyframes appPageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.mobile-home{
+  border:0!important;
+  background:transparent!important;
+  border-radius:0!important;
+  padding:22px 18px 6px!important;
+  margin:0!important;
+  box-shadow:none!important;
+}
+.mobile-home.completed{background:transparent!important;border:0!important}
+
+.home-kicker,
+#todayEyebrow{
+  color:var(--app-accent)!important;
+  font-size:9px!important;
+  letter-spacing:.15em!important;
+  font-weight:950!important;
+  text-transform:uppercase;
+  margin:0 0 11px!important;
+}
+.mobile-home h1,
+#heroTitle{
+  margin:0;
+  max-width:500px;
+  font-size:clamp(30px,8.8vw,44px)!important;
+  line-height:.98!important;
+  letter-spacing:-.055em!important;
+  font-weight:950!important;
+  color:#f7f9fb!important;
+}
+.mobile-home>p,
+#heroText{
+  margin:14px 0 0!important;
+  max-width:470px;
+  color:#87919e!important;
+  font-size:13px!important;
+  line-height:1.55!important;
+}
+
+.home-main-action{
+  width:100%;
+  margin-top:22px;
+  min-height:64px;
+  border:0;
+  border-radius:20px;
+  padding:0 16px;
+  display:grid;
+  grid-template-columns:36px 1fr 20px;
+  align-items:center;
+  gap:10px;
+  background:var(--app-accent);
+  color:#090b05;
+  text-align:left;
+  box-shadow:0 14px 34px rgba(203,255,56,.12);
+  transition:transform .18s ease,filter .18s ease;
+}
+.home-main-action:active{transform:scale(.985);filter:brightness(.95)}
+.home-main-action>span{
+  width:34px;height:34px;border-radius:12px;
+  display:grid;place-items:center;
+  background:rgba(7,9,12,.11);
+  font-size:18px;font-weight:1000;
+}
+.home-main-action b{font-size:14px;font-weight:950;letter-spacing:-.02em}
+.home-main-action i{font-style:normal;font-size:23px;font-weight:400;opacity:.58}
+
+#todaySummary{margin-top:20px}
+
+.today-progress{
+  margin:0!important;
+  display:grid!important;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:10px;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+}
+.today-progress .bar{
+  height:5px!important;border-radius:999px!important;
+  background:#151b21!important;overflow:hidden!important;
+}
+.today-progress .bar i{background:var(--app-accent)!important;border-radius:inherit!important;transition:width .55s cubic-bezier(.2,.8,.2,1)}
+.today-progress span{font-size:9px!important;color:#707b88!important;font-weight:850!important}
+
+.nextbox{
+  margin-top:14px!important;
+  padding:14px 0 16px!important;
+  border:0!important;
+  border-top:1px solid #1a2027!important;
+  border-bottom:1px solid #1a2027!important;
+  border-radius:0!important;
+  background:transparent!important;
+  display:grid!important;
+  grid-template-columns:42px 1fr!important;
+  column-gap:12px!important;
+  box-shadow:none!important;
+}
+.nextbox:before{
+  content:'▶'!important;
+  width:42px!important;height:42px!important;border-radius:15px!important;
+  background:#141b10!important;color:var(--app-accent)!important;
+  border:1px solid rgba(203,255,56,.16)!important;
+  display:grid!important;place-items:center!important;
+  grid-row:1/4!important;
+  font-size:12px!important;
+}
+.nextbox small,.nextbox strong,.nextbox p{grid-column:2!important}
+.nextbox small{color:#64707d!important;font-size:8px!important;letter-spacing:.13em!important}
+.nextbox strong{font-size:15px!important;margin-top:2px!important}
+.nextbox p{font-size:10px!important;color:#7f8997!important;margin:4px 0 0!important}
+
+.mobile-timeline{
+  position:relative;
+  margin-top:7px!important;
+  gap:0!important;
+  display:block!important;
+}
+.mobile-timeline:before{
+  content:'';
+  position:absolute;
+  left:19px;
+  top:25px;
+  bottom:28px;
+  width:1px;
+  background:#1d242b;
+}
+.today-card{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:40px 1fr!important;
+  gap:12px!important;
+  padding:17px 0!important;
+  border:0!important;
+  border-bottom:1px solid #171d23!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  min-height:0!important;
+  animation:timelineItemIn .34s both cubic-bezier(.2,.8,.2,1);
+}
+.today-card:nth-child(2){animation-delay:.04s}
+.today-card:nth-child(3){animation-delay:.08s}
+.today-card:nth-child(4){animation-delay:.12s}
+.today-card:nth-child(5){animation-delay:.16s}
+@keyframes timelineItemIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.today-card.next{background:transparent!important;box-shadow:none!important}
+.today-num{
+  position:relative;z-index:2;
+  width:40px!important;height:40px!important;flex-basis:40px!important;
+  border-radius:14px!important;
+  background:#11161c!important;border:1px solid #202832!important;
+  color:#788491!important;font-size:12px!important;
+  display:grid!important;place-items:center!important;
+}
+.today-card.next .today-num{
+  background:var(--app-accent)!important;
+  color:#090b05!important;
+  border-color:var(--app-accent)!important;
+}
+.today-card.done .today-num{
+  background:#121a0d!important;
+  color:var(--app-accent)!important;
+  border-color:rgba(203,255,56,.16)!important;
+}
+.today-main{min-width:0;padding-right:2px}
+.today-main strong{font-size:14px!important;letter-spacing:-.02em!important}
+.today-main small{font-size:9px!important;color:#75808d!important;margin-top:4px!important;line-height:1.4!important}
+.today-actions{
+  grid-column:2!important;
+  display:flex!important;align-items:center!important;gap:7px!important;
+  margin-top:8px!important;flex-wrap:wrap!important;
+}
+.today-action,.today-first{
+  border:0!important;border-radius:11px!important;
+  padding:9px 11px!important;
+  font-size:9px!important;font-weight:900!important;
+}
+.today-action{background:#171e24!important;color:#d9e0e8!important}
+.today-card.next .today-action{background:var(--app-accent)!important;color:#090b05!important}
+.today-first{background:transparent!important;color:#727e8b!important;border:1px solid #222a33!important}
+.today-first.active{color:var(--app-accent)!important;border-color:rgba(203,255,56,.22)!important}
+
+.completion-card{
+  margin-top:0!important;
+  border:0!important;border-radius:0!important;
+  background:transparent!important;padding:4px 0 10px!important;
+  box-shadow:none!important;
+}
+.completion-head{padding:10px 0 16px!important;border-bottom:1px solid #1a2027!important}
+.completion-icon{
+  background:#121a0d!important;color:var(--app-accent)!important;
+  border:1px solid rgba(203,255,56,.16)!important;
+}
+.completion-stats{
+  display:grid!important;grid-template-columns:repeat(3,1fr)!important;
+  gap:0!important;border-bottom:1px solid #1a2027!important;
+}
+.completion-stat{
+  padding:16px 8px!important;background:transparent!important;border:0!important;
+  border-right:1px solid #1a2027!important;border-radius:0!important;
+}
+.completion-stat:last-child{border-right:0!important}
+.completion-actions{margin-top:12px!important}
+.primary-mini,.secondary-mini{border-radius:12px!important;padding:10px 12px!important}
+
+.home-tools{
+  margin:16px 18px 0;
+  border-top:1px solid #171d23;
+}
+.home-tools>button{
+  width:100%;
+  min-height:70px;
+  display:grid;
+  grid-template-columns:42px 1fr 18px;
+  align-items:center;
+  gap:12px;
+  border:0;
+  border-bottom:1px solid #171d23;
+  background:transparent;
+  color:#eef2f6;
+  padding:10px 0;
+  text-align:left;
+}
+.home-tools .tool-icon{
+  width:42px;height:42px;border-radius:15px;
+  display:grid;place-items:center;
+  background:#10161b;border:1px solid #1e252e;
+  color:var(--app-accent);font-size:17px;font-weight:900;
+}
+.home-tools button>span:nth-child(2){display:flex;flex-direction:column;gap:3px}
+.home-tools strong{font-size:13px}
+.home-tools small{font-size:9px;color:#737e8a}
+.home-tools i{font-style:normal;font-size:22px;color:#4f5965}
+
+.mobile-library{
+  margin:0!important;
+  padding:18px 18px 22px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+.mobile-screen-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  margin:4px 0 26px;
+}
+.mobile-screen-head small{font-size:8px;letter-spacing:.15em;color:var(--app-accent);font-weight:950}
+.mobile-screen-head h2{margin:5px 0 3px;font-size:30px;letter-spacing:-.05em;line-height:1}
+.mobile-screen-head p{margin:0;font-size:10px;color:#77828f}
+.screen-add{
+  width:46px;height:46px;border:0;border-radius:16px;
+  background:var(--app-accent);color:#090b05;font-size:22px;font-weight:900;
+}
+.mobile-library-hidden-head{display:none!important}
+.mobile-filter-title{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-bottom:11px;
+}
+.mobile-filter-title strong{font-size:12px}
+.mobile-filter-title span{font-size:8px;color:#68737f}
+
+.mobile-muscle-scroll{
+  display:flex!important;
+  grid-template-columns:none!important;
+  gap:8px!important;
+  overflow-x:auto;
+  scroll-snap-type:x proximity;
+  margin:0 -18px 26px!important;
+  padding:0 18px 4px!important;
+  scrollbar-width:none;
+}
+.mobile-muscle-scroll::-webkit-scrollbar{display:none}
+.mobile-muscle-scroll .muscle{
+  flex:0 0 auto!important;
+  min-width:auto!important;
+  min-height:0!important;
+  padding:10px 13px!important;
+  border-radius:999px!important;
+  background:#0e1318!important;
+  border:1px solid #1c242c!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  scroll-snap-align:start;
+}
+.mobile-muscle-scroll .muscle .muscle-top{display:flex!important;align-items:center!important;gap:6px!important}
+.mobile-muscle-scroll .muscle-icon{
+  width:22px!important;height:22px!important;border-radius:8px!important;
+  background:#151b21!important;font-size:10px!important;
+}
+.mobile-muscle-scroll .muscle strong{font-size:10px!important}
+.mobile-muscle-scroll .muscle small{display:none!important}
+.mobile-muscle-scroll .muscle.active{
+  background:rgba(203,255,56,.09)!important;
+  border-color:rgba(203,255,56,.22)!important;
+  color:var(--app-accent)!important;
+}
+.mobile-muscle-scroll .muscle.active .muscle-icon{
+  background:var(--app-accent)!important;color:#090b05!important;
+}
+
+.mobile-exercise-heading{
+  display:flex;align-items:end;justify-content:space-between;gap:12px;
+  margin:0 0 8px;
+}
+.mobile-exercise-heading h3{margin:0;font-size:17px;letter-spacing:-.03em}
+.mobile-exercise-heading span{display:block;margin-top:3px;font-size:8px;color:#6d7885}
+.mobile-exercise-heading button{
+  border:0;background:transparent;color:#68737f;font-size:9px;font-weight:850;padding:8px 0;
+}
+
+.mobile-exercise-list{gap:0!important}
+.mobile-exercise-list .exercise-card{
+  border:0!important;
+  border-bottom:1px solid #171e24!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding:16px 0!important;
+  box-shadow:none!important;
+  transition:transform .18s ease,background .18s ease!important;
+}
+.mobile-exercise-list .exercise-card:active{transform:scale(.99)}
+.mobile-exercise-list .exercise-head{
+  display:grid!important;
+  grid-template-columns:44px 1fr auto!important;
+  gap:11px!important;
+  align-items:center!important;
+}
+.mobile-exercise-list .exercise-index{
+  width:44px!important;height:44px!important;
+  display:grid!important;place-items:center!important;
+  border-radius:15px!important;background:#10161b!important;
+  border:1px solid #1d252d!important;color:var(--app-accent)!important;
+}
+.mobile-exercise-list .exercise-title strong{font-size:13px!important}
+.mobile-exercise-list .exercise-title small{font-size:8px!important;color:#727d89!important;margin-top:3px!important}
+.mobile-exercise-list .exercise-load{
+  font-size:17px!important;color:#f0f3f7!important;
+}
+.mobile-exercise-list .exercise-load small{font-size:8px!important}
+.mobile-exercise-list .refbox,
+.mobile-exercise-list .progressline{display:none!important}
+.mobile-exercise-list .chips{
+  margin:8px 0 0 55px!important;
+  gap:5px!important;
+}
+.mobile-exercise-list .chip{
+  font-size:7px!important;
+  padding:5px 7px!important;
+  border-radius:999px!important;
+  background:#11171d!important;
+}
+.mobile-exercise-list .chip.work{display:none!important}
+
+.mobile-bottom-nav{
+  position:fixed!important;
+  left:50%!important;
+  bottom:0!important;
+  transform:translateX(-50%)!important;
+  width:min(100%,620px)!important;
+  height:78px!important;
+  padding:7px 9px calc(7px + env(safe-area-inset-bottom))!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,1fr)!important;
+  gap:2px!important;
+  background:rgba(8,11,14,.96)!important;
+  border:0!important;
+  border-top:1px solid #1a2027!important;
+  border-radius:0!important;
+  box-shadow:0 -16px 40px rgba(0,0,0,.28)!important;
+  backdrop-filter:blur(22px)!important;
+  z-index:70!important;
+}
+.mobile-bottom-nav button{
+  position:relative;
+  border:0!important;
+  border-radius:13px!important;
+  background:transparent!important;
+  color:#697481!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  font-size:8px!important;
+  font-weight:850!important;
+  transition:color .2s ease,transform .18s ease!important;
+}
+.mobile-bottom-nav button .nav-ico{
+  font-size:18px!important;
+  transition:transform .22s cubic-bezier(.2,.8,.2,1)!important;
+}
+.mobile-bottom-nav button.active{
+  color:var(--app-accent)!important;
+  background:transparent!important;
+}
+.mobile-bottom-nav button.active:before{
+  content:'';
+  position:absolute;
+  top:1px;
+  width:28px;height:3px;border-radius:999px;
+  background:var(--app-accent);
+  box-shadow:0 0 14px rgba(203,255,56,.25);
+  animation:navIndicator .24s ease;
+}
+.mobile-bottom-nav button.active .nav-ico{transform:translateY(-2px) scale(1.08)}
+@keyframes navIndicator{from{opacity:0;transform:scaleX(.35)}to{opacity:1;transform:scaleX(1)}}
+
+.fab{display:none!important}
+
+/* Bottom sheets feel like native app layers */
+.modal{background:rgba(2,4,6,.76)!important;backdrop-filter:blur(13px)!important}
+.modal.show>.sheet,
+.modal.show>.progress-sheet{animation:nativeSheetIn .34s cubic-bezier(.2,.82,.2,1)}
+@keyframes nativeSheetIn{from{opacity:.7;transform:translateY(26px)}to{opacity:1;transform:none}}
+.sheet{
+  width:min(100%,620px)!important;
+  border-radius:28px 28px 0 0!important;
+  background:#0b0f13!important;
+  border-color:#202730!important;
+}
+#exerciseModal .sheet,
+#todayModal .sheet{
+  max-height:94dvh!important;
+}
+.input,.select,.picker-select{
+  background:#0f1419!important;
+  border-color:#202832!important;
+}
+.entry-mode{
+  border:1px solid #1d252d!important;
+  background:#080c0f!important;
+}
+.entry-mode button.active{
+  background:rgba(203,255,56,.10)!important;
+  color:var(--app-accent)!important;
+}
+.set-group{
+  background:#0f1419!important;
+  border-color:#1f2730!important;
+  box-shadow:none!important;
+}
+
+/* Desktop still feels like a phone app, not a dashboard */
+@media(min-width:700px){
+  body{padding:22px 0}
+  .mobile-app-shell{
+    min-height:calc(100dvh - 44px);
+    border:1px solid #1a2129;
+    border-radius:32px;
+    overflow:hidden;
+    box-shadow:0 32px 90px rgba(0,0,0,.35);
+  }
+  .mobile-header{position:sticky}
+  .mobile-bottom-nav{
+    bottom:22px!important;
+    border:1px solid #1a2129!important;
+    border-radius:0 0 32px 32px!important;
+  }
+}
+
+@media(max-width:430px){
+  .mobile-header{grid-template-columns:auto 1fr auto;padding-inline:13px}
+  .mobile-brand-copy{display:none}
+  .mobile-gym-pill{width:132px}
+  .mobile-home{padding-inline:16px!important}
+  .home-tools{margin-inline:16px}
+  .mobile-library{padding-inline:16px!important}
+  .mobile-muscle-scroll{margin-inline:-16px!important;padding-inline:16px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="topbar">
-    <div class="brand"><div class="logo">↗</div><div><h1>Evolução de Carga</h1><small>progressão sem achismo</small></div></div>
-    <button class="iconbtn" onclick="openSettings()" aria-label="Configurações">⚙</button>
-  </div>
-
-  <div class="gym-switch">
-    <div class="label"><div class="eyebrow">Academia atual</div><div class="gymname" id="gymName">EVOQUE</div></div>
-    <select id="gymSelect" onchange="changeGym(this.value)"></select>
-  </div>
-
-  <section class="hero">
-    <div class="hero-top"><div class="hero-symbol">▶</div><div class="hero-copy"><div class="eyebrow" id="todayEyebrow">TREINO DE HOJE</div><h2 id="heroTitle">O que você vai treinar hoje?</h2></div></div>
-    <p id="heroText">Escolha o treino e siga o próximo exercício destacado.</p>
-    <div class="hero-actions">
-      <button class="btn primary" onclick="openTodayModal()" id="todaySetupBtn"><span class="bi">＋</span>Escolher treino de hoje</button>
+<div class="mobile-app-shell">
+  <header class="mobile-header">
+    <div class="mobile-brand">
+      <div class="mobile-brand-mark">↗</div>
+      <div class="mobile-brand-copy">
+        <small>EVOLUÇÃO</small>
+        <strong>de Carga</strong>
+      </div>
     </div>
-    <div id="todaySummary"></div>
-    <div class="today-list" id="todayWorkout"></div>
-  </section>
 
-  <div class="quick-actions">
-    <button class="quick-action" onclick="openExerciseModal()"><span class="qi">＋</span>Novo exercício</button>
-    <button class="quick-action" onclick="toggleLibrary(true)"><span class="qi">▦</span>Biblioteca</button>
-    <button class="quick-action" onclick="openHistoryModal()"><span class="qi">↗</span>Progresso</button>
-  </div>
+    <label class="mobile-gym-pill" aria-label="Trocar academia">
+      <span>Academia</span>
+      <strong id="gymName">EVOQUE</strong>
+      <select id="gymSelect" onchange="changeGym(this.value)"></select>
+    </label>
 
-  <section class="library-wrap">
-    <div class="library-head"><div class="visual-icon">▦</div><div class="copy"><h3>Biblioteca</h3><p>Exercícios cadastrados por grupo muscular</p></div><button class="library-toggle" id="libraryToggle" onclick="toggleLibrary()">Mostrar</button></div>
-    <div class="library-content hidden" id="libraryContent">
-      <div class="section-title"><h3>Grupos musculares</h3><span id="sessionInfo">biblioteca</span></div>
-      <div class="library-note">Toque em um grupo para filtrar.</div>
-      <div class="muscles" id="muscles"></div>
-      <div class="section-title"><h3 id="exerciseSectionTitle">Todos os exercícios</h3><span id="exerciseCount">0 cadastrados</span></div>
-      <div class="exercise-list" id="exerciseList"></div>
-    </div>
-  </section>
+    <button class="mobile-settings" onclick="openSettings()" aria-label="Configurações">⚙</button>
+  </header>
+
+  <main class="mobile-pages">
+    <section class="app-page active" id="homeScreen">
+      <section class="hero mobile-home">
+        <div class="home-kicker" id="todayEyebrow">TREINO DE HOJE</div>
+        <h1 id="heroTitle">O que você vai treinar hoje?</h1>
+        <p id="heroText">Escolha o treino e siga o próximo exercício destacado.</p>
+
+        <button class="home-main-action" onclick="openTodayModal()" id="todaySetupBtn">
+          <span>＋</span>
+          <b>Escolher treino de hoje</b>
+          <i>›</i>
+        </button>
+
+        <div id="todaySummary"></div>
+        <div class="today-list mobile-timeline" id="todayWorkout"></div>
+      </section>
+
+      <section class="home-tools">
+        <button onclick="openExerciseModal()">
+          <span class="tool-icon">＋</span>
+          <span><strong>Novo exercício</strong><small>Adicionar à biblioteca</small></span>
+          <i>›</i>
+        </button>
+        <button onclick="openHistoryModal()">
+          <span class="tool-icon">↗</span>
+          <span><strong>Meu progresso</strong><small>Gráficos e evolução</small></span>
+          <i>›</i>
+        </button>
+      </section>
+    </section>
+
+    <section class="app-page" id="exerciseScreen">
+      <section class="library-wrap mobile-library">
+        <div class="mobile-screen-head">
+          <div>
+            <small>BIBLIOTECA</small>
+            <h2>Seus exercícios</h2>
+            <p>Organizados por grupo muscular.</p>
+          </div>
+          <button class="screen-add" onclick="openExerciseModal()">＋</button>
+        </div>
+
+        <div class="library-head mobile-library-hidden-head">
+          <div class="visual-icon">▦</div>
+          <div class="copy"><h3>Biblioteca</h3><p>Exercícios cadastrados por grupo muscular</p></div>
+          <button class="library-toggle" id="libraryToggle" onclick="toggleLibrary()">Ocultar</button>
+        </div>
+
+        <div class="library-content" id="libraryContent">
+          <div class="mobile-filter-title">
+            <strong>Filtrar por músculo</strong>
+            <span id="sessionInfo">toque para filtrar</span>
+          </div>
+          <div class="muscles mobile-muscle-scroll" id="muscles"></div>
+
+          <div class="mobile-exercise-heading">
+            <div>
+              <h3 id="exerciseSectionTitle">Todos os exercícios</h3>
+              <span id="exerciseCount">0 cadastrados</span>
+            </div>
+            <button onclick="filterMuscle(state.activeMuscle)">Limpar</button>
+          </div>
+
+          <div class="exercise-list mobile-exercise-list" id="exerciseList"></div>
+        </div>
+      </section>
+    </section>
+  </main>
 </div>
 
-<div class="fab"><button class="btn primary" id="fabMain" onclick="doNextAction()">▶ Começar treino</button><button class="btn secondary" onclick="openHistoryModal()">↗ Progresso</button></div>
+<div class="fab" aria-hidden="true">
+  <button class="btn primary" id="fabMain" onclick="doNextAction()">▶ Começar treino</button>
+  <button class="btn secondary" onclick="openHistoryModal()">↗ Progresso</button>
+</div>
+
 <div class="toast" id="toast"></div>
-<nav class="app-nav" id="appNav"><button class="active" onclick="navHome(this)"><span class="nav-ico">⌂</span>Hoje</button><button onclick="navHistory(this)"><span class="nav-ico">▦</span>Histórico</button><button onclick="navProgress(this)"><span class="nav-ico">↗</span>Progresso</button><button onclick="navExercises(this)"><span class="nav-ico">◎</span>Exercícios</button></nav>
+
+<nav class="app-nav mobile-bottom-nav" id="appNav">
+  <button class="active" onclick="navHome(this)">
+    <span class="nav-ico">⌂</span><span>Hoje</span>
+  </button>
+  <button onclick="navHistory(this)">
+    <span class="nav-ico">◷</span><span>Histórico</span>
+  </button>
+  <button onclick="navProgress(this)">
+    <span class="nav-ico">↗</span><span>Progresso</span>
+  </button>
+  <button onclick="navExercises(this)">
+    <span class="nav-ico">◎</span><span>Exercícios</span>
+  </button>
+</nav>
 
 <div class="modal" id="todayModal" onclick="backdropClose(event,'todayModal')"><div class="sheet">
   <div class="grab"></div><div class="sheethead"><div><h3>▶ Treino de hoje</h3><p>Marque tudo o que vai treinar nesta sessão.</p></div><button class="close" onclick="closeModal('todayModal')">✕</button></div>
@@ -231,9 +891,12 @@ html{background:#07090c}body{padding-bottom:98px;background:radial-gradient(circ
 </div></div>
 
 <div class="modal" id="historyModal" onclick="backdropClose(event,'historyModal')"><div class="progress-sheet">
-  <div class="grab"></div><div class="sheethead"><div><h3>↗ Progresso</h3><p>Uma visão ampla da sua evolução na academia atual.</p></div><button class="close" onclick="closeModal('historyModal')">✕</button></div>
-  <div class="progress-top"><div><div style="font-size:11px;color:var(--accent);font-weight:900;letter-spacing:.08em;text-transform:uppercase"><span id="progressGymName">Academia</span></div><div style="font-size:22px;font-weight:900;letter-spacing:-.04em;margin-top:4px">Seu progresso de carga</div></div><div class="field"><label>Ir direto para um exercício</label><select id="historyExercise" class="select" onchange="renderHistory()"></select></div></div>
-  <div id="historyContent"></div>
+  <div class="progress-appbar">
+    <div class="progress-appbar-copy"><small id="progressGymName">ACADEMIA</small><h3>Seu progresso</h3><p>Veja de forma simples onde você está evoluindo.</p></div>
+    <button class="progress-close" onclick="closeModal('historyModal')" aria-label="Fechar progresso">✕</button>
+  </div>
+  <select id="historyExercise" hidden onchange="renderHistory()"></select>
+  <div id="historyContent" class="progress-content"></div>
 </div></div>
 
 <div class="modal" id="settingsModal" onclick="backdropClose(event,'settingsModal')"><div class="sheet">
@@ -378,7 +1041,7 @@ async function loadCloudState(manual=false){
 
 function uid(){return Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-4)}
 function muscleIcon(m){return ({'Peito':'◇','Costas':'↔','Quadríceps':'▲','Posterior':'▼','Ombros':'◆','Bíceps':'⌁','Tríceps':'⌁','Panturrilha':'◒','Glúteos':'●','Abdômen':'▦'})[m]||'●'}
-function toggleLibrary(forceOpen=false){const box=document.getElementById('libraryContent'),btn=document.getElementById('libraryToggle');if(!box)return;const open=forceOpen||box.classList.contains('hidden');box.classList.toggle('hidden',!open);btn.textContent=open?'Ocultar':'Mostrar';if(open&&forceOpen)document.querySelector('.library-wrap')?.scrollIntoView({behavior:'smooth',block:'start'})}
+function toggleLibrary(forceOpen=false){const box=document.getElementById('libraryContent'),btn=document.getElementById('libraryToggle');if(!box)return;const open=forceOpen||box.classList.contains('hidden');box.classList.toggle('hidden',!open);if(btn)btn.textContent=open?'Ocultar':'Mostrar';if(open&&forceOpen)document.querySelector('.mobile-library')?.scrollTo?.({top:0,behavior:'smooth'})}
 function gym(){return state.gyms.find(g=>g.id===state.activeGym)||state.gyms[0]}
 function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1800)}
 function fmtDate(iso){return new Date(iso).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'2-digit'})}
@@ -941,10 +1604,32 @@ function backdropClose(ev,id){if(ev.target.id===id)closeModal(id)}
 function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 
 function setNavActive(btn){document.querySelectorAll('#appNav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active')}
-function navHome(btn){setNavActive(btn);closeModal('historyModal');document.querySelector('.hero')?.scrollIntoView({behavior:'smooth',block:'start'})}
-function navHistory(btn){setNavActive(btn);openHistoryModal();setTimeout(()=>document.querySelector('.progress-calendar')?.scrollIntoView({behavior:'smooth',block:'start'}),100)}
-function navProgress(btn){setNavActive(btn);openHistoryModal()}
-function navExercises(btn){setNavActive(btn);closeModal('historyModal');toggleLibrary(true)}
+function showAppScreen(id){
+  document.querySelectorAll('.app-page').forEach(p=>p.classList.toggle('active',p.id===id));
+  const page=document.getElementById(id);
+  if(page){page.classList.remove('page-enter');void page.offsetWidth;page.classList.add('page-enter')}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function navHome(btn){
+  setNavActive(btn);
+  closeModal('historyModal');
+  showAppScreen('homeScreen');
+}
+function navHistory(btn){
+  setNavActive(btn);
+  openHistoryModal();
+  setTimeout(()=>document.querySelector('.progress-calendar')?.scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+function navProgress(btn){
+  setNavActive(btn);
+  openHistoryModal();
+}
+function navExercises(btn){
+  setNavActive(btn);
+  closeModal('historyModal');
+  showAppScreen('exerciseScreen');
+  toggleLibrary(true);
+}
 function monthCalendarHTML(){
   const now=new Date(),y=now.getFullYear(),m=now.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0),days=last.getDate();
   const trained=new Set(state.history.filter(h=>h.gymId===state.activeGym).map(h=>new Date(h.date).toLocaleDateString('sv-SE')));
@@ -973,6 +1658,162 @@ renderProgressOverview=function(){
   const cards=stats.length?stats.map(x=>{const d=x.delta,deltaText=x.first?`${d>0?'+':''}${d.toFixed(1).replace('.0','')} kg`:'—';const lastSummary=x.last?setSummary(x.last.sets):'Sem registro ainda';return `<button class="progress-ex-card" onclick="document.getElementById('historyExercise').value='${x.e.id}';renderHistory()"><div class="progress-ex-head"><div class="progress-ex-icon">${muscleIcon(x.e.muscle)}</div><div class="progress-ex-main"><strong>${esc(x.e.name)}</strong><small>${esc(x.e.muscle)} · ${x.sessions} registro${x.sessions===1?'':'s'}</small></div><div class="progress-ex-load">${x.current||'—'}<small>${x.current?'kg atual':'sem carga'}</small></div></div><div class="progress-ex-meta"><div><small>Melhor</small><b>${x.best?x.best+' kg':'—'}</b></div><div><small>Evolução</small><b class="${d>0?'progress-up':d<0?'progress-down':''}">${deltaText}</b></div><div><small>Último</small><b>${x.last?fmtDate(x.last.date):'—'}</b></div></div><div style="margin-top:8px;color:#75808d;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(lastSummary)}</div></button>`}).join(''):'<div class="empty"><strong>Nenhum exercício cadastrado</strong>Cadastre exercícios para começar a acompanhar sua evolução.</div>';
   document.getElementById('historyContent').innerHTML=`${progressHeroHTML(stats,records)}${monthCalendarHTML()}${progressHighlightsHTML(stats,records)}<div class="progress-overview-stats"><div class="progress-bigstat"><small>Exercícios</small><strong>${xs.length}</strong><em>na ${esc(gym()?.name||'academia')}</em></div><div class="progress-bigstat"><small>Registros</small><strong>${totalSessions}</strong><em>${lastDate?'último '+fmtDate(lastDate):'ainda sem histórico'}</em></div><div class="progress-bigstat"><small>Evoluindo</small><strong>${improved}</strong><em>acima da carga inicial</em></div><div class="progress-bigstat"><small>PRs</small><strong>${prs}</strong><em>marcas registradas</em></div></div><div class="progress-section-label">Todos os exercícios</div><div class="progress-grid">${cards}</div>`
 }
+
+
+/* ===== PROGRESSO 3.0 ===== */
+let progressViewMuscle='';
+let progressViewExercise='';
+let progressMetric='load';
+
+function progressRealRecordsForExercise(e){
+  const all=state.history.filter(h=>h.exerciseId===e.id&&h.gymId===state.activeGym).sort((a,b)=>a.date.localeCompare(b.date));
+  const real=all.filter(h=>!h.referenceOnly);
+  return real.length?real:all;
+}
+function progressMetricValue(h,metric){
+  const work=h?.sets?.work||[];
+  if(metric==='reps')return Math.max(0,...work.map(s=>normalizeNum(s.reps)));
+  if(metric==='volume')return work.reduce((sum,s)=>sum+normalizeNum(s.kg)*normalizeNum(s.reps),0);
+  return normalizeNum(h?.workMax)||Math.max(0,...work.map(s=>normalizeNum(s.kg)));
+}
+function progressMetricLabel(metric){return metric==='reps'?'Repetições':metric==='volume'?'Volume':'Carga'}
+function progressMetricUnit(metric){return metric==='reps'?'reps':metric==='volume'?'kg':'kg'}
+function progressFormatMetric(metric,v){
+  if(!Number.isFinite(v)||v<=0)return '—';
+  if(metric==='reps')return Math.round(v)+' reps';
+  if(metric==='volume')return Math.round(v).toLocaleString('pt-BR')+' kg';
+  return fmtKg(v)+' kg';
+}
+function progressExerciseInfo(e){
+  const arr=progressRealRecordsForExercise(e), first=arr[0]||null,last=arr[arr.length-1]||null;
+  const loads=arr.map(h=>progressMetricValue(h,'load')).filter(Boolean), reps=arr.map(h=>progressMetricValue(h,'reps')).filter(Boolean);
+  const firstLoad=first?progressMetricValue(first,'load'):0,currentLoad=last?progressMetricValue(last,'load'):0,bestLoad=Math.max(0,...loads);
+  const firstReps=first?progressMetricValue(first,'reps'):0,currentReps=last?progressMetricValue(last,'reps'):0,bestReps=Math.max(0,...reps);
+  const deltaLoad=firstLoad?currentLoad-firstLoad:0;
+  const lastWork1=last?.sets?.work?.[0]||null;
+  const advice=progressionAdviceForExercise(e.id);
+  let status='Sem dados',statusClass='',message='Registre este exercício para começar a acompanhar.';
+  if(arr.length){
+    if(advice?.state==='ready'){status='Pronto para subir';statusClass='ready';message=advice.text}
+    else if(deltaLoad>0){status='Evoluindo';statusClass='good';message=`Você usa ${fmtKg(deltaLoad)} kg a mais que no primeiro registro.`}
+    else if(currentLoad===firstLoad&&currentReps>firstReps){status='Mais repetições';statusClass='good';message=`Mesma carga, mas você ganhou ${currentReps-firstReps} rep${currentReps-firstReps===1?'':'s'}.`}
+    else if(arr.length===1){status='Primeiro registro';message='Mais um treino já vai permitir uma comparação.'}
+    else if(currentLoad<firstLoad){status='Abaixo do início';message=`Hoje está ${fmtKg(firstLoad-currentLoad)} kg abaixo do primeiro registro.`}
+    else{status='Mantendo';message='Você está mantendo a referência atual. Busque mais reps ou melhor execução.'}
+  }
+  return {e,arr,first,last,firstLoad,currentLoad,bestLoad,firstReps,currentReps,bestReps,deltaLoad,lastWork1,advice,status,statusClass,message,sessions:arr.length};
+}
+function progressMuscleInfo(muscle){
+  const exercises=state.exercises.filter(e=>e.gymId===state.activeGym&&e.muscle===muscle),infos=exercises.map(progressExerciseInfo),withData=infos.filter(x=>x.sessions);
+  const records=state.history.filter(h=>h.gymId===state.activeGym&&h.muscle===muscle&&!h.referenceOnly);
+  const improving=withData.filter(x=>x.statusClass==='good'||x.statusClass==='ready').length;
+  const ready=withData.filter(x=>x.statusClass==='ready').length;
+  const last=records.slice().sort((a,b)=>b.date.localeCompare(a.date))[0]||null;
+  return {muscle,exercises,infos,withData,records,improving,ready,last};
+}
+function progressSparklineHTML(info){
+  const pts=info.arr.map(h=>progressMetricValue(h,'load')).filter(v=>v>0).slice(-7);
+  if(pts.length<2)return '<div class="progress-spark"></div>';
+  const w=94,h=32,p=4,min=Math.min(...pts),max=Math.max(...pts),span=Math.max(1,max-min);
+  const cs=pts.map((v,i)=>[p+i*(w-2*p)/(pts.length-1),h-p-(v-min)*(h-2*p)/span]);
+  return `<div class="progress-spark"><svg viewBox="0 0 ${w} ${h}" aria-label="Tendência de carga"><polyline class="spark-line" points="${cs.map(c=>c.join(',')).join(' ')}"/>${cs.map((c,i)=>`<circle class="spark-dot" cx="${c[0]}" cy="${c[1]}" r="${i===cs.length-1?3:1.8}"/>`).join('')}</svg></div>`;
+}
+function progressCount(value,label){return `<strong data-progress-count="${Number(value)||0}">0</strong><span>${label}</span>`}
+function animateProgressNumbers(){
+  requestAnimationFrame(()=>document.querySelectorAll('#historyContent [data-progress-count]').forEach(el=>{
+    const target=Number(el.dataset.progressCount||0),start=performance.now(),duration=430;
+    const tick=t=>{const p=Math.min(1,(t-start)/duration),v=Math.round(target*(1-Math.pow(1-p,3)));el.textContent=v.toLocaleString('pt-BR');if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick);
+  }));
+}
+function progressOverallSummary(){
+  const xs=state.exercises.filter(e=>e.gymId===state.activeGym),infos=xs.map(progressExerciseInfo),records=state.history.filter(h=>h.gymId===state.activeGym&&!h.referenceOnly);
+  const withData=infos.filter(x=>x.sessions),improving=withData.filter(x=>x.statusClass==='good'||x.statusClass==='ready'),ready=withData.filter(x=>x.statusClass==='ready');
+  const prs=records.reduce((n,h)=>n+(h.prFlags||[]).length,0),last=records.slice().sort((a,b)=>b.date.localeCompare(a.date))[0]||null;
+  let title='Comece registrando seus treinos',sub='Com dois registros do mesmo exercício, a evolução já fica visível.';
+  if(withData.length){
+    if(ready.length){title=`${ready.length} exercício${ready.length===1?' está':'s estão'} pronto${ready.length===1?'':'s'} para subir`;sub='O app encontrou exercícios em que você já dominou a carga atual.'}
+    else if(improving.length){title=`Você está evoluindo em ${improving.length} exercício${improving.length===1?'':'s'}`;sub='Carga ou repetições estão acima da sua referência inicial.'}
+    else{title='Você está construindo consistência';sub='Ainda não houve aumento claro de carga, mas seus registros já permitem comparar.'}
+  }
+  return {xs,infos,records,withData,improving,ready,prs,last,title,sub};
+}
+function progressMuscleCardHTML(mi,index){
+  const count=mi.exercises.length,regs=mi.records.length;
+  let status='Ainda sem registros',cls='';
+  if(mi.ready){status=`${mi.ready} pronto${mi.ready===1?'':'s'} para subir`;cls='ready'}
+  else if(mi.improving){status=`${mi.improving} exercício${mi.improving===1?'':'s'} evoluindo`;cls='good'}
+  else if(regs){status='Acompanhamento ativo'}
+  return `<button class="progress-muscle-card" style="animation-delay:${Math.min(index,8)*.035}s" onclick="showProgressMuscle('${esc(mi.muscle)}')"><div class="progress-muscle-top"><div class="progress-muscle-icon">${muscleIcon(mi.muscle)}</div><div class="progress-muscle-main"><strong>${esc(mi.muscle)}</strong><small>${count} exercício${count===1?'':'s'} · ${regs} registro${regs===1?'':'s'}</small></div><div class="progress-muscle-chevron">›</div></div><div class="progress-muscle-status ${cls}"><i></i>${status}</div></button>`;
+}
+function openHistoryModal(){
+  fillHistorySelect();
+  const g=document.getElementById('progressGymName');if(g)g.textContent=(gym()?.name||'Academia').toUpperCase();
+  progressViewMuscle='';progressViewExercise='';progressMetric='load';
+  const sel=document.getElementById('historyExercise');if(sel)sel.value='';
+  renderProgressOverview();openModal('historyModal');
+  document.querySelector('#historyModal .progress-sheet')?.scrollTo({top:0});
+}
+function progressRenderOverviewV3(){
+  progressViewMuscle='';progressViewExercise='';
+  const s=progressOverallSummary();
+  const muscleNames=MUSCLES.filter(m=>state.exercises.some(e=>e.gymId===state.activeGym&&e.muscle===m));
+  const muscleCards=muscleNames.length?muscleNames.map((m,i)=>progressMuscleCardHTML(progressMuscleInfo(m),i)).join(''):`<div class="progress-empty-state" style="grid-column:1/-1"><div class="ico">＋</div><strong>Nenhum exercício cadastrado</strong><span>Cadastre seus exercícios. Depois eles aparecem aqui separados por músculo.</span></div>`;
+  const lastText=s.last?fmtDate(s.last.date):'—';
+  document.getElementById('historyContent').innerHTML=`<div class="progress-landing-hero"><div class="progress-landing-kicker">RESUMO DA SUA EVOLUÇÃO</div><h2 class="progress-landing-title">${esc(s.title)}</h2><p class="progress-landing-copy">${esc(s.sub)}</p><div class="progress-landing-answer"><div class="progress-answer-icon">↗</div><div class="progress-answer-copy"><small>O QUE OLHAR AGORA</small><strong>${s.ready.length?'Veja os exercícios prontos para aumentar a carga':s.improving.length?'Continue tentando superar seus últimos números':'Escolha um músculo para ver exercício por exercício'}</strong><span>Sem planilha confusa: entre no grupo muscular e veja o gráfico.</span></div></div></div><div class="progress-glance"><div class="progress-glance-card"><small>Evoluindo</small>${progressCount(s.improving.length,'exercícios')}</div><div class="progress-glance-card"><small>PRs</small>${progressCount(s.prs,'marcas')}</div><div class="progress-glance-card"><small>Último treino</small><strong>${lastText}</strong><span>${s.last?esc(s.last.muscle||'treino registrado'):'sem histórico'}</span></div></div><div class="progress-section-head"><div><strong>Escolha o grupo muscular</strong><span>Você vê somente os exercícios daquele músculo.</span></div><span>${muscleNames.length} grupos</span></div><div class="progress-muscle-grid">${muscleCards}</div>${monthCalendarHTML()}`;
+  animateProgressNumbers();
+}
+function showProgressMuscle(muscle){
+  progressViewMuscle=muscle;progressViewExercise='';
+  const mi=progressMuscleInfo(muscle),rows=mi.infos.length?mi.infos.map((x,i)=>`<button class="progress-exercise-row" style="animation-delay:${Math.min(i,8)*.035}s" onclick="openProgressExercise('${x.e.id}')"><div class="progress-exercise-top"><div class="progress-exercise-rank">${String(i+1).padStart(2,'0')}</div><div class="progress-exercise-name"><strong>${esc(x.e.name)}</strong><small>${x.sessions} registro${x.sessions===1?'':'s'}${x.last?' · último '+fmtDate(x.last.date):''}</small></div><div class="progress-exercise-now"><strong>${x.currentLoad?fmtKg(x.currentLoad):'—'}</strong><small>${x.currentLoad?'kg agora':'sem carga'}</small></div></div><div class="progress-exercise-bottom"><div class="progress-exercise-message"><strong class="${x.statusClass==='good'?'progress-up':''}">${esc(x.status)}</strong><span>${esc(x.message)}</span></div>${progressSparklineHTML(x)}</div></button>`).join(''):`<div class="progress-empty-state"><div class="ico">◎</div><strong>Nenhum exercício aqui</strong><span>Cadastre um exercício de ${esc(muscle)} para acompanhar a evolução.</span></div>`;
+  const label=mi.ready?`${mi.ready} pronto${mi.ready===1?'':'s'} para subir`:mi.improving?`${mi.improving} evoluindo`:mi.records.length?'Acompanhamento ativo':'Sem histórico';
+  document.getElementById('historyContent').innerHTML=`<div class="progress-muscle-screen"><div class="progress-screen-head"><button class="progress-screen-back" onclick="renderProgressOverview()" aria-label="Voltar">←</button><div class="progress-screen-icon">${muscleIcon(muscle)}</div><div class="progress-screen-copy"><small>GRUPO MUSCULAR</small><strong>${esc(muscle)}</strong><span>Escolha um exercício para abrir o gráfico.</span></div><div class="progress-screen-pill">${esc(label)}</div></div><div class="progress-muscle-summary"><div class="progress-muscle-summary-main"><small>LEITURA RÁPIDA</small><strong>${mi.improving?`${mi.improving} exercício${mi.improving===1?' está':'s estão'} melhorando`:'Veja exercício por exercício'}</strong><span>${mi.ready?'Há carga que já pode estar pronta para subir.':mi.records.length?'Compare o número atual com os treinos anteriores.':'Quando você registrar este músculo, os dados aparecem aqui.'}</span></div><div class="progress-muscle-summary-side"><small>REGISTROS</small>${progressCount(mi.records.length,'neste músculo')}</div></div><div class="progress-section-head"><div><strong>Exercícios de ${esc(muscle)}</strong><span>Toque em um exercício para entender a evolução.</span></div></div><div class="progress-exercise-list">${rows}</div></div>`;
+  animateProgressNumbers();document.querySelector('#historyModal .progress-sheet')?.scrollTo({top:0,behavior:'smooth'});
+}
+function progressGraphHTML(info,metric){
+  const pts=info.arr.map(h=>({h,v:progressMetricValue(h,metric)})).filter(x=>x.v>0).slice(-12);
+  if(pts.length<2)return `<div class="progress-empty-state"><div class="ico">↗</div><strong>Ainda faltam dados para o gráfico</strong><span>Com mais um registro deste exercício, você já consegue enxergar a tendência.</span></div>`;
+  const vals=pts.map(x=>x.v),min=Math.min(...vals),max=Math.max(...vals),rawSpan=max-min,span=Math.max(metric==='reps'?2:1,rawSpan||1),w=760,h=210,padL=40,padR=18,padT=28,padB=38;
+  const floor=min-((span-rawSpan)/2),ceil=floor+span;
+  const coords=vals.map((v,i)=>[padL+i*(w-padL-padR)/(vals.length-1),padT+(ceil-v)*(h-padT-padB)/span]);
+  const poly=coords.map(c=>c.join(',')).join(' '),area=`${padL},${h-padB} ${poly} ${w-padR},${h-padB}`;
+  const grids=[0,.5,1].map(t=>{const y=padT+t*(h-padT-padB),v=ceil-t*span;return `<line class="gridline" x1="${padL}" y1="${y}" x2="${w-padR}" y2="${y}"/><text class="axis-label" x="4" y="${y+3}">${metric==='volume'?Math.round(v):Number(v.toFixed(1)).toString().replace('.',',')}</text>`}).join('');
+  const labels=coords.map((c,i)=>{const show=i===0||i===coords.length-1||coords.length<=5;return `<circle class="chart-dot" style="animation-delay:${i*.055}s" cx="${c[0]}" cy="${c[1]}" r="4"><title>${fmtDate(pts[i].h.date)} · ${progressFormatMetric(metric,vals[i])}</title></circle>${show?`<text class="point-label" x="${c[0]}" y="${Math.max(12,c[1]-10)}" text-anchor="middle">${metric==='volume'?Math.round(vals[i]):Number(vals[i].toFixed(1)).toString().replace('.',',')}</text>`:''}<text class="date-label" x="${c[0]}" y="${h-13}" text-anchor="middle">${fmtDate(pts[i].h.date).slice(0,5)}</text>`}).join('');
+  const first=vals[0],last=vals[vals.length-1],diff=last-first;
+  return `<div class="progress-chart-stage"><svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><defs><linearGradient id="progressArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#cbff38" stop-opacity=".13"/><stop offset="100%" stop-color="#cbff38" stop-opacity="0"/></linearGradient></defs>${grids}<polygon class="chart-area" points="${area}"/><polyline class="chart-line" points="${poly}"/>${labels}</svg></div><div class="progress-chart-story"><div class="progress-story-item"><small>Começou</small><strong>${progressFormatMetric(metric,first)}</strong></div><div class="progress-story-item"><small>Agora</small><strong>${progressFormatMetric(metric,last)}</strong></div><div class="progress-story-item ${diff>0?'good':''}"><small>Diferença</small><strong>${diff>0?'+':''}${progressFormatMetric(metric,Math.abs(diff))}${diff<0?' ↓':''}</strong></div></div>`;
+}
+function openProgressExercise(id){
+  const e=state.exercises.find(x=>x.id===id);if(!e)return;
+  progressViewExercise=id;progressViewMuscle=e.muscle;progressMetric='load';
+  const sel=document.getElementById('historyExercise');if(sel)sel.value=id;
+  renderProgressExerciseDetail(e);
+}
+function setProgressMetric(metric,id){progressMetric=metric;const e=state.exercises.find(x=>x.id===id);if(e)renderProgressExerciseDetail(e,false)}
+function renderProgressExerciseDetail(e,scrollTop=true){
+  const x=progressExerciseInfo(e),arrDesc=[...x.arr].reverse(),pct=x.firstLoad?((x.currentLoad-x.firstLoad)/x.firstLoad*100):0;
+  let bannerTitle='Ainda sem histórico suficiente',bannerText='Registre este exercício para começar a comparar.';
+  if(x.sessions===1){bannerTitle=`Primeiro registro: ${progressFormatMetric('load',x.currentLoad)}`;bannerText='No próximo treino, o app já consegue mostrar se você melhorou.'}
+  else if(x.sessions>1){
+    if(x.currentLoad>x.firstLoad){bannerTitle=`Você está ${fmtKg(x.currentLoad-x.firstLoad)} kg acima do início`;bannerText=`Saiu de ${fmtKg(x.firstLoad)} kg para ${fmtKg(x.currentLoad)} kg. Isso representa ${pct>=0?'+':''}${pct.toFixed(1).replace('.',',')}% na carga.`}
+    else if(x.currentLoad===x.firstLoad&&x.currentReps>x.firstReps){bannerTitle=`Mesma carga, ${x.currentReps-x.firstReps} rep${x.currentReps-x.firstReps===1?'':'s'} a mais`;bannerText='Você também progride quando faz mais repetições com a mesma carga.'}
+    else if(x.currentLoad===x.firstLoad){bannerTitle='Carga estável';bannerText='A carga não mudou. Olhe a aba “Repetições” para ver se houve progresso sem aumentar peso.'}
+    else{bannerTitle='Carga atual abaixo do início';bannerText='Isso pode acontecer por execução, fadiga ou mudança de estratégia. Veja a sequência no gráfico.'}
+  }
+  if(x.advice?.state==='ready'){bannerTitle='Pronto para experimentar mais carga';bannerText=x.advice.text}
+  const last=x.last,work=last?.sets?.work||[];
+  const latestSets=last?`<div class="progress-latest-card"><div class="progress-latest-head"><small>ÚLTIMO TREINO · ${fmtDate(last.date)}</small><strong>${esc(x.status)}</strong></div><div class="progress-latest-sets">${[0,1].map(i=>{const s=work[i];return `<div class="progress-latest-set"><small>TRABALHO ${i+1}</small><strong>${s?(s.kg?esc(s.kg)+' kg':'peso corporal')+(s.reps?' × '+esc(s.reps):'')+(s.rir!==''&&s.rir!==undefined?' · RIR '+esc(s.rir):''):'—'}</strong></div>`}).join('')}</div></div>`:'';
+  const rows=arrDesc.slice(0,12).map((h,i)=>{const value=progressMetricValue(h,'load'),prev=arrDesc[i+1]?progressMetricValue(arrDesc[i+1],'load'):0,d=prev&&value?value-prev:0;return `<div class="progress-history-simple-row"><div class="date"><strong>${fmtDate(h.date)}</strong><small>${h.referenceOnly?'referência':'treino'}</small></div><div class="result"><strong>${value?fmtKg(value)+' kg':'Sem carga'}${d?` <span class="${d>0?'progress-up':'progress-down'}">${d>0?'+':''}${fmtKg(d)} kg</span>`:''}</strong><span>${esc(setSummary(h.sets))}</span></div><div class="actions"><button onclick="openHistoryRecord('${h.id}')" aria-label="Editar registro">✎</button><button class="danger" onclick="deleteHistoryRecord('${h.id}')" aria-label="Excluir registro">⌫</button></div></div>`}).join('');
+  const chart=progressGraphHTML(x,progressMetric);
+  document.getElementById('historyContent').innerHTML=`<div class="progress-detail-screen"><div class="progress-screen-head"><button class="progress-screen-back" onclick="showProgressMuscle('${esc(e.muscle)}')" aria-label="Voltar">←</button><div class="progress-screen-icon">${muscleIcon(e.muscle)}</div><div class="progress-screen-copy"><small>${esc(e.muscle)}</small><strong>${esc(e.name)}</strong><span>${x.sessions} registro${x.sessions===1?'':'s'} neste aparelho</span></div></div><div class="progress-simple-banner"><small>EM PORTUGUÊS CLARO</small><strong>${esc(bannerTitle)}</strong><p>${esc(bannerText)}</p></div><div class="progress-detail-stats"><div class="progress-detail-stat"><small>AGORA</small><strong>${x.currentLoad?fmtKg(x.currentLoad)+' kg':'—'}</strong><span>${x.last?'último treino '+fmtDate(x.last.date):'sem registro'}</span></div><div class="progress-detail-stat"><small>MELHOR CARGA</small><strong>${x.bestLoad?fmtKg(x.bestLoad)+' kg':'—'}</strong><span>maior carga registrada</span></div><div class="progress-detail-stat"><small>MELHOR REP</small><strong>${x.bestReps||'—'}</strong><span>maior número em trabalho</span></div></div><div class="progress-chart-panel"><div class="progress-chart-toolbar"><div><strong>${progressMetricLabel(progressMetric)} ao longo do tempo</strong><span>Quanto mais a linha sobe, maior foi o resultado.</span></div><div class="progress-metric-tabs"><button class="${progressMetric==='load'?'active':''}" onclick="setProgressMetric('load','${e.id}')">Carga</button><button class="${progressMetric==='reps'?'active':''}" onclick="setProgressMetric('reps','${e.id}')">Reps</button><button class="${progressMetric==='volume'?'active':''}" onclick="setProgressMetric('volume','${e.id}')">Volume</button></div></div>${chart}</div>${latestSets}<div class="progress-section-head"><div><strong>Treinos anteriores</strong><span>Do mais recente para o mais antigo.</span></div></div><div class="progress-history-simple">${rows||'<div class="progress-empty-state"><div class="ico">◎</div><strong>Sem registros</strong><span>Seu histórico aparecerá aqui.</span></div>'}</div></div>`;
+  if(scrollTop)document.querySelector('#historyModal .progress-sheet')?.scrollTo({top:0,behavior:'smooth'});
+}
+function renderHistory(){
+  const id=document.getElementById('historyExercise')?.value||progressViewExercise;
+  if(id){const e=state.exercises.find(x=>x.id===id);if(e)return renderProgressExerciseDetail(e)}
+  if(progressViewMuscle)return showProgressMuscle(progressViewMuscle);
+  return renderProgressOverview();
+}
+
+renderProgressOverview=progressRenderOverviewV3;
 
 render();
 initSupabase();
