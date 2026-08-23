@@ -2909,6 +2909,99 @@ async function syncNow(manual=false){
   }catch(e){console.error('Cloud sync',e);setSyncStatus('Não foi possível sincronizar: '+(e.message||'erro'),'warn');if(manual)toast('Erro ao sincronizar')}
   finally{syncBusy=false}
 }
+
+const CHEST_RECOVERY_20260822=[
+  {
+    id:'y96s6c8358n',
+    date:'2026-08-22T00:27:54.311Z',
+    name:'Supino Máquina',
+    sets:{
+      pap:[{kg:'65',rir:'',reps:'2'}],
+      work:[{kg:'65',rir:'3',reps:'7'},{kg:'65',rir:'0',reps:'10'}],
+      feeder:[{kg:'45',rir:'',reps:'8'},{kg:'55',rir:'',reps:''}],
+      warmup:[{kg:'30',rir:'',reps:'12'}]
+    },
+    gymId:'evoque',
+    muscle:'Peito',
+    prFlags:['PR inicial'],
+    workMax:65,
+    createdAt:'2026-08-22T00:27:54.310Z',
+    exerciseId:'t1h45w0t6xw',
+    approximate:false,
+    referenceOnly:false
+  },
+  {
+    id:'qsslx13kwly',
+    date:'2026-08-22T00:41:42.934Z',
+    name:'Crucifixo Polia Inferior',
+    sets:{
+      pap:[],
+      work:[{kg:'24',rir:'1',reps:'8'},{kg:'24',rir:'0',reps:'10'}],
+      feeder:[],
+      warmup:[]
+    },
+    gymId:'evoque',
+    muscle:'Peito',
+    prFlags:['PR inicial'],
+    workMax:24,
+    createdAt:'2026-08-22T00:41:42.933Z',
+    exerciseId:'dw2atziv0gf',
+    approximate:false,
+    referenceOnly:false
+  },
+  {
+    id:'wvead5x2uxn',
+    date:'2026-08-22T00:55:40.571Z',
+    name:'Crucifixo 90 Graus',
+    sets:{
+      pap:[],
+      work:[{kg:'55',rir:'1',reps:'5'},{kg:'55',rir:'0',reps:'7'}],
+      feeder:[],
+      warmup:[]
+    },
+    gymId:'evoque',
+    muscle:'Peito',
+    prFlags:['PR inicial'],
+    workMax:55,
+    createdAt:'2026-08-22T00:55:40.571Z',
+    exerciseId:'08vt9a2tmdg',
+    approximate:false,
+    referenceOnly:false
+  }
+];
+
+function recoverDeletedChestRecords20260822(){
+  state.migrations=state.migrations||{};
+  const migrationKey='restoreChest20260822_v1';
+  if(state.migrations[migrationKey])return 0;
+
+  state.history=Array.isArray(state.history)?state.history:[];
+  const existingIds=new Set(state.history.map(h=>h.id));
+  const existingSignatures=new Set(
+    state.history.map(h=>`${h.exerciseId||''}|${performedDayFromIso(h.date)}|${h.name||''}`)
+  );
+
+  let restored=0;
+  CHEST_RECOVERY_20260822.forEach(record=>{
+    const sig=`${record.exerciseId}|2026-08-22|${record.name}`;
+    if(existingIds.has(record.id)||existingSignatures.has(sig))return;
+
+    // Only restore when the original exercise itself still exists.
+    // This preserves the old exercise ID/history relationship and avoids duplicates.
+    const ex=state.exercises?.find(e=>e.id===record.exerciseId);
+    if(!ex)return;
+
+    state.history.push(structuredClone(record));
+    restored++;
+  });
+
+  state.migrations[migrationKey]={
+    completedAt:new Date().toISOString(),
+    restored
+  };
+  return restored;
+}
+
 function normalizeLoadedState(raw){
   const z={...structuredClone(DEFAULT),...(raw||{})};z.preparedByGym=z.preparedByGym||{};z.exercises=z.exercises||[];z.history=z.history||[];z.sessionMuscles=z.sessionMuscles||[];z.sessionFirstByMuscle=z.sessionFirstByMuscle||{};z.sessionExerciseIds=Array.isArray(z.sessionExerciseIds)?z.sessionExerciseIds:[];if(z.sessionDate!==todayKey()){z.sessionDate=todayKey();z.preparedByGym={};z.activeMuscle=null;z.muscleStartedAt=null;z.sessionMuscles=[];z.sessionExerciseIds=[];z.sessionFirstByMuscle={}}return z
 }
@@ -2919,7 +3012,7 @@ async function loadCloudState(manual=false){
     const {data,error}=await supabaseClient.from('workout_app_state').select('state,updated_at').eq('user_id',currentUser.id).maybeSingle();
     if(error)throw error;
     if(!data){await syncNow(false);setSyncStatus('Primeiro backup criado na nuvem.','ok');if(manual)toast('Seus dados locais foram enviados');return}
-    suppressCloudSync=true;state=normalizeLoadedState(data.state);cloudUpdatedAt=data.updated_at||null;persist(false);suppressCloudSync=false;render();setSyncStatus('Dados carregados e sincronizados.','ok');if(manual)toast('Dados baixados da nuvem')
+    suppressCloudSync=true;state=normalizeLoadedState(data.state);const recoveredChest=recoverDeletedChestRecords20260822();cloudUpdatedAt=data.updated_at||null;persist(false);suppressCloudSync=false;render();if(recoveredChest){await syncNow(false);toast(`${recoveredChest} registro${recoveredChest===1?'':'s'} de peito recuperado${recoveredChest===1?'':'s'}`)}setSyncStatus('Dados carregados e sincronizados.','ok');if(manual&&!recoveredChest)toast('Dados baixados da nuvem')
   }catch(e){suppressCloudSync=false;console.error('Cloud load',e);setSyncStatus('Erro ao baixar: '+(e.message||'erro'),'warn');if(manual)toast('Erro ao baixar dados')}
 }
 
@@ -4562,7 +4655,10 @@ function renderHistory(){
 
 renderProgressOverview=progressRenderOverviewV3;
 
+const recoveredChestLocal=recoverDeletedChestRecords20260822();
+if(recoveredChestLocal)persist(false);
 render();
+if(recoveredChestLocal)setTimeout(()=>toast(`${recoveredChestLocal} registro${recoveredChestLocal===1?'':'s'} de peito recuperado${recoveredChestLocal===1?'':'s'}`),250);
 initSupabase();
 </script>
 </body>
