@@ -1127,6 +1127,216 @@ body:before{display:none!important}
   border-color:rgba(203,255,56,.18)!important;
   background:#141c0d!important;
 }
+
+/* =========================================================
+   WORKOUT REORDER 4.3 — mouse + touch
+   ========================================================= */
+
+.today-order-control{
+  padding:14px 0 2px;
+}
+.today-order-control>button{
+  width:100%;
+  min-height:52px;
+  display:grid;
+  grid-template-columns:34px 1fr 18px;
+  gap:10px;
+  align-items:center;
+  padding:8px 11px;
+  border:1px solid #1d252d;
+  border-radius:15px;
+  background:#0d1217;
+  color:#dce3e9;
+  text-align:left;
+  transition:background .16s ease,border-color .16s ease,transform .16s ease;
+}
+.today-order-control>button:active{
+  transform:scale(.988);
+  background:#11181e;
+}
+.order-control-icon{
+  width:34px;height:34px;border-radius:11px;
+  display:grid;place-items:center;
+  background:#141b20;
+  color:var(--app-accent);
+  font-size:15px;
+  font-weight:950;
+}
+.today-order-control button>span:nth-child(2){
+  display:flex;flex-direction:column;gap:2px;min-width:0;
+}
+.today-order-control b{font-size:10px}
+.today-order-control small{font-size:7px;color:#6f7a86}
+.today-order-control i{font-style:normal;color:#5d6874;font-size:18px}
+
+.reorder-panel{
+  padding:18px 0 6px;
+  animation:reorderPanelIn .28s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes reorderPanelIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+.reorder-head{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:14px;
+  align-items:start;
+  padding-bottom:15px;
+  border-bottom:1px solid #192027;
+}
+.reorder-head>div{min-width:0}
+.reorder-head span{
+  display:block;
+  color:var(--app-accent);
+  font-size:8px;
+  letter-spacing:.14em;
+  font-weight:950;
+}
+.reorder-head strong{
+  display:block;
+  margin-top:4px;
+  font-size:18px;
+  letter-spacing:-.035em;
+}
+.reorder-head small{
+  display:block;
+  margin-top:5px;
+  max-width:360px;
+  color:#74808c;
+  font-size:8px;
+  line-height:1.45;
+}
+.reorder-head>button,
+.reorder-foot button{
+  border:0;
+  border-radius:11px;
+  background:var(--app-accent);
+  color:#090b05;
+  font-size:8px;
+  font-weight:950;
+  padding:10px 12px;
+}
+.reorder-done-note{
+  margin:12px 0 0;
+  padding:9px 11px;
+  border-radius:11px;
+  background:#0e1510;
+  color:#8c9a85;
+  font-size:8px;
+  border:1px solid rgba(203,255,56,.09);
+}
+
+.reorder-list{
+  margin-top:13px;
+  border-top:1px solid #192027;
+}
+.reorder-item{
+  min-height:68px;
+  display:grid;
+  grid-template-columns:42px 30px minmax(0,1fr);
+  align-items:center;
+  gap:8px;
+  padding:9px 0;
+  border-bottom:1px solid #192027;
+  background:#080b0e;
+  transition:
+    transform .16s cubic-bezier(.2,.8,.2,1),
+    background .16s ease,
+    box-shadow .16s ease,
+    opacity .16s ease;
+  position:relative;
+  z-index:1;
+}
+.reorder-item.is-prep{
+  background:linear-gradient(90deg,rgba(203,255,56,.035),transparent 70%);
+}
+.reorder-item.dragging{
+  z-index:20;
+  opacity:.72;
+  transform:scale(.985);
+  background:#111820;
+  box-shadow:0 12px 32px rgba(0,0,0,.28);
+}
+.reorder-grip{
+  width:38px;height:46px;
+  border:0;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:#11171d;
+  color:#85909c;
+  font-size:18px;
+  font-weight:900;
+  cursor:grab;
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.reorder-grip:active{
+  cursor:grabbing;
+  color:var(--app-accent);
+  background:#17200e;
+}
+.reorder-number{
+  width:26px;height:26px;
+  border-radius:9px;
+  display:grid;place-items:center;
+  color:#6e7985;
+  background:#0e1419;
+  border:1px solid #1d252d;
+  font-size:8px;
+  font-weight:900;
+}
+.reorder-copy{min-width:0}
+.reorder-copy strong{
+  display:block;
+  font-size:11px;
+  color:#eef2f5;
+  line-height:1.2;
+}
+.reorder-copy small{
+  display:block;
+  margin-top:3px;
+  color:#6e7985;
+  font-size:8px;
+}
+.reorder-copy em{
+  display:inline-block;
+  margin-top:5px;
+  color:var(--app-accent);
+  font-size:7px;
+  font-style:normal;
+  font-weight:900;
+}
+.reorder-foot{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding-top:14px;
+}
+.reorder-foot span{
+  color:#67727e;
+  font-size:7px;
+}
+.workout-dragging{
+  cursor:grabbing!important;
+  user-select:none!important;
+}
+.workout-dragging *{
+  cursor:grabbing!important;
+}
+
+@media(max-width:430px){
+  .reorder-head{
+    grid-template-columns:1fr auto;
+  }
+  .reorder-head strong{font-size:17px}
+  .reorder-item{
+    grid-template-columns:42px 28px minmax(0,1fr);
+  }
+}
 </style>
 </head>
 <body>
@@ -1327,6 +1537,8 @@ const TYPES=[
 ];
 const DEFAULT={gyms:[{id:'evoque',name:'EVOQUE'}],activeGym:'evoque',activeMuscle:null,muscleStartedAt:null,sessionDate:null,sessionMuscles:[],sessionExerciseIds:[],sessionFirstByMuscle:{},preparedByGym:{},exercises:[],history:[]};
 let state=load(), restTimer=null, restEnd=0, currentEditingHistoryId=null;
+let workoutReorderMode=false;
+let workoutDrag=null;
 const SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 function todayKey(){return new Date().toLocaleDateString('sv-SE')}
@@ -1528,22 +1740,29 @@ function sessionExercises(){
   const chosen=state.sessionMuscles||[];
   const orderedIds=state.sessionExerciseIds||[];
   const ids=new Set(orderedIds);
+
   return state.exercises
     .filter(e=>e.gymId===state.activeGym&&chosen.includes(e.muscle)&&ids.has(e.id))
     .sort((a,b)=>{
-      const ma=chosen.indexOf(a.muscle),mb=chosen.indexOf(b.muscle);
-      if(ma!==mb)return ma-mb;
-
-      const forced=state.sessionFirstByMuscle?.[a.muscle];
-      if(forced){
-        if(a.id===forced&&b.id!==forced)return -1;
-        if(b.id===forced&&a.id!==forced)return 1;
-      }
-
-      const ia=orderedIds.indexOf(a.id),ib=orderedIds.indexOf(b.id);
+      const ia=orderedIds.indexOf(a.id);
+      const ib=orderedIds.indexOf(b.id);
       if(ia!==ib)return ia-ib;
       return (a.createdAt||'').localeCompare(b.createdAt||'');
     });
+}
+function syncSessionPrepToOrder(){
+  state.sessionFirstByMuscle=state.sessionFirstByMuscle||{};
+  const xs=sessionExercises();
+
+  (state.sessionMuscles||[]).forEach(muscle=>{
+    if(isPrepared(muscle)){
+      delete state.sessionFirstByMuscle[muscle];
+      return;
+    }
+    const firstPending=xs.find(e=>e.muscle===muscle&&!doneToday(e.id));
+    if(firstPending)state.sessionFirstByMuscle[muscle]=firstPending.id;
+    else delete state.sessionFirstByMuscle[muscle];
+  });
 }
 function effectiveFirstExerciseId(muscle){
   if(isPrepared(muscle))return null;
@@ -1562,6 +1781,101 @@ function render(){
   document.getElementById('sessionInfo').textContent=state.activeMuscle?'filtrando '+state.activeMuscle:'toque para filtrar';
   renderExercises();fillMuscleSelect();fillHistorySelect();
 }
+function toggleWorkoutReorder(force){
+  workoutReorderMode=typeof force==='boolean'?force:!workoutReorderMode;
+  renderToday();
+  if(workoutReorderMode){
+    requestAnimationFrame(()=>document.querySelector('.reorder-panel')?.scrollIntoView({behavior:'smooth',block:'nearest'}));
+  }
+}
+function workoutPendingIds(){
+  return sessionExercises().filter(e=>!doneToday(e.id)).map(e=>e.id);
+}
+function commitWorkoutReorderFromDOM(){
+  const list=document.getElementById('workoutReorderList');
+  if(!list)return;
+
+  const newPending=[...list.querySelectorAll('.reorder-item[data-exercise-id]')].map(el=>el.dataset.exerciseId);
+  if(!newPending.length)return;
+
+  const pendingSet=new Set(newPending);
+  const queue=[...newPending];
+  state.sessionExerciseIds=(state.sessionExerciseIds||[]).map(id=>pendingSet.has(id)?queue.shift():id);
+
+  syncSessionPrepToOrder();
+  persist();
+}
+function beginWorkoutDrag(ev,id){
+  if(!workoutReorderMode)return;
+  if(ev.button!==undefined&&ev.button!==0)return;
+
+  const item=ev.currentTarget.closest('.reorder-item');
+  const list=item?.parentElement;
+  if(!item||!list)return;
+
+  ev.preventDefault();
+  try{ev.currentTarget.setPointerCapture(ev.pointerId)}catch(_){}
+
+  workoutDrag={
+    pointerId:ev.pointerId,
+    item,
+    list,
+    handle:ev.currentTarget,
+    startY:ev.clientY
+  };
+
+  item.classList.add('dragging');
+  document.body.classList.add('workout-dragging');
+}
+function moveWorkoutDrag(ev){
+  if(!workoutDrag||ev.pointerId!==workoutDrag.pointerId)return;
+  ev.preventDefault();
+
+  const {item,list}=workoutDrag;
+  const y=ev.clientY;
+
+  const target=document.elementsFromPoint(ev.clientX,y)
+    .map(el=>el.closest?.('.reorder-item'))
+    .find(el=>el&&el!==item&&el.parentElement===list);
+
+  if(target){
+    const rect=target.getBoundingClientRect();
+    const after=y>rect.top+rect.height/2;
+    const reference=after?target.nextSibling:target;
+    if(reference!==item&&target!==item.nextSibling){
+      list.insertBefore(item,reference);
+    }
+  }
+
+  const edge=92;
+  if(y<edge)window.scrollBy({top:-13,behavior:'auto'});
+  else if(y>window.innerHeight-edge)window.scrollBy({top:13,behavior:'auto'});
+}
+function endWorkoutDrag(ev){
+  if(!workoutDrag||ev.pointerId!==workoutDrag.pointerId)return;
+
+  const {item,handle}=workoutDrag;
+  item.classList.remove('dragging');
+  document.body.classList.remove('workout-dragging');
+
+  try{handle.releasePointerCapture(ev.pointerId)}catch(_){}
+  workoutDrag=null;
+
+  commitWorkoutReorderFromDOM();
+  renderToday();
+}
+function cancelWorkoutDrag(){
+  if(!workoutDrag)return;
+  workoutDrag.item?.classList.remove('dragging');
+  document.body.classList.remove('workout-dragging');
+  workoutDrag=null;
+  renderToday();
+}
+
+document.addEventListener('pointermove',moveWorkoutDrag,{passive:false});
+document.addEventListener('pointerup',endWorkoutDrag);
+document.addEventListener('pointercancel',cancelWorkoutDrag);
+
 function setTodaySetupButton(mode){
   const btn=document.getElementById('todaySetupBtn');
   if(!btn)return;
@@ -1595,6 +1909,7 @@ function renderToday(){
   hero?.classList.remove('completed');
 
   if(!chosen.length){
+    workoutReorderMode=false;
     title.textContent='O que você vai treinar hoje?';
     desc.textContent='Escolha os grupos musculares. Depois o app organiza o treino para você.';
     summary.innerHTML='';
@@ -1609,6 +1924,7 @@ function renderToday(){
   setTodaySetupButton('edit');
 
   if(!xs.length){
+    workoutReorderMode=false;
     desc.textContent='Treino escolhido. Agora selecione quais exercícios vão entrar hoje.';
     summary.innerHTML='';
     root.innerHTML=`<div class="empty"><strong>Nenhum exercício selecionado</strong>Edite o treino de hoje e escolha os exercícios.</div>`;
@@ -1621,6 +1937,7 @@ function renderToday(){
   const completed=done===xs.length;
 
   if(completed){
+    workoutReorderMode=false;
     hero?.classList.add('completed');
     desc.textContent='Treino concluído. Seus resultados já estão salvos para a próxima sessão.';
     const todayRecords=state.history.filter(h=>h.gymId===state.activeGym&&isHistoryToday(h)&&xs.some(e=>e.id===h.exerciseId));
@@ -1643,18 +1960,72 @@ function renderToday(){
       </div>
     </div>`;
   }else{
-    desc.textContent='Siga a ordem abaixo. Você pode escolher em qual exercício começa a preparação de cada músculo.';
+    desc.textContent=workoutReorderMode
+      ?'Segure o ícone de arrastar e coloque os exercícios na ordem que você quer fazer.'
+      :'Siga a ordem abaixo. Você pode escolher onde começa a preparação e também reorganizar o treino.';
     summary.innerHTML=`<div class="today-progress-wrap">
       <div class="today-progress-head"><span>Seu progresso hoje</span><strong>${done} de ${xs.length}</strong></div>
       <div class="today-progress"><div class="bar"><i style="width:${pct}%"></i></div><span>${pct}%</span></div>
     </div>`;
   }
 
+  if(workoutReorderMode&&!completed){
+    const pending=xs.filter(e=>!doneToday(e.id));
+
+    root.innerHTML=`<section class="reorder-panel">
+      <div class="reorder-head">
+        <div>
+          <span>ORGANIZAR TREINO</span>
+          <strong>Arraste para mudar a ordem</strong>
+          <small>No celular, segure em ⋮⋮ e arraste. No PC, clique e arraste.</small>
+        </div>
+        <button onclick="toggleWorkoutReorder(false)">Concluir</button>
+      </div>
+
+      ${done?`<div class="reorder-done-note">✓ ${done} exercício${done===1?'':'s'} já concluído${done===1?'':'s'} fica${done===1?'':'m'} fixo${done===1?'':'s'}.</div>`:''}
+
+      <div class="reorder-list" id="workoutReorderList">
+        ${pending.map((e,i)=>{
+          const firstId=effectiveFirstExerciseId(e.muscle);
+          const prep=!isPrepared(e.muscle)&&firstId===e.id;
+          return `<article class="reorder-item ${prep?'is-prep':''}" data-exercise-id="${e.id}">
+            <button class="reorder-grip"
+              onpointerdown="beginWorkoutDrag(event,'${e.id}')"
+              aria-label="Arrastar ${esc(e.name)}">
+              <span>⋮⋮</span>
+            </button>
+            <div class="reorder-number">${i+1}</div>
+            <div class="reorder-copy">
+              <strong>${esc(e.name)}</strong>
+              <small>${esc(e.muscle)}</small>
+              ${prep?'<em>★ preparação começa aqui</em>':''}
+            </div>
+          </article>`;
+        }).join('')}
+      </div>
+
+      <div class="reorder-foot">
+        <span>As alterações são salvas automaticamente.</span>
+        <button onclick="toggleWorkoutReorder(false)">Pronto</button>
+      </div>
+    </section>`;
+
+    fab.textContent='✓ Concluir organização';
+    fab.onclick=()=>toggleWorkoutReorder(false);
+    return;
+  }
+
   const undone=xs.filter(e=>!doneToday(e.id));
   const finished=xs.filter(e=>doneToday(e.id));
   const upcoming=undone.filter(e=>!next||e.id!==next.id);
 
-  let html='';
+  let html=`<div class="today-order-control">
+    <button onclick="toggleWorkoutReorder(true)">
+      <span class="order-control-icon">↕</span>
+      <span><b>Organizar ordem</b><small>arraste os exercícios</small></span>
+      <i>›</i>
+    </button>
+  </div>`;
 
   if(next){
     const firstId=effectiveFirstExerciseId(next.muscle);
@@ -1761,9 +2132,24 @@ function setFirstToday(id){
   const e=state.exercises.find(x=>x.id===id);
   if(!e)return;
   if(isPrepared(e.muscle))return toast(e.muscle+' já está preparado hoje');
-  if(!(state.sessionExerciseIds||[]).includes(id))return toast('Este exercício não está no treino de hoje');
+
+  const ids=[...(state.sessionExerciseIds||[])];
+  const pos=ids.indexOf(id);
+  if(pos<0)return toast('Este exercício não está no treino de hoje');
+
+  const samePending=ids.filter(x=>{
+    const ex=state.exercises.find(y=>y.id===x);
+    return ex&&ex.muscle===e.muscle&&!doneToday(x);
+  });
+
+  const firstPos=Math.min(...samePending.map(x=>ids.indexOf(x)).filter(x=>x>=0));
+  ids.splice(pos,1);
+  ids.splice(firstPos,0,id);
+
+  state.sessionExerciseIds=ids;
   state.sessionFirstByMuscle=state.sessionFirstByMuscle||{};
   state.sessionFirstByMuscle[e.muscle]=id;
+
   persist();
   render();
   toast('Preparação de '+e.muscle+' começa em '+e.name);
