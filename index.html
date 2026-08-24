@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   7.4 — MANUAL EXERCISES / MUSCLE VISUAL SYSTEM
+   7.5 — DETAILED ANATOMICAL MUSCLE VISUALS
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -5068,6 +5068,32 @@ textarea{
 #exerciseScreen .mobile-screen-head>div>p{
   max-width:500px;
 }
+
+/* =========================================================
+   7.5 — detailed anatomical muscle cards
+   ========================================================= */
+.muscle-visual.detailed{
+  background:#0f1519!important;
+  border-color:#263039!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.015);
+}
+.muscle-visual.detailed svg{
+  width:100%;
+  height:100%;
+  display:block;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.22));
+}
+.muscle-visual.detailed.tiny{width:42px!important;height:52px!important}
+.muscle-visual.detailed.small{width:52px!important;height:64px!important}
+.muscle-visual.detailed.list{width:58px!important;height:70px!important}
+.muscle-visual.detailed.picker{width:50px!important;height:62px!important}
+.muscle-visual.detailed.progress{width:54px!important;height:66px!important}
+.muscle-visual.detailed.context{width:84px!important;height:102px!important}
+
+@media(max-width:520px){
+  .muscle-visual.detailed.list{width:54px!important;height:66px!important}
+  .muscle-visual.detailed.small{width:48px!important;height:60px!important}
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -5560,7 +5586,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='7.4';
+const APP_BUILD_VERSION='7.5';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -7634,44 +7660,118 @@ function exerciseCatalogFor(value){return null}
 
 function muscleVisualHTML(muscle,cls=''){
   const m=muscle||'';
-  const back=['Costas','Tríceps','Posterior','Glúteos','Panturrilha'].includes(m);
   const accent='#cbff38';
-  const base='#263038';
-  const muted='#151c21';
+  const accentSoft='rgba(203,255,56,.45)';
+  const skin='#7f8a92';
+  const skin2='#59636b';
+  const line='#1f282e';
+  const bg='#0f1519';
 
-  const part=(name,frontPath,backPath='')=>{
+  const isBack=['Costas','Tríceps','Posterior','Glúteos','Panturrilha'].includes(m);
+
+  const hi=(name,path,opacity=.98)=>{
     if(m!==name)return '';
-    return `<path d="${back&&backPath?backPath:frontPath}" fill="${accent}" opacity=".96"/>`;
+    return `<path d="${path}" fill="${accent}" opacity="${opacity}"/>`;
+  };
+  const hiSoft=(name,path,opacity=.62)=>{
+    if(m!==name)return '';
+    return `<path d="${path}" fill="${accentSoft}" opacity="${opacity}"/>`;
   };
 
-  return `<span class="muscle-visual ${cls}" aria-label="${esc(m||'Grupo muscular')}">
-    <svg viewBox="0 0 72 86" role="img" aria-hidden="true">
-      <rect x="1" y="1" width="70" height="84" rx="16" fill="#10161a"/>
-      <circle cx="36" cy="13" r="7" fill="${base}"/>
-      <path d="M25 24 Q36 19 47 24 L50 52 Q45 58 40 59 L42 80 H30 L32 59 Q27 58 22 52Z" fill="${base}"/>
-      <path d="M25 27 L16 49 Q15 53 19 55 L29 37Z" fill="${base}"/>
-      <path d="M47 27 L56 49 Q57 53 53 55 L43 37Z" fill="${base}"/>
-      <path d="M31 57 L25 80 H33 L36 59Z" fill="${base}"/>
-      <path d="M41 57 L47 80 H39 L36 59Z" fill="${base}"/>
+  const front=`<g transform="translate(8,4)">
+    <ellipse cx="28" cy="9" rx="6.6" ry="8.4" fill="${skin2}" stroke="${line}" stroke-width="1"/>
+    <path d="M22.5 18
+             C18.5 20 16 25 15.5 31
+             L14 49
+             C14 56 17 62 20 66
+             L18.5 82
+             L24.5 82
+             L27 63
+             L29 63
+             L31.5 82
+             L37.5 82
+             L36 66
+             C39 62 42 56 42 49
+             L40.5 31
+             C40 25 37.5 20 33.5 18
+             Z"
+          fill="${skin}" stroke="${line}" stroke-width="1.1"/>
+    <path d="M18 23 C13 25 10.5 31 9.5 39 L8.5 55
+             C8.2 58 10 60 12.5 59
+             L16 45 L20 30 Z"
+          fill="${skin}" stroke="${line}" stroke-width="1"/>
+    <path d="M38 23 C43 25 45.5 31 46.5 39 L47.5 55
+             C47.8 58 46 60 43.5 59
+             L40 45 L36 30 Z"
+          fill="${skin}" stroke="${line}" stroke-width="1"/>
+    <path d="M21 31 Q28 26 35 31 L34 40 Q28 44 22 40 Z"
+          fill="#6f7a82" opacity=".7"/>
+    <path d="M24 42 L32 42 L31 57 L25 57 Z"
+          fill="#657078" opacity=".7"/>
+    <path d="M20 66 L26.5 66 L24 81 L18.7 81 Z"
+          fill="#69747b"/>
+    <path d="M29.5 66 L36 66 L37.3 81 L32 81 Z"
+          fill="#69747b"/>
+    ${hi('Peito','M21.2 28.6 Q28 24.2 34.8 28.6 L34 38.2 Q28 41.2 22 38.2 Z')}
+    ${hi('Ombros','M17 24 C18 20.6 20.4 19 23.4 20.8 L23 29 C20.4 30.4 18.2 28.8 17 24 Z M39 24 C38 20.6 35.6 19 32.6 20.8 L33 29 C35.6 30.4 37.8 28.8 39 24 Z')}
+    ${hi('Bíceps','M13.8 31.5 C15.6 27.5 18.8 28 19.6 31.8 L17.8 44.5 C16.5 47 13.8 46.7 12.8 44.3 Z M42.2 31.5 C40.4 27.5 37.2 28 36.4 31.8 L38.2 44.5 C39.5 47 42.2 46.7 43.2 44.3 Z')}
+    ${hi('Antebraços','M10.8 44.5 L17.6 44.5 L14.9 57.5 C13.5 59.5 10.8 58.8 10.2 56.2 Z M45.2 44.5 L38.4 44.5 L41.1 57.5 C42.5 59.5 45.2 58.8 45.8 56.2 Z')}
+    ${hi('Abdômen','M24.2 40.2 H31.8 L31 57.7 H25 Z')}
+    ${hiSoft('Abdômen','M21.3 41.5 L24.1 40.5 L24.8 57 L22.4 55 Z M34.7 41.5 L31.9 40.5 L31.2 57 L33.6 55 Z',.5)}
+    ${hi('Quadríceps','M19.7 64.2 L26.4 64.2 L24.5 80.6 L18.6 80.6 Z M29.6 64.2 L36.3 64.2 L37.4 80.6 L31.5 80.6 Z')}
+  </g>`;
 
-      ${part('Peito','M27 27 Q36 23 36 37 Q30 40 25 35Z M45 27 Q36 23 36 37 Q42 40 47 35Z')}
-      ${part('Costas','M25 28 Q36 22 47 28 L45 47 Q36 55 27 47Z','M25 27 Q36 21 47 27 L46 48 Q36 57 26 48Z')}
-      ${part('Ombros','M21 27 Q25 22 29 26 L27 35 Q22 35 19 31Z M51 27 Q47 22 43 26 L45 35 Q50 35 53 31Z')}
-      ${part('Bíceps','M20 37 Q23 32 27 35 L25 48 Q21 50 18 46Z M52 37 Q49 32 45 35 L47 48 Q51 50 54 46Z')}
-      ${part('Tríceps','M20 37 Q23 32 27 35 L25 49 Q21 51 18 46Z M52 37 Q49 32 45 35 L47 49 Q51 51 54 46Z','M20 35 Q24 31 27 36 L24 50 Q20 51 18 46Z M52 35 Q48 31 45 36 L48 50 Q52 51 54 46Z')}
-      ${part('Antebraços','M17 49 L22 44 L20 57 Q17 60 15 56Z M55 49 L50 44 L52 57 Q55 60 57 56Z')}
-      ${part('Abdômen','M30 38 H42 L41 53 Q36 57 31 53Z')}
-      ${part('Quadríceps','M30 58 L36 60 L33 74 H27Z M42 58 L36 60 L39 74 H45Z')}
-      ${part('Posterior','M30 58 L36 60 L33 74 H27Z M42 58 L36 60 L39 74 H45Z','M29 58 L36 60 L33 74 H27Z M43 58 L36 60 L39 74 H45Z')}
-      ${part('Glúteos','M29 51 Q36 47 36 59 Q30 61 27 57Z M43 51 Q36 47 36 59 Q42 61 45 57Z','M28 50 Q36 46 36 59 Q30 62 27 57Z M44 50 Q36 46 36 59 Q42 62 45 57Z')}
-      ${part('Panturrilha','M27 70 L33 69 L32 80 H26Z M45 70 L39 69 L40 80 H46Z','M27 70 L33 69 L32 80 H26Z M45 70 L39 69 L40 80 H46Z')}
+  const back=`<g transform="translate(8,4)">
+    <ellipse cx="28" cy="9" rx="6.6" ry="8.4" fill="${skin2}" stroke="${line}" stroke-width="1"/>
+    <path d="M22.5 18
+             C18.5 20 16 25 15.5 31
+             L14 49
+             C14 56 17 62 20 66
+             L18.5 82
+             L24.5 82
+             L27 63
+             L29 63
+             L31.5 82
+             L37.5 82
+             L36 66
+             C39 62 42 56 42 49
+             L40.5 31
+             C40 25 37.5 20 33.5 18
+             Z"
+          fill="${skin}" stroke="${line}" stroke-width="1.1"/>
+    <path d="M18 23 C13 25 10.5 31 9.5 39 L8.5 55
+             C8.2 58 10 60 12.5 59
+             L16 45 L20 30 Z"
+          fill="${skin}" stroke="${line}" stroke-width="1"/>
+    <path d="M38 23 C43 25 45.5 31 46.5 39 L47.5 55
+             C47.8 58 46 60 43.5 59
+             L40 45 L36 30 Z"
+          fill="${skin}" stroke="${line}" stroke-width="1"/>
+    <path d="M22 28 Q28 23 34 28 L35 46 Q28 52 21 46 Z"
+          fill="#6f7a82" opacity=".72"/>
+    <path d="M20 66 L26.5 66 L24 81 L18.7 81 Z"
+          fill="#69747b"/>
+    <path d="M29.5 66 L36 66 L37.3 81 L32 81 Z"
+          fill="#69747b"/>
+    ${hi('Costas','M21.3 26.6 Q28 22.7 34.7 26.6 L36.1 43.8 Q28 51.2 19.9 43.8 Z')}
+    ${hiSoft('Costas','M24 20.8 Q28 19.3 32 20.8 L31.5 27.5 Q28 29.3 24.5 27.5 Z',.68)}
+    ${hi('Ombros','M17 24 C18 20.6 20.4 19 23.4 20.8 L23 29 C20.4 30.4 18.2 28.8 17 24 Z M39 24 C38 20.6 35.6 19 32.6 20.8 L33 29 C35.6 30.4 37.8 28.8 39 24 Z')}
+    ${hi('Tríceps','M13.5 30.8 C15.6 28 18.5 28.4 19.4 31.8 L17.5 45 C16 47.2 13.6 46.6 12.6 44.2 Z M42.5 30.8 C40.4 28 37.5 28.4 36.6 31.8 L38.5 45 C40 47.2 42.4 46.6 43.4 44.2 Z')}
+    ${hi('Antebraços','M10.8 44.5 L17.6 44.5 L14.9 57.5 C13.5 59.5 10.8 58.8 10.2 56.2 Z M45.2 44.5 L38.4 44.5 L41.1 57.5 C42.5 59.5 45.2 58.8 45.8 56.2 Z')}
+    ${hi('Glúteos','M20.5 52.5 Q28 48.3 28 61.5 Q22.1 63.4 18.7 58.7 Z M35.5 52.5 Q28 48.3 28 61.5 Q33.9 63.4 37.3 58.7 Z')}
+    ${hi('Posterior','M19.7 64.2 L26.4 64.2 L24.5 80.6 L18.6 80.6 Z M29.6 64.2 L36.3 64.2 L37.4 80.6 L31.5 80.6 Z')}
+    ${hi('Panturrilha','M19.6 74.2 L24.7 73.6 L23.6 81.4 L18.8 81.4 Z M31.3 73.6 L36.4 74.2 L37.2 81.4 L32.4 81.4 Z')}
+  </g>`;
 
-      <circle cx="58" cy="69" r="8" fill="${muted}"/>
-      <text x="58" y="72" text-anchor="middle" fill="${accent}" font-size="8" font-weight="900">${catalogMuscleIcon(m)}</text>
+  return `<span class="muscle-visual detailed ${cls}" aria-label="${esc(m||'Grupo muscular')}">
+    <svg viewBox="0 0 72 92" role="img" aria-hidden="true">
+      <rect x="1" y="1" width="70" height="90" rx="16" fill="${bg}"/>
+      ${isBack?back:front}
+      <rect x="5" y="70" width="62" height="16" rx="8" fill="rgba(8,12,15,.72)"/>
+      <text x="36" y="81" text-anchor="middle" fill="${accent}" font-size="7.2" font-weight="900">${esc(m||'Músculo')}</text>
     </svg>
   </span>`;
 }
-
 function exerciseVisualThumbHTML(value,stage='peak',cls=''){
   const muscle=(value&&value.muscle)||'';
   return muscleVisualHTML(muscle,cls);
