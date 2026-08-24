@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   7.3 — STANDARDIZED REPDB EXERCISE VISUALS
+   7.4 — MANUAL EXERCISES / MUSCLE VISUAL SYSTEM
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -4992,6 +4992,82 @@ textarea{
 .repdb-source-note.equivalent>small{
   color:#77838c!important;
 }
+
+/* =========================================================
+   7.4 — manual exercises + standardized muscle identity
+   ========================================================= */
+.muscle-visual{
+  position:relative;
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+  overflow:hidden;
+  border:1px solid #26323a;
+  border-radius:12px;
+  background:#10161a;
+}
+.muscle-visual svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+.muscle-visual.tiny{width:38px;height:44px;border-radius:9px}
+.muscle-visual.small{width:48px;height:56px}
+.muscle-visual.list{width:52px;height:58px}
+.muscle-visual.picker{width:44px;height:50px}
+.muscle-visual.progress{width:48px;height:54px}
+.muscle-visual.context{width:76px;height:88px}
+
+/* Neutralize old external-image visual containers. */
+.app-ex-thumb{
+  background:#10161a!important;
+}
+.app-ex-thumb img,
+.repdb-image-wrap,
+.repdb-attribution,
+.repdb-source-note,
+.catalog-linked-info,
+.exercise-context-host{
+  display:none!important;
+}
+
+/* Existing exercise list becomes cleaner: muscle identity, name, load. */
+.exercise-card-visual,
+.upcoming-visual,
+.finished-visual,
+.reorder-thumb,
+.progress-exercise-thumb{
+  background:transparent!important;
+}
+.exercise-title small,
+.upcoming-copy small,
+.finished-copy small{
+  color:#7d8993!important;
+}
+.exercise-card .chips{
+  margin-left:64px;
+}
+
+/* Add exercise form is intentionally simple. */
+.new-exercise-mode .sheethead p{
+  max-width:520px;
+}
+.new-exercise-mode .field.live-hide{
+  margin-bottom:12px;
+}
+.new-exercise-mode #exerciseName{
+  font-size:15px!important;
+  font-weight:750;
+}
+
+/* The Exercises tab is now "your exercises", not a browsable third-party catalog. */
+#exerciseScreen .mobile-screen-head>div>small{
+  color:var(--app-accent);
+  letter-spacing:.11em;
+}
+#exerciseScreen .mobile-screen-head>div>p{
+  max-width:500px;
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -5169,7 +5245,7 @@ textarea{
       <section class="library-wrap mobile-library">
         <div class="mobile-screen-head">
           <div>
-            <small>BIBLIOTECA</small>
+            <small>EXERCÍCIOS</small>
             <h2>Seus exercícios</h2>
             <p>Organizados por grupo muscular.</p>
           </div>
@@ -5178,7 +5254,7 @@ textarea{
 
         <div class="library-head mobile-library-hidden-head">
           <div class="visual-icon">▦</div>
-          <div class="copy"><h3>Biblioteca</h3><p>Exercícios cadastrados por grupo muscular</p></div>
+          <div class="copy"><h3>Seus exercícios</h3><p>Exercícios que você cadastrou nesta academia</p></div>
           <button class="library-toggle" id="libraryToggle" onclick="toggleLibrary()">Ocultar</button>
         </div>
 
@@ -5261,64 +5337,6 @@ textarea{
 </div></div>
 
 
-<div class="modal" id="exerciseCatalogModal" onclick="backdropClose(event,'exerciseCatalogModal')">
-  <div class="sheet catalog-sheet">
-    <div class="grab"></div>
-    <div class="catalog-head">
-      <div>
-        <small>BIBLIOTECA DE EXERCÍCIOS</small>
-        <h3>O que você quer fazer?</h3>
-        <p>Escolha um exercício, veja como executar e depois adicione à sua biblioteca.</p>
-      </div>
-      <button class="close" onclick="closeModal('exerciseCatalogModal')">✕</button>
-    </div>
-
-    <div class="catalog-search">
-      <span>⌕</span>
-      <input id="catalogSearch" placeholder="Buscar exercício, músculo ou aparelho..." oninput="renderExerciseCatalog()">
-    </div>
-
-    <div class="catalog-library-toolbar">
-      <div class="catalog-equipment-filter">
-        <label for="catalogEquipmentFilter">Equipamento</label>
-        <select id="catalogEquipmentFilter" onchange="catalogEquipmentFilter=this.value;renderExerciseCatalog()">
-          <option value="Todos">Todos</option>
-        </select>
-      </div>
-      <div class="catalog-source-status" id="repdbCatalogStatus"></div>
-    </div>
-
-    <div class="catalog-filter-row" id="catalogFilters"></div>
-
-    <div class="catalog-top-actions">
-      <button onclick="openBlankExerciseModal()">
-        <span>＋</span>
-        <span><strong>Criar exercício manualmente</strong><small>Use se não encontrar na biblioteca.</small></span>
-        <i>›</i>
-      </button>
-    </div>
-
-    <div class="catalog-results-head">
-      <div><strong id="catalogResultTitle">Exercícios</strong><small class="catalog-library-size" id="catalogLibrarySize">Biblioteca de musculação · ${EXERCISE_CATALOG.length} exercícios</small></div>
-      <span id="catalogResultCount"></span>
-    </div>
-    <div class="catalog-grid" id="catalogGrid"></div>
-    <div class="repdb-attribution">
-      <span>Visuais de exercícios:</span>
-      <a href="https://repdb.co" target="_blank" rel="noopener noreferrer">RepDB ↗</a>
-      <span>·</span>
-      <a href="https://github.com/yuhonas/free-exercise-db" target="_blank" rel="noopener noreferrer">Free Exercise DB ↗</a>
-    </div>
-  </div>
-</div>
-
-<div class="modal" id="exerciseCatalogDetailModal" onclick="backdropClose(event,'exerciseCatalogDetailModal')">
-  <div class="sheet catalog-detail-sheet">
-    <div class="grab"></div>
-    <div id="catalogDetailContent"></div>
-  </div>
-</div>
-
 <div class="modal" id="exerciseModal" onclick="backdropClose(event,'exerciseModal')"><div class="sheet">
   <div class="grab"></div><div class="sheethead"><div><h3 id="modalTitle">＋ Registrar exercício</h3><p id="modalSubtitle">As cargas ficam separadas por academia.</p></div><button class="close" onclick="closeModal('exerciseModal')">✕</button></div>
   <input type="hidden" id="editId"><div class="record-banner" id="recordBanner"><small>Editando registro</small><strong id="recordBannerText"></strong></div>
@@ -5333,14 +5351,6 @@ textarea{
   <div class="field live-hide"><label>Grupo muscular</label><select id="exerciseMuscle" class="select" onchange="onMuscleFormChange()"></select></div>
   <div class="field live-hide"><label>Exercício</label><input id="exerciseName" class="input" placeholder="Ex.: Supino inclinado máquina"></div>
   <input type="hidden" id="catalogKey">
-  <div class="catalog-linked-info live-hide" id="catalogLinkedInfo" style="display:none">
-    <button type="button" onclick="openLinkedCatalogInfo()">
-      <span class="catalog-linked-icon">?</span>
-      <span><strong>Ver execução e músculos trabalhados</strong><small>Ilustrações, mapa muscular e instruções.</small></span>
-      <i>›</i>
-    </button>
-  </div>
-  <div id="exerciseContextCard" class="exercise-context-host"></div>
   <div class="toggle live-hide"><input type="checkbox" id="usePrep" onchange="renderSetEditors();if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}"><label for="usePrep">Primeiro exercício do músculo · fazer preparação completa</label></div>
   <div id="lastWorkoutBox" class="training-only"></div>
   <div class="field training-only live-hide" id="performedDateField"><label>📅 Dia realizado</label><input id="performedDate" type="date" class="input"><small style="display:block;color:#7f8997;font-size:9px;margin-top:6px;line-height:1.4">Use a data em que você realmente fez este exercício. Pode registrar hoje um treino de dias atrás.</small></div>
@@ -5357,7 +5367,7 @@ textarea{
   <button id="saveExerciseBtn" class="btn primary" style="width:100%;margin-top:8px" onclick="saveExercise()">Salvar registro</button>
   <button id="cancelExerciseBtn" class="btn secondary" style="width:100%;margin-top:10px" onclick="cancelExerciseModal()">Cancelar / voltar sem salvar</button>
   <div class="record-actions" id="recordActions"><button class="btn secondary" onclick="duplicateHistoryRecord()">Duplicar registro</button><button class="btn danger" onclick="deleteCurrentHistoryRecord()">Excluir este registro</button></div>
-  <button id="deleteExerciseBtn" class="btn danger" style="width:100%;margin-top:10px;display:none" onclick="deleteExercise()">Excluir exercício da biblioteca</button>
+  <button id="deleteExerciseBtn" class="btn danger" style="width:100%;margin-top:10px;display:none" onclick="deleteExercise()">Excluir exercício</button>
 </div></div>
 
 <div class="modal" id="historyModal" onclick="backdropClose(event,'historyModal')"><div class="progress-sheet">
@@ -5550,7 +5560,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='7.3';
+const APP_BUILD_VERSION='7.4';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -6522,7 +6532,6 @@ function effectiveFirstExerciseId(muscle){
 }
 function nextSessionExercise(){return sessionExercises().find(e=>!doneToday(e.id))||null}
 function render(){
-  linkExistingExercisesToCatalog();
   document.getElementById('gymName').textContent=gym().name;
   const gymOptions=state.gyms.map(g=>`<option value="${g.id}" ${g.id===state.activeGym?'selected':''}>${esc(g.name)}</option>`).join('');
   const gs=document.getElementById('gymSelect');if(gs)gs.innerHTML=gymOptions;
@@ -7374,24 +7383,8 @@ function normCatalog(v){
   return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim().replace(/\s+/g,' ');
 }
 function catalogItem(key){return EXERCISE_CATALOG.find(x=>x.key===key)||null}
-function catalogKeyFromExercise(e){
-  if(!e)return '';
-  if(e.catalogKey&&catalogItem(e.catalogKey))return e.catalogKey;
-  const n=normCatalog(e.name);
-  if(!n)return '';
-  return EXERCISE_CATALOG.find(x=>[x.name,...(x.aliases||[])].some(a=>normCatalog(a)===n))?.key||'';
-}
-function linkExistingExercisesToCatalog(){
-  let linked=0;
-  (state.exercises||[]).forEach(e=>{
-    const key=catalogKeyFromExercise(e);
-    if(key&&e.catalogKey!==key){
-      e.catalogKey=key;
-      linked++;
-    }
-  });
-  return linked;
-}
+function catalogKeyFromExercise(e){return e?.catalogKey||''}
+function linkExistingExercisesToCatalog(){return 0}
 function existingExerciseForCatalog(item){
   return state.exercises.find(e=>{
     if(e.gymId!==state.activeGym)return false;
@@ -7399,7 +7392,10 @@ function existingExerciseForCatalog(item){
   })||null;
 }
 function catalogMuscleIcon(m){
-  const map={Peito:'◆',Costas:'↔',Ombros:'◇','Bíceps':'⌁','Tríceps':'⇣',Quadríceps:'▥',Posterior:'◒',Panturrilha:'△',Glúteos:'⬡','Abdômen':'▦'};
+  const map={
+    Peito:'◆',Costas:'↔',Ombros:'◇','Bíceps':'⌁','Tríceps':'⇣','Antebraços':'≈',
+    Quadríceps:'▥',Posterior:'◒',Panturrilha:'△',Glúteos:'⬡','Abdômen':'▦'
+  };
   return map[m]||'●';
 }
 function bodyHeatSVG(primary=[],secondary=[]){
@@ -7634,100 +7630,63 @@ function repdbSourceNote(item){
     <span>Imagem específica ainda indisponível</span>
   </div>`;
 }
-function exerciseCatalogFor(value){
-  if(!value)return null;
-  if(typeof value==='string')return catalogItem(value);
-  if(value.key&&catalogItem(value.key))return catalogItem(value.key);
-  const key=catalogKeyFromExercise(value);
-  return key?catalogItem(key):null;
-}
-function exerciseVisualThumbHTML(value,stage='peak',cls=''){
-  const item=exerciseCatalogFor(value);
-  if(!item){
-    const muscle=(value&&value.muscle)||'';
-    return `<span class="app-ex-thumb placeholder ${cls}"><b>${catalogMuscleIcon(muscle)}</b></span>`;
-  }
-  const url=exerciseImageUrl(item,stage);
-  if(!url){
-    return `<span class="app-ex-thumb placeholder ${cls}"><b>${catalogMuscleIcon(item.muscle)}</b></span>`;
-  }
-  return `<span class="app-ex-thumb ${cls}">
-    <img src="${url}" alt="${esc(item.name)}" loading="lazy" decoding="async"
-      onerror="this.parentElement.classList.add('broken');this.remove()">
-    <b>${catalogMuscleIcon(item.muscle)}</b>
+function exerciseCatalogFor(value){return null}
+
+function muscleVisualHTML(muscle,cls=''){
+  const m=muscle||'';
+  const back=['Costas','Tríceps','Posterior','Glúteos','Panturrilha'].includes(m);
+  const accent='#cbff38';
+  const base='#263038';
+  const muted='#151c21';
+
+  const part=(name,frontPath,backPath='')=>{
+    if(m!==name)return '';
+    return `<path d="${back&&backPath?backPath:frontPath}" fill="${accent}" opacity=".96"/>`;
+  };
+
+  return `<span class="muscle-visual ${cls}" aria-label="${esc(m||'Grupo muscular')}">
+    <svg viewBox="0 0 72 86" role="img" aria-hidden="true">
+      <rect x="1" y="1" width="70" height="84" rx="16" fill="#10161a"/>
+      <circle cx="36" cy="13" r="7" fill="${base}"/>
+      <path d="M25 24 Q36 19 47 24 L50 52 Q45 58 40 59 L42 80 H30 L32 59 Q27 58 22 52Z" fill="${base}"/>
+      <path d="M25 27 L16 49 Q15 53 19 55 L29 37Z" fill="${base}"/>
+      <path d="M47 27 L56 49 Q57 53 53 55 L43 37Z" fill="${base}"/>
+      <path d="M31 57 L25 80 H33 L36 59Z" fill="${base}"/>
+      <path d="M41 57 L47 80 H39 L36 59Z" fill="${base}"/>
+
+      ${part('Peito','M27 27 Q36 23 36 37 Q30 40 25 35Z M45 27 Q36 23 36 37 Q42 40 47 35Z')}
+      ${part('Costas','M25 28 Q36 22 47 28 L45 47 Q36 55 27 47Z','M25 27 Q36 21 47 27 L46 48 Q36 57 26 48Z')}
+      ${part('Ombros','M21 27 Q25 22 29 26 L27 35 Q22 35 19 31Z M51 27 Q47 22 43 26 L45 35 Q50 35 53 31Z')}
+      ${part('Bíceps','M20 37 Q23 32 27 35 L25 48 Q21 50 18 46Z M52 37 Q49 32 45 35 L47 48 Q51 50 54 46Z')}
+      ${part('Tríceps','M20 37 Q23 32 27 35 L25 49 Q21 51 18 46Z M52 37 Q49 32 45 35 L47 49 Q51 51 54 46Z','M20 35 Q24 31 27 36 L24 50 Q20 51 18 46Z M52 35 Q48 31 45 36 L48 50 Q52 51 54 46Z')}
+      ${part('Antebraços','M17 49 L22 44 L20 57 Q17 60 15 56Z M55 49 L50 44 L52 57 Q55 60 57 56Z')}
+      ${part('Abdômen','M30 38 H42 L41 53 Q36 57 31 53Z')}
+      ${part('Quadríceps','M30 58 L36 60 L33 74 H27Z M42 58 L36 60 L39 74 H45Z')}
+      ${part('Posterior','M30 58 L36 60 L33 74 H27Z M42 58 L36 60 L39 74 H45Z','M29 58 L36 60 L33 74 H27Z M43 58 L36 60 L39 74 H45Z')}
+      ${part('Glúteos','M29 51 Q36 47 36 59 Q30 61 27 57Z M43 51 Q36 47 36 59 Q42 61 45 57Z','M28 50 Q36 46 36 59 Q30 62 27 57Z M44 50 Q36 46 36 59 Q42 62 45 57Z')}
+      ${part('Panturrilha','M27 70 L33 69 L32 80 H26Z M45 70 L39 69 L40 80 H46Z','M27 70 L33 69 L32 80 H26Z M45 70 L39 69 L40 80 H46Z')}
+
+      <circle cx="58" cy="69" r="8" fill="${muted}"/>
+      <text x="58" y="72" text-anchor="middle" fill="${accent}" font-size="8" font-weight="900">${catalogMuscleIcon(m)}</text>
+    </svg>
   </span>`;
 }
-function exerciseEmphasisRows(value){
-  const item=exerciseCatalogFor(value);
-  return item?regionEmphasisFor(item):[];
-}
-function exerciseEmphasisInlineHTML(value,limit=3){
-  const rows=exerciseEmphasisRows(value).slice(0,limit);
-  if(!rows.length)return '';
-  return `<div class="app-ex-emphasis-inline">${rows.map(([name,pct],i)=>
-    `<span class="${i===0?'main':''}"><b>${esc(name)}</b><i>${pct}%</i></span>`
-  ).join('')}</div>`;
-}
-function exerciseEmphasisText(value,limit=2){
-  const rows=exerciseEmphasisRows(value).slice(0,limit);
-  return rows.map(([name,pct])=>`${name} ${pct}%`).join(' · ');
-}
-function exerciseVisualSummaryHTML(value,mode='compact'){
-  const item=exerciseCatalogFor(value);
-  if(!item)return '';
-  const rows=exerciseEmphasisRows(item).slice(0,mode==='full'?5:3);
-  const imgs=exerciseImageUrl(item,'start')||exerciseImageUrl(item,'peak');
-  return `<div class="app-ex-context ${mode}">
-    <div class="app-ex-context-visual">
-      ${mode==='full'
-        ? `<div class="app-ex-context-pair">
-            <div><small>INÍCIO</small>${exerciseVisualThumbHTML(item,'start','context')}</div>
-            <div><small>FIM</small>${exerciseVisualThumbHTML(item,'peak','context')}</div>
-          </div>`
-        : exerciseVisualThumbHTML(item,'peak','context')}
-    </div>
-    <div class="app-ex-context-copy">
-      <small>ONDE PEGA MAIS</small>
-      <strong>${esc(item.name)}</strong>
-      <div class="app-ex-region-list">
-        ${rows.map(([name,pct],i)=>`<div class="${i===0?'primary':''}">
-          <span>${esc(name)}</span>
-          <em><i style="width:${pct}%"></i></em>
-          <b>${pct}%</b>
-        </div>`).join('')}
-      </div>
-      ${mode==='full'?`<button type="button" onclick="openCatalogDetail('${item.key}')">Ver execução completa <span>›</span></button>`:''}
-    </div>
-  </div>`;
-}
-function renderExerciseContextCard(key){
-  const host=document.getElementById('exerciseContextCard');
-  if(!host)return;
-  const item=key?catalogItem(key):null;
-  host.innerHTML=item?exerciseVisualSummaryHTML(item,'full'):'';
-  host.style.display=item?'block':'none';
-}
-function progressExerciseVisualHTML(e){
-  const item=exerciseCatalogFor(e);
-  if(!item)return '';
-  return `<section class="progress-exercise-visual">
-    <div class="progress-exercise-visual-head">
-      <div><small>GUIA DO EXERCÍCIO</small><strong>Execução + regiões mais exigidas</strong></div>
-      <button onclick="openCatalogDetail('${item.key}')">Ver guia completo</button>
-    </div>
-    ${exerciseVisualSummaryHTML(item,'full')}
-  </section>`;
-}
 
-function openExerciseCatalog(){
-  catalogMuscleFilter=state.activeMuscle||'Todos';
-  catalogEquipmentFilter='Todos';
-  document.getElementById('catalogSearch').value='';
-  renderExerciseCatalog();
-  updateRepdbCatalogStatus();
-  openModal('exerciseCatalogModal');
-  loadExpandedRepdbCatalog();
+function exerciseVisualThumbHTML(value,stage='peak',cls=''){
+  const muscle=(value&&value.muscle)||'';
+  return muscleVisualHTML(muscle,cls);
 }
+function exerciseEmphasisRows(){return []}
+function exerciseEmphasisInlineHTML(){return ''}
+function exerciseEmphasisText(){return ''}
+function exerciseVisualSummaryHTML(){return ''}
+function renderExerciseContextCard(){
+  const host=document.getElementById('exerciseContextCard');
+  if(host){host.innerHTML='';host.style.display='none'}
+}
+function progressExerciseVisualHTML(){return ''}
+
+function openExerciseCatalog(){openBlankExerciseModal()}
 function renderExerciseCatalog(){
   const root=document.getElementById('catalogGrid');if(!root)return;
   const q=normCatalog(document.getElementById('catalogSearch')?.value||'');
@@ -7856,17 +7815,11 @@ function addCatalogExercise(key){
   openBlankExerciseModal(item);
 }
 function renderCatalogLinkedInfo(key){
-  const box=document.getElementById('catalogLinkedInfo');
   const input=document.getElementById('catalogKey');
   if(input)input.value=key||'';
-  if(box)box.style.display=key&&catalogItem(key)?'block':'none';
-  renderExerciseContextCard(key||'');
+  renderExerciseContextCard('');
 }
-function openLinkedCatalogInfo(){
-  const key=document.getElementById('catalogKey')?.value||'';
-  if(key&&catalogItem(key))openCatalogDetail(key);
-  else toast('Este exercício ainda não tem guia visual');
-}
+function openLinkedCatalogInfo(){return}
 
 function fillMuscleSelect(){const el=document.getElementById('exerciseMuscle');if(!el)return;el.innerHTML=MUSCLES.map(m=>`<option ${m===state.activeMuscle?'selected':''}>${m}</option>`).join('')}
 function muscleHasPrep(muscle,excludeId=''){return isPrepared(muscle)||state.exercises.some(e=>e.gymId===state.activeGym&&e.muscle===muscle&&e.usePrep&&e.id!==excludeId&&e.updatedAt&&state.muscleStartedAt&&e.updatedAt>=state.muscleStartedAt)}
@@ -8208,7 +8161,7 @@ function saveCalibrationResult(){
   saveExercise();
 }
 function openExerciseModal(){
-  openExerciseCatalog();
+  openBlankExerciseModal();
 }
 function openBlankExerciseModal(prefill=null){
   currentEditingHistoryId=null;
@@ -8247,10 +8200,10 @@ function openBlankExerciseModal(prefill=null){
   };
 
   renderCatalogLinkedInfo(prefill?.key||'');
-  document.getElementById('modalTitle').textContent=prefill?'＋ Adicionar exercício':'＋ Criar exercício';
-  document.getElementById('modalSubtitle').textContent=prefill?'O nome já veio da biblioteca, mas você pode editar.':'Crie um exercício personalizado para esta academia.';
+  document.getElementById('modalTitle').textContent='＋ Adicionar exercício';
+  document.getElementById('modalSubtitle').textContent='Escolha o grupo muscular e dê o nome que você usa para esse exercício.';
   document.getElementById('targetRepsLabel').textContent='Meta de reps · opcional';
-  document.getElementById('saveExerciseBtn').textContent='Adicionar à biblioteca';
+  document.getElementById('saveExerciseBtn').textContent='Adicionar exercício';
 
   renderLastWorkoutBox(null);
   renderSetEditors();
@@ -8851,7 +8804,6 @@ function renderHistory(){
 renderProgressOverview=progressRenderOverviewV3;
 
 showAuthGate('login');
-loadExpandedRepdbCatalog();
 initSupabase();
 </script>
 </body>
