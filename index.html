@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   6.5 — DESKTOP MODAL SCROLL FIX
+   6.6 — HISTORY HUB / CALENDAR GLOBAL / SESSION DAY FIX
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -3850,6 +3850,180 @@ select{
     background-clip:padding-box;
   }
 }
+
+/* =========================================================
+   6.6 — distinct History hub + clear editing affordance
+   ========================================================= */
+.history-hub{
+  width:min(980px,100%);
+  margin:0 auto;
+  padding:2px 0 28px;
+}
+.history-hub-hero{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(280px,.58fr);
+  align-items:center;
+  gap:18px;
+  padding:20px;
+  border:1px solid rgba(203,255,56,.18);
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(203,255,56,.08),transparent 34%),
+    linear-gradient(135deg,#11180f,#0c1115);
+}
+.history-hub-hero>div>small{
+  color:var(--app-accent);
+  font-size:7px;
+  letter-spacing:.12em;
+  font-weight:950;
+}
+.history-hub-hero h4{
+  margin:6px 0 6px;
+  color:#f1f5f7;
+  font-size:22px;
+  line-height:1.06;
+  letter-spacing:-.04em;
+}
+.history-hub-hero p{
+  margin:0;
+  max-width:520px;
+  color:#85919c;
+  font-size:8px;
+  line-height:1.5;
+}
+.history-hub-primary{
+  min-height:72px;
+  padding:11px 12px;
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr) 18px;
+  align-items:center;
+  gap:10px;
+  border:1px solid rgba(203,255,56,.25);
+  border-radius:16px;
+  background:#121b0d;
+  color:#e8f2dc;
+  text-align:left;
+}
+.history-hub-primary>span:first-child{
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border-radius:13px;
+  background:var(--app-accent);
+  color:#090d04;
+  font-size:17px;
+  font-weight:1000;
+}
+.history-hub-primary>span:nth-child(2){
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+.history-hub-primary strong{font-size:9px}
+.history-hub-primary small{margin-top:3px;color:#82916f;font-size:6.5px}
+.history-hub-primary i{font-style:normal;color:var(--app-accent);font-size:16px}
+
+.history-hub-section-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:end;
+  margin:22px 2px 10px;
+}
+.history-hub-section-head>div strong{
+  display:block;
+  color:#edf2f4;
+  font-size:11px;
+}
+.history-hub-section-head>div span,
+.history-hub-section-head>span{
+  display:block;
+  margin-top:3px;
+  color:#6f7b86;
+  font-size:7px;
+}
+.history-hub-days{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+  margin-bottom:18px;
+}
+.history-hub-day{
+  min-width:0;
+  min-height:76px;
+  padding:10px 11px;
+  display:grid;
+  grid-template-columns:52px minmax(0,1fr) auto;
+  align-items:center;
+  gap:10px;
+  border:1px solid #202a32;
+  border-radius:15px;
+  background:#0c1115;
+  color:#e4eaee;
+  text-align:left;
+}
+.history-hub-day:hover{
+  border-color:#34414b;
+  background:#10171c;
+}
+.history-hub-date{
+  width:52px;height:52px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border-radius:13px;
+  background:#131b10;
+}
+.history-hub-date strong{
+  color:var(--app-accent);
+  font-size:11px;
+  text-transform:uppercase;
+}
+.history-hub-date small{
+  margin-top:2px;
+  color:#77836d;
+  font-size:6px;
+  text-transform:uppercase;
+}
+.history-hub-day-copy{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+.history-hub-day-copy strong{font-size:9px}
+.history-hub-day-copy small{
+  margin-top:4px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  color:#73808a;
+  font-size:6.5px;
+}
+.history-hub-edit{
+  color:#84919a;
+  font-size:7px;
+  font-weight:900;
+}
+.history-hub-empty{
+  grid-column:1/-1;
+  padding:18px;
+  border:1px dashed #28333b;
+  border-radius:15px;
+  background:#0b1014;
+}
+.history-hub-empty strong{display:block;font-size:10px}
+.history-hub-empty span{display:block;margin-top:5px;color:#77838d;font-size:7px}
+
+@media(max-width:899px){
+  .history-hub-hero{
+    grid-template-columns:1fr;
+    padding:15px;
+  }
+  .history-hub-hero h4{font-size:18px}
+  .history-hub-days{grid-template-columns:1fr}
+  .history-hub-primary{min-height:66px}
+  .history-hub-section-head{align-items:flex-start}
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -4210,7 +4384,7 @@ select{
 
 <div class="modal" id="historyModal" onclick="backdropClose(event,'historyModal')"><div class="progress-sheet">
   <div class="progress-appbar">
-    <div class="progress-appbar-copy"><small id="progressGymName">ACADEMIA</small><h3>Seu progresso</h3><p>Veja de forma simples onde você está evoluindo.</p></div>
+    <div class="progress-appbar-copy"><small id="progressGymName">ACADEMIA</small><h3 id="historyModalTitle">Seu progresso</h3><p id="historyModalSubtitle">Veja de forma simples onde você está evoluindo.</p></div>
     <button class="progress-close" onclick="closeModal('historyModal')" aria-label="Fechar progresso">✕</button>
   </div>
   <select id="historyExercise" hidden onchange="renderHistory()"></select>
@@ -4373,7 +4547,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='6.5';
+const APP_BUILD_VERSION='6.6';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -4859,7 +5033,7 @@ async function loadCloudState(manual=false){
 }
 
 
-function editHistory(id){return openHistoryDayEditor(id)}
+function editHistory(id){return openHistoryRecord(id)}
 function historyEntriesForSessionDay(day){
   return (state.history||[])
     .filter(h=>!h.referenceOnly&&sessionDayFromHistory(h)===day)
@@ -4889,7 +5063,7 @@ function renderHistoryDayEditor(){
         <strong>${esc(h.name||'Exercício')}</strong>
         <span>${esc(workText||'Registro salvo')}</span>
       </div>
-      <button class="btn secondary" onclick="closeModal('historyDayModal');editHistory('${h.id}')">Editar</button>
+      <button class="btn secondary" onclick="closeModal('historyDayModal');openHistoryRecord('${h.id}')">Editar</button>
     </article>`;
   }).join('')}</div>`;
 }
@@ -6701,7 +6875,7 @@ function saveExercise(){
   if(currentEditingHistoryId){
     const idx=state.history.findIndex(h=>h.id===currentEditingHistoryId);
     if(idx>=0){const old=state.history[idx];state.history[idx]={...old,exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay,old.date),workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate,sessionDay:performedDay,editedAt:now}}
-  }else{state.history.push({id:uid(),exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay),createdAt:now,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate})}
+  }else{state.history.push({id:uid(),exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay),sessionDay:performedDay,createdAt:now,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate})}
   if(usePrep&&!referenceOnly&&performedDay===todayKey()){markPrepared(muscle);if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle]}recomputePreparedToday();state.activeMuscle=muscle;if(!state.muscleStartedAt)state.muscleStartedAt=now;persist();closeModal('exerciseModal');render();toast(currentEditingHistoryId?'Registro atualizado':performedDay!==todayKey()?'Treino de '+new Date(isoForPerformedDate(performedDay)).toLocaleDateString('pt-BR')+' salvo':referenceOnly?'Referência salva':progressionToastText(ex.id));currentEditingHistoryId=null
 }
 function openHistoryRecord(historyId){
@@ -6713,7 +6887,7 @@ function openHistoryRecord(historyId){
     if(!currentSets.warmup.length)currentSets.warmup.push(blankSet());while(currentSets.feeder.length<2)currentSets.feeder.push(blankSet());if(!currentSets.pap.length)currentSets.pap.push(blankSet());while(currentSets.work.length<2)currentSets.work.push(blankSet());
     const modal=document.getElementById('exerciseModal');modal.classList.remove('new-exercise-mode');document.getElementById('editId').value=e.id;document.getElementById('entryModeBox').style.display='grid';
     fillMuscleSelect();document.getElementById('exerciseMuscle').value=h.muscle||e.muscle;document.getElementById('exerciseName').value=h.name||e.name;renderCatalogLinkedInfo(catalogKeyFromExercise(e));document.getElementById('exerciseNote').value=e.note||'';document.getElementById('targetKg').value=e.targetKg||'';document.getElementById('targetReps').value=e.targetReps||'';
-    document.getElementById('usePrep').checked=recordHasPrep(h);document.getElementById('performedDate').value=performedDayFromIso(h.date);document.getElementById('firstTimeNote').classList.remove('show');document.getElementById('targetKgField').style.display='';document.getElementById('targetRepsLabel').textContent='Meta de reps';
+    document.getElementById('usePrep').checked=recordHasPrep(h);document.getElementById('performedDate').value=sessionDayFromHistory(h);document.getElementById('firstTimeNote').classList.remove('show');document.getElementById('targetKgField').style.display='';document.getElementById('targetRepsLabel').textContent='Meta de reps';
     document.getElementById('modalTitle').textContent='✎ Editar registro';document.getElementById('modalSubtitle').textContent='Altere cargas, séries ou o dia realizado se precisar.';document.getElementById('saveExerciseBtn').textContent='Salvar alterações';document.getElementById('deleteExerciseBtn').style.display='none';
     const rb=document.getElementById('recordBanner');rb.classList.add('show');document.getElementById('recordBannerText').textContent=`${fmtDate(h.date)} · ${e.name}${h.editedAt?' · já editado':''}`;document.getElementById('recordActions').classList.add('show');
     currentCalibration={tests:JSON.parse(JSON.stringify(h.sets?.calibration||[blankSet(),blankSet(),blankSet()])),work:JSON.parse(JSON.stringify(h.sets?.work||[blankSet(),blankSet()])),approx:!!h.approximate};ensureCalibration();
@@ -6740,8 +6914,8 @@ function progressExerciseStats(e){
 }
 function openHistoryModal(){
   fillHistorySelect();
-  const g=document.getElementById('progressGymName');if(g)g.textContent=gym()?.name||'Academia';
-  document.getElementById('historyExercise').value='';renderHistory();openModal('historyModal');
+  document.getElementById('progressGymName').textContent=(gym()?.name||'ACADEMIA').toUpperCase();
+  openModal('historyModal');
 }
 function renderProgressOverview(){
   const xs=state.exercises.filter(e=>e.gymId===state.activeGym), records=state.history.filter(h=>h.gymId===state.activeGym), stats=xs.map(e=>({e,...progressExerciseStats(e)}));
@@ -6798,12 +6972,13 @@ function navHome(btn){
 }
 function navHistory(btn){
   setNavActive(btn);
-  openHistoryModal();
-  setTimeout(()=>document.querySelector('.progress-calendar')?.scrollIntoView({behavior:'smooth',block:'start'}),100);
+  openHistoryHub();
 }
 function navProgress(btn){
   setNavActive(btn);
   openHistoryModal();
+  setHistoryModalMode('progress');
+  renderProgressOverview();
 }
 function navExercises(btn){
   setNavActive(btn);
@@ -6811,9 +6986,86 @@ function navExercises(btn){
   showAppScreen('exerciseScreen');
   toggleLibrary(true);
 }
+
+function setHistoryModalMode(mode){
+  const title=document.getElementById('historyModalTitle');
+  const subtitle=document.getElementById('historyModalSubtitle');
+  const gymLabel=document.getElementById('progressGymName');
+
+  if(mode==='history'){
+    if(title)title.textContent='Histórico de treinos';
+    if(subtitle)subtitle.textContent='Consulte e edite treinos de qualquer dia.';
+    if(gymLabel)gymLabel.textContent='TODAS AS ACADEMIAS';
+  }else{
+    if(title)title.textContent='Seu progresso';
+    if(subtitle)subtitle.textContent='Veja de forma simples onde você está evoluindo.';
+    if(gymLabel)gymLabel.textContent=(gym()?.name||'ACADEMIA').toUpperCase();
+  }
+}
+function historyDayGroups(){
+  const map=new Map();
+  (state.history||[])
+    .filter(h=>!h.referenceOnly)
+    .forEach(h=>{
+      const day=sessionDayFromHistory(h);
+      if(!map.has(day))map.set(day,[]);
+      map.get(day).push(h);
+    });
+  return [...map.entries()]
+    .sort((a,b)=>b[0].localeCompare(a[0]))
+    .map(([day,entries])=>({day,entries:entries.sort((a,b)=>(a.date||'').localeCompare(b.date||''))}));
+}
+function renderHistoryHub(){
+  const root=document.getElementById('historyContent');if(!root)return;
+  const groups=historyDayGroups();
+  const recent=groups.slice(0,12);
+
+  root.innerHTML=`<div class="history-hub">
+    <div class="history-hub-hero">
+      <div>
+        <small>EDITAR TREINOS PASSADOS</small>
+        <h4>Escolha o dia e corrija o que precisar</h4>
+        <p>Você pode alterar carga, reps, RIR e até a data de exercícios já registrados.</p>
+      </div>
+      <button class="history-hub-primary" onclick="openHistoryDayEditor()">
+        <span>✎</span>
+        <span><strong>Editar treino por dia</strong><small>Abrir calendário e escolher uma data</small></span>
+        <i>›</i>
+      </button>
+    </div>
+
+    <div class="history-hub-section-head">
+      <div><strong>Treinos recentes</strong><span>Independente da academia em que você treinou.</span></div>
+      <span>${groups.length} dia${groups.length===1?'':'s'} com treino</span>
+    </div>
+
+    <div class="history-hub-days">
+      ${recent.length?recent.map(g=>{
+        const gyms=[...new Set(g.entries.map(h=>(state.gyms||[]).find(x=>x.id===h.gymId)?.name||'Academia'))];
+        const muscles=[...new Set(g.entries.map(h=>h.muscle).filter(Boolean))];
+        return `<button class="history-hub-day" onclick="openHistoryDayEditor('${g.day}')">
+          <span class="history-hub-date"><strong>${new Date(g.day+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'})}</strong><small>${new Date(g.day+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'short'})}</small></span>
+          <span class="history-hub-day-copy">
+            <strong>${g.entries.length} exercício${g.entries.length===1?'':'s'}</strong>
+            <small>${esc(muscles.join(' · ')||'Treino')} · ${esc(gyms.join(' + '))}</small>
+          </span>
+          <span class="history-hub-edit">Editar ›</span>
+        </button>`;
+      }).join(''):`<div class="history-hub-empty"><strong>Ainda não há treinos salvos.</strong><span>Quando você registrar um treino, ele aparecerá aqui.</span></div>`}
+    </div>
+
+    ${monthCalendarHTML()}
+  </div>`;
+}
+function openHistoryHub(){
+  openHistoryModal();
+  setHistoryModalMode('history');
+  renderHistoryHub();
+}
+
 function monthCalendarHTML(){
   const now=new Date(),y=now.getFullYear(),m=now.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0),days=last.getDate();
-  const trained=new Set(state.history.filter(h=>h.gymId===state.activeGym).map(h=>new Date(h.date).toLocaleDateString('sv-SE')));
+  const trained=new Set((state.history||[]).filter(h=>!h.referenceOnly).map(sessionDayFromHistory));
   const monthKeys=[...trained].filter(k=>{const d=new Date(k+'T12:00:00');return d.getFullYear()===y&&d.getMonth()===m});
   const weekdays=['D','S','T','Q','Q','S','S'];let cells=weekdays.map(x=>`<div class="cal-weekday">${x}</div>`).join('');
   for(let i=0;i<first.getDay();i++)cells+='<div class="cal-day empty"></div>';
@@ -6928,11 +7180,8 @@ function progressMuscleCardHTML(mi,index){
 }
 function openHistoryModal(){
   fillHistorySelect();
-  const g=document.getElementById('progressGymName');if(g)g.textContent=(gym()?.name||'Academia').toUpperCase();
-  progressViewMuscle='';progressViewExercise='';progressMetric='load';
-  const sel=document.getElementById('historyExercise');if(sel)sel.value='';
-  renderProgressOverview();openModal('historyModal');
-  document.querySelector('#historyModal .progress-sheet')?.scrollTo({top:0});
+  document.getElementById('progressGymName').textContent=(gym()?.name||'ACADEMIA').toUpperCase();
+  openModal('historyModal');
 }
 function progressRenderOverviewV3(){
   progressViewMuscle='';progressViewExercise='';
