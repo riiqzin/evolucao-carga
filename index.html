@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   6.2 — PUBLIC APP AUTH / MULTI-USER EXPERIENCE
+   6.3 — PUBLIC APP AUTH / RESPONSIVE DESKTOP + MOBILE
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -2940,6 +2940,801 @@ body.auth-locked .fab{display:none!important}
   transform:scale(.98);
   border-color:#3a4650;
 }
+
+/* =========================================================
+   6.3 — RESPONSIVE APP
+   Mobile remains app-like; desktop becomes a real dashboard.
+   ========================================================= */
+
+.desktop-header-copy,
+.desktop-nav-brand,
+.desktop-nav-section-label,
+.desktop-nav-spacer,
+.desktop-gym-card,
+.desktop-account-button{
+  display:none;
+}
+
+/* Small quality-of-life improvements shared by every size */
+button,
+[role="button"],
+label,
+select{
+  touch-action:manipulation;
+}
+.modal,
+.sheet,
+.progress-sheet{
+  overscroll-behavior:contain;
+}
+.exercise-card,
+.home-tools button,
+.home-main-action,
+.muscle,
+.catalog-card{
+  -webkit-user-select:none;
+  user-select:none;
+}
+
+/* ---------------------------------------------------------
+   MOBILE / TABLET
+   --------------------------------------------------------- */
+@media(max-width:899px){
+  html{-webkit-text-size-adjust:100%}
+  body{
+    min-height:100dvh;
+    padding-bottom:calc(78px + env(safe-area-inset-bottom));
+  }
+
+  .mobile-app-shell{
+    width:100%;
+    min-height:100dvh;
+    padding-bottom:calc(86px + env(safe-area-inset-bottom));
+  }
+
+  .mobile-header{
+    min-height:76px;
+    height:auto;
+    padding-top:calc(10px + env(safe-area-inset-top));
+  }
+
+  /* Prevent iOS from zooming the viewport when a field receives focus */
+  input,
+  select,
+  textarea,
+  .input,
+  .select,
+  .picker-select,
+  .auth-field input{
+    font-size:16px!important;
+  }
+
+  button,
+  .btn,
+  .iconbtn,
+  .close,
+  .screen-add{
+    min-height:44px;
+  }
+
+  .mobile-bottom-nav{
+    height:calc(72px + env(safe-area-inset-bottom))!important;
+    padding-bottom:calc(7px + env(safe-area-inset-bottom))!important;
+  }
+
+  .mobile-bottom-nav button{
+    min-height:52px;
+  }
+
+  .modal{
+    align-items:flex-end;
+  }
+
+  .sheet{
+    width:100%;
+    max-height:94dvh;
+    padding-bottom:calc(24px + env(safe-area-inset-bottom));
+  }
+
+  .toast{
+    max-width:calc(100vw - 28px);
+  }
+
+  .today-selection-status{
+    margin-bottom:14px;
+  }
+}
+
+/* Comfortable intermediate layout for landscape tablets */
+@media(min-width:700px) and (max-width:899px){
+  body{padding-left:18px;padding-right:18px}
+  .mobile-app-shell{
+    max-width:760px;
+    min-height:calc(100dvh - 36px);
+    margin:18px auto;
+    border:1px solid #1a2129;
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 28px 80px rgba(0,0,0,.3);
+  }
+  .mobile-bottom-nav{
+    width:min(calc(100% - 36px),760px)!important;
+    bottom:18px!important;
+    border:1px solid #1a2129!important;
+    border-radius:0 0 28px 28px!important;
+  }
+}
+
+/* ---------------------------------------------------------
+   DESKTOP — 900px+
+   --------------------------------------------------------- */
+@media(min-width:900px){
+  :root{
+    --desktop-sidebar:232px;
+    --desktop-gap:26px;
+  }
+
+  html{
+    background:#07090c;
+  }
+
+  body{
+    min-height:100vh;
+    padding:22px 26px 22px calc(var(--desktop-sidebar) + 48px)!important;
+    background:
+      radial-gradient(circle at 75% -15%,rgba(203,255,56,.075),transparent 31%),
+      radial-gradient(circle at -5% 72%,rgba(86,116,137,.055),transparent 28%),
+      #07090c!important;
+  }
+
+  /* Main application canvas */
+  .mobile-app-shell{
+    width:min(100%,1320px)!important;
+    min-height:calc(100vh - 44px)!important;
+    margin:0 auto!important;
+    padding:0 0 34px!important;
+    border:1px solid #192129!important;
+    border-radius:28px!important;
+    overflow:visible!important;
+    background:
+      linear-gradient(180deg,rgba(12,16,20,.94),rgba(8,11,14,.98))!important;
+    box-shadow:
+      0 30px 90px rgba(0,0,0,.34),
+      inset 0 1px 0 rgba(255,255,255,.015)!important;
+  }
+
+  /* Left navigation */
+  .mobile-bottom-nav{
+    position:fixed!important;
+    z-index:60!important;
+    left:22px!important;
+    top:22px!important;
+    bottom:22px!important;
+    transform:none!important;
+    width:var(--desktop-sidebar)!important;
+    height:auto!important;
+    padding:16px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:5px!important;
+    border:1px solid #1c252d!important;
+    border-radius:25px!important;
+    background:
+      linear-gradient(180deg,#0d1217 0%,#090d11 100%)!important;
+    box-shadow:0 24px 70px rgba(0,0,0,.34)!important;
+  }
+
+  .desktop-nav-brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:3px 4px 22px;
+    margin-bottom:8px;
+    border-bottom:1px solid #192129;
+  }
+
+  .desktop-nav-logo{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    display:grid;
+    place-items:center;
+    flex:0 0 auto;
+    background:var(--app-accent);
+    color:#080b04;
+    font-size:21px;
+    font-weight:1000;
+    box-shadow:0 10px 26px rgba(203,255,56,.12);
+  }
+
+  .desktop-nav-brand>div:last-child{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .desktop-nav-brand small{
+    color:#74808c;
+    font-size:7px;
+    letter-spacing:.16em;
+    font-weight:950;
+  }
+
+  .desktop-nav-brand strong{
+    margin-top:3px;
+    color:#f1f5f7;
+    font-size:13px;
+    letter-spacing:-.025em;
+  }
+
+  .desktop-nav-section-label{
+    display:block;
+    padding:8px 9px 5px;
+    color:#57636e;
+    font-size:7px;
+    letter-spacing:.15em;
+    font-weight:950;
+  }
+
+  .mobile-bottom-nav>button:not(.desktop-account-button){
+    width:100%!important;
+    min-height:48px!important;
+    padding:0 12px!important;
+    display:grid!important;
+    grid-template-columns:30px 1fr!important;
+    align-items:center!important;
+    justify-items:start!important;
+    gap:9px!important;
+    border:1px solid transparent!important;
+    border-radius:13px!important;
+    background:transparent!important;
+    color:#7d8994!important;
+    text-align:left!important;
+    font-size:9px!important;
+    font-weight:900!important;
+    transition:
+      background .16s ease,
+      border-color .16s ease,
+      color .16s ease,
+      transform .16s ease!important;
+  }
+
+  .mobile-bottom-nav>button:not(.desktop-account-button):hover{
+    background:#11181e!important;
+    color:#dfe6eb!important;
+  }
+
+  .mobile-bottom-nav>button:not(.desktop-account-button).active{
+    background:linear-gradient(90deg,rgba(203,255,56,.12),rgba(203,255,56,.035))!important;
+    border-color:rgba(203,255,56,.16)!important;
+    color:var(--app-accent)!important;
+  }
+
+  .mobile-bottom-nav>button:not(.desktop-account-button) .nav-ico{
+    width:30px!important;
+    height:30px!important;
+    display:grid!important;
+    place-items:center!important;
+    margin:0!important;
+    border-radius:10px!important;
+    background:#11171d!important;
+    color:inherit!important;
+    font-size:14px!important;
+  }
+
+  .mobile-bottom-nav>button:not(.desktop-account-button).active .nav-ico{
+    background:var(--app-accent)!important;
+    color:#080b04!important;
+  }
+
+  .mobile-bottom-nav>button:not(.desktop-account-button)>span:last-child{
+    font-size:9px!important;
+  }
+
+  .desktop-nav-spacer{
+    display:block;
+    flex:1;
+    min-height:18px;
+  }
+
+  .desktop-gym-card{
+    display:block;
+    margin-top:8px;
+    padding:11px;
+    border:1px solid #1d2730;
+    border-radius:14px;
+    background:#0b1014;
+  }
+
+  .desktop-gym-card>span{
+    display:block;
+    margin-bottom:6px;
+    color:#5f6b76;
+    font-size:6.5px;
+    letter-spacing:.13em;
+    font-weight:950;
+  }
+
+  .desktop-gym-card select{
+    width:100%;
+    border:0;
+    outline:0;
+    padding:0 18px 0 0;
+    background:transparent;
+    color:#e4e9ed;
+    font-size:9px;
+    font-weight:900;
+  }
+
+  .desktop-account-button{
+    min-height:58px!important;
+    margin-top:8px!important;
+    padding:8px!important;
+    display:grid!important;
+    grid-template-columns:36px minmax(0,1fr) 16px!important;
+    align-items:center!important;
+    gap:9px!important;
+    border:1px solid #1d2730!important;
+    border-radius:15px!important;
+    background:#0b1014!important;
+    color:#e4e9ed!important;
+    text-align:left!important;
+  }
+
+  .desktop-account-button:hover{
+    background:#11181e!important;
+    border-color:#2b3741!important;
+  }
+
+  .desktop-account-avatar{
+    width:36px;
+    height:36px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:#17210f;
+    color:var(--app-accent);
+    font-size:11px;
+    font-weight:1000;
+  }
+
+  .desktop-account-copy{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .desktop-account-copy strong,
+  .desktop-account-copy small{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+  }
+
+  .desktop-account-copy strong{font-size:8px}
+  .desktop-account-copy small{margin-top:3px;color:#66727d;font-size:6.5px}
+  .desktop-account-button i{font-style:normal;color:#596570;font-size:16px}
+
+  /* Top toolbar */
+  .mobile-header{
+    position:sticky!important;
+    top:0!important;
+    z-index:34!important;
+    min-height:78px!important;
+    height:78px!important;
+    padding:13px 22px!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto auto!important;
+    align-items:center!important;
+    gap:10px!important;
+    border-bottom:1px solid #182129!important;
+    border-radius:28px 28px 0 0!important;
+    background:rgba(9,13,16,.90)!important;
+    backdrop-filter:blur(22px)!important;
+    -webkit-backdrop-filter:blur(22px)!important;
+  }
+
+  .mobile-brand{display:none!important}
+
+  .desktop-header-copy{
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+  }
+
+  .desktop-header-copy small{
+    color:#687580;
+    font-size:7px;
+    letter-spacing:.09em;
+    font-weight:900;
+  }
+
+  .desktop-header-copy strong{
+    margin-top:4px;
+    color:#edf1f4;
+    font-size:18px;
+    letter-spacing:-.035em;
+  }
+
+  .mobile-gym-pill{
+    width:190px!important;
+    min-height:50px;
+    padding:9px 34px 9px 12px!important;
+    justify-self:auto!important;
+    border-radius:14px!important;
+    background:#0d1318!important;
+  }
+
+  .mobile-settings{
+    width:50px!important;
+    height:50px!important;
+    border-radius:14px!important;
+  }
+
+  /* Pages */
+  .mobile-pages{
+    padding:0!important;
+  }
+
+  .app-page{
+    padding:24px!important;
+  }
+
+  #homeScreen.app-page.active{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.65fr) minmax(290px,.65fr)!important;
+    align-items:start!important;
+    gap:20px!important;
+  }
+
+  .mobile-home{
+    margin:0!important;
+    padding:25px!important;
+    min-height:calc(100vh - 150px);
+    border:1px solid #1e282f!important;
+    border-radius:22px!important;
+    background:
+      radial-gradient(circle at 90% 0%,rgba(203,255,56,.055),transparent 34%),
+      #0b1014!important;
+    box-shadow:none!important;
+  }
+
+  .mobile-home .home-kicker{
+    font-size:8px!important;
+    letter-spacing:.14em!important;
+  }
+
+  .mobile-home>h1{
+    max-width:760px;
+    margin-top:8px!important;
+    font-size:clamp(30px,3vw,46px)!important;
+    line-height:.98!important;
+    letter-spacing:-.055em!important;
+  }
+
+  .mobile-home>p{
+    max-width:650px;
+    font-size:11px!important;
+    line-height:1.55!important;
+  }
+
+  .home-main-action{
+    max-width:560px!important;
+    min-height:70px!important;
+    margin-top:20px!important;
+    border-radius:16px!important;
+  }
+
+  .home-tools{
+    position:sticky;
+    top:102px;
+    margin:0!important;
+    padding:0!important;
+    display:grid!important;
+    gap:10px!important;
+  }
+
+  .home-tools:before{
+    content:'ATALHOS';
+    display:block;
+    padding:0 2px 2px;
+    color:#66727e;
+    font-size:7px;
+    letter-spacing:.14em;
+    font-weight:950;
+  }
+
+  .home-tools button{
+    min-height:82px!important;
+    padding:13px!important;
+    grid-template-columns:44px 1fr 18px!important;
+    border:1px solid #1e282f!important;
+    border-radius:17px!important;
+    background:#0c1116!important;
+  }
+
+  .home-tools button:hover{
+    border-color:#2e3b45!important;
+    background:#10171c!important;
+    transform:translateY(-1px);
+  }
+
+  .home-tools .tool-icon{
+    width:44px!important;
+    height:44px!important;
+    border-radius:13px!important;
+  }
+
+  .home-tools strong{font-size:10px!important}
+  .home-tools small{font-size:7px!important}
+
+  /* Today timeline gets more breathing room */
+  .today-list.mobile-timeline{
+    margin-top:20px!important;
+  }
+
+  .mobile-timeline .upcoming-row,
+  .mobile-timeline .done-row{
+    padding-left:12px!important;
+    padding-right:12px!important;
+    border-radius:14px!important;
+  }
+
+  /* Exercise library */
+  #exerciseScreen.app-page.active{
+    display:block!important;
+  }
+
+  .mobile-library{
+    margin:0!important;
+    padding:0!important;
+    max-width:none!important;
+  }
+
+  .mobile-screen-head{
+    padding:2px 2px 20px!important;
+  }
+
+  .mobile-screen-head h2{
+    font-size:30px!important;
+  }
+
+  .mobile-filter-title{
+    margin-bottom:10px!important;
+  }
+
+  .mobile-muscle-scroll{
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    gap:8px!important;
+    overflow:visible!important;
+    margin:0 0 24px!important;
+    padding:0!important;
+  }
+
+  .mobile-muscle-scroll .muscle{
+    width:100%!important;
+    min-height:58px!important;
+    padding:9px 10px!important;
+    justify-content:flex-start!important;
+    border-radius:14px!important;
+  }
+
+  .mobile-muscle-scroll .muscle strong{
+    font-size:8px!important;
+  }
+
+  .mobile-muscle-scroll .muscle-icon{
+    width:28px!important;
+    height:28px!important;
+    border-radius:9px!important;
+  }
+
+  .mobile-exercise-heading{
+    margin-top:6px!important;
+    padding-top:16px!important;
+    border-top:1px solid #182129!important;
+  }
+
+  .mobile-exercise-list{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+
+  .mobile-exercise-list .exercise-card{
+    min-width:0;
+    padding:14px!important;
+    border:1px solid #1d2730!important;
+    border-radius:17px!important;
+    background:#0c1116!important;
+  }
+
+  .mobile-exercise-list .exercise-card:hover{
+    border-color:#303d47!important;
+    background:#10171c!important;
+  }
+
+  .mobile-exercise-list .exercise-head{
+    grid-template-columns:46px minmax(0,1fr) auto!important;
+  }
+
+  .mobile-exercise-list .exercise-index{
+    width:46px!important;
+    height:46px!important;
+  }
+
+  .mobile-exercise-list .exercise-title strong{
+    font-size:11px!important;
+  }
+
+  .mobile-exercise-list .chips{
+    margin-left:57px!important;
+  }
+
+  /* Desktop modals: centered panels rather than phone bottom sheets */
+  .modal{
+    align-items:center!important;
+    padding:26px!important;
+    background:rgba(3,5,7,.78)!important;
+  }
+
+  .sheet{
+    width:min(900px,calc(100vw - 320px))!important;
+    max-height:88vh!important;
+    padding:20px 22px 24px!important;
+    border:1px solid #26313a!important;
+    border-radius:24px!important;
+    box-shadow:0 34px 110px rgba(0,0,0,.48)!important;
+  }
+
+  .grab{display:none!important}
+
+  #todayModal .sheet{
+    width:min(980px,calc(100vw - 320px))!important;
+  }
+
+  #settingsModal .sheet{
+    width:min(720px,calc(100vw - 320px))!important;
+  }
+
+  #exerciseModal .sheet{
+    width:min(980px,calc(100vw - 320px))!important;
+  }
+
+  .catalog-sheet,
+  .catalog-detail-sheet{
+    width:min(1080px,calc(100vw - 320px))!important;
+    max-height:90vh!important;
+    border-radius:24px!important;
+  }
+
+  .catalog-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+
+  .catalog-card{
+    min-height:122px!important;
+  }
+
+  .progress-sheet{
+    width:min(1160px,calc(100vw - 320px))!important;
+    height:min(88vh,900px)!important;
+    max-height:88vh!important;
+    margin:0!important;
+    border:1px solid #26313a!important;
+    border-radius:24px!important;
+    overflow:hidden!important;
+    box-shadow:0 34px 110px rgba(0,0,0,.48)!important;
+  }
+
+  .progress-content{
+    padding-bottom:28px!important;
+  }
+
+  /* Desktop auth: use the available screen rather than showing a phone card */
+  .auth-gate{
+    padding:36px!important;
+  }
+
+  .auth-shell{
+    width:min(940px,100%)!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 400px!important;
+    grid-template-areas:
+      "brand tabs"
+      "hero warning"
+      "hero pane"
+      ". message"!important;
+    column-gap:70px!important;
+    row-gap:10px!important;
+    align-items:start!important;
+  }
+
+  .auth-brand{grid-area:brand;margin:0 0 48px!important}
+  .auth-hero{grid-area:hero;margin:0!important;padding-top:12px}
+  .auth-config-warning{grid-area:warning}
+  .auth-tabs{grid-area:tabs;margin:0 0 8px!important}
+  .auth-pane{grid-area:pane}
+  .auth-message{grid-area:message}
+
+  .auth-hero h1{
+    max-width:480px;
+    font-size:48px!important;
+  }
+
+  .auth-hero p{
+    max-width:460px;
+    font-size:11px!important;
+  }
+
+  .auth-pane.active{
+    padding:18px;
+    border:1px solid #1d2730;
+    border-radius:20px;
+    background:#0b1014;
+    box-shadow:0 24px 70px rgba(0,0,0,.2);
+  }
+
+  .auth-field input{
+    height:52px!important;
+    font-size:11px!important;
+  }
+
+  .onboarding-shell{
+    width:min(560px,100%)!important;
+    padding:24px!important;
+    border:1px solid #1e282f;
+    border-radius:24px;
+    background:#0b1014;
+    box-shadow:0 30px 90px rgba(0,0,0,.34);
+  }
+
+  /* Desktop hover/focus polish */
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible{
+    outline:2px solid rgba(203,255,56,.55)!important;
+    outline-offset:2px!important;
+  }
+
+  button:hover{
+    transition-duration:.14s;
+  }
+
+  /* Old mobile floating CTA is redundant on a desktop dashboard */
+  .fab{
+    display:none!important;
+  }
+
+  .toast{
+    left:auto!important;
+    right:28px!important;
+    bottom:28px!important;
+    transform:none!important;
+    width:auto!important;
+    max-width:380px!important;
+  }
+}
+
+/* Wider desktop: three exercise cards and more generous canvas */
+@media(min-width:1280px){
+  .mobile-exercise-list{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+
+  .catalog-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+}
+
+/* Prevent giant layouts on ultra-wide screens */
+@media(min-width:1700px){
+  .mobile-app-shell{
+    max-width:1380px!important;
+  }
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -3068,6 +3863,11 @@ body.auth-locked .fab{display:none!important}
       </div>
     </div>
 
+    <div class="desktop-header-copy">
+      <small id="desktopTodayLabel">SEU PAINEL</small>
+      <strong>Treino e evolução</strong>
+    </div>
+
     <label class="mobile-gym-pill" aria-label="Trocar academia">
       <span>Academia</span>
       <strong id="gymName">EVOQUE</strong>
@@ -3155,17 +3955,40 @@ body.auth-locked .fab{display:none!important}
 <div class="toast" id="toast"></div>
 
 <nav class="app-nav mobile-bottom-nav" id="appNav">
-  <button class="active" onclick="navHome(this)">
+  <div class="desktop-nav-brand">
+    <div class="desktop-nav-logo">↗</div>
+    <div><small>EVOLUÇÃO</small><strong>de Carga</strong></div>
+  </div>
+
+  <div class="desktop-nav-section-label">NAVEGAÇÃO</div>
+
+  <button class="active" onclick="navHome(this)" data-nav="home">
     <span class="nav-ico">⌂</span><span>Hoje</span>
   </button>
-  <button onclick="navHistory(this)">
+  <button onclick="navHistory(this)" data-nav="history">
     <span class="nav-ico">◷</span><span>Histórico</span>
   </button>
-  <button onclick="navProgress(this)">
+  <button onclick="navProgress(this)" data-nav="progress">
     <span class="nav-ico">↗</span><span>Progresso</span>
   </button>
-  <button onclick="navExercises(this)">
+  <button onclick="navExercises(this)" data-nav="exercises">
     <span class="nav-ico">◎</span><span>Exercícios</span>
+  </button>
+
+  <div class="desktop-nav-spacer"></div>
+
+  <div class="desktop-gym-card">
+    <span>ACADEMIA ATIVA</span>
+    <select id="desktopGymSelect" onchange="changeGym(this.value)" aria-label="Trocar academia"></select>
+  </div>
+
+  <button class="desktop-account-button" type="button" onclick="openSettings()">
+    <span class="desktop-account-avatar" id="desktopAccountAvatar">U</span>
+    <span class="desktop-account-copy">
+      <strong id="desktopAccountName">Usuário</strong>
+      <small id="desktopAccountEmail">Perfil e dados</small>
+    </span>
+    <i>›</i>
   </button>
 </nav>
 
@@ -3418,7 +4241,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='6.2';
+const APP_BUILD_VERSION='6.3';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -3547,10 +4370,16 @@ function refreshAccountUI(){
   const emailEl=document.getElementById('accountEmail');
   const avatar=document.getElementById('accountAvatar');
   const profile=document.getElementById('profileName');
+  const desktopName=document.getElementById('desktopAccountName');
+  const desktopEmail=document.getElementById('desktopAccountEmail');
+  const desktopAvatar=document.getElementById('desktopAccountAvatar');
   if(nameEl)nameEl.textContent=name;
   if(emailEl)emailEl.textContent=em;
   if(avatar)avatar.textContent=initials(name);
   if(profile&&!profile.matches(':focus'))profile.value=name;
+  if(desktopName)desktopName.textContent=name;
+  if(desktopEmail)desktopEmail.textContent=em||'Perfil e dados';
+  if(desktopAvatar)desktopAvatar.textContent=initials(name);
 }
 function refreshSyncUI(){
   refreshAccountUI();
@@ -4214,7 +5043,12 @@ function nextSessionExercise(){return sessionExercises().find(e=>!doneToday(e.id
 function render(){
   linkExistingExercisesToCatalog();
   document.getElementById('gymName').textContent=gym().name;
-  const gs=document.getElementById('gymSelect');gs.innerHTML=state.gyms.map(g=>`<option value="${g.id}" ${g.id===state.activeGym?'selected':''}>${esc(g.name)}</option>`).join('');
+  const gymOptions=state.gyms.map(g=>`<option value="${g.id}" ${g.id===state.activeGym?'selected':''}>${esc(g.name)}</option>`).join('');
+  const gs=document.getElementById('gymSelect');if(gs)gs.innerHTML=gymOptions;
+  const dgs=document.getElementById('desktopGymSelect');if(dgs)dgs.innerHTML=gymOptions;
+  const dayLabel=document.getElementById('desktopTodayLabel');
+  if(dayLabel)dayLabel.textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'}).toUpperCase();
+  refreshAccountUI();
   renderToday();
   const prep=preparedSet();
   const ms=document.getElementById('muscles');ms.innerHTML=MUSCLES.map(m=>{const active=state.activeMuscle===m;const ready=prep.has(m);const selected=(state.sessionMuscles||[]).includes(m);const count=state.exercises.filter(e=>e.gymId===state.activeGym&&e.muscle===m).length;let sub=selected?'no treino de hoje':ready?'preparado hoje ✓':count?count+' exercício'+(count>1?'s':''):'nenhum cadastrado';return `<button class="muscle ${active||selected?'active':''}" onclick="filterMuscle('${m}')"><div class="muscle-top"><span class="muscle-icon">${muscleIcon(m)}</span><strong>${m}</strong></div><small>${sub}</small></button>`}).join('');
