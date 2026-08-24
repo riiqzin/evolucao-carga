@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   7.0 — GUIDED LAST WORKING LOADS REFERENCE
+   7.1 — SUBTLE GUIDED WORKING LOADS REFERENCE
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -4815,6 +4815,71 @@ textarea{
     grid-template-columns:1fr 1fr;
   }
 }
+
+/* =========================================================
+   7.1 — guided workload reference becomes a quiet reminder
+   ========================================================= */
+.guided-workload-reference.multi{
+  margin:8px 0 10px!important;
+  padding:8px 10px!important;
+  border:1px solid #263039!important;
+  border-radius:11px!important;
+  background:#0d1216!important;
+  box-shadow:none!important;
+}
+.guided-workload-reference.multi .guided-workload-copy>small{
+  margin-bottom:6px!important;
+  color:#76828c!important;
+  font-size:9px!important;
+  letter-spacing:.07em!important;
+  font-weight:900!important;
+}
+.guided-workload-rows{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+}
+.guided-workload-row{
+  width:auto!important;
+  min-width:0!important;
+  padding:5px 7px!important;
+  display:flex!important;
+  align-items:baseline!important;
+  gap:6px!important;
+  border:0!important;
+  border-radius:8px!important;
+  background:#11171b!important;
+}
+.guided-workload-row>span{
+  color:#697680!important;
+  font-size:9px!important;
+  font-weight:850!important;
+}
+.guided-workload-row>strong{
+  margin:0!important;
+  color:#dfe5e9!important;
+  font-size:12px!important;
+  line-height:1.2!important;
+  letter-spacing:0!important;
+}
+.guided-workload-row>small{
+  margin:0!important;
+  color:#6f7b85!important;
+  font-size:9px!important;
+}
+.guided-workload-date{
+  margin-top:5px!important;
+  color:#5f6b75!important;
+  font-size:9px!important;
+}
+@media(max-width:520px){
+  .guided-workload-rows{
+    display:flex!important;
+  }
+  .guided-workload-row{
+    max-width:100%;
+  }
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -5353,7 +5418,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='7.0';
+const APP_BUILD_VERSION='7.1';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
