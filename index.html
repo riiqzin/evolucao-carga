@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   6.1 — PUBLIC APP AUTH / MULTI-USER EXPERIENCE
+   6.2 — PUBLIC APP AUTH / MULTI-USER EXPERIENCE
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -2919,6 +2919,27 @@ body.auth-locked .fab{display:none!important}
   .auth-hero h1{font-size:28px}
   .account-actions{grid-template-columns:1fr}
 }
+
+/* 6.2 — account switching before onboarding is completed */
+.onboarding-topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.onboarding-signout{
+  border:1px solid #27313a;
+  border-radius:999px;
+  padding:8px 11px;
+  background:#0d1216;
+  color:#8d99a4;
+  font-size:7px;
+  font-weight:900;
+}
+.onboarding-signout:active{
+  transform:scale(.98);
+  border-color:#3a4650;
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -3010,7 +3031,10 @@ body.auth-locked .fab{display:none!important}
 
 <div class="onboarding-gate" id="onboardingGate">
   <div class="onboarding-shell">
-    <div class="onboarding-step">PRIMEIRO ACESSO</div>
+    <div class="onboarding-topbar">
+      <div class="onboarding-step">PRIMEIRO ACESSO</div>
+      <button class="onboarding-signout" type="button" onclick="signOutSupabase()">Sair da conta</button>
+    </div>
     <div class="onboarding-icon">↗</div>
     <h2>Vamos preparar seu treino.</h2>
     <p>Você só precisa configurar isso uma vez. Depois o app já abre direto nos seus dados.</p>
@@ -3394,7 +3418,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='6.1';
+const APP_BUILD_VERSION='6.2';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
