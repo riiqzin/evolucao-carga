@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   6.7 — DESKTOP MODAL SYSTEM / FULL HISTORY DAY EDITOR
+   6.8 — INFORMATION ARCHITECTURE / READABILITY
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -4310,6 +4310,389 @@ body.has-open-modal{
     width:100%;
   }
 }
+
+/* =========================================================
+   6.8 — information architecture + legibility
+   ========================================================= */
+
+/* Clear visual identity for each tab */
+.progress-purpose-strip{
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr);
+  align-items:center;
+  gap:11px;
+  margin:0 auto 14px;
+  padding:11px 13px;
+  border:1px solid #23303a;
+  border-radius:15px;
+  background:#0c1217;
+}
+.progress-purpose-icon{
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border-radius:13px;
+  background:#17210f;
+  color:var(--app-accent);
+  font-size:18px;
+  font-weight:1000;
+}
+.progress-purpose-strip strong{
+  display:block;
+  color:#edf2f5;
+  font-size:14px;
+  line-height:1.2;
+}
+.progress-purpose-strip small{
+  display:block;
+  margin-top:4px;
+  color:#89959f;
+  font-size:11px!important;
+  line-height:1.45;
+}
+
+.progress-history-simple-row.readonly{
+  grid-template-columns:120px minmax(0,1fr)!important;
+}
+.progress-history-simple-row.readonly .result{
+  padding-right:4px;
+}
+
+/* Typography baseline: previous versions used many 6–9px labels.
+   Keep hierarchy, but make everything readable on an actual phone/monitor. */
+body{
+  line-height:1.45;
+}
+small,
+.sheet small,
+.progress-sheet small,
+.catalog-sheet small,
+.catalog-detail-sheet small{
+  font-size:11px!important;
+  line-height:1.4!important;
+}
+label,
+.field>label,
+.auth-field label{
+  font-size:12px!important;
+  line-height:1.35!important;
+}
+p,
+.sheet p,
+.progress-sheet p{
+  font-size:13px!important;
+  line-height:1.55!important;
+}
+.btn,
+button,
+select,
+input,
+textarea{
+  font-size:13px;
+}
+.sheethead h3{
+  font-size:20px!important;
+}
+.sheethead p{
+  font-size:12px!important;
+}
+.progress-appbar-copy h3{
+  font-size:24px!important;
+}
+.progress-appbar-copy p{
+  font-size:12px!important;
+}
+.progress-appbar-copy>small{
+  font-size:10px!important;
+  letter-spacing:.10em!important;
+}
+
+.history-hub-hero>div>small,
+.progress-landing-kicker,
+.progress-answer-copy small,
+.progress-screen-copy small,
+.progress-simple-banner>small{
+  font-size:10px!important;
+  letter-spacing:.10em!important;
+}
+.history-hub-hero h4{
+  font-size:25px!important;
+}
+.history-hub-hero p{
+  font-size:12px!important;
+}
+.history-hub-primary strong{
+  font-size:13px!important;
+}
+.history-hub-primary small{
+  font-size:11px!important;
+}
+.history-hub-section-head>div strong,
+.progress-section-head>div strong{
+  font-size:15px!important;
+}
+.history-hub-section-head>div span,
+.history-hub-section-head>span,
+.progress-section-head>div span,
+.progress-section-head>span{
+  font-size:11px!important;
+}
+.history-hub-day-copy strong{
+  font-size:13px!important;
+}
+.history-hub-day-copy small{
+  font-size:11px!important;
+}
+.history-hub-edit{
+  font-size:11px!important;
+}
+
+.cal-head strong{
+  font-size:15px!important;
+}
+.cal-head span,
+.cal-weekday,
+.cal-stat span{
+  font-size:11px!important;
+}
+.cal-day{
+  font-size:12px!important;
+}
+.cal-stat b{
+  font-size:18px!important;
+}
+
+.progress-landing-title{
+  font-size:30px!important;
+  line-height:1.08!important;
+}
+.progress-landing-copy{
+  font-size:13px!important;
+}
+.progress-answer-copy strong{
+  font-size:14px!important;
+}
+.progress-answer-copy span{
+  font-size:11px!important;
+}
+.progress-glance-card>small{
+  font-size:10px!important;
+}
+.progress-glance-card>strong,
+.progress-glance-card [data-progress-count]{
+  font-size:25px!important;
+}
+.progress-glance-card>span{
+  font-size:11px!important;
+}
+.progress-muscle-main strong,
+.progress-exercise-name strong{
+  font-size:14px!important;
+}
+.progress-muscle-main small,
+.progress-exercise-name small,
+.progress-muscle-status,
+.progress-exercise-message span{
+  font-size:11px!important;
+}
+.progress-exercise-message strong{
+  font-size:12px!important;
+}
+.progress-detail-stat small,
+.progress-latest-set small,
+.progress-latest-head small{
+  font-size:10px!important;
+}
+.progress-detail-stat strong{
+  font-size:21px!important;
+}
+.progress-detail-stat span,
+.progress-latest-set strong,
+.progress-latest-head strong{
+  font-size:11px!important;
+}
+.progress-chart-toolbar strong{
+  font-size:14px!important;
+}
+.progress-chart-toolbar span{
+  font-size:11px!important;
+}
+.progress-metric-tabs button{
+  font-size:11px!important;
+}
+.progress-history-simple-row .date strong,
+.progress-history-simple-row .result strong{
+  font-size:12px!important;
+}
+.progress-history-simple-row .date small,
+.progress-history-simple-row .result span{
+  font-size:11px!important;
+}
+
+/* Exercise library */
+.mobile-screen-head h2{
+  font-size:28px!important;
+}
+.mobile-screen-head p,
+.mobile-filter-title,
+.mobile-exercise-heading small{
+  font-size:12px!important;
+}
+.exercise-title strong,
+.mobile-exercise-list .exercise-title strong{
+  font-size:14px!important;
+}
+.exercise-title small,
+.exercise-card small,
+.chip{
+  font-size:11px!important;
+}
+
+/* Today / workout */
+.mobile-home .home-kicker{
+  font-size:10px!important;
+}
+.mobile-home>p{
+  font-size:13px!important;
+}
+.home-tools strong{
+  font-size:13px!important;
+}
+.home-tools small{
+  font-size:11px!important;
+}
+.upcoming-row strong,
+.done-row strong,
+.exercise-pick-copy strong{
+  font-size:13px!important;
+}
+.upcoming-row small,
+.done-row small,
+.exercise-pick-copy small,
+.today-selection-status small{
+  font-size:11px!important;
+}
+.today-selection-status span{
+  font-size:12px!important;
+}
+
+/* Day editor */
+.history-day-add-head strong,
+.history-day-item-main strong,
+.history-day-summary strong{
+  font-size:13px!important;
+}
+.history-day-add-head span,
+.history-day-item-main small,
+.history-day-item-main span,
+.history-day-summary span,
+.history-day-empty span{
+  font-size:11px!important;
+}
+.history-day-empty strong{
+  font-size:13px!important;
+}
+
+/* ---------------------------------------------------------
+   Mobile hierarchy / spacing
+   --------------------------------------------------------- */
+@media(max-width:899px){
+  .progress-sheet{
+    font-size:13px!important;
+  }
+  .progress-purpose-strip{
+    grid-template-columns:38px minmax(0,1fr);
+    padding:10px 11px;
+  }
+  .progress-purpose-icon{
+    width:38px;height:38px;
+  }
+  .progress-landing-title{
+    font-size:25px!important;
+  }
+  .history-hub-hero h4{
+    font-size:21px!important;
+  }
+  .history-hub-day{
+    min-height:84px!important;
+  }
+  .history-hub-date{
+    width:56px!important;
+    height:56px!important;
+  }
+  .history-hub-date strong{
+    font-size:13px!important;
+  }
+  .history-hub-date small{
+    font-size:10px!important;
+  }
+  .progress-glance{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:7px!important;
+  }
+  .progress-glance-card{
+    padding:11px 9px!important;
+  }
+  .progress-glance-card>strong,
+  .progress-glance-card [data-progress-count]{
+    font-size:21px!important;
+  }
+  .progress-history-simple-row.readonly{
+    grid-template-columns:88px minmax(0,1fr)!important;
+  }
+}
+
+/* ---------------------------------------------------------
+   Desktop: larger comfortable reading size
+   --------------------------------------------------------- */
+@media(min-width:900px){
+  .desktop-nav-section-label{
+    font-size:10px!important;
+  }
+  .mobile-bottom-nav>button:not(.desktop-account-button)>span:last-child{
+    font-size:13px!important;
+  }
+  .desktop-gym-card>span{
+    font-size:10px!important;
+  }
+  .desktop-gym-card select{
+    font-size:12px!important;
+  }
+  .desktop-account-copy strong{
+    font-size:12px!important;
+  }
+  .desktop-account-copy small{
+    font-size:10px!important;
+  }
+  .desktop-header-copy small{
+    font-size:10px!important;
+  }
+  .desktop-header-copy strong{
+    font-size:20px!important;
+  }
+
+  .history-hub,
+  .progress-landing-hero,
+  .progress-purpose-strip,
+  .progress-glance,
+  .progress-section-head,
+  .progress-muscle-grid{
+    max-width:1040px;
+  }
+
+  .history-hub-hero{
+    padding:24px!important;
+  }
+  .history-hub-hero h4{
+    font-size:28px!important;
+  }
+
+  .progress-landing-hero{
+    padding:22px!important;
+  }
+  .progress-landing-title{
+    font-size:34px!important;
+  }
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -4848,7 +5231,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='6.7';
+const APP_BUILD_VERSION='6.8';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -7461,11 +7844,11 @@ function setHistoryModalMode(mode){
 
   if(mode==='history'){
     if(title)title.textContent='Histórico de treinos';
-    if(subtitle)subtitle.textContent='Consulte e edite treinos de qualquer dia.';
+    if(subtitle)subtitle.textContent='Datas, exercícios e edição dos seus treinos passados.';
     if(gymLabel)gymLabel.textContent='TODAS AS ACADEMIAS';
   }else{
     if(title)title.textContent='Seu progresso';
-    if(subtitle)subtitle.textContent='Veja de forma simples onde você está evoluindo.';
+    if(subtitle)subtitle.textContent='Tendências de carga, reps e consolidação por exercício.';
     if(gymLabel)gymLabel.textContent=(gym()?.name||'ACADEMIA').toUpperCase();
   }
 }
@@ -7490,19 +7873,19 @@ function renderHistoryHub(){
   root.innerHTML=`<div class="history-hub">
     <div class="history-hub-hero">
       <div>
-        <small>EDITAR TREINOS PASSADOS</small>
-        <h4>Escolha o dia e corrija o que precisar</h4>
-        <p>Você pode alterar carga, reps, RIR e até a data de exercícios já registrados.</p>
+        <small>HISTÓRICO</small>
+        <h4>Todos os treinos que você já registrou</h4>
+        <p>Aqui ficam datas, academias e exercícios realizados. Use esta aba quando quiser consultar, corrigir, adicionar ou remover algo de um treino passado.</p>
       </div>
       <button class="history-hub-primary" onclick="openHistoryDayEditor()">
         <span>✎</span>
-        <span><strong>Editar treino por dia</strong><small>Abrir calendário e escolher uma data</small></span>
+        <span><strong>Editar um treino passado</strong><small>Escolher o dia e alterar os exercícios</small></span>
         <i>›</i>
       </button>
     </div>
 
     <div class="history-hub-section-head">
-      <div><strong>Treinos recentes</strong><span>Independente da academia em que você treinou.</span></div>
+      <div><strong>Dias treinados recentemente</strong><span>Todos os seus treinos, independente da academia.</span></div>
       <span>${groups.length} dia${groups.length===1?'':'s'} com treino</span>
     </div>
 
@@ -7540,7 +7923,7 @@ function monthCalendarHTML(){
   const weeks=Math.max(1,Math.ceil(days/7)),freq=(monthKeys.length/weeks).toFixed(1).replace('.0','');
   const ordered=[...trained].sort();let streak=0;if(ordered.length){streak=1;for(let i=ordered.length-1;i>0;i--){const a=new Date(ordered[i]+'T12:00:00'),b=new Date(ordered[i-1]+'T12:00:00');if((a-b)<=86400000*2)streak++;else break}}
   const monthName=now.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
-  return `<div class="progress-calendar"><div class="cal-head"><strong>Frequência de treino</strong><span>${monthName}</span></div><div class="cal-grid">${cells}</div><div class="cal-stats"><div class="cal-stat"><b>${monthKeys.length}</b><span>treinos no mês</span></div><div class="cal-stat"><b>${freq}x</b><span>média por semana</span></div><div class="cal-stat"><b>${streak}</b><span>sequência recente</span></div></div></div>`
+  return `<div class="progress-calendar history-calendar"><div class="cal-head"><strong>Calendário de treinos</strong><span>${monthName}</span></div><div class="cal-grid">${cells}</div><div class="cal-stats"><div class="cal-stat"><b>${monthKeys.length}</b><span>treinos no mês</span></div><div class="cal-stat"><b>${freq}x</b><span>média por semana</span></div><div class="cal-stat"><b>${streak}</b><span>sequência recente</span></div></div></div>`
 }
 function progressHeroHTML(stats,records){
   const withData=stats.filter(x=>x.sessions>0),improved=withData.filter(x=>x.delta>0).length,prs=records.reduce((n,h)=>n+(h.prFlags||[]).length,0),score=Math.min(99,Math.max(0,Math.round(improved*12+prs*4+records.length*1.2)));
@@ -7556,7 +7939,7 @@ renderProgressOverview=function(){
   const xs=state.exercises.filter(e=>e.gymId===state.activeGym),records=state.history.filter(h=>h.gymId===state.activeGym),stats=xs.map(e=>({e,...progressExerciseStats(e)}));
   const withData=stats.filter(x=>x.sessions>0),totalSessions=records.length,prs=records.reduce((n,h)=>n+(h.prFlags||[]).length,0),improved=withData.filter(x=>x.delta>0).length,lastDate=records.slice().sort((a,b)=>b.date.localeCompare(a.date))[0]?.date;
   const cards=stats.length?stats.map(x=>{const d=x.delta,deltaText=x.first?`${d>0?'+':''}${d.toFixed(1).replace('.0','')} kg`:'—';const lastSummary=x.last?setSummary(x.last.sets):'Sem registro ainda';return `<button class="progress-ex-card" onclick="document.getElementById('historyExercise').value='${x.e.id}';renderHistory()"><div class="progress-ex-head"><div class="progress-ex-icon">${muscleIcon(x.e.muscle)}</div><div class="progress-ex-main"><strong>${esc(x.e.name)}</strong><small>${esc(x.e.muscle)} · ${x.sessions} registro${x.sessions===1?'':'s'}</small></div><div class="progress-ex-load">${x.current||'—'}<small>${x.current?'kg atual':'sem carga'}</small></div></div><div class="progress-ex-meta"><div><small>Melhor</small><b>${x.best?x.best+' kg':'—'}</b></div><div><small>Evolução</small><b class="${d>0?'progress-up':d<0?'progress-down':''}">${deltaText}</b></div><div><small>Último</small><b>${x.last?fmtDate(x.last.date):'—'}</b></div></div><div style="margin-top:8px;color:#75808d;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(lastSummary)}</div></button>`}).join(''):'<div class="empty"><strong>Nenhum exercício cadastrado</strong>Cadastre exercícios para começar a acompanhar sua evolução.</div>';
-  document.getElementById('historyContent').innerHTML=`${progressHeroHTML(stats,records)}${monthCalendarHTML()}${progressHighlightsHTML(stats,records)}<div class="progress-overview-stats"><div class="progress-bigstat"><small>Exercícios</small><strong>${xs.length}</strong><em>na ${esc(gym()?.name||'academia')}</em></div><div class="progress-bigstat"><small>Registros</small><strong>${totalSessions}</strong><em>${lastDate?'último '+fmtDate(lastDate):'ainda sem histórico'}</em></div><div class="progress-bigstat"><small>Evoluindo</small><strong>${improved}</strong><em>acima da carga inicial</em></div><div class="progress-bigstat"><small>PRs</small><strong>${prs}</strong><em>marcas registradas</em></div></div><div class="progress-section-label">Todos os exercícios</div><div class="progress-grid">${cards}</div>`
+  document.getElementById('historyContent').innerHTML=`${progressHeroHTML(stats,records)}${progressHighlightsHTML(stats,records)}<div class="progress-overview-stats"><div class="progress-bigstat"><small>Exercícios</small><strong>${xs.length}</strong><em>na ${esc(gym()?.name||'academia')}</em></div><div class="progress-bigstat"><small>Registros</small><strong>${totalSessions}</strong><em>${lastDate?'último '+fmtDate(lastDate):'ainda sem histórico'}</em></div><div class="progress-bigstat"><small>Evoluindo</small><strong>${improved}</strong><em>acima da carga inicial</em></div><div class="progress-bigstat"><small>PRs</small><strong>${prs}</strong><em>marcas registradas</em></div></div><div class="progress-section-label">Todos os exercícios</div><div class="progress-grid">${cards}</div>`
 }
 
 
@@ -7654,9 +8037,43 @@ function progressRenderOverviewV3(){
   progressViewMuscle='';progressViewExercise='';
   const s=progressOverallSummary();
   const muscleNames=MUSCLES.filter(m=>state.exercises.some(e=>e.gymId===state.activeGym&&e.muscle===m));
-  const muscleCards=muscleNames.length?muscleNames.map((m,i)=>progressMuscleCardHTML(progressMuscleInfo(m),i)).join(''):`<div class="progress-empty-state" style="grid-column:1/-1"><div class="ico">＋</div><strong>Nenhum exercício cadastrado</strong><span>Cadastre seus exercícios. Depois eles aparecem aqui separados por músculo.</span></div>`;
-  const lastText=s.last?fmtDate(s.last.date):'—';
-  document.getElementById('historyContent').innerHTML=`<div class="progress-landing-hero"><div class="progress-landing-kicker">RESUMO DA SUA EVOLUÇÃO</div><h2 class="progress-landing-title">${esc(s.title)}</h2><p class="progress-landing-copy">${esc(s.sub)}</p><div class="progress-landing-answer"><div class="progress-answer-icon">↗</div><div class="progress-answer-copy"><small>O QUE OLHAR AGORA</small><strong>${s.ready.length?'Veja os exercícios prontos para aumentar a carga':s.improving.length?'Continue tentando superar seus últimos números':'Escolha um músculo para ver exercício por exercício'}</strong><span>Sem planilha confusa: entre no grupo muscular e veja o gráfico.</span></div></div></div><div class="progress-glance"><div class="progress-glance-card"><small>Evoluindo</small>${progressCount(s.improving.length,'exercícios')}</div><div class="progress-glance-card"><small>PRs</small>${progressCount(s.prs,'marcas')}</div><div class="progress-glance-card"><small>Último treino</small><strong>${lastText}</strong><span>${s.last?esc(s.last.muscle||'treino registrado'):'sem histórico'}</span></div></div><div class="progress-section-head"><div><strong>Escolha o grupo muscular</strong><span>Você vê somente os exercícios daquele músculo.</span></div><span>${muscleNames.length} grupos</span></div><div class="progress-muscle-grid">${muscleCards}</div>${monthCalendarHTML()}`;
+  const muscleCards=muscleNames.length
+    ?muscleNames.map((m,i)=>progressMuscleCardHTML(progressMuscleInfo(m),i)).join('')
+    :`<div class="progress-empty-state" style="grid-column:1/-1"><div class="ico">＋</div><strong>Nenhum exercício cadastrado</strong><span>Cadastre exercícios para começar a acompanhar tendências de carga e repetições.</span></div>`;
+
+  const consolidated=s.infos.filter(x=>x.advice?.state==='ready'||x.advice?.state==='top').length;
+
+  document.getElementById('historyContent').innerHTML=`
+    <div class="progress-purpose-strip">
+      <span class="progress-purpose-icon">↗</span>
+      <div><strong>Progresso = entender sua evolução</strong><small>Gráficos, tendências e sinais de consolidação. Para editar um treino antigo, use a aba Histórico.</small></div>
+    </div>
+
+    <div class="progress-landing-hero">
+      <div class="progress-landing-kicker">LEITURA RÁPIDA</div>
+      <h2 class="progress-landing-title">${esc(s.title)}</h2>
+      <p class="progress-landing-copy">${esc(s.sub)}</p>
+      <div class="progress-landing-answer">
+        <div class="progress-answer-icon">↗</div>
+        <div class="progress-answer-copy">
+          <small>PRÓXIMA DECISÃO</small>
+          <strong>${s.ready.length?'Veja onde a carga já está consolidada':s.improving.length?'Veja quais exercícios estão avançando':'Abra um grupo muscular e construa sua referência'}</strong>
+          <span>O objetivo aqui é mostrar tendência, não cobrar recorde em todo treino.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-glance">
+      <div class="progress-glance-card"><small>EVOLUINDO</small>${progressCount(s.improving.length,'exercícios')}</div>
+      <div class="progress-glance-card"><small>CONSOLIDANDO</small>${progressCount(consolidated,'exercícios')}</div>
+      <div class="progress-glance-card"><small>PRs REGISTRADOS</small>${progressCount(s.prs,'marcas')}</div>
+    </div>
+
+    <div class="progress-section-head">
+      <div><strong>Ver evolução por grupo muscular</strong><span>Entre em um grupo e depois escolha o exercício para abrir o gráfico.</span></div>
+      <span>${muscleNames.length} grupos</span>
+    </div>
+    <div class="progress-muscle-grid">${muscleCards}</div>`;
   animateProgressNumbers();
 }
 function showProgressMuscle(muscle){
@@ -7698,9 +8115,15 @@ function renderProgressExerciseDetail(e,scrollTop=true){
   if(x.advice?.state==='ready'){bannerTitle='Pronto para experimentar mais carga';bannerText=x.advice.text}
   const last=x.last,work=last?.sets?.work||[];
   const latestSets=last?`<div class="progress-latest-card"><div class="progress-latest-head"><small>ÚLTIMO TREINO · ${fmtDate(last.date)}</small><strong>${esc(x.status)}</strong></div><div class="progress-latest-sets">${[0,1].map(i=>{const s=work[i];return `<div class="progress-latest-set"><small>TRABALHO ${i+1}</small><strong>${s?(s.kg?esc(s.kg)+' kg':'peso corporal')+(s.reps?' × '+esc(s.reps):'')+(s.rir!==''&&s.rir!==undefined?' · RIR '+esc(s.rir):''):'—'}</strong></div>`}).join('')}</div></div>`:'';
-  const rows=arrDesc.slice(0,12).map((h,i)=>{const value=progressMetricValue(h,'load'),prev=arrDesc[i+1]?progressMetricValue(arrDesc[i+1],'load'):0,d=prev&&value?value-prev:0;return `<div class="progress-history-simple-row"><div class="date"><strong>${fmtDate(h.date)}</strong><small>${h.referenceOnly?'referência':'treino'}</small></div><div class="result"><strong>${value?fmtKg(value)+' kg':'Sem carga'}${d?` <span class="${d>0?'progress-up':'progress-down'}">${d>0?'+':''}${fmtKg(d)} kg</span>`:''}</strong><span>${esc(setSummary(h.sets))}</span></div><div class="actions"><button onclick="openHistoryRecord('${h.id}')" aria-label="Editar registro">✎</button><button class="danger" onclick="deleteHistoryRecord('${h.id}')" aria-label="Excluir registro">⌫</button></div></div>`}).join('');
+  const rows=arrDesc.slice(0,8).map((h,i)=>{
+    const value=progressMetricValue(h,'load'),prev=arrDesc[i+1]?progressMetricValue(arrDesc[i+1],'load'):0,d=prev&&value?value-prev:0;
+    return `<div class="progress-history-simple-row readonly">
+      <div class="date"><strong>${fmtDate(h.date)}</strong><small>${h.referenceOnly?'referência':'resultado'}</small></div>
+      <div class="result"><strong>${value?fmtKg(value)+' kg':'Sem carga'}${d?` <span class="${d>0?'progress-up':'progress-down'}">${d>0?'+':''}${fmtKg(d)} kg</span>`:''}</strong><span>${esc(setSummary(h.sets))}</span></div>
+    </div>`;
+  }).join('');
   const chart=progressGraphHTML(x,progressMetric);
-  document.getElementById('historyContent').innerHTML=`<div class="progress-detail-screen"><div class="progress-screen-head"><button class="progress-screen-back" onclick="showProgressMuscle('${esc(e.muscle)}')" aria-label="Voltar">←</button><div class="progress-screen-icon">${muscleIcon(e.muscle)}</div><div class="progress-screen-copy"><small>${esc(e.muscle)}</small><strong>${esc(e.name)}</strong><span>${x.sessions} registro${x.sessions===1?'':'s'} neste aparelho</span></div></div>${progressExerciseVisualHTML(e)}<div class="progress-simple-banner"><small>EM PORTUGUÊS CLARO</small><strong>${esc(bannerTitle)}</strong><p>${esc(bannerText)}</p></div><div class="progress-detail-stats"><div class="progress-detail-stat"><small>AGORA</small><strong>${x.currentLoad?fmtKg(x.currentLoad)+' kg':'—'}</strong><span>${x.last?'último treino '+fmtDate(x.last.date):'sem registro'}</span></div><div class="progress-detail-stat"><small>MELHOR CARGA</small><strong>${x.bestLoad?fmtKg(x.bestLoad)+' kg':'—'}</strong><span>maior carga registrada</span></div><div class="progress-detail-stat"><small>MELHOR REP</small><strong>${x.bestReps||'—'}</strong><span>maior número em trabalho</span></div></div><div class="progress-chart-panel"><div class="progress-chart-toolbar"><div><strong>${progressMetricLabel(progressMetric)} ao longo do tempo</strong><span>Quanto mais a linha sobe, maior foi o resultado.</span></div><div class="progress-metric-tabs"><button class="${progressMetric==='load'?'active':''}" onclick="setProgressMetric('load','${e.id}')">Carga</button><button class="${progressMetric==='reps'?'active':''}" onclick="setProgressMetric('reps','${e.id}')">Reps</button><button class="${progressMetric==='volume'?'active':''}" onclick="setProgressMetric('volume','${e.id}')">Volume</button></div></div>${chart}</div>${latestSets}<div class="progress-section-head"><div><strong>Treinos anteriores</strong><span>Do mais recente para o mais antigo.</span></div></div><div class="progress-history-simple">${rows||'<div class="progress-empty-state"><div class="ico">◎</div><strong>Sem registros</strong><span>Seu histórico aparecerá aqui.</span></div>'}</div></div>`;
+  document.getElementById('historyContent').innerHTML=`<div class="progress-detail-screen"><div class="progress-screen-head"><button class="progress-screen-back" onclick="showProgressMuscle('${esc(e.muscle)}')" aria-label="Voltar">←</button><div class="progress-screen-icon">${muscleIcon(e.muscle)}</div><div class="progress-screen-copy"><small>${esc(e.muscle)}</small><strong>${esc(e.name)}</strong><span>${x.sessions} registro${x.sessions===1?'':'s'} neste aparelho</span></div></div>${progressExerciseVisualHTML(e)}<div class="progress-simple-banner"><small>EM PORTUGUÊS CLARO</small><strong>${esc(bannerTitle)}</strong><p>${esc(bannerText)}</p></div><div class="progress-detail-stats"><div class="progress-detail-stat"><small>AGORA</small><strong>${x.currentLoad?fmtKg(x.currentLoad)+' kg':'—'}</strong><span>${x.last?'último treino '+fmtDate(x.last.date):'sem registro'}</span></div><div class="progress-detail-stat"><small>MELHOR CARGA</small><strong>${x.bestLoad?fmtKg(x.bestLoad)+' kg':'—'}</strong><span>maior carga registrada</span></div><div class="progress-detail-stat"><small>MELHOR REP</small><strong>${x.bestReps||'—'}</strong><span>maior número em trabalho</span></div></div><div class="progress-chart-panel"><div class="progress-chart-toolbar"><div><strong>${progressMetricLabel(progressMetric)} ao longo do tempo</strong><span>Quanto mais a linha sobe, maior foi o resultado.</span></div><div class="progress-metric-tabs"><button class="${progressMetric==='load'?'active':''}" onclick="setProgressMetric('load','${e.id}')">Carga</button><button class="${progressMetric==='reps'?'active':''}" onclick="setProgressMetric('reps','${e.id}')">Reps</button><button class="${progressMetric==='volume'?'active':''}" onclick="setProgressMetric('volume','${e.id}')">Volume</button></div></div>${chart}</div>${latestSets}<div class="progress-section-head"><div><strong>Resultados usados no gráfico</strong><span>Somente leitura. Para corrigir ou excluir um registro, abra Histórico.</span></div></div><div class="progress-history-simple">${rows||'<div class="progress-empty-state"><div class="ico">◎</div><strong>Sem resultados suficientes</strong><span>Depois de registrar o exercício, os pontos aparecem aqui.</span></div>'}</div></div>`;
   if(scrollTop)document.querySelector('#historyModal .progress-sheet')?.scrollTo({top:0,behavior:'smooth'});
 }
 function renderHistory(){
