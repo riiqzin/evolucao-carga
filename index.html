@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   6.8 — INFORMATION ARCHITECTURE / READABILITY
+   6.9 — GUIDED WORKING LOAD REFERENCE
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -4693,6 +4693,63 @@ textarea{
     font-size:34px!important;
   }
 }
+
+/* =========================================================
+   6.9 — guided mode: always show working-load reference
+   ========================================================= */
+.guided-workload-reference{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr);
+  align-items:center;
+  gap:10px;
+  margin:10px 0 12px;
+  padding:10px 12px;
+  border:1px solid rgba(203,255,56,.20);
+  border-radius:14px;
+  background:
+    linear-gradient(135deg,rgba(203,255,56,.075),rgba(203,255,56,.02)),
+    #0d1310;
+}
+.guided-workload-icon{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:#18230f;
+  color:var(--app-accent);
+  font-size:11px;
+}
+.guided-workload-copy{
+  min-width:0;
+}
+.guided-workload-copy small{
+  display:block;
+  color:#a7be72;
+  font-size:10px!important;
+  letter-spacing:.08em;
+  font-weight:950;
+}
+.guided-workload-copy strong{
+  display:block;
+  margin-top:2px;
+  color:#f3f7f0;
+  font-size:18px;
+  line-height:1.15;
+  letter-spacing:-.03em;
+}
+.guided-workload-copy span{
+  display:block;
+  margin-top:2px;
+  color:#829079;
+  font-size:11px;
+  line-height:1.35;
+}
+@media(min-width:900px){
+  .guided-workload-reference{
+    max-width:520px;
+  }
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -5231,7 +5288,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='6.8';
+const APP_BUILD_VERSION='6.9';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -7398,6 +7455,49 @@ function liveFinalSetPreview(){
   box.className='live-final-progress-preview';
   box.innerHTML=`<strong>${11-reps} rep${11-reps===1?'':'s'} até o topo da faixa</strong><span>Sua primeira meta é usar ${reps} reps como referência. Igualar no próximo treino já conta como consolidação; evolua quando a sessão permitir.</span>`;
 }
+
+function guidedWorkingLoadReference(){
+  const id=document.getElementById('editId')?.value;
+  if(!id)return null;
+
+  const currentWork=currentSets?.work||[];
+  const currentKg=currentWork
+    .map(s=>normalizeNum(s?.kg))
+    .find(v=>v>0);
+
+  const h=latestRealHistoryForExercise(id,true);
+  const previousWork=h?.sets?.work||[];
+  const previousKg=previousWork
+    .map(s=>normalizeNum(s?.kg))
+    .find(v=>v>0);
+
+  const kg=currentKg||previousKg||0;
+  if(!kg)return null;
+
+  return {
+    kg,
+    source:currentKg?'today':'previous',
+    previousKg:previousKg||0
+  };
+}
+function guidedWorkingLoadReferenceHTML(){
+  const ref=guidedWorkingLoadReference();
+  if(!ref)return '';
+
+  const sourceText=ref.source==='today'
+    ?'carga de trabalho definida para hoje'
+    :'carga de trabalho do último treino';
+
+  return `<div class="guided-workload-reference">
+    <div class="guided-workload-icon">●</div>
+    <div class="guided-workload-copy">
+      <small>CARGA DE TRABALHO</small>
+      <strong>${fmtKg(ref.kg)} kg</strong>
+      <span>${sourceText}</span>
+    </div>
+  </div>`;
+}
+
 function renderLiveGuide(){
   const root=document.getElementById('liveGuide'); if(!root||currentEntryMode!=='live')return;
   const steps=liveSteps(); if(!steps.length){root.innerHTML='';return}
@@ -7412,7 +7512,7 @@ function renderLiveGuide(){
       <h4>${esc(document.getElementById('exerciseName')?.value||'Exercício')}</h4>
       <p class="live-hint">${esc(st.hint)}</p>
       ${ref?`<div class="live-reference">${ref}</div>`:''}
-      ${liveProgressionAdvice(st)}
+      ${guidedWorkingLoadReferenceHTML()}${liveProgressionAdvice(st)}
       <div class="live-inputs ${st.type==='pap'||st.type==='work'?'':'no-rir'}">
         <div class="live-input-wrap"><label>Carga</label>${setPicker('kg',val.kg,st.type==='work'&&st.index===1?'liveFinalSetPreview()':'','liveKg')}</div>
         <div class="live-input-wrap"><label>Reps</label>${setPicker('reps',val.reps,st.type==='work'&&st.index===1?'liveFinalSetPreview()':'','liveReps')}</div>
