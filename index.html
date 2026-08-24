@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   6.9 — GUIDED WORKING LOAD REFERENCE
+   7.0 — GUIDED LAST WORKING LOADS REFERENCE
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -4750,6 +4750,71 @@ textarea{
     max-width:520px;
   }
 }
+
+/* =========================================================
+   7.0 — guided mode: show all working loads from last session
+   ========================================================= */
+.guided-workload-reference.multi{
+  display:block;
+  margin:10px 0 12px;
+  padding:11px 12px;
+  border:1px solid rgba(203,255,56,.20);
+  border-radius:14px;
+  background:
+    linear-gradient(135deg,rgba(203,255,56,.075),rgba(203,255,56,.02)),
+    #0d1310;
+}
+.guided-workload-reference.multi .guided-workload-copy>small{
+  display:block;
+  color:#a7be72;
+  font-size:10px!important;
+  letter-spacing:.08em;
+  font-weight:950;
+  margin-bottom:8px;
+}
+.guided-workload-rows{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+.guided-workload-row{
+  min-width:0;
+  padding:9px 10px;
+  border:1px solid #25301f;
+  border-radius:11px;
+  background:#111810;
+}
+.guided-workload-row>span{
+  display:block;
+  color:#819070;
+  font-size:10px!important;
+  font-weight:900;
+}
+.guided-workload-row>strong{
+  display:block;
+  margin-top:2px;
+  color:#f3f7f0;
+  font-size:18px;
+  line-height:1.1;
+  letter-spacing:-.03em;
+}
+.guided-workload-row>small{
+  display:block;
+  margin-top:3px;
+  color:#899784;
+  font-size:11px!important;
+}
+.guided-workload-date{
+  display:block;
+  margin-top:8px;
+  color:#74806f;
+  font-size:10px!important;
+}
+@media(max-width:520px){
+  .guided-workload-rows{
+    grid-template-columns:1fr 1fr;
+  }
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -5288,7 +5353,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='6.9';
+const APP_BUILD_VERSION='7.0';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -7456,44 +7521,46 @@ function liveFinalSetPreview(){
   box.innerHTML=`<strong>${11-reps} rep${11-reps===1?'':'s'} até o topo da faixa</strong><span>Sua primeira meta é usar ${reps} reps como referência. Igualar no próximo treino já conta como consolidação; evolua quando a sessão permitir.</span>`;
 }
 
-function guidedWorkingLoadReference(){
+
+function guidedLastWorkingLoads(){
   const id=document.getElementById('editId')?.value;
   if(!id)return null;
 
-  const currentWork=currentSets?.work||[];
-  const currentKg=currentWork
-    .map(s=>normalizeNum(s?.kg))
-    .find(v=>v>0);
-
   const h=latestRealHistoryForExercise(id,true);
-  const previousWork=h?.sets?.work||[];
-  const previousKg=previousWork
-    .map(s=>normalizeNum(s?.kg))
-    .find(v=>v>0);
+  const work=h?.sets?.work||[];
+  const loads=work
+    .map((s,i)=>({
+      index:i,
+      kg:normalizeNum(s?.kg),
+      reps:normalizeNum(s?.reps),
+      rir:s?.rir
+    }))
+    .filter(x=>x.kg>0);
 
-  const kg=currentKg||previousKg||0;
-  if(!kg)return null;
+  if(!loads.length)return null;
 
   return {
-    kg,
-    source:currentKg?'today':'previous',
-    previousKg:previousKg||0
+    history:h,
+    loads
   };
 }
 function guidedWorkingLoadReferenceHTML(){
-  const ref=guidedWorkingLoadReference();
+  const ref=guidedLastWorkingLoads();
   if(!ref)return '';
 
-  const sourceText=ref.source==='today'
-    ?'carga de trabalho definida para hoje'
-    :'carga de trabalho do último treino';
+  const rows=ref.loads.map(x=>`
+    <div class="guided-workload-row">
+      <span>TRABALHO ${x.index+1}</span>
+      <strong>${fmtKg(x.kg)} kg</strong>
+      <small>${x.reps?`${x.reps} reps`:''}${x.rir!==''&&x.rir!=null?`${x.reps?' · ':''}RIR ${x.rir}`:''}</small>
+    </div>
+  `).join('');
 
-  return `<div class="guided-workload-reference">
-    <div class="guided-workload-icon">●</div>
+  return `<div class="guided-workload-reference multi">
     <div class="guided-workload-copy">
-      <small>CARGA DE TRABALHO</small>
-      <strong>${fmtKg(ref.kg)} kg</strong>
-      <span>${sourceText}</span>
+      <small>CARGAS DE TRABALHO DO ÚLTIMO TREINO</small>
+      <div class="guided-workload-rows">${rows}</div>
+      <span class="guided-workload-date">${fmtDate(ref.history.date)}</span>
     </div>
   </div>`;
 }
