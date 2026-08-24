@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   7.1 — SUBTLE GUIDED WORKING LOADS REFERENCE
+   7.2 — EXPANDED REPDB GYM LIBRARY
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -4880,6 +4880,104 @@ textarea{
     max-width:100%;
   }
 }
+
+/* =========================================================
+   7.2 — expanded RepDB gym-only library
+   ========================================================= */
+.catalog-library-toolbar{
+  display:grid;
+  grid-template-columns:minmax(180px,.45fr) minmax(0,1fr);
+  align-items:end;
+  gap:10px;
+  margin:10px 0 12px;
+}
+.catalog-equipment-filter label{
+  display:block;
+  margin:0 0 5px;
+  color:#76828d;
+  font-size:10px!important;
+  font-weight:900;
+}
+.catalog-equipment-filter select{
+  width:100%;
+  min-height:42px;
+  padding:0 34px 0 11px;
+  border:1px solid #28323b;
+  border-radius:12px;
+  outline:none;
+  background:#0d1318;
+  color:#e8edf0;
+  font-size:12px!important;
+}
+.catalog-source-status{
+  min-height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:7px;
+  color:#73808a;
+  font-size:10px;
+}
+.catalog-source-status>span{
+  width:7px;height:7px;
+  flex:0 0 auto;
+  border-radius:50%;
+  background:#65717b;
+}
+.catalog-source-status strong{
+  color:#9aa5ad;
+  font-size:10px!important;
+}
+.catalog-source-status small{
+  color:#6f7b85;
+  font-size:10px!important;
+}
+.catalog-source-status.loading>span{
+  background:#d4b75d;
+  box-shadow:0 0 0 4px rgba(212,183,93,.08);
+  animation:repdbStatusPulse 1s ease infinite;
+}
+.catalog-source-status.ok>span{
+  background:var(--app-accent);
+  box-shadow:0 0 0 4px rgba(203,255,56,.07);
+}
+.catalog-source-status.warn>span{
+  background:#d98e5c;
+}
+.catalog-source-status button{
+  min-height:30px;
+  padding:0 8px;
+  border:1px solid #303b44;
+  border-radius:9px;
+  background:#12181d;
+  color:#b9c2c8;
+  font-size:10px!important;
+}
+@keyframes repdbStatusPulse{
+  50%{opacity:.45}
+}
+.catalog-card-tags em{
+  margin-left:auto;
+  padding:3px 5px;
+  border:1px solid #28342b;
+  border-radius:6px;
+  color:#8ea06f;
+  font-size:8px;
+  font-style:normal;
+  font-weight:950;
+  letter-spacing:.06em;
+}
+@media(max-width:699px){
+  .catalog-library-toolbar{
+    grid-template-columns:1fr;
+    align-items:stretch;
+  }
+  .catalog-source-status{
+    justify-content:flex-start;
+    min-height:28px;
+    flex-wrap:wrap;
+  }
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -5163,7 +5261,17 @@ textarea{
 
     <div class="catalog-search">
       <span>⌕</span>
-      <input id="catalogSearch" placeholder="Buscar exercício ou aparelho..." oninput="renderExerciseCatalog()">
+      <input id="catalogSearch" placeholder="Buscar exercício, músculo ou aparelho..." oninput="renderExerciseCatalog()">
+    </div>
+
+    <div class="catalog-library-toolbar">
+      <div class="catalog-equipment-filter">
+        <label for="catalogEquipmentFilter">Equipamento</label>
+        <select id="catalogEquipmentFilter" onchange="catalogEquipmentFilter=this.value;renderExerciseCatalog()">
+          <option value="Todos">Todos</option>
+        </select>
+      </div>
+      <div class="catalog-source-status" id="repdbCatalogStatus"></div>
     </div>
 
     <div class="catalog-filter-row" id="catalogFilters"></div>
@@ -5177,7 +5285,7 @@ textarea{
     </div>
 
     <div class="catalog-results-head">
-      <div><strong id="catalogResultTitle">Exercícios</strong><small class="catalog-library-size">Biblioteca expandida · ${EXERCISE_CATALOG.length} exercícios</small></div>
+      <div><strong id="catalogResultTitle">Exercícios</strong><small class="catalog-library-size" id="catalogLibrarySize">Biblioteca de musculação · ${EXERCISE_CATALOG.length} exercícios</small></div>
       <span id="catalogResultCount"></span>
     </div>
     <div class="catalog-grid" id="catalogGrid"></div>
@@ -5339,7 +5447,7 @@ textarea{
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const MUSCLES=['Peito','Costas','Quadríceps','Posterior','Ombros','Bíceps','Tríceps','Panturrilha','Glúteos','Abdômen'];
+const MUSCLES=['Peito','Costas','Quadríceps','Posterior','Ombros','Bíceps','Tríceps','Antebraços','Panturrilha','Glúteos','Abdômen'];
 const TYPES=[
   {key:'warmup',label:'Aquecimento',hint:'leve · sem fadiga'},
   {key:'feeder',label:'Feeders',hint:'2 séries · ~50% e ~70% da carga de trabalho'},
@@ -5356,6 +5464,7 @@ function catalogPrimarySecondary(item){
   if(m==='Ombros')return {primary:['Ombros'],secondary:item.movement==='shoulderpress'?['Tríceps']:['Costas']};
   if(m==='Bíceps')return {primary:['Bíceps'],secondary:['Antebraços']};
   if(m==='Tríceps')return {primary:['Tríceps'],secondary:['Ombros']};
+  if(m==='Antebraços')return {primary:['Antebraços'],secondary:['Bíceps']};
   if(m==='Quadríceps')return {primary:['Quadríceps'],secondary:['Glúteos','Posterior']};
   if(m==='Posterior')return {primary:['Posterior'],secondary:['Glúteos']};
   if(m==='Glúteos')return {primary:['Glúteos'],secondary:['Posterior']};
@@ -5369,20 +5478,29 @@ function makeCatalogExercise(raw){
   return {
     ...raw,
     aliases:[raw.name,raw.repdbId,raw.freeDbId,...(raw.aliases||[])].filter(Boolean),
-    primary:ms.primary,
-    secondary:ms.secondary,
-    summary:guide.summary,
-    steps:[...guide.steps],
-    tips:[...guide.tips],
+    primary:raw.primary||ms.primary,
+    secondary:raw.secondary||ms.secondary,
+    summary:raw.summary||guide.summary,
+    steps:raw.steps?.length?[...raw.steps]:[...guide.steps],
+    tips:raw.tips?.length?[...raw.tips]:[...guide.tips],
     repdbExact:!!raw.repdbId,
     freeDbExact:raw.freeDbExact!==false,
     repdbNote:raw.repdbId?'':(raw.freeDbId?'': 'Ainda não há uma imagem específica deste exercício nas fontes abertas cadastradas.'),
     visualNote:raw.visualNote||''
   };
 }
-const EXERCISE_CATALOG=CATALOG_ITEMS.map(makeCatalogExercise);
+let EXERCISE_CATALOG=CATALOG_ITEMS.map(makeCatalogExercise);
 
+const REPDB_DATA_URLS=[
+  'https://exercise-dataset.com/exercises.json',
+  'https://raw.githubusercontent.com/RepDB/exercise-dataset/main/exercises.json'
+];
+let repdbRemoteLoaded=false;
+let repdbRemoteLoading=false;
+let repdbRemoteError=false;
+let repdbRemoteCount=0;
 let catalogMuscleFilter='Todos';
+let catalogEquipmentFilter='Todos';
 let activeCatalogKey='';
 
 const DEFAULT={
@@ -5418,7 +5536,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='7.1';
+const APP_BUILD_VERSION='7.2';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -6045,7 +6163,7 @@ function renderHistoryDayEditor(){
 }
 
 function uid(){return Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-4)}
-function muscleIcon(m){return ({'Peito':'◇','Costas':'↔','Quadríceps':'▲','Posterior':'▼','Ombros':'◆','Bíceps':'⌁','Tríceps':'⌁','Panturrilha':'◒','Glúteos':'●','Abdômen':'▦'})[m]||'●'}
+function muscleIcon(m){return ({'Peito':'◇','Costas':'↔','Quadríceps':'▲','Posterior':'▼','Ombros':'◆','Bíceps':'⌁','Tríceps':'⌁','Antebraços':'≈','Panturrilha':'◒','Glúteos':'●','Abdômen':'▦'})[m]||'●'}
 function toggleLibrary(forceOpen=false){const box=document.getElementById('libraryContent'),btn=document.getElementById('libraryToggle');if(!box)return;const open=forceOpen||box.classList.contains('hidden');box.classList.toggle('hidden',!open);if(btn)btn.textContent=open?'Ocultar':'Mostrar';if(open&&forceOpen)document.querySelector('.mobile-library')?.scrollTo?.({top:0,behavior:'smooth'})}
 function gym(){return state.gyms.find(g=>g.id===state.activeGym)||state.gyms[0]}
 function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1800)}
@@ -6921,6 +7039,323 @@ function startMuscle(m){filterMuscle(m)}
 function finishMuscle(){if(!state.activeMuscle)return toast('Nenhum músculo ativo');state.activeMuscle=null;persist();render();toast('Grupo muscular finalizado')}
 function changeGym(id){state.activeGym=id;state.activeMuscle=null;state.muscleStartedAt=null;state.sessionMuscles=[];state.sessionExerciseIds=[];state.sessionFirstByMuscle={};persist();render();toast('Academia alterada')}
 
+
+function repdbMajorMuscle(raw){
+  const body=String(raw?.body_part||'').toLowerCase();
+  const p=(raw?.primary_muscles||[]).map(x=>String(x).toLowerCase());
+  const has=(...xs)=>xs.some(x=>p.includes(x));
+
+  if(body==='chest'||has('pectoralis_major','pectoralis_minor'))return 'Peito';
+  if(body==='back'||has('latissimus_dorsi','rhomboids','teres_major','erector_spinae'))return 'Costas';
+  if(body==='shoulders'||has('anterior_deltoid','lateral_deltoid','posterior_deltoid','deltoids','trapezius'))return 'Ombros';
+  if(has('biceps_brachii','brachialis'))return 'Bíceps';
+  if(has('triceps_brachii'))return 'Tríceps';
+  if(body==='forearms'||has('forearm_flexors','forearm_extensors','brachioradialis'))return 'Antebraços';
+  if(body==='quadriceps'||has('quadriceps','rectus_femoris','vastus_lateralis','vastus_medialis'))return 'Quadríceps';
+  if(body==='hamstrings'||has('hamstrings','biceps_femoris','semitendinosus','semimembranosus'))return 'Posterior';
+  if(body==='glutes'||has('gluteus_maximus','gluteus_medius','gluteus_minimus','adductors'))return 'Glúteos';
+  if(body==='calves'||has('gastrocnemius','soleus'))return 'Panturrilha';
+  if(body==='core'||has('rectus_abdominis','obliques','transverse_abdominis'))return 'Abdômen';
+
+  // Some compound leg movements are tagged simply as "legs".
+  if(body==='legs'){
+    if(has('hamstrings'))return 'Posterior';
+    if(has('gluteus_maximus'))return 'Glúteos';
+    return 'Quadríceps';
+  }
+  return '';
+}
+function repdbEquipmentPt(v){
+  const key=String(v||'').toLowerCase();
+  const map={
+    barbell:'Barra',dumbbell:'Halteres',cable:'Polia',machine:'Máquina',
+    smith_machine:'Smith',bodyweight:'Peso corporal',bench:'Banco',
+    ez_bar:'Barra EZ',pull_up_bar:'Barra fixa',dip_station:'Paralelas',
+    resistance_band:'Elástico',kettlebell:'Kettlebell',ab_wheel:'Roda abdominal',
+    leg_press_machine:'Leg press',hack_squat_machine:'Hack squat',
+    preacher_bench:'Banco Scott',roman_chair:'Cadeira romana',
+    stability_ball:'Bola suíça',plate:'Anilha',landmine:'Landmine',
+    trap_bar:'Trap bar',none:'Peso corporal'
+  };
+  return map[key]||key.replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase())||'Equipamento';
+}
+function repdbMovement(raw){
+  const id=String(raw?.id||'').toLowerCase();
+  const name=String(raw?.name_en||'').toLowerCase();
+  const s=id+' '+name;
+
+  if(/lat-pulldown|pulldown/.test(s))return 'pulldown';
+  if(/pull.?up|chin.?up/.test(s))return 'pullup';
+  if(/pullover|straight-arm/.test(s))return 'pullover';
+  if(/row/.test(s))return /wide|rear|high row/.test(s)?'rowwide':'row';
+  if(/chest fly|pec deck|fly/.test(s))return 'fly';
+  if(/dip/.test(s))return 'dip';
+  if(/push.?up/.test(s))return 'pushup';
+  if(/shoulder press|overhead press|military press|arnold/.test(s))return 'shoulderpress';
+  if(/lateral raise/.test(s))return 'lateral';
+  if(/front raise/.test(s))return 'frontraise';
+  if(/reverse fly|rear delt/.test(s))return 'reardelt';
+  if(/face pull/.test(s))return 'facepull';
+  if(/upright row/.test(s))return 'uprightrow';
+  if(/shrug/.test(s))return 'shrug';
+  if(/hammer curl/.test(s))return 'hammer';
+  if(/reverse curl|wrist curl|wrist extension/.test(s))return 'reversecurl';
+  if(/incline.*curl/.test(s))return 'curlincline';
+  if(/preacher/.test(s))return 'preacher';
+  if(/curl/.test(s))return 'curl';
+  if(/overhead.*tricep|overhead.*extension/.test(s))return 'overheadtriceps';
+  if(/pushdown/.test(s))return 'pushdown';
+  if(/skull|lying.*tricep/.test(s))return 'skullcrusher';
+  if(/kickback/.test(s))return 'kickback';
+  if(/leg extension/.test(s))return 'legextension';
+  if(/leg curl|hamstring curl|nordic/.test(s))return 'legcurl';
+  if(/leg press/.test(s))return 'legpress';
+  if(/romanian|stiff/.test(s))return 'rdl';
+  if(/split squat|bulgarian/.test(s))return 'split';
+  if(/lunge/.test(s))return 'lunge';
+  if(/front squat/.test(s))return 'frontsquat';
+  if(/squat/.test(s))return 'squat';
+  if(/hip thrust|glute bridge/.test(s))return 'hipthrust';
+  if(/abduction/.test(s))return 'abduction';
+  if(/adduction/.test(s))return 'adduction';
+  if(/glute.*kick|kickback/.test(s))return 'glutekick';
+  if(/seated.*calf/.test(s))return 'calfseated';
+  if(/calf/.test(s))return 'calfstanding';
+  if(/side plank/.test(s))return 'sideplank';
+  if(/plank/.test(s))return 'plank';
+  if(/leg raise|knee raise/.test(s))return 'legraise';
+  if(/twist|rotation|woodchop|bicycle/.test(s))return 'rotation';
+  if(/dead bug|bird dog/.test(s))return 'stability';
+  if(/crunch|sit.?up/.test(s))return 'crunch';
+  return raw?.force_type==='pull'?'row':'press';
+}
+function repdbPortugueseName(raw){
+  const id=String(raw?.id||'').toLowerCase();
+  const original=String(raw?.name_en||raw?.id||'Exercício');
+
+  const exact={
+    'bench-press':'Supino Reto com Barra',
+    'db-bench-press':'Supino Reto com Halteres',
+    'incline-bench-press':'Supino Inclinado com Barra',
+    'incline-db-press':'Supino Inclinado com Halteres',
+    'decline-bench-press':'Supino Declinado',
+    'lat-pulldown':'Puxada Alta',
+    'close-grip-lat-pulldown':'Puxada Alta Pegada Fechada',
+    'pull-up':'Barra Fixa',
+    'chin-ups':'Chin-up',
+    'barbell-row':'Remada Curvada com Barra',
+    'single-arm-db-row':'Remada Unilateral com Halter',
+    'chest-supported-db-row':'Remada com Peito Apoiado',
+    'machine-shoulder-press':'Desenvolvimento Máquina',
+    'dumbbell-shoulder-press':'Desenvolvimento com Halteres',
+    'lateral-raise':'Elevação Lateral',
+    'cable-lateral-raise':'Elevação Lateral na Polia',
+    'dumbbell-front-raise':'Elevação Frontal com Halteres',
+    'face-pull':'Face Pull',
+    'barbell-curl':'Rosca Direta com Barra',
+    'ez-bar-curl':'Rosca Direta Barra EZ',
+    'cable-curl':'Rosca Direta na Polia',
+    'hammer-curl':'Rosca Martelo',
+    'preacher-curl':'Rosca Scott',
+    'tricep-pushdown':'Tríceps Pushdown',
+    'overhead-tricep-extension':'Extensão de Tríceps Acima da Cabeça',
+    'skull-crusher':'Tríceps Testa',
+    'leg-press':'Leg Press',
+    'horizontal-leg-press':'Leg Press Horizontal',
+    'hack-squat':'Hack Squat',
+    'squat':'Agachamento Livre',
+    'front-squat':'Agachamento Frontal',
+    'bulgarian-split-squat':'Agachamento Búlgaro',
+    'leg-extension':'Cadeira Extensora',
+    'leg-curl':'Mesa / Cadeira Flexora',
+    'romanian-deadlift':'Levantamento Romeno',
+    'hip-thrust':'Hip Thrust',
+    'glute-bridge':'Ponte de Glúteo',
+    'hip-abduction':'Abdutora',
+    'hip-adduction':'Adutora',
+    'standing-calf-raise':'Panturrilha em Pé',
+    'seated-calf-raise':'Panturrilha Sentado',
+    'cable-crunch':'Crunch na Polia',
+    'plank':'Prancha',
+    'side-plank':'Prancha Lateral'
+  };
+  if(exact[id])return exact[id];
+
+  let n=original
+    .replace(/\bBarbell\b/gi,'Barra')
+    .replace(/\bDumbbells?\b/gi,'Halteres')
+    .replace(/\bCable\b/gi,'Polia')
+    .replace(/\bMachine\b/gi,'Máquina')
+    .replace(/\bSmith Machine\b/gi,'Smith')
+    .replace(/\bSingle[- ]Arm\b/gi,'Unilateral')
+    .replace(/\bOne[- ]Arm\b/gi,'Unilateral')
+    .replace(/\bSeated\b/gi,'Sentado')
+    .replace(/\bStanding\b/gi,'Em Pé')
+    .replace(/\bLying\b/gi,'Deitado')
+    .replace(/\bIncline\b/gi,'Inclinado')
+    .replace(/\bDecline\b/gi,'Declinado')
+    .replace(/\bReverse\b/gi,'Inverso')
+    .replace(/\bClose[- ]Grip\b/gi,'Pegada Fechada')
+    .replace(/\bWide[- ]Grip\b/gi,'Pegada Aberta')
+    .replace(/\bLat Pulldown\b/gi,'Puxada Alta')
+    .replace(/\bPulldown\b/gi,'Puxada')
+    .replace(/\bPull[- ]?Ups?\b/gi,'Barra Fixa')
+    .replace(/\bRows?\b/gi,'Remada')
+    .replace(/\bBench Press\b/gi,'Supino')
+    .replace(/\bChest Press\b/gi,'Chest Press')
+    .replace(/\bShoulder Press\b/gi,'Desenvolvimento')
+    .replace(/\bLateral Raise\b/gi,'Elevação Lateral')
+    .replace(/\bFront Raise\b/gi,'Elevação Frontal')
+    .replace(/\bRear Delt\b/gi,'Deltoide Posterior')
+    .replace(/\bBiceps? Curl\b/gi,'Rosca Bíceps')
+    .replace(/\bCurl\b/gi,'Rosca')
+    .replace(/\bTriceps?\b/gi,'Tríceps')
+    .replace(/\bExtension\b/gi,'Extensão')
+    .replace(/\bLeg Press\b/gi,'Leg Press')
+    .replace(/\bLeg Extension\b/gi,'Extensão de Joelhos')
+    .replace(/\bLeg Curl\b/gi,'Flexão de Joelhos')
+    .replace(/\bCalf Raise\b/gi,'Panturrilha')
+    .replace(/\bSquat\b/gi,'Agachamento')
+    .replace(/\bLunge\b/gi,'Afundo')
+    .replace(/\bGlute Bridge\b/gi,'Ponte de Glúteo')
+    .replace(/\bCrunch\b/gi,'Crunch')
+    .replace(/\bPlank\b/gi,'Prancha');
+  return n.replace(/\s+/g,' ').trim();
+}
+function isGymStrengthExercise(raw){
+  if(!raw||String(raw.category||'').toLowerCase()!=='strength')return false;
+
+  const muscle=repdbMajorMuscle(raw);
+  if(!muscle)return false;
+
+  const goals=(raw.goals||[]).map(x=>String(x).toLowerCase());
+  if(goals.length&&!goals.includes('hypertrophy')&&!goals.includes('strength'))return false;
+
+  const s=(String(raw.id||'')+' '+String(raw.name_en||'')).toLowerCase();
+
+  // Deliberately exclude conditioning / CrossFit / Olympic / plyometric-style work.
+  const blocked=[
+    'air bike','assault bike','burpee','box jump','jump squat','jumping',
+    'battle rope','clean and jerk','clean & jerk','power clean','hang clean',
+    'snatch','jerk','thruster','wall ball','kettlebell swing','turkish get',
+    'farmer','carry','sled push','sled pull','bear crawl','mountain climber',
+    'sprint','rope climb','jump rope','double under','muscle-up','muscle up',
+    'broad jump','depth jump','plyometric','pistol squat'
+  ];
+  if(blocked.some(x=>s.includes(x)))return false;
+
+  const equipment=String(raw.equipment||'').toLowerCase();
+  if(['air_bike','battle_ropes','jump_rope','sled'].includes(equipment))return false;
+
+  return true;
+}
+function repdbRemoteItem(raw){
+  const muscle=repdbMajorMuscle(raw);
+  const movement=repdbMovement(raw);
+  const eq=repdbEquipmentPt(raw.equipment);
+  const imageFlat=raw?.images?.flat||{};
+  const aliases=[
+    raw.name_en,raw.name_es,raw.name_de,raw.id,
+    ...(raw.primary_muscles||[]),
+    ...(raw.secondary_muscles||[])
+  ].filter(Boolean);
+
+  return makeCatalogExercise({
+    key:'repdb-'+raw.id,
+    name:repdbPortugueseName(raw),
+    muscle,
+    equipment:eq,
+    repdbId:raw.id,
+    movement,
+    aliases,
+    repdbDynamic:true,
+    repdbEquipmentKey:raw.equipment||'',
+    repdbDifficulty:raw.difficulty||'',
+    repdbPrimaryMuscles:raw.primary_muscles||[],
+    repdbSecondaryMuscles:raw.secondary_muscles||[],
+    repdbImageStart:imageFlat.start||imageFlat.main||'',
+    repdbImagePeak:imageFlat.peak||imageFlat.main||imageFlat.start||'',
+    visualNote:'Exercício carregado da biblioteca gratuita atual do RepDB.'
+  });
+}
+function mergeRepdbRemoteCatalog(rawExercises){
+  const currentIds=new Set(EXERCISE_CATALOG.map(x=>x.repdbId).filter(Boolean));
+  const currentNames=new Set(EXERCISE_CATALOG.map(x=>normCatalog(x.name)));
+  const incoming=(rawExercises||[])
+    .filter(isGymStrengthExercise)
+    .map(repdbRemoteItem)
+    .filter(x=>x.muscle&&x.repdbId)
+    .filter(x=>!currentIds.has(x.repdbId)&&!currentNames.has(normCatalog(x.name)));
+
+  const seen=new Set();
+  const unique=incoming.filter(x=>{
+    if(seen.has(x.repdbId))return false;
+    seen.add(x.repdbId);
+    return true;
+  });
+
+  EXERCISE_CATALOG.push(...unique);
+  EXERCISE_CATALOG.sort((a,b)=>{
+    const ma=MUSCLES.indexOf(a.muscle),mb=MUSCLES.indexOf(b.muscle);
+    return (ma-mb)||a.name.localeCompare(b.name,'pt-BR');
+  });
+  repdbRemoteCount=unique.length;
+  return unique.length;
+}
+async function loadExpandedRepdbCatalog(force=false){
+  if(repdbRemoteLoading)return;
+  if(repdbRemoteLoaded&&!force)return;
+  repdbRemoteLoading=true;
+  repdbRemoteError=false;
+  updateRepdbCatalogStatus();
+
+  let lastError=null;
+  for(const url of REPDB_DATA_URLS){
+    try{
+      const res=await fetch(url,{cache:'no-store'});
+      if(!res.ok)throw new Error(`HTTP ${res.status}`);
+      const json=await res.json();
+      const exercises=Array.isArray(json)?json:(json.exercises||[]);
+      if(!exercises.length)throw new Error('dataset vazio');
+      mergeRepdbRemoteCatalog(exercises);
+      repdbRemoteLoaded=true;
+      repdbRemoteLoading=false;
+      updateRepdbCatalogStatus();
+      if(document.getElementById('exerciseCatalogModal')?.classList.contains('show'))renderExerciseCatalog();
+      return;
+    }catch(err){
+      lastError=err;
+      console.warn('RepDB dataset fallback',url,err);
+    }
+  }
+
+  repdbRemoteLoading=false;
+  repdbRemoteError=true;
+  updateRepdbCatalogStatus();
+  console.warn('Não foi possível expandir o RepDB agora.',lastError);
+}
+function updateRepdbCatalogStatus(){
+  const el=document.getElementById('repdbCatalogStatus');
+  if(!el)return;
+  if(repdbRemoteLoading){
+    el.className='catalog-source-status loading';
+    el.innerHTML='<span></span><strong>Atualizando biblioteca RepDB…</strong>';
+    return;
+  }
+  if(repdbRemoteLoaded){
+    el.className='catalog-source-status ok';
+    el.innerHTML=`<span></span><strong>Biblioteca RepDB carregada</strong><small>${EXERCISE_CATALOG.length} exercícios de musculação disponíveis</small>`;
+    return;
+  }
+  if(repdbRemoteError){
+    el.className='catalog-source-status warn';
+    el.innerHTML='<span></span><strong>Usando biblioteca local</strong><small>Não foi possível buscar exercícios extras agora.</small><button onclick="loadExpandedRepdbCatalog(true)">Tentar novamente</button>';
+    return;
+  }
+  el.className='catalog-source-status';
+  el.innerHTML='<span></span><strong>RepDB</strong><small>Biblioteca focada em musculação</small>';
+}
+
 function normCatalog(v){
   return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim().replace(/\s+/g,' ');
 }
@@ -7002,6 +7437,11 @@ function bodyHeatSVG(primary=[],secondary=[]){
 }
 function exerciseImageUrl(item,stage='start'){
   if(item?.repdbId){
+    const rawPath=stage==='peak'?item.repdbImagePeak:item.repdbImageStart;
+    if(rawPath){
+      if(/^https?:\/\//i.test(rawPath))return rawPath;
+      return `https://raw.githubusercontent.com/RepDB/exercise-dataset/main/${rawPath.replace(/^\//,'')}`;
+    }
     const suffix=stage==='peak'?'peak':'start';
     return `https://raw.githubusercontent.com/RepDB/exercise-dataset/main/images/flat/${item.repdbId}-${suffix}.webp`;
   }
@@ -7101,6 +7541,10 @@ function regionEmphasisFor(item){
     if(mv==='diptriceps'||mv==='pushuptriceps')
       return [['Tríceps — cabeça lateral',92],['Cabeça longa',78],['Cabeça medial',68],['Peito',45]];
     return [['Tríceps',100],['Cabeça lateral',82],['Cabeça longa',72]];
+  }
+
+  if(item.muscle==='Antebraços'){
+    return [['Antebraços',100],['Braquiorradial',82],['Flexores / extensores do punho',74],['Bíceps',24]];
   }
 
   if(item.muscle==='Quadríceps'){
@@ -7262,32 +7706,54 @@ function progressExerciseVisualHTML(e){
 
 function openExerciseCatalog(){
   catalogMuscleFilter=state.activeMuscle||'Todos';
+  catalogEquipmentFilter='Todos';
   document.getElementById('catalogSearch').value='';
   renderExerciseCatalog();
+  updateRepdbCatalogStatus();
   openModal('exerciseCatalogModal');
+  loadExpandedRepdbCatalog();
 }
 function renderExerciseCatalog(){
-  const root=document.getElementById('catalogGrid');
+  const root=document.getElementById('catalogGrid');if(!root)return;
   const q=normCatalog(document.getElementById('catalogSearch')?.value||'');
+
   const muscles=['Todos',...MUSCLES.filter(m=>EXERCISE_CATALOG.some(x=>x.muscle===m))];
   document.getElementById('catalogFilters').innerHTML=muscles.map(m=>`<button class="${catalogMuscleFilter===m?'active':''}" onclick="catalogMuscleFilter='${m}';renderExerciseCatalog()">${esc(m)}</button>`).join('');
 
+  const equipment=[...new Set(EXERCISE_CATALOG.map(x=>x.equipment).filter(Boolean))]
+    .sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  const eqSel=document.getElementById('catalogEquipmentFilter');
+  if(eqSel){
+    const current=equipment.includes(catalogEquipmentFilter)?catalogEquipmentFilter:'Todos';
+    catalogEquipmentFilter=current;
+    eqSel.innerHTML=['Todos',...equipment].map(x=>`<option value="${esc(x)}" ${x===current?'selected':''}>${esc(x)}</option>`).join('');
+  }
+
   const arr=EXERCISE_CATALOG.filter(x=>{
     const muscleOk=catalogMuscleFilter==='Todos'||x.muscle===catalogMuscleFilter;
-    const hay=normCatalog([x.name,x.muscle,x.equipment,...(x.aliases||[])].join(' '));
-    return muscleOk&&(!q||hay.includes(q));
+    const equipmentOk=catalogEquipmentFilter==='Todos'||x.equipment===catalogEquipmentFilter;
+    const hay=normCatalog([
+      x.name,x.muscle,x.equipment,x.repdbId,
+      ...(x.aliases||[]),
+      ...(x.repdbPrimaryMuscles||[]),
+      ...(x.repdbSecondaryMuscles||[])
+    ].join(' '));
+    return muscleOk&&equipmentOk&&(!q||hay.includes(q));
   });
 
-  document.getElementById('catalogResultTitle').textContent=catalogMuscleFilter==='Todos'?'Exercícios':'Exercícios de '+catalogMuscleFilter;
-  document.getElementById('catalogResultCount').textContent=arr.length+' de '+EXERCISE_CATALOG.length+' exercícios';
+  document.getElementById('catalogResultTitle').textContent=catalogMuscleFilter==='Todos'?'Exercícios de musculação':'Exercícios de '+catalogMuscleFilter;
+  document.getElementById('catalogResultCount').textContent=arr.length+' de '+EXERCISE_CATALOG.length;
+  const size=document.getElementById('catalogLibrarySize');
+  if(size)size.textContent=`Biblioteca de musculação · ${EXERCISE_CATALOG.length} exercícios`;
 
   if(!arr.length){
-    root.innerHTML=`<div class="catalog-empty"><strong>Nada encontrado</strong><span>Tente outro nome ou crie o exercício manualmente.</span><button onclick="openBlankExerciseModal()">＋ Criar manualmente</button></div>`;
+    root.innerHTML=`<div class="catalog-empty"><strong>Nada encontrado</strong><span>Tente outro músculo, equipamento ou nome. A biblioteca exclui exercícios de condicionamento/CrossFit.</span><button onclick="openBlankExerciseModal()">＋ Criar manualmente</button></div>`;
     return;
   }
 
   root.innerHTML=arr.map(item=>{
     const exists=existingExerciseForCatalog(item);
+    const source=item.repdbDynamic?'REPDB':'';
     return `<button class="catalog-card" onclick="openCatalogDetail('${item.key}')">
       <div class="catalog-card-visual">
         <div class="catalog-card-muscle">${catalogMuscleIcon(item.muscle)}</div>
@@ -7299,11 +7765,13 @@ function renderExerciseCatalog(){
         <p>${esc(item.summary)}</p>
         <div class="catalog-card-tags">
           <span>${exists?'✓ já atrelado ao seu cadastro':'ver execução'}</span>
+          ${source?`<em>${source}</em>`:''}
           <i>›</i>
         </div>
       </div>
     </button>`;
   }).join('');
+  updateRepdbCatalogStatus();
 }
 function openCatalogDetail(key){
   const item=catalogItem(key);if(!item)return;
@@ -8368,6 +8836,7 @@ function renderHistory(){
 renderProgressOverview=progressRenderOverviewV3;
 
 showAuthGate('login');
+loadExpandedRepdbCatalog();
 initSupabase();
 </script>
 </body>
