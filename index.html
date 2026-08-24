@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   6.6 — HISTORY HUB / CALENDAR GLOBAL / SESSION DAY FIX
+   6.7 — DESKTOP MODAL SYSTEM / FULL HISTORY DAY EDITOR
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -4024,6 +4024,292 @@ select{
   .history-hub-primary{min-height:66px}
   .history-hub-section-head{align-items:flex-start}
 }
+
+/* =========================================================
+   6.7 — desktop modal architecture + complete day editor
+   ========================================================= */
+
+/* Every shown modal is a true interaction layer. JS assigns the final z-index. */
+.modal{
+  isolation:isolate;
+  pointer-events:none;
+}
+.modal.show{
+  pointer-events:auto;
+}
+body.has-open-modal{
+  overflow:hidden!important;
+}
+
+/* A nested modal always has its own visual surface; the previous layer stays visible
+   underneath but cannot intercept clicks because the newer layer is above it. */
+.modal.show[data-modal-layer]{
+  animation:modalLayerIn .16s ease both;
+}
+@keyframes modalLayerIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+/* History day editor */
+.history-day-toolbar{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:end;
+  gap:10px;
+  margin-bottom:10px;
+}
+.history-day-date-field{
+  margin:0!important;
+}
+.history-day-add-toggle{
+  min-height:46px;
+  white-space:nowrap;
+}
+.history-day-add-panel{
+  display:none;
+  margin:4px 0 14px;
+  padding:13px;
+  border:1px solid rgba(203,255,56,.18);
+  border-radius:15px;
+  background:linear-gradient(135deg,rgba(203,255,56,.055),#0b1014);
+}
+.history-day-add-panel.show{
+  display:block;
+  animation:progFadeUp .18s ease both;
+}
+.history-day-add-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+.history-day-add-head strong{
+  display:block;
+  color:#edf2f4;
+  font-size:9px;
+}
+.history-day-add-head span{
+  display:block;
+  margin-top:3px;
+  color:#77838d;
+  font-size:6.5px;
+  line-height:1.4;
+}
+.close.mini{
+  width:30px;
+  height:30px;
+  min-height:30px!important;
+  border-radius:9px;
+}
+.history-day-add-controls{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px;
+}
+.history-day-summary>div{
+  min-width:0;
+}
+.history-day-summary>div strong,
+.history-day-summary>div span{
+  display:block;
+}
+.history-day-summary>div span{
+  margin-top:3px;
+}
+.history-day-item{
+  grid-template-columns:38px minmax(0,1fr) auto!important;
+}
+.history-day-order{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:#141b10;
+  color:var(--app-accent);
+  font-size:7px;
+  font-weight:950;
+}
+.history-day-actions{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.history-day-remove{
+  border-color:rgba(255,100,110,.18)!important;
+  color:#e99aa0!important;
+}
+
+/* ---------------------------------------------------------
+   DESKTOP — modal/popup behavior rebuilt around viewport layers
+   --------------------------------------------------------- */
+@media(min-width:900px){
+  body{
+    overflow-x:hidden!important;
+  }
+
+  .modal{
+    position:fixed!important;
+    inset:0!important;
+    width:100vw!important;
+    height:100dvh!important;
+    padding:28px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    overflow:hidden!important;
+    background:rgba(3,6,8,.72)!important;
+    backdrop-filter:blur(12px)!important;
+    -webkit-backdrop-filter:blur(12px)!important;
+  }
+
+  /* All regular sheets use a predictable desktop surface */
+  .modal > .sheet{
+    position:relative!important;
+    width:min(960px,calc(100vw - 96px))!important;
+    max-width:none!important;
+    height:auto!important;
+    max-height:calc(100dvh - 56px)!important;
+    margin:0!important;
+    padding:20px 22px 24px!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    border:1px solid #29343d!important;
+    border-radius:24px!important;
+    background:#0d1216!important;
+    box-shadow:0 35px 120px rgba(0,0,0,.58)!important;
+    overscroll-behavior:contain!important;
+    scrollbar-gutter:stable!important;
+  }
+
+  /* Specialized full-size surfaces */
+  #historyModal .progress-sheet{
+    position:relative!important;
+    width:min(1180px,calc(100vw - 96px))!important;
+    height:min(900px,calc(100dvh - 56px))!important;
+    max-width:none!important;
+    max-height:calc(100dvh - 56px)!important;
+    margin:0!important;
+    padding:0 18px 28px!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    border:1px solid #29343d!important;
+    border-radius:25px!important;
+    background:
+      radial-gradient(circle at 50% -140px,rgba(203,255,56,.08),transparent 380px),
+      #080b0e!important;
+    box-shadow:0 35px 120px rgba(0,0,0,.58)!important;
+    overscroll-behavior:contain!important;
+    scrollbar-gutter:stable!important;
+  }
+
+  #exerciseCatalogModal .catalog-sheet,
+  #exerciseCatalogDetailModal .catalog-detail-sheet{
+    position:relative!important;
+    width:min(1100px,calc(100vw - 96px))!important;
+    height:auto!important;
+    max-height:calc(100dvh - 56px)!important;
+    margin:0!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    border:1px solid #29343d!important;
+    border-radius:24px!important;
+    box-shadow:0 35px 120px rgba(0,0,0,.58)!important;
+  }
+
+  #exerciseModal > .sheet{
+    width:min(1040px,calc(100vw - 96px))!important;
+  }
+  #todayModal > .sheet{
+    width:min(1040px,calc(100vw - 96px))!important;
+  }
+  #historyDayModal > .sheet{
+    width:min(920px,calc(100vw - 96px))!important;
+  }
+  #settingsModal > .sheet{
+    width:min(720px,calc(100vw - 96px))!important;
+  }
+
+  /* Sticky headers must live inside their OWN layer only. */
+  .modal > .sheet > .sheethead,
+  #historyModal .progress-appbar{
+    position:sticky!important;
+    top:0!important;
+    z-index:4!important;
+  }
+  .modal > .sheet > .sheethead{
+    margin:-20px -22px 16px!important;
+    padding:18px 22px 13px!important;
+    background:rgba(13,18,22,.96)!important;
+    border-bottom:1px solid #1d2730!important;
+    backdrop-filter:blur(16px)!important;
+  }
+  #historyModal .progress-appbar{
+    background:linear-gradient(180deg,rgba(8,11,14,.98) 78%,rgba(8,11,14,.88))!important;
+  }
+
+  /* Everything clickable is visibly clickable on desktop. */
+  .btn,
+  .close,
+  .history-hub-day,
+  .history-hub-primary,
+  .catalog-card,
+  .progress-muscle-card,
+  .progress-ex-card{
+    cursor:pointer!important;
+  }
+
+  .btn:hover,
+  .close:hover{
+    filter:brightness(1.08);
+  }
+
+  /* Child modal visually separates itself from parent. */
+  .modal.show[data-modal-layer="2"],
+  .modal.show[data-modal-layer="3"],
+  .modal.show[data-modal-layer="4"]{
+    background:rgba(1,3,5,.78)!important;
+  }
+
+  .history-day-toolbar{
+    position:sticky;
+    top:63px;
+    z-index:3;
+    padding:10px 0;
+    background:linear-gradient(180deg,#0d1216 80%,rgba(13,18,22,.88));
+  }
+
+  .history-day-list{
+    padding-bottom:4px;
+  }
+}
+
+/* ---------------------------------------------------------
+   MOBILE — keep controls compact and stacked
+   --------------------------------------------------------- */
+@media(max-width:899px){
+  .history-day-toolbar{
+    grid-template-columns:1fr;
+  }
+  .history-day-add-toggle{
+    width:100%;
+  }
+  .history-day-add-controls{
+    grid-template-columns:1fr;
+  }
+  .history-day-item{
+    grid-template-columns:34px minmax(0,1fr)!important;
+  }
+  .history-day-actions{
+    grid-column:1/-1;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .history-day-actions .btn{
+    width:100%;
+  }
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -4395,16 +4681,31 @@ select{
 <div class="modal" id="historyDayModal" onclick="backdropClose(event,'historyDayModal')"><div class="sheet history-day-sheet">
   <div class="grab"></div>
   <div class="sheethead">
-    <div><h3>Editar treino por dia</h3><p>Veja e corrija o treino de qualquer data, mesmo se atravessou a meia-noite.</p></div>
+    <div><h3>Editar treino por dia</h3><p>Altere registros, adicione exercícios esquecidos ou remova exercícios daquele treino.</p></div>
     <button class="close" onclick="closeModal('historyDayModal')">✕</button>
   </div>
-  <div class="field">
-    <label>Dia do treino</label>
-    <div class="row">
-      <input id="historyDayPicker" class="input" type="date">
-      <button class="btn primary" onclick="renderHistoryDayEditor()">Abrir</button>
+
+  <div class="history-day-toolbar">
+    <div class="field history-day-date-field">
+      <label>Dia do treino</label>
+      <input id="historyDayPicker" class="input" type="date" onchange="renderHistoryDayEditor()">
+    </div>
+    <button class="btn primary history-day-add-toggle" type="button" onclick="toggleHistoryDayAddPanel()">
+      ＋ Adicionar exercício
+    </button>
+  </div>
+
+  <div class="history-day-add-panel" id="historyDayAddPanel">
+    <div class="history-day-add-head">
+      <div><strong>Adicionar ao treino desse dia</strong><span>Escolha um exercício já cadastrado. Depois você preenche as séries normalmente.</span></div>
+      <button class="close mini" type="button" onclick="toggleHistoryDayAddPanel(false)">✕</button>
+    </div>
+    <div class="history-day-add-controls">
+      <select id="historyDayExerciseSelect" class="select"></select>
+      <button class="btn primary" type="button" onclick="addSelectedExerciseToHistoryDay()">Adicionar e preencher</button>
     </div>
   </div>
+
   <div id="historyDayEditorBody" class="history-day-editor-body"></div>
 </div></div>
 
@@ -4547,7 +4848,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='6.6';
+const APP_BUILD_VERSION='6.7';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -5039,33 +5340,138 @@ function historyEntriesForSessionDay(day){
     .filter(h=>!h.referenceOnly&&sessionDayFromHistory(h)===day)
     .sort((a,b)=>(a.date||'').localeCompare(b.date||''));
 }
+function fillHistoryDayExerciseSelect(){
+  const el=document.getElementById('historyDayExerciseSelect');if(!el)return;
+  const exercises=(state.exercises||[])
+    .slice()
+    .sort((a,b)=>{
+      const ga=(state.gyms||[]).find(g=>g.id===a.gymId)?.name||'';
+      const gb=(state.gyms||[]).find(g=>g.id===b.gymId)?.name||'';
+      return ga.localeCompare(gb)||a.muscle.localeCompare(b.muscle)||a.name.localeCompare(b.name);
+    });
+
+  if(!exercises.length){
+    el.innerHTML='<option value="">Nenhum exercício cadastrado</option>';
+    return;
+  }
+
+  const byGym=new Map();
+  exercises.forEach(e=>{
+    const gymName=(state.gyms||[]).find(g=>g.id===e.gymId)?.name||'Academia';
+    if(!byGym.has(gymName))byGym.set(gymName,[]);
+    byGym.get(gymName).push(e);
+  });
+
+  el.innerHTML=[...byGym.entries()].map(([gymName,xs])=>
+    `<optgroup label="${esc(gymName)}">${xs.map(e=>`<option value="${e.id}">${esc(e.name)} · ${esc(e.muscle)}</option>`).join('')}</optgroup>`
+  ).join('');
+}
+function toggleHistoryDayAddPanel(force=null){
+  const panel=document.getElementById('historyDayAddPanel');if(!panel)return;
+  const show=force===null?!panel.classList.contains('show'):!!force;
+  panel.classList.toggle('show',show);
+  if(show){
+    fillHistoryDayExerciseSelect();
+    setTimeout(()=>document.getElementById('historyDayExerciseSelect')?.focus?.(),20);
+  }
+}
 function openHistoryDayEditor(day=null){
   const picker=document.getElementById('historyDayPicker');
   if(picker)picker.value=day||state.sessionDate||todayKey();
+  toggleHistoryDayAddPanel(false);
+  fillHistoryDayExerciseSelect();
   renderHistoryDayEditor();
   openModal('historyDayModal');
+}
+function addSelectedExerciseToHistoryDay(){
+  const day=document.getElementById('historyDayPicker')?.value||todayKey();
+  const id=document.getElementById('historyDayExerciseSelect')?.value;
+  if(!id)return toast('Escolha um exercício');
+
+  const e=(state.exercises||[]).find(x=>x.id===id);
+  if(!e)return toast('Exercício não encontrado');
+
+  // Use the exercise's own gym while creating a historical record.
+  // It is restored after the editor closes/saves through normal rendering.
+  state.activeGym=e.gymId;
+  render();
+
+  currentEditingHistoryId=null;
+  editExercise(id);
+
+  const dateInput=document.getElementById('performedDate');
+  if(dateInput)dateInput.value=day;
+
+  document.getElementById('modalTitle').textContent='＋ Adicionar ao treino';
+  document.getElementById('modalSubtitle').textContent=`Novo registro para ${new Date(day+'T12:00:00').toLocaleDateString('pt-BR')}. Preencha as séries realizadas.`;
+  document.getElementById('saveExerciseBtn').textContent='Adicionar ao dia';
+
+  toggleHistoryDayAddPanel(false);
+}
+function removeHistoryRecordFromDay(historyId){
+  const h=(state.history||[]).find(x=>x.id===historyId);if(!h)return;
+  if(!confirm(`Remover ${h.name||'este exercício'} desse treino? O exercício continuará cadastrado na sua biblioteca.`))return;
+
+  state.history=state.history.filter(x=>x.id!==historyId);
+  recomputePreparedToday();
+  persist();
+  render();
+  renderHistoryDayEditor();
+
+  if(document.getElementById('historyModal')?.classList.contains('show')){
+    const title=document.getElementById('historyModalTitle')?.textContent||'';
+    if(title.includes('Histórico'))renderHistoryHub();
+  }
+  toast('Exercício removido desse treino');
 }
 function renderHistoryDayEditor(){
   const day=document.getElementById('historyDayPicker')?.value||todayKey();
   const root=document.getElementById('historyDayEditorBody');if(!root)return;
   const entries=historyEntriesForSessionDay(day);
+
+  const dateLabel=new Date(day+'T12:00:00').toLocaleDateString('pt-BR',{
+    weekday:'long',day:'2-digit',month:'long',year:'numeric'
+  });
+
   if(!entries.length){
-    root.innerHTML=`<div class="history-day-empty"><strong>Nenhum exercício salvo nesse dia.</strong><span>Se alguma série não foi salva porque virou meia-noite, abra o exercício e registre usando essa data.</span></div>`;
+    root.innerHTML=`<div class="history-day-summary">
+      <div><strong>0 exercícios</strong><span>${dateLabel}</span></div>
+      <button class="btn primary" onclick="toggleHistoryDayAddPanel(true)">＋ Adicionar primeiro exercício</button>
+    </div>
+    <div class="history-day-empty">
+      <strong>Nenhum exercício salvo nesse dia.</strong>
+      <span>Você pode reconstruir o treino adicionando os exercícios que realizou e preenchendo as séries.</span>
+    </div>`;
     return;
   }
-  root.innerHTML=`<div class="history-day-summary"><strong>${entries.length} registro${entries.length===1?'':'s'}</strong><span>${new Date(day+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'})}</span></div>
-  <div class="history-day-list">${entries.map(h=>{
-    const work=h.sets?.work||[];
-    const workText=work.map((s,i)=>`T${i+1}: ${s.kg?`${s.kg} kg`:'peso corporal'} × ${s.reps||'—'}${s.rir!==''&&s.rir!=null?` · RIR ${s.rir}`:''}`).join(' · ');
-    return `<article class="history-day-item">
-      <div class="history-day-item-main">
-        <small>${esc(h.muscle||'Treino')} · ${esc((state.gyms||[]).find(g=>g.id===h.gymId)?.name||'Academia')}</small>
-        <strong>${esc(h.name||'Exercício')}</strong>
-        <span>${esc(workText||'Registro salvo')}</span>
-      </div>
-      <button class="btn secondary" onclick="closeModal('historyDayModal');openHistoryRecord('${h.id}')">Editar</button>
-    </article>`;
-  }).join('')}</div>`;
+
+  root.innerHTML=`<div class="history-day-summary">
+    <div><strong>${entries.length} exercício${entries.length===1?'':'s'}</strong><span>${dateLabel}</span></div>
+    <button class="btn secondary" onclick="toggleHistoryDayAddPanel(true)">＋ Adicionar exercício</button>
+  </div>
+  <div class="history-day-list">
+    ${entries.map((h,index)=>{
+      const work=h.sets?.work||[];
+      const workText=work.map((s,i)=>{
+        const kg=s.kg?`${s.kg} kg`:'peso corporal';
+        return `T${i+1}: ${kg} × ${s.reps||'—'}${s.rir!==''&&s.rir!=null?` · RIR ${s.rir}`:''}`;
+      }).join(' · ');
+      const gymName=(state.gyms||[]).find(g=>g.id===h.gymId)?.name||'Academia';
+
+      return `<article class="history-day-item">
+        <div class="history-day-order">${String(index+1).padStart(2,'0')}</div>
+        <div class="history-day-item-main">
+          <small>${esc(h.muscle||'Treino')} · ${esc(gymName)}</small>
+          <strong>${esc(h.name||'Exercício')}</strong>
+          <span>${esc(workText||'Registro salvo')}</span>
+        </div>
+        <div class="history-day-actions">
+          <button class="btn secondary" onclick="openHistoryRecord('${h.id}')">Editar</button>
+          <button class="btn danger history-day-remove" onclick="removeHistoryRecordFromDay('${h.id}')">Remover</button>
+        </div>
+      </article>`;
+    }).join('')}
+  </div>`;
 }
 
 function uid(){return Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-4)}
@@ -6882,6 +7288,7 @@ function openHistoryRecord(historyId){
   try{
     const h=state.history.find(x=>x.id===historyId);if(!h)return toast('Registro não encontrado');
     const e=state.exercises.find(x=>x.id===h.exerciseId);if(!e)return toast('Exercício não encontrado');
+    if(h.gymId&&state.gyms.some(g=>g.id===h.gymId))state.activeGym=h.gymId;
     currentEditingHistoryId=h.id;currentCalibration=null;
     window.currentSets=JSON.parse(JSON.stringify(h.sets||{}));TYPES.forEach(t=>{if(!Array.isArray(currentSets[t.key]))currentSets[t.key]=[]});
     if(!currentSets.warmup.length)currentSets.warmup.push(blankSet());while(currentSets.feeder.length<2)currentSets.feeder.push(blankSet());if(!currentSets.pap.length)currentSets.pap.push(blankSet());while(currentSets.work.length<2)currentSets.work.push(blankSet());
@@ -6953,9 +7360,67 @@ function resetData(){
   closeModal('settingsModal');
   toast('Dados de treino apagados');
 }
-function openModal(id){document.getElementById(id).classList.add('show');document.body.style.overflow='hidden'}
-function closeModal(id){document.getElementById(id).classList.remove('show');document.body.style.overflow=''}
-function backdropClose(ev,id){if(ev.target.id===id)closeModal(id)}
+let modalStack=[];
+function syncModalStack(){
+  modalStack=modalStack.filter(id=>document.getElementById(id)?.classList.contains('show'));
+  modalStack.forEach((id,index)=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.style.zIndex=String(1000+(index*20));
+    el.dataset.modalLayer=String(index+1);
+    el.setAttribute('aria-hidden','false');
+  });
+  document.body.classList.toggle('has-open-modal',modalStack.length>0);
+  document.body.style.overflow=modalStack.length?'hidden':'';
+}
+function openModal(id){
+  const el=document.getElementById(id);if(!el)return;
+  modalStack=modalStack.filter(x=>x!==id);
+  modalStack.push(id);
+  el.classList.add('show');
+  syncModalStack();
+  requestAnimationFrame(()=>{
+    const focusable=el.querySelector('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])');
+    focusable?.focus?.({preventScroll:true});
+  });
+}
+function closeModal(id){
+  const el=document.getElementById(id);if(!el)return;
+  el.classList.remove('show');
+  el.style.zIndex='';
+  el.removeAttribute('data-modal-layer');
+  el.setAttribute('aria-hidden','true');
+  modalStack=modalStack.filter(x=>x!==id);
+  syncModalStack();
+
+  if(id==='exerciseModal'&&document.getElementById('historyDayModal')?.classList.contains('show')){
+    renderHistoryDayEditor();
+  }
+  if(id==='historyDayModal'&&document.getElementById('historyModal')?.classList.contains('show')){
+    const title=document.getElementById('historyModalTitle')?.textContent||'';
+    if(title.includes('Histórico'))renderHistoryHub();
+  }
+}
+function closeTopModal(){
+  const id=modalStack[modalStack.length-1];
+  if(id)closeModal(id);
+}
+function closeAllContentModals(){
+  [...modalStack].reverse().forEach(id=>closeModal(id));
+  modalStack=[];
+  syncModalStack();
+}
+function backdropClose(ev,id){
+  if(ev.target.id!==id)return;
+  if(modalStack[modalStack.length-1]!==id)return;
+  closeModal(id);
+}
+document.addEventListener('keydown',ev=>{
+  if(ev.key==='Escape'&&modalStack.length){
+    ev.preventDefault();
+    closeTopModal();
+  }
+});
 function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 
 function setNavActive(btn){document.querySelectorAll('#appNav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active')}
@@ -6967,22 +7432,24 @@ function showAppScreen(id){
 }
 function navHome(btn){
   setNavActive(btn);
-  closeModal('historyModal');
+  closeAllContentModals();
   showAppScreen('homeScreen');
 }
 function navHistory(btn){
   setNavActive(btn);
+  closeAllContentModals();
   openHistoryHub();
 }
 function navProgress(btn){
   setNavActive(btn);
+  closeAllContentModals();
   openHistoryModal();
   setHistoryModalMode('progress');
   renderProgressOverview();
 }
 function navExercises(btn){
   setNavActive(btn);
-  closeModal('historyModal');
+  closeAllContentModals();
   showAppScreen('exerciseScreen');
   toggleLibrary(true);
 }
