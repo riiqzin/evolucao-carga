@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   6.4 — SESSION DAY / GLOBAL CALENDAR / HISTORY EDITING
+   6.5 — DESKTOP MODAL SCROLL FIX
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -3757,6 +3757,99 @@ select{
   .history-day-item{grid-template-columns:1fr}
   .history-day-item .btn{width:100%}
 }
+
+/* =========================================================
+   6.5 — desktop modal mouse-wheel / trackpad scrolling
+   ========================================================= */
+@media(min-width:900px){
+  /* The modal itself must not trap wheel events on a non-scrollable layer. */
+  .modal{
+    overflow:hidden!important;
+  }
+
+  /* Make every desktop sheet the actual scrolling surface. */
+  .modal > .sheet,
+  .progress-sheet,
+  .catalog-sheet,
+  .catalog-detail-sheet{
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-gutter:stable;
+  }
+
+  /* Keep the desktop sheets inside the viewport so there is always
+     a real scrollable height instead of content escaping below the screen. */
+  .modal > .sheet{
+    max-height:calc(100dvh - 52px)!important;
+    min-height:0!important;
+  }
+
+  .progress-sheet,
+  .catalog-sheet,
+  .catalog-detail-sheet{
+    max-height:calc(100dvh - 52px)!important;
+    min-height:0!important;
+  }
+
+  /* Some screens have nested content wrappers. They must not capture
+     scrolling with fixed heights/hidden overflow. */
+  .progress-content,
+  .catalog-body,
+  .catalog-list,
+  .history-day-editor-body{
+    overflow:visible!important;
+    max-height:none!important;
+  }
+
+  /* Sticky sheet headers make long popups easier to use on desktop. */
+  .sheet > .sheethead,
+  .progress-sheet .progress-head,
+  .catalog-sheet .catalog-head,
+  .catalog-detail-sheet .catalog-head{
+    position:sticky!important;
+    top:0!important;
+    z-index:8!important;
+    background:inherit!important;
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+  }
+
+  /* Explicit scrollbar styling so it is obvious the popup can scroll. */
+  .modal > .sheet::-webkit-scrollbar,
+  .progress-sheet::-webkit-scrollbar,
+  .catalog-sheet::-webkit-scrollbar,
+  .catalog-detail-sheet::-webkit-scrollbar{
+    width:10px;
+  }
+
+  .modal > .sheet::-webkit-scrollbar-track,
+  .progress-sheet::-webkit-scrollbar-track,
+  .catalog-sheet::-webkit-scrollbar-track,
+  .catalog-detail-sheet::-webkit-scrollbar-track{
+    background:transparent;
+  }
+
+  .modal > .sheet::-webkit-scrollbar-thumb,
+  .progress-sheet::-webkit-scrollbar-thumb,
+  .catalog-sheet::-webkit-scrollbar-thumb,
+  .catalog-detail-sheet::-webkit-scrollbar-thumb{
+    background:#2c3740;
+    border:3px solid transparent;
+    background-clip:padding-box;
+    border-radius:999px;
+  }
+
+  .modal > .sheet::-webkit-scrollbar-thumb:hover,
+  .progress-sheet::-webkit-scrollbar-thumb:hover,
+  .catalog-sheet::-webkit-scrollbar-thumb:hover,
+  .catalog-detail-sheet::-webkit-scrollbar-thumb:hover{
+    background:#3b4852;
+    border:3px solid transparent;
+    background-clip:padding-box;
+  }
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -4280,7 +4373,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='6.4';
+const APP_BUILD_VERSION='6.5';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
