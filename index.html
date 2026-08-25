@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   7.8 — GUIDED FIRST / TRUE LOAD PRS
+   7.9 — HISTORY EXPERIENCE REDESIGN
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -5333,6 +5333,36 @@ textarea{
     display:none;
   }
 }
+
+/* =========================================================
+   7.9 — HISTÓRICO 4.0
+   ========================================================= */
+.h4-shell{width:min(1060px,100%)!important;padding:2px 0 22px!important}
+.h4-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(265px,.46fr);gap:14px;align-items:center;padding:20px;border:1px solid #303b2a;border-radius:25px;background:radial-gradient(circle at 88% 4%,rgba(203,255,56,.09),transparent 30%),linear-gradient(145deg,#111812,#0d1316 55%,#0b1014);animation:h4Rise .38s ease both}
+.h4-hero:after{content:'';position:absolute;right:-70px;bottom:-110px;width:220px;height:220px;border-radius:50%;border:1px solid rgba(203,255,56,.06);box-shadow:0 0 0 35px rgba(203,255,56,.018),0 0 0 70px rgba(203,255,56,.012)}
+.h4-hero-copy{position:relative;z-index:2;min-width:0}.h4-hero-copy>small,.h4-section-head small,.h4-calendar-head small,.h4-day-hero small,.h4-day-actionbar small{display:block;color:#95a96c;font-size:8px!important;font-weight:950;letter-spacing:.12em}.h4-hero h2{margin:6px 0 5px;font-size:27px!important;line-height:1.04;letter-spacing:-.05em}.h4-hero p{margin:0;color:#89958f;font-size:10px!important}.h4-hero-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}.h4-hero-pills span{padding:6px 8px;border:1px solid #29342d;border-radius:999px;background:rgba(7,11,9,.42);color:#8f9b94;font-size:7px;font-weight:850}
+.h4-hero-action{position:relative;z-index:2;min-height:82px;display:grid;grid-template-columns:40px minmax(0,1fr) 15px;gap:9px;align-items:center;padding:12px;border:1px solid #3a4828;border-radius:17px;background:rgba(18,26,14,.82);color:#edf3e7;text-align:left}.h4-hero-action>span{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:var(--accent);color:#090c05;font-size:15px;font-weight:950}.h4-hero-action div{min-width:0}.h4-hero-action small{display:block;color:#8da065;font-size:7px!important}.h4-hero-action strong{display:block;margin-top:2px;font-size:12px}.h4-hero-action em{display:block;margin-top:2px;color:#75836f;font-size:7px;font-style:normal}.h4-hero-action>b{color:var(--accent);font-size:16px}
+
+.h4-glance{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:9px 0 16px}.h4-glance>div{display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:8px;align-items:center;padding:10px;border:1px solid #232d34;border-radius:17px;background:#0f1418;animation:h4Rise .38s both}.h4-glance>div:nth-child(2){animation-delay:.03s}.h4-glance>div:nth-child(3){animation-delay:.06s}.h4-glance>div:nth-child(4){animation-delay:.09s}.h4-glance>div>span{grid-row:1/4;width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:#171e16;color:#a9c95a;font-size:12px}.h4-glance small{color:#6d7881;font-size:6.5px!important;font-weight:950;letter-spacing:.06em}.h4-glance strong{display:block;font-size:17px;line-height:1}.h4-glance em{display:block;color:#707b84;font-size:6.5px;font-style:normal}
+
+.h4-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);gap:12px;align-items:start}.h4-main-column,.h4-side-column{min-width:0}.h4-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:8px 2px}.h4-section-head strong{display:block;margin-top:2px;font-size:15px}.h4-section-head div>span,.h4-section-head>span{display:block;color:#6f7b84;font-size:8px}.h4-session-list{display:grid;gap:7px}
+.h4-session-card{--delay:0s;width:100%;display:grid;grid-template-columns:56px minmax(0,1fr) auto 16px;gap:10px;align-items:center;padding:10px 11px;border:1px solid #232d34;border-radius:18px;background:#0f1418;color:#edf2f4;text-align:left;animation:h4Rise .38s var(--delay) both;transition:.16s ease}.h4-session-card:hover{border-color:#3a472a;background:#111811}.h4-session-card:active{transform:scale(.99)}
+.h4-session-date{width:56px;height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:14px;background:#141c11;border:1px solid #283522}.h4-session-date small{color:#82945f;font-size:6px!important;font-weight:950}.h4-session-date strong{color:var(--accent);font-size:21px;line-height:1}.h4-session-date span{margin-top:2px;color:#6e7b68;font-size:7px;text-transform:uppercase}.h4-session-main{min-width:0}.h4-session-meta{display:flex;align-items:center;gap:6px;margin-bottom:3px}.h4-session-meta>span{color:#68747e;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.h4-session-meta em{padding:2px 5px;border-radius:999px;background:#202715;color:#bddb6e;font-size:6px;font-style:normal;font-weight:900;white-space:nowrap}.h4-session-main>strong{display:block;font-size:11px}.h4-session-exercises{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}.h4-session-exercises span{max-width:150px;padding:3px 6px;border-radius:7px;background:#0b1013;color:#77838c;font-size:6.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.h4-session-muscles{display:flex;align-items:center}.h4-session-muscles i{width:27px;height:27px;margin-left:-5px;display:grid;place-items:center;border:2px solid #0f1418;border-radius:50%;background:#1a2215;color:var(--accent);font-size:9px;font-style:normal}.h4-session-muscles i:first-child{margin-left:0}.h4-session-arrow{color:#59656e;font-size:17px}.h4-empty{padding:24px;text-align:center;border:1px dashed #2c363d;border-radius:20px;background:#0d1215}.h4-empty>span{width:42px;height:42px;margin:0 auto;display:grid;place-items:center;border-radius:13px;background:#172014;color:var(--accent);font-size:16px}.h4-empty strong{display:block;margin-top:8px;font-size:12px}.h4-empty p{margin:4px auto 0;max-width:430px;color:#74808a;font-size:8px!important}
+
+.h4-calendar-panel{position:sticky;top:78px;padding:13px;border:1px solid #253039;border-radius:21px;background:#0d1216;animation:h4Rise .4s .05s both}.h4-calendar-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px}.h4-calendar-head strong{display:block;margin-top:2px;font-size:13px;text-transform:capitalize}.h4-calendar-head span{display:block;max-width:220px;margin-top:2px;color:#6d7982;font-size:6.5px}.h4-calendar-nav{display:flex;gap:3px}.h4-calendar-nav button{min-width:30px;height:30px;padding:0 8px;border:1px solid #29333a;border-radius:9px;background:#11171b;color:#9ca6ad;font-size:9px}.h4-calendar-nav button.today{color:var(--accent);font-size:7px;font-weight:900}
+.h4-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.h4-cal-week{height:20px;display:grid;place-items:center;color:#5d6972;font-size:6.5px;font-weight:900}.h4-cal-day{position:relative;min-height:43px;padding:4px;border:1px solid transparent;border-radius:10px;background:#10161a;color:#75818a;font-size:8px}.h4-cal-day.empty{visibility:hidden}.h4-cal-day>span{display:block;font-size:8px}.h4-cal-day.trained{border-color:#334124;background:#151d10;color:#dce8bd}.h4-cal-day.trained>span{color:var(--accent);font-weight:950}.h4-cal-day.trained>i{position:absolute;right:4px;top:4px;min-width:14px;height:14px;padding:0 3px;display:grid;place-items:center;border-radius:999px;background:var(--accent);color:#090c05;font-size:5.5px;font-style:normal;font-weight:950}.h4-cal-day.trained>em{position:absolute;left:4px;bottom:3px;color:#7f9361;font-size:5.5px;font-style:normal;letter-spacing:-.08em}.h4-cal-day.today{box-shadow:inset 0 0 0 1px #77859a}.h4-calendar-foot{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:9px}.h4-calendar-foot>div{padding:7px;border-radius:10px;background:#0a0f12;text-align:center}.h4-calendar-foot strong{display:block;font-size:12px}.h4-calendar-foot span{display:block;margin-top:1px;color:#647079;font-size:5.5px}
+
+.h4-day-hero{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px;border:1px solid #354227;border-radius:20px;background:linear-gradient(145deg,rgba(203,255,56,.07),#0f1518);margin-bottom:9px}.h4-day-hero h3{margin:3px 0;font-size:22px;letter-spacing:-.04em;text-transform:capitalize}.h4-day-hero p{margin:0;color:#7c8982;font-size:8px!important}.h4-day-hero-stats{display:grid;grid-template-columns:repeat(3,1fr);min-width:235px;border:1px solid #28332c;border-radius:14px;overflow:hidden}.h4-day-hero-stats>div{padding:8px;text-align:center;background:#0b1112}.h4-day-hero-stats>div+div{border-left:1px solid #222c2f}.h4-day-hero-stats strong{display:block;font-size:15px}.h4-day-hero-stats span{display:block;margin-top:1px;color:#68756e;font-size:6px}.h4-day-actionbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0}.h4-day-actionbar strong{display:block;margin-top:2px;font-size:10px;text-transform:capitalize}.h4-day-list{display:grid;gap:7px}.h4-day-card{display:grid;grid-template-columns:32px 50px minmax(0,1fr) auto;gap:9px;align-items:center;padding:10px;border:1px solid #222d34;border-radius:17px;background:#0d1317}.h4-day-card-index{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:#151d11;color:#9fbd59;font-size:7px;font-weight:950}.h4-day-card-visual{width:50px;height:60px}.h4-day-card-visual .muscle-visual.small{width:50px!important;height:60px!important}.h4-day-card-main{min-width:0}.h4-day-card-main>small{display:block;color:#69757f;font-size:6.5px!important}.h4-day-card-main>strong{display:block;margin-top:2px;font-size:11px}.h4-day-sets{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}.h4-day-sets>span{padding:4px 6px;border-radius:8px;background:#0a0f12;color:#89949c;font-size:6.5px}.h4-day-sets b{margin-right:4px;color:#6b777f;font-size:6px}.h4-day-sets em{margin-left:3px;color:#6e7d67;font-size:6px;font-style:normal}.h4-day-pr{margin-top:5px;color:#b9d56c;font-size:6.5px;font-weight:900}.h4-day-actions{display:flex;align-items:center;gap:5px}.h4-edit-btn,.h4-remove-btn{height:34px;border-radius:10px;font-size:7px;font-weight:900}.h4-edit-btn{padding:0 10px;border:1px solid #2d383f;background:#141a1e;color:#cbd2d6}.h4-remove-btn{width:34px;border:1px solid #3a262b;background:#1a1114;color:#d88790}.h4-day-empty{padding:25px;text-align:center;border:1px dashed #2c373e;border-radius:19px;background:#0d1215}.h4-day-empty>span{width:42px;height:42px;margin:0 auto;display:grid;place-items:center;border-radius:13px;background:#182114;color:var(--accent);font-size:18px}.h4-day-empty strong{display:block;margin-top:8px;font-size:12px}.h4-day-empty p{margin:4px auto 0;max-width:450px;color:#74808a;font-size:8px!important}
+
+@keyframes h4Rise{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:840px){
+  .h4-layout{grid-template-columns:1fr}.h4-calendar-panel{position:relative;top:auto;order:-1}.h4-main-column{order:2}.h4-side-column{order:1}.h4-hero{grid-template-columns:1fr}.h4-hero-action{min-height:70px}.h4-glance{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .h4-hero{padding:15px;border-radius:21px}.h4-hero h2{font-size:22px!important}.h4-hero-action{grid-template-columns:35px 1fr 12px}.h4-hero-action>span{width:35px;height:35px}.h4-glance{gap:5px}.h4-glance>div{padding:8px}.h4-session-card{grid-template-columns:48px minmax(0,1fr) 15px}.h4-session-date{width:48px;height:56px}.h4-session-date strong{font-size:18px}.h4-session-muscles{display:none}.h4-session-exercises span{max-width:115px}.h4-calendar-panel{padding:10px}.h4-calendar-head{display:block}.h4-calendar-nav{margin-top:7px}.h4-cal-day{min-height:38px}.h4-calendar-foot span{display:none}.h4-day-hero{display:block;padding:12px}.h4-day-hero-stats{min-width:0;margin-top:9px}.h4-day-actionbar{display:block}.h4-day-actionbar button{width:100%;margin-top:7px}.h4-day-card{grid-template-columns:28px 46px minmax(0,1fr)}.h4-day-card-index{width:28px;height:28px}.h4-day-card-visual{width:46px;height:56px}.h4-day-card-visual .muscle-visual.small{width:46px!important;height:56px!important}.h4-day-actions{grid-column:1/-1;display:grid;grid-template-columns:1fr 36px}.h4-edit-btn{width:100%}
+}
+@media(prefers-reduced-motion:reduce){.h4-shell *{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body class="auth-locked">
@@ -5648,7 +5678,7 @@ textarea{
 <div class="modal" id="historyDayModal" onclick="backdropClose(event,'historyDayModal')"><div class="sheet history-day-sheet">
   <div class="grab"></div>
   <div class="sheethead">
-    <div><h3>Editar treino por dia</h3><p>Altere registros, adicione exercícios esquecidos ou remova exercícios daquele treino.</p></div>
+    <div><h3>Treino do dia</h3><p>Veja o que você fez e ajuste só o que precisar.</p></div>
     <button class="close" onclick="closeModal('historyDayModal')">✕</button>
   </div>
 
@@ -5825,7 +5855,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='7.8';
+const APP_BUILD_VERSION='7.9';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -8924,8 +8954,8 @@ function setHistoryModalMode(mode){
   const gymLabel=document.getElementById('progressGymName');
 
   if(mode==='history'){
-    if(title)title.textContent='Histórico de treinos';
-    if(subtitle)subtitle.textContent='Datas, exercícios e edição dos seus treinos passados.';
+    if(title)title.textContent='Seu histórico';
+    if(subtitle)subtitle.textContent='Tudo o que você já treinou, organizado por dia.';
     if(gymLabel)gymLabel.textContent='TODAS AS ACADEMIAS';
   }else{
     if(title)title.textContent='Seu progresso';
@@ -9598,6 +9628,240 @@ showProgressMuscle=showProgressMuscleV4;
 renderProgressExerciseDetail=renderProgressExerciseDetailV4;
 renderProgressOverview=progressRenderOverviewV4;
 
+
+
+/* =========================================================
+   HISTÓRICO 4.0 — visual timeline + interactive calendar
+   ========================================================= */
+let historyViewMonth=new Date();
+
+function historyV4AllEntries(){
+  return (state.history||[]).filter(h=>!h.referenceOnly);
+}
+function historyV4MonthKey(d){
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+}
+function historyV4ThisMonthDays(){
+  const now=new Date();
+  const key=historyV4MonthKey(now);
+  return [...new Set(historyV4AllEntries().map(sessionDayFromHistory).filter(d=>d.startsWith(key)))];
+}
+function historyV4RecentDays(n=30){
+  const now=new Date(todayKey()+'T12:00:00');
+  const cutoff=new Date(now);cutoff.setDate(cutoff.getDate()-(n-1));
+  const ck=`${cutoff.getFullYear()}-${String(cutoff.getMonth()+1).padStart(2,'0')}-${String(cutoff.getDate()).padStart(2,'0')}`;
+  return [...new Set(historyV4AllEntries().map(sessionDayFromHistory).filter(d=>d>=ck&&d<=todayKey()))];
+}
+function historyV4RelativeDay(day){
+  const a=new Date(todayKey()+'T12:00:00');
+  const b=new Date(day+'T12:00:00');
+  const diff=Math.round((a-b)/86400000);
+  if(diff===0)return 'hoje';
+  if(diff===1)return 'ontem';
+  if(diff>1&&diff<7)return `há ${diff} dias`;
+  return new Date(day+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+}
+function historyV4CalendarHTML(){
+  const y=historyViewMonth.getFullYear(),m=historyViewMonth.getMonth();
+  const first=new Date(y,m,1),last=new Date(y,m+1,0),days=last.getDate();
+  const groups=historyDayGroups();
+  const byDay=new Map(groups.map(g=>[g.day,g]));
+  const weekdays=['D','S','T','Q','Q','S','S'];
+  let cells=weekdays.map(x=>`<div class="h4-cal-week">${x}</div>`).join('');
+  for(let i=0;i<first.getDay();i++)cells+='<div class="h4-cal-day empty"></div>';
+
+  let monthTrainingDays=0,monthExercises=0;
+  for(let d=1;d<=days;d++){
+    const key=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const g=byDay.get(key),trained=!!g;
+    if(trained){monthTrainingDays++;monthExercises+=g.entries.length}
+    const muscles=trained?[...new Set(g.entries.map(h=>h.muscle).filter(Boolean))].slice(0,3):[];
+    cells+=`<button class="h4-cal-day ${trained?'trained':''} ${key===todayKey()?'today':''}" onclick="openHistoryDayEditor('${key}')" aria-label="${trained?`${d}, treino com ${g.entries.length} exercícios`:`${d}, sem treino registrado`}">
+      <span>${d}</span>
+      ${trained?`<i>${g.entries.length}</i><em>${muscles.map(m=>muscleIcon(m)).join('')}</em>`:''}
+    </button>`;
+  }
+  const monthName=historyViewMonth.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+  return `<section class="h4-calendar-panel">
+    <div class="h4-calendar-head">
+      <div><small>CALENDÁRIO</small><strong>${monthName}</strong><span>Toque em qualquer dia para ver ou reconstruir o treino.</span></div>
+      <div class="h4-calendar-nav">
+        <button onclick="changeHistoryMonth(-1)" aria-label="Mês anterior">←</button>
+        <button class="today" onclick="resetHistoryMonth()">Hoje</button>
+        <button onclick="changeHistoryMonth(1)" aria-label="Próximo mês">→</button>
+      </div>
+    </div>
+    <div class="h4-cal-grid">${cells}</div>
+    <div class="h4-calendar-foot">
+      <div><strong>${monthTrainingDays}</strong><span>dias treinados</span></div>
+      <div><strong>${monthExercises}</strong><span>exercícios registrados</span></div>
+      <div><strong>${monthTrainingDays?Math.round(monthExercises/monthTrainingDays):0}</strong><span>exercícios / treino</span></div>
+    </div>
+  </section>`;
+}
+function changeHistoryMonth(delta){
+  historyViewMonth=new Date(historyViewMonth.getFullYear(),historyViewMonth.getMonth()+delta,1);
+  renderHistoryHub(false);
+}
+function resetHistoryMonth(){
+  historyViewMonth=new Date();
+  renderHistoryHub(false);
+}
+function historyV4SessionCard(g,index){
+  const gyms=[...new Set(g.entries.map(h=>(state.gyms||[]).find(x=>x.id===h.gymId)?.name||'Academia'))];
+  const muscles=[...new Set(g.entries.map(h=>h.muscle).filter(Boolean))];
+  const names=g.entries.map(h=>h.name).filter(Boolean);
+  const prCount=loadPRCount(g.entries);
+  const date=new Date(g.day+'T12:00:00');
+  const day=date.toLocaleDateString('pt-BR',{day:'2-digit'});
+  const mon=date.toLocaleDateString('pt-BR',{month:'short'}).replace('.','').toUpperCase();
+  const weekday=date.toLocaleDateString('pt-BR',{weekday:'long'});
+  return `<button class="h4-session-card" style="--delay:${Math.min(index,10)*.035}s" onclick="openHistoryDayEditor('${g.day}')">
+    <div class="h4-session-date">
+      <small>${esc(mon)}</small><strong>${day}</strong><span>${esc(weekday.slice(0,3))}</span>
+    </div>
+    <div class="h4-session-main">
+      <div class="h4-session-meta">
+        <span>${esc(gyms.join(' + '))}</span>
+        ${prCount?`<em>★ ${prCount} recorde${prCount===1?'':'s'}</em>`:''}
+      </div>
+      <strong>${g.entries.length} exercício${g.entries.length===1?'':'s'} · ${esc(muscles.join(' + ')||'Treino')}</strong>
+      <div class="h4-session-exercises">
+        ${names.slice(0,3).map(n=>`<span>${esc(n)}</span>`).join('')}
+        ${names.length>3?`<span>+${names.length-3}</span>`:''}
+      </div>
+    </div>
+    <div class="h4-session-muscles">
+      ${muscles.slice(0,3).map(m=>`<i title="${esc(m)}">${muscleIcon(m)}</i>`).join('')}
+    </div>
+    <b class="h4-session-arrow">›</b>
+  </button>`;
+}
+function renderHistoryHub(resetScroll=true){
+  const root=document.getElementById('historyContent');if(!root)return;
+  const groups=historyDayGroups();
+  const entries=historyV4AllEntries();
+  const recent=groups.slice(0,10);
+  const thisMonth=historyV4ThisMonthDays().length;
+  const recent30=historyV4RecentDays(30).length;
+  const totalExercises=entries.length;
+  const uniqueMuscles=new Set(entries.map(h=>h.muscle).filter(Boolean)).size;
+  const last=groups[0]||null;
+  const lastMuscles=last?[...new Set(last.entries.map(h=>h.muscle).filter(Boolean))]:[];
+  const heroTitle=last?`Seu último treino foi ${historyV4RelativeDay(last.day)}`:'Seu histórico começa aqui';
+  const heroCopy=last
+    ?`${last.entries.length} exercício${last.entries.length===1?'':'s'} · ${lastMuscles.join(' + ')||'treino registrado'}`
+    :'Quando você salvar seu primeiro treino, ele aparece aqui automaticamente.';
+
+  root.innerHTML=`<div class="history-hub h4-shell">
+    <section class="h4-hero">
+      <div class="h4-hero-copy">
+        <small>HISTÓRICO</small>
+        <h2>${esc(heroTitle)}</h2>
+        <p>${esc(heroCopy)}</p>
+        <div class="h4-hero-pills">
+          <span>◷ ${groups.length} dia${groups.length===1?'':'s'} de treino</span>
+          <span>◎ ${uniqueMuscles} grupo${uniqueMuscles===1?'':'s'} muscular${uniqueMuscles===1?'':'es'}</span>
+        </div>
+      </div>
+      <button class="h4-hero-action" onclick="openHistoryDayEditor()">
+        <span>✎</span>
+        <div><small>AJUSTAR HISTÓRICO</small><strong>Editar um treino</strong><em>Escolha a data e altere só o necessário.</em></div>
+        <b>›</b>
+      </button>
+    </section>
+
+    <section class="h4-glance">
+      <div><span>◷</span><small>TOTAL</small><strong>${groups.length}</strong><em>dias treinados</em></div>
+      <div><span>●</span><small>ESTE MÊS</small><strong>${thisMonth}</strong><em>dias com treino</em></div>
+      <div><span>↺</span><small>ÚLTIMOS 30D</small><strong>${recent30}</strong><em>dias treinados</em></div>
+      <div><span>▦</span><small>REGISTROS</small><strong>${totalExercises}</strong><em>exercícios salvos</em></div>
+    </section>
+
+    <div class="h4-layout">
+      <div class="h4-main-column">
+        <div class="h4-section-head">
+          <div><small>LINHA DO TEMPO</small><strong>Treinos recentes</strong><span>Do mais novo para o mais antigo.</span></div>
+          <span>${groups.length} no total</span>
+        </div>
+        <div class="h4-session-list">
+          ${recent.length?recent.map(historyV4SessionCard).join(''):`<div class="h4-empty"><span>◷</span><strong>Ainda não há treinos salvos</strong><p>Quando você concluir um treino, ele vai aparecer aqui com data, exercícios e grupo muscular.</p></div>`}
+        </div>
+      </div>
+      <div class="h4-side-column">
+        ${historyV4CalendarHTML()}
+      </div>
+    </div>
+  </div>`;
+  if(resetScroll)document.querySelector('#historyModal .progress-sheet')?.scrollTo({top:0,behavior:'smooth'});
+}
+function openHistoryHub(){
+  openHistoryModal();
+  setHistoryModalMode('history');
+  renderHistoryHub();
+}
+function renderHistoryDayEditor(){
+  const day=document.getElementById('historyDayPicker')?.value||todayKey();
+  const root=document.getElementById('historyDayEditorBody');if(!root)return;
+  const entries=historyEntriesForSessionDay(day);
+  const date=new Date(day+'T12:00:00');
+  const dateLabel=date.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+  const muscles=[...new Set(entries.map(h=>h.muscle).filter(Boolean))];
+  const gyms=[...new Set(entries.map(h=>(state.gyms||[]).find(g=>g.id===h.gymId)?.name||'Academia'))];
+
+  if(!entries.length){
+    root.innerHTML=`<section class="h4-day-hero empty">
+      <div><small>${date.toLocaleDateString('pt-BR',{weekday:'long'}).toUpperCase()}</small><h3>${date.toLocaleDateString('pt-BR',{day:'2-digit',month:'long'})}</h3><p>Nenhum treino salvo neste dia.</p></div>
+      <button class="btn primary" onclick="toggleHistoryDayAddPanel(true)">＋ Adicionar exercício</button>
+    </section>
+    <div class="h4-day-empty">
+      <span>＋</span><strong>Quer reconstruir esse treino?</strong><p>Adicione os exercícios que você fez e preencha as séries. Isso não altera os outros dias.</p>
+    </div>`;
+    return;
+  }
+
+  root.innerHTML=`<section class="h4-day-hero">
+    <div>
+      <small>${date.toLocaleDateString('pt-BR',{weekday:'long'}).toUpperCase()}</small>
+      <h3>${date.toLocaleDateString('pt-BR',{day:'2-digit',month:'long'})}</h3>
+      <p>${entries.length} exercício${entries.length===1?'':'s'} · ${esc(muscles.join(' + ')||'treino')} · ${esc(gyms.join(' + '))}</p>
+    </div>
+    <div class="h4-day-hero-stats">
+      <div><strong>${entries.length}</strong><span>exercícios</span></div>
+      <div><strong>${muscles.length}</strong><span>grupos</span></div>
+      <div><strong>${loadPRCount(entries)}</strong><span>recordes</span></div>
+    </div>
+  </section>
+
+  <div class="h4-day-actionbar">
+    <div><small>TREINO SALVO</small><strong>${esc(dateLabel)}</strong></div>
+    <button class="btn secondary" onclick="toggleHistoryDayAddPanel(true)">＋ Adicionar exercício</button>
+  </div>
+
+  <div class="h4-day-list">
+    ${entries.map((h,index)=>{
+      const work=(h.sets?.work||[]).filter(s=>s.kg!==''||s.reps!=='');
+      const gymName=(state.gyms||[]).find(g=>g.id===h.gymId)?.name||'Academia';
+      const ex=(state.exercises||[]).find(e=>e.id===h.exerciseId)||{muscle:h.muscle};
+      return `<article class="h4-day-card">
+        <div class="h4-day-card-index">${String(index+1).padStart(2,'0')}</div>
+        <div class="h4-day-card-visual">${exerciseVisualThumbHTML(ex,'peak','small')}</div>
+        <div class="h4-day-card-main">
+          <small>${esc(h.muscle||'Treino')} · ${esc(gymName)}</small>
+          <strong>${esc(h.name||'Exercício')}</strong>
+          <div class="h4-day-sets">
+            ${work.length?work.map((s,i)=>`<span><b>T${i+1}</b>${s.kg?`${esc(s.kg)} kg`:'peso corporal'} × ${s.reps||'—'}${s.rir!==''&&s.rir!=null?` <em>RIR ${esc(s.rir)}</em>`:''}</span>`).join(''):'<span>Registro salvo sem série de trabalho</span>'}
+          </div>
+          ${isLoadPRRecord(h)?'<div class="h4-day-pr">★ recorde de carga neste treino</div>':''}
+        </div>
+        <div class="h4-day-actions">
+          <button class="h4-edit-btn" onclick="openHistoryRecord('${h.id}')">Editar</button>
+          <button class="h4-remove-btn" onclick="removeHistoryRecordFromDay('${h.id}')" aria-label="Remover exercício">✕</button>
+        </div>
+      </article>`;
+    }).join('')}
+  </div>`;
+}
 
 showAuthGate('login');
 initSupabase();
