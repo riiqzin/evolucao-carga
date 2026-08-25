@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   7.9 — HISTORY EXPERIENCE REDESIGN
+   8.0 — HOW TO USE / INTERACTIVE TUTORIAL
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -5363,6 +5363,63 @@ textarea{
   .h4-hero{padding:15px;border-radius:21px}.h4-hero h2{font-size:22px!important}.h4-hero-action{grid-template-columns:35px 1fr 12px}.h4-hero-action>span{width:35px;height:35px}.h4-glance{gap:5px}.h4-glance>div{padding:8px}.h4-session-card{grid-template-columns:48px minmax(0,1fr) 15px}.h4-session-date{width:48px;height:56px}.h4-session-date strong{font-size:18px}.h4-session-muscles{display:none}.h4-session-exercises span{max-width:115px}.h4-calendar-panel{padding:10px}.h4-calendar-head{display:block}.h4-calendar-nav{margin-top:7px}.h4-cal-day{min-height:38px}.h4-calendar-foot span{display:none}.h4-day-hero{display:block;padding:12px}.h4-day-hero-stats{min-width:0;margin-top:9px}.h4-day-actionbar{display:block}.h4-day-actionbar button{width:100%;margin-top:7px}.h4-day-card{grid-template-columns:28px 46px minmax(0,1fr)}.h4-day-card-index{width:28px;height:28px}.h4-day-card-visual{width:46px;height:56px}.h4-day-card-visual .muscle-visual.small{width:46px!important;height:56px!important}.h4-day-actions{grid-column:1/-1;display:grid;grid-template-columns:1fr 36px}.h4-edit-btn{width:100%}
 }
 @media(prefers-reduced-motion:reduce){.h4-shell *{animation:none!important;transition:none!important}}
+
+/* =========================================================
+   8.0 — COMO USAR
+   ========================================================= */
+.mobile-bottom-nav{grid-template-columns:repeat(5,1fr)!important}
+.help-shell{width:min(1100px,100%);margin:0 auto;padding:20px 24px 34px}
+.help-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:20px;align-items:center;padding:25px;border:1px solid #354127;border-radius:27px;background:radial-gradient(circle at 86% 20%,rgba(203,255,56,.12),transparent 29%),linear-gradient(145deg,#131b0f,#0e1518 54%,#0c1115)}
+.help-hero-copy>small,.help-section-title small{display:block;color:#9caf68;font-size:8px!important;font-weight:950;letter-spacing:.13em}
+.help-hero h1{margin:7px 0 8px;max-width:690px;font-size:32px;line-height:1.02;letter-spacing:-.055em}
+.help-hero p{max-width:650px;margin:0;color:#8d9992;font-size:11px!important;line-height:1.55}
+.help-hero-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:17px}
+.help-show-me{min-width:250px;display:grid;grid-template-columns:36px minmax(0,1fr) 15px;gap:8px;align-items:center;padding:10px;border:1px solid #506025;border-radius:15px;background:var(--accent);color:#090d04;text-align:left}.help-show-me>span{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:#0e1309;color:var(--accent);font-size:13px}.help-show-me div{min-width:0}.help-show-me small{display:block;color:#34420e;font-size:6.5px!important;font-weight:950}.help-show-me strong{display:block;margin-top:2px;font-size:10px}.help-show-me>b{font-size:16px}.help-quick-jump{height:48px;padding:0 12px;border:1px solid #303a40;border-radius:14px;background:#10161a;color:#909ba3;font-size:8px;font-weight:900}
+.help-purpose-orbit{position:relative;width:205px;height:205px;margin:auto;border:1px solid rgba(203,255,56,.09);border-radius:50%;box-shadow:0 0 0 34px rgba(203,255,56,.025),0 0 0 68px rgba(203,255,56,.012)}.help-purpose-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:66px;height:66px;display:grid;place-items:center;border-radius:22px;background:var(--accent);color:#090d04;font-size:29px;font-weight:950;box-shadow:0 0 35px rgba(203,255,56,.13)}.help-purpose-orbit>span{position:absolute;padding:5px 8px;border:1px solid #314022;border-radius:999px;background:#121a0f;color:#99ae67;font-size:6.5px;font-weight:950;letter-spacing:.08em}.help-purpose-orbit .p1{top:18px;left:67px}.help-purpose-orbit .p2{right:-6px;top:91px}.help-purpose-orbit .p3{left:47px;bottom:10px}
+
+.help-principles{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:9px 0 22px}.help-principles>div{display:grid;grid-template-columns:34px 1fr;column-gap:8px;align-items:center;padding:11px;border:1px solid #222d34;border-radius:17px;background:#0f1418}.help-principles>div>span{grid-row:1/3;width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:#172014;color:var(--accent);font-size:10px;font-weight:950}.help-principles strong{font-size:10px}.help-principles small{display:block;margin-top:2px;color:#707c85;font-size:7px!important}
+
+.help-section{margin:24px 0}.help-section-title{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:0 2px 10px}.help-section-title h2{margin:2px 0 0;font-size:21px;letter-spacing:-.045em}.help-section-title>span{color:#69757e;font-size:8px}
+.help-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.help-flow-card{position:relative;min-width:0;padding:12px;border:1px solid #242e35;border-radius:20px;background:#0f1418}.help-flow-number{position:absolute;right:10px;top:8px;color:#303b42;font-size:19px;font-weight:950}.help-flow-demo{height:90px;margin-bottom:11px;padding:10px;border:1px solid #222d33;border-radius:15px;background:#0a0f12;overflow:hidden}.help-flow-card h3{margin:0;font-size:11px}.help-flow-card p{margin:4px 0 0;color:#78848d;font-size:8px!important;line-height:1.5}.help-flow-card p b{color:#aab4ba}
+.exercises-demo{display:grid;grid-template-columns:35px 1fr 24px;gap:7px;align-items:center}.exercises-demo .demo-muscle{width:35px;height:44px;display:grid;place-items:center;border-radius:10px;background:#182114;color:var(--accent)}.exercises-demo div{min-width:0}.exercises-demo i{display:block;color:#6f7b84;font-size:6px;font-style:normal}.exercises-demo b{display:block;margin-top:2px;font-size:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.exercises-demo em{width:24px;height:24px;display:grid;place-items:center;border-radius:8px;background:var(--accent);color:#090d04;font-style:normal;font-weight:950}
+.today-demo{display:flex;flex-direction:column;justify-content:center}.today-demo>span{color:#849866;font-size:6px;font-weight:950}.today-demo>b{margin-top:3px;font-size:10px}.today-demo>div{display:flex;gap:4px;margin-top:8px}.today-demo i{width:24px;height:20px;display:grid;place-items:center;border-radius:7px;background:#182114;color:var(--accent);font-size:7px;font-style:normal}
+.guided-demo-mini>span{display:block;color:#b4ca70;font-size:6px;font-weight:950}.guided-demo-mini>strong{display:block;margin-top:6px;font-size:13px}.guided-demo-mini>small{display:block;color:#69757e;font-size:6px!important}.guided-demo-mini>div{margin-top:7px;color:#65717b;font-size:6.5px}
+.progress-demo{position:relative;display:flex;align-items:end;gap:6px;padding-top:38px}.demo-line{position:absolute;left:9px;right:9px;top:18px;height:28px;border-bottom:2px solid #3a4829;transform:skewY(-7deg)}.demo-line i{position:absolute;right:0;bottom:-3px;width:7px;height:7px;border-radius:50%;background:var(--accent)}.progress-demo span{color:#69757e;font-size:9px}.progress-demo>b{color:#58636b}.progress-demo strong{color:var(--accent);font-size:14px}
+
+.help-guided-layout{display:grid;grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr);gap:11px;align-items:stretch}.help-guided-phone{padding:10px;border:1px solid #2b363d;border-radius:24px;background:#090d10;box-shadow:0 18px 55px rgba(0,0,0,.24)}.hgp-progress{display:flex;gap:8px;align-items:center;padding:4px 3px 9px}.hgp-progress:before{content:'';height:5px;flex:1;border-radius:999px;background:linear-gradient(90deg,var(--accent) 17%,#1d252a 17%)}.hgp-progress i{display:none}.hgp-progress span{font-size:7px;color:#75818a}.hgp-card{padding:14px;border:1px solid #344127;border-radius:19px;background:linear-gradient(145deg,rgba(203,255,56,.06),#10161a)}.hgp-card>small{color:#b3cb68;font-size:7px!important;font-weight:950}.hgp-card h3{margin:5px 0 4px;font-size:18px}.hgp-card>p{margin:0;color:#839089;font-size:8px!important}.hgp-main-ref{margin-top:11px;padding:10px;border:1px solid #394650;border-radius:13px;background:#0d1318}.hgp-main-ref small{display:block;color:#85919a;font-size:6px!important}.hgp-main-ref strong{display:block;margin-top:3px;font-size:14px}.hgp-main-ref span{display:block;margin-top:2px;color:#707c85;font-size:7px}.hgp-work-ref{margin-top:7px}.hgp-work-ref>small{display:block;color:#59656e;font-size:5.8px!important}.hgp-work-ref>span{display:inline-block;margin:4px 8px 0 0;color:#8a959c;font-size:7px}.hgp-work-ref b{color:#637078;font-size:6px}.hgp-inputs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}.hgp-inputs>span{padding:8px;border:1px solid #29333a;border-radius:11px;background:#0b1013}.hgp-inputs small{display:block;color:#67737c;font-size:6px!important}.hgp-inputs b{display:block;margin-top:3px;font-size:13px}.hgp-card>button{width:100%;height:38px;margin-top:9px;border:0;border-radius:11px;background:var(--accent);color:#090d04;font-size:8px;font-weight:950}
+.help-guided-explain{display:grid;grid-template-columns:1fr 1fr;gap:7px}.help-callout{display:grid;grid-template-columns:31px 1fr;gap:8px;align-items:start;padding:11px;border:1px solid #242e35;border-radius:17px;background:#0f1418}.help-callout>span{width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:#192019;color:#8f9b91;font-size:8px;font-weight:950}.help-callout.main{border-color:#394629;background:#111811}.help-callout.main>span{background:var(--accent);color:#090d04}.help-callout strong{display:block;font-size:10px}.help-callout p{margin:3px 0 0;color:#748089;font-size:7.5px!important;line-height:1.45}
+
+.help-stage-track{display:grid;grid-template-columns:1fr 22px 1fr 22px 1fr 22px 1fr 22px 1fr;gap:4px;align-items:stretch}.help-stage-track>div{padding:11px;border:1px solid #232e35;border-radius:16px;background:#0f1418}.help-stage-track>div>span{width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:#171e16;color:#91a56c}.help-stage-track strong{display:block;margin-top:8px;font-size:9px}.help-stage-track small{display:block;margin-top:3px;color:#717d86;font-size:7px!important;line-height:1.4}.help-stage-track>i{display:grid;place-items:center;color:#414c53;font-style:normal}.help-stage-track .work{border-color:#354225}.help-stage-track .work>span{background:#1b2513;color:var(--accent)}.help-stage-track .final>span{background:#2a1719;color:#f4a2aa}.help-stage-note{margin-top:7px;padding:9px 11px;border:1px solid #263139;border-radius:13px;background:#0c1115;color:#76828b;font-size:7.5px;line-height:1.45}.help-stage-note b{color:#a5b0b5}
+.help-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.help-modes article{position:relative;padding:13px;border:1px solid #242e35;border-radius:19px;background:#0f1418}.help-modes article.primary{border-color:#3c4929;background:linear-gradient(145deg,rgba(203,255,56,.07),#0f1418)}.help-modes article>span{width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:#171e16;color:#99aa7b}.help-modes article.primary>span{background:var(--accent);color:#090d04}.help-modes article>small{display:block;margin-top:10px;color:#71805f;font-size:6px!important;font-weight:950}.help-modes article>strong{display:block;margin-top:2px;font-size:12px}.help-modes article>p{margin:4px 0 0;color:#75818a;font-size:7.5px!important}
+.help-rules{display:grid;grid-template-columns:1fr 1fr;gap:7px}.help-rule{display:grid;grid-template-columns:42px 1fr;gap:9px;align-items:center;padding:12px;border:1px solid #242e35;border-radius:18px;background:#0f1418}.help-rule>span{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#171e16;color:#9aa58f;font-size:11px;font-weight:950}.help-rule.pr{border-color:#394627}.help-rule.pr>span{background:var(--accent);color:#090d04}.help-rule strong{font-size:10px}.help-rule p{margin:3px 0 0;color:#748089;font-size:7.5px!important}
+.help-nav-map{display:grid;grid-template-columns:1fr 1fr;gap:7px}.help-nav-map button{display:grid;grid-template-columns:38px 1fr 15px;gap:9px;align-items:center;padding:10px;border:1px solid #242e35;border-radius:16px;background:#0f1418;color:#e9edef;text-align:left}.help-nav-map button>span{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#172014;color:var(--accent)}.help-nav-map button div{min-width:0}.help-nav-map strong{display:block;font-size:10px}.help-nav-map small{display:block;margin-top:2px;color:#707c85;font-size:7px!important}.help-nav-map b{color:#59656d}
+.help-faq details{margin-top:6px;border:1px solid #242e35;border-radius:15px;background:#0f1418;overflow:hidden}.help-faq summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px;cursor:pointer}.help-faq summary::-webkit-details-marker{display:none}.help-faq summary span{font-size:9px;font-weight:900}.help-faq summary b{color:#6f7a83}.help-faq details[open] summary b{transform:rotate(45deg)}.help-faq details p{margin:0;padding:0 11px 11px;color:#77838c;font-size:8px!important;line-height:1.5}.help-faq details p b{color:#aab5bb}
+.help-bottom-cta{display:grid;grid-template-columns:1fr auto;gap:15px;align-items:center;margin-top:27px;padding:17px;border:1px solid #3b4829;border-radius:21px;background:linear-gradient(145deg,#121a0f,#0e1417)}.help-bottom-cta small{display:block;color:#879962;font-size:6.5px!important;font-weight:950}.help-bottom-cta strong{display:block;margin-top:2px;font-size:15px}.help-bottom-cta p{margin:3px 0 0;color:#748179;font-size:8px!important}.help-bottom-cta button{height:44px;padding:0 14px;border:0;border-radius:13px;background:var(--accent);color:#090d04;font-size:9px;font-weight:950}
+
+/* =========================================================
+   8.0 — FIRST-USE / REPLAYABLE INTERACTIVE TOUR
+   ========================================================= */
+.tutorial-welcome{position:fixed;inset:0;z-index:12000;display:none;place-items:center;padding:18px;background:rgba(2,4,6,.82);backdrop-filter:blur(12px)}.tutorial-welcome.show{display:grid;animation:tutFade .22s ease both}.tutorial-welcome-card{position:relative;width:min(430px,100%);padding:22px;border:1px solid #3d492d;border-radius:26px;background:radial-gradient(circle at 80% 0,rgba(203,255,56,.10),transparent 35%),#0e1417;box-shadow:0 28px 100px rgba(0,0,0,.55)}.tutorial-welcome-close{position:absolute;right:12px;top:12px;width:34px;height:34px;border:1px solid #2a343a;border-radius:11px;background:#11171b;color:#7d8992}.tutorial-welcome-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:17px;background:var(--accent);color:#090d04;font-size:24px;font-weight:950}.tutorial-welcome-card>small{display:block;margin-top:15px;color:#98aa6d;font-size:7px!important;font-weight:950;letter-spacing:.13em}.tutorial-welcome-card h2{margin:5px 0 6px;font-size:25px;line-height:1.04;letter-spacing:-.045em}.tutorial-welcome-card>p{margin:0;color:#87938d;font-size:9px!important;line-height:1.5}.tutorial-welcome-actions{display:grid;grid-template-columns:1.2fr .8fr;gap:7px;margin-top:16px}.tutorial-welcome-actions button{min-height:44px;border:1px solid #2c363d;border-radius:13px;background:#11171b;color:#9aa5ad;font-size:9px;font-weight:900}.tutorial-welcome-actions .primary{border:0;background:var(--accent);color:#090d04}.tutorial-welcome-card>span{display:block;margin-top:9px;color:#65717a;font-size:7px;text-align:center}.tutorial-welcome-card>span b{color:#9ba6ad}
+
+.app-tutorial{position:fixed;inset:0;z-index:13000;display:none;pointer-events:none}.app-tutorial.show{display:block}.tutorial-shade{z-index:1;pointer-events:auto}.tutorial-hole{position:fixed;z-index:2;border:2px solid var(--accent);border-radius:15px;box-shadow:0 0 0 3px rgba(203,255,56,.08),0 0 28px rgba(203,255,56,.16);pointer-events:auto;animation:tutHole 1.5s ease-in-out infinite}.tutorial-card{position:fixed;z-index:3;width:min(390px,calc(100vw - 24px));padding:15px;border:1px solid #3a472a;border-radius:20px;background:#0e1417;box-shadow:0 22px 75px rgba(0,0,0,.58);pointer-events:auto;transition:left .2s ease,top .2s ease,bottom .2s ease}.tutorial-card.centered{transform:translate(-50%,-50%);max-width:430px}.tutorial-card:not(.centered){transform:none}.tutorial-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.tutorial-card-top>span{color:#82945e;font-size:6.5px;font-weight:950;letter-spacing:.12em}.tutorial-card-top>button{border:0;background:transparent;color:#707b84;font-size:7px;font-weight:900}.tutorial-card-icon{width:38px;height:38px;margin-top:9px;display:grid;place-items:center;border-radius:12px;background:#192114;color:var(--accent);font-size:16px}.tutorial-card h3{margin:8px 0 4px;font-size:16px;letter-spacing:-.025em}.tutorial-card p{margin:0;color:#849089;font-size:8.5px!important;line-height:1.5}.tutorial-progress{display:flex;gap:4px;margin-top:13px}.tutorial-progress i{height:3px;flex:1;border-radius:999px;background:#252e34}.tutorial-progress i.done{background:#57672c}.tutorial-progress i.active{background:var(--accent);box-shadow:0 0 9px rgba(203,255,56,.18)}.tutorial-actions{display:grid;grid-template-columns:.75fr 1.25fr;gap:6px;margin-top:11px}.tutorial-actions button{height:40px;border:1px solid #29343a;border-radius:12px;background:#11171b;color:#89959d;font-size:8px;font-weight:900}.tutorial-actions button.next{border:0;background:var(--accent);color:#090d04}.tutorial-actions button:disabled{opacity:.25}
+@keyframes tutFade{from{opacity:0}to{opacity:1}}@keyframes tutHole{50%{box-shadow:0 0 0 5px rgba(203,255,56,.05),0 0 34px rgba(203,255,56,.22)}}
+
+@media(max-width:899px){
+  .help-shell{padding:16px 14px 28px}
+  .mobile-bottom-nav button{font-size:7px!important}
+}
+@media(max-width:760px){
+  .help-hero{grid-template-columns:1fr}.help-purpose-orbit{display:none}.help-principles{grid-template-columns:1fr}.help-flow{grid-template-columns:1fr 1fr}.help-guided-layout{grid-template-columns:1fr}.help-stage-track{grid-template-columns:1fr}.help-stage-track>i{height:16px;transform:rotate(90deg)}.help-modes{grid-template-columns:1fr}.help-rules{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .help-shell{padding:13px 12px 24px}.help-hero{padding:17px;border-radius:22px}.help-hero h1{font-size:24px}.help-show-me{min-width:0;width:100%}.help-quick-jump{width:100%}.help-flow{grid-template-columns:1fr}.help-guided-explain{grid-template-columns:1fr}.help-nav-map{grid-template-columns:1fr}.help-bottom-cta{grid-template-columns:1fr}.help-bottom-cta button{width:100%}.tutorial-welcome-actions{grid-template-columns:1fr}.tutorial-card{padding:13px}
+}
+@media(min-width:900px){
+  #helpScreen{padding:0 8px 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .tutorial-hole,.tutorial-welcome,.help-shell *{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -5572,6 +5629,188 @@ textarea{
         </div>
       </section>
     </section>
+
+    <section class="app-page" id="helpScreen">
+      <section class="help-shell">
+        <div class="help-hero">
+          <div class="help-hero-copy">
+            <small>COMO USAR</small>
+            <h1>O app fica simples quando você entende o fluxo.</h1>
+            <p>Você treina normalmente. O app guarda suas cargas, lembra o que veio antes e mostra se você está avançando.</p>
+            <div class="help-hero-actions">
+              <button class="help-show-me" onclick="startAppTutorial(true)">
+                <span>▶</span>
+                <div><small>TUTORIAL INTERATIVO</small><strong>Me mostrar no aplicativo</strong></div>
+                <b>›</b>
+              </button>
+              <button class="help-quick-jump" onclick="document.getElementById('helpQuickStart')?.scrollIntoView({behavior:'smooth',block:'start'})">Ver passo a passo ↓</button>
+            </div>
+          </div>
+          <div class="help-purpose-orbit" aria-hidden="true">
+            <div class="help-purpose-center">↗</div>
+            <span class="p1">CARGA</span><span class="p2">REPS</span><span class="p3">HISTÓRICO</span>
+          </div>
+        </div>
+
+        <div class="help-principles">
+          <div><span>1</span><strong>Você faz o treino</strong><small>O app não escolhe exercícios por você.</small></div>
+          <div><span>2</span><strong>Ele lembra</strong><small>Mostra o que você usou no treino anterior.</small></div>
+          <div><span>3</span><strong>Ele compara</strong><small>Carga, reps e consistência viram evolução visível.</small></div>
+        </div>
+
+        <section class="help-section" id="helpQuickStart">
+          <div class="help-section-title">
+            <div><small>COMECE POR AQUI</small><h2>Seu treino em 4 passos</h2></div>
+            <span>leva menos de 1 minuto</span>
+          </div>
+
+          <div class="help-flow">
+            <article class="help-flow-card">
+              <div class="help-flow-number">01</div>
+              <div class="help-flow-demo exercises-demo">
+                <span class="demo-muscle">↔</span>
+                <div><i>Costas</i><b>Remada máquina</b></div>
+                <em>＋</em>
+              </div>
+              <h3>Cadastre seus exercícios uma vez</h3>
+              <p>Na aba <b>Exercícios</b>, toque em <b>＋</b>, escolha o músculo e escreva o nome que você usa na academia.</p>
+            </article>
+
+            <article class="help-flow-card">
+              <div class="help-flow-number">02</div>
+              <div class="help-flow-demo today-demo">
+                <span>HOJE</span>
+                <b>Costas + Bíceps</b>
+                <div><i>✓</i><i>✓</i><i>✓</i></div>
+              </div>
+              <h3>Monte apenas o treino de hoje</h3>
+              <p>Em <b>Hoje</b>, escolha os músculos e marque só os exercícios que realmente vai fazer naquela sessão.</p>
+            </article>
+
+            <article class="help-flow-card">
+              <div class="help-flow-number">03</div>
+              <div class="help-flow-demo guided-demo-mini">
+                <span>○ AQUECIMENTO</span>
+                <strong>10 kg · 15 reps</strong>
+                <small>último aquecimento</small>
+                <div>T1 22 kg&nbsp;&nbsp; T2 22 kg</div>
+              </div>
+              <h3>Siga o Modo Guiado</h3>
+              <p>O app mostra uma série por vez e usa o treino anterior como referência. Você só registra o que realmente fez.</p>
+            </article>
+
+            <article class="help-flow-card">
+              <div class="help-flow-number">04</div>
+              <div class="help-flow-demo progress-demo">
+                <div class="demo-line"><i></i></div>
+                <span>60</span><b>→</b><strong>70 kg</strong>
+              </div>
+              <h3>Depois, apenas acompanhe</h3>
+              <p><b>Histórico</b> mostra o que aconteceu. <b>Progresso</b> mostra para onde seus resultados estão indo.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="help-section help-guided-section" id="helpGuidedDemo">
+          <div class="help-section-title">
+            <div><small>O CORAÇÃO DO APP</small><h2>Entendendo o Modo Guiado</h2></div>
+            <span>modo principal</span>
+          </div>
+
+          <div class="help-guided-layout">
+            <div class="help-guided-phone">
+              <div class="hgp-progress"><i></i><span>1 / 6</span></div>
+              <div class="hgp-card">
+                <small>○ O AQUECIMENTO</small>
+                <h3>Tríceps Corda</h3>
+                <p>Leve. Prepare o movimento sem gerar fadiga.</p>
+                <div class="hgp-main-ref"><small>ÚLTIMO TREINO</small><strong>10 kg · 15 reps</strong><span>Aquecimento anterior</span></div>
+                <div class="hgp-work-ref"><small>LEMBRETE · TRABALHO ANTERIOR</small><span><b>T1</b> 22 kg</span><span><b>T2</b> 22 kg</span></div>
+                <div class="hgp-inputs"><span><small>CARGA</small><b>10</b></span><span><small>REPS</small><b>15</b></span></div>
+                <button>✓ Concluir série e avançar</button>
+              </div>
+            </div>
+
+            <div class="help-guided-explain">
+              <div class="help-callout main"><span>A</span><div><strong>O número grande é o que importa agora</strong><p>Se está no aquecimento, a referência principal é o aquecimento anterior. Se está no Trabalho 1, é o Trabalho 1 anterior.</p></div></div>
+              <div class="help-callout"><span>B</span><div><strong>A carga de trabalho fica como lembrete</strong><p>Ela aparece menor para você saber onde vai chegar, sem confundir com a série atual.</p></div></div>
+              <div class="help-callout"><span>C</span><div><strong>Preencha o que aconteceu de verdade</strong><p>Não precisa copiar a referência. Ela é só um ponto de comparação.</p></div></div>
+              <div class="help-callout"><span>D</span><div><strong>O app não exige recorde todo treino</strong><p>Igualar uma boa performance também pode ser consolidação. Evolução costuma acontecer aos poucos.</p></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="help-section">
+          <div class="help-section-title">
+            <div><small>PREPARAÇÃO</small><h2>O que significa cada etapa?</h2></div>
+            <span>sem complicar</span>
+          </div>
+          <div class="help-stage-track">
+            <div><span>○</span><strong>Aquecimento</strong><small>Leve. Só prepara o movimento.</small></div>
+            <i>→</i>
+            <div><span>↗</span><strong>Feeders</strong><small>Aproximam da carga sem cansar.</small></div>
+            <i>→</i>
+            <div><span>⚡</span><strong>PAP</strong><small>Curta e pesada. Não é série de falha.</small></div>
+            <i>→</i>
+            <div class="work"><span>●</span><strong>Trabalho 1</strong><small>Forte, terminando com 1–2 RIR.</small></div>
+            <i>→</i>
+            <div class="work final"><span>🔥</span><strong>Trabalho 2</strong><small>Série final, até a falha técnica.</small></div>
+          </div>
+          <div class="help-stage-note"><b>Atalho importante:</b> a preparação completa é para o primeiro exercício daquele músculo. Nos próximos, normalmente entra apenas um feeder de reconhecimento antes das séries de trabalho.</div>
+        </section>
+
+        <section class="help-section">
+          <div class="help-section-title">
+            <div><small>3 FORMAS DE REGISTRAR</small><h2>Qual modo eu uso?</h2></div>
+          </div>
+          <div class="help-modes">
+            <article class="primary"><span>▶</span><small>RECOMENDADO</small><strong>Modo Guiado</strong><p>Use durante o treino. O aplicativo conduz uma série por vez e lembra suas referências anteriores.</p></article>
+            <article><span>✎</span><small>SE JÁ ANOTOU</small><strong>Registrar depois</strong><p>Use quando você anotou no papel ou no celular e quer preencher todas as séries de uma vez.</p></article>
+            <article><span>≈</span><small>SEM CERTEZA</small><strong>Referência / calibração</strong><p>Use em máquina nova ou quando você só conseguiu descobrir uma carga aproximada. Não conta como recorde.</p></article>
+          </div>
+        </section>
+
+        <section class="help-section">
+          <div class="help-section-title">
+            <div><small>COMO O APP PENSA</small><h2>O que é progresso aqui?</h2></div>
+          </div>
+          <div class="help-rules">
+            <div class="help-rule baseline"><span>◎</span><div><strong>Primeiro registro = referência</strong><p>Se você começou com 60 kg, isso é sua base. Não é recorde ainda.</p></div></div>
+            <div class="help-rule"><span>＋1</span><div><strong>Mais reps também é progresso</strong><p>60 kg × 8 virar 60 kg × 9 é evolução, mesmo sem aumentar o peso.</p></div></div>
+            <div class="help-rule pr"><span>★</span><div><strong>Recorde de carga é simples</strong><p>Se o maior peso registrado era 60 kg e depois você faz 65 kg, aí sim o app conta um recorde de carga.</p></div></div>
+            <div class="help-rule"><span>＝</span><div><strong>Repetir uma boa marca é útil</strong><p>O objetivo não é bater recorde em toda sessão. Manter uma performance forte ajuda a consolidar a carga.</p></div></div>
+          </div>
+        </section>
+
+        <section class="help-section">
+          <div class="help-section-title">
+            <div><small>ONDE ENCONTRO?</small><h2>Mapa rápido do aplicativo</h2></div>
+          </div>
+          <div class="help-nav-map">
+            <button onclick="navHome(document.querySelector('[data-nav=home]'))"><span>⌂</span><div><strong>Hoje</strong><small>montar e executar o treino atual</small></div><b>›</b></button>
+            <button onclick="navHistory(document.querySelector('[data-nav=history]'))"><span>◷</span><div><strong>Histórico</strong><small>consultar ou corrigir treinos passados</small></div><b>›</b></button>
+            <button onclick="navProgress(document.querySelector('[data-nav=progress]'))"><span>↗</span><div><strong>Progresso</strong><small>gráficos, evolução e recordes de carga</small></div><b>›</b></button>
+            <button onclick="navExercises(document.querySelector('[data-nav=exercises]'))"><span>◎</span><div><strong>Exercícios</strong><small>cadastrar os exercícios que você usa</small></div><b>›</b></button>
+          </div>
+        </section>
+
+        <section class="help-section help-faq">
+          <div class="help-section-title">
+            <div><small>SE DER BRANCO</small><h2>Dúvidas que aparecem no treino</h2></div>
+          </div>
+          <details><summary><span>Esqueci de registrar um treino. E agora?</span><b>＋</b></summary><p>Abra <b>Histórico</b>, escolha o dia no calendário e adicione os exercícios que faltaram. Você pode reconstruir um dia antigo.</p></details>
+          <details><summary><span>Troquei de máquina e o peso não bate.</span><b>＋</b></summary><p>Máquinas diferentes podem ter escalas diferentes. Cadastre a variação como outro exercício quando a comparação direta não fizer sentido.</p></details>
+          <details><summary><span>Fiz menos reps que no último treino. Regredi?</span><b>＋</b></summary><p>Não necessariamente. Um treino isolado pode variar. O app olha tendência e histórico; não transforma uma sessão ruim em sentença.</p></details>
+          <details><summary><span>Aumentei a carga e minhas reps caíram.</span><b>＋</b></summary><p>Isso é esperado. Depois de subir a carga, o foco passa a ser consolidar o novo peso antes de buscar outro aumento.</p></details>
+          <details><summary><span>Quero rever esse tutorial depois.</span><b>＋</b></summary><p>Volte para esta aba e toque em <b>Me mostrar no aplicativo</b>. O tutorial pode ser repetido quantas vezes quiser.</p></details>
+        </section>
+
+        <div class="help-bottom-cta">
+          <div><small>AINDA PARECE MUITA COISA?</small><strong>Não precisa decorar nada.</strong><p>Durante o treino, use o Modo Guiado. Ele foi feito justamente para lembrar o que importa na hora certa.</p></div>
+          <button onclick="startAppTutorial(true)">▶ Me mostrar</button>
+        </div>
+      </section>
+    </section>
   </main>
 </div>
 
@@ -5602,6 +5841,9 @@ textarea{
   <button onclick="navExercises(this)" data-nav="exercises">
     <span class="nav-ico">◎</span><span>Exercícios</span>
   </button>
+  <button onclick="navHelp(this)" data-nav="help">
+    <span class="nav-ico">?</span><span>Como usar</span>
+  </button>
 
   <div class="desktop-nav-spacer"></div>
 
@@ -5619,6 +5861,44 @@ textarea{
     <i>›</i>
   </button>
 </nav>
+
+
+<div class="tutorial-welcome" id="tutorialWelcome" aria-hidden="true">
+  <div class="tutorial-welcome-card">
+    <button class="tutorial-welcome-close" onclick="dismissTutorialWelcome()">✕</button>
+    <div class="tutorial-welcome-icon">↗</div>
+    <small>PRIMEIRO ACESSO</small>
+    <h2>Quer que eu te mostre como usar?</h2>
+    <p>É rapidinho. Eu vou destacar cada parte do aplicativo e explicar o que você precisa fazer.</p>
+    <div class="tutorial-welcome-actions">
+      <button class="primary" onclick="startAppTutorial()">▶ Me mostrar</button>
+      <button onclick="dismissTutorialWelcome()">Agora não</button>
+    </div>
+    <span>Você pode repetir depois em <b>Como usar</b>.</span>
+  </div>
+</div>
+
+<div class="app-tutorial" id="appTutorial" aria-hidden="true">
+  <div class="tutorial-shade top"></div>
+  <div class="tutorial-shade left"></div>
+  <div class="tutorial-shade right"></div>
+  <div class="tutorial-shade bottom"></div>
+  <div class="tutorial-hole"></div>
+  <div class="tutorial-card" id="tutorialCard">
+    <div class="tutorial-card-top">
+      <span id="tutorialStepLabel">PASSO 1</span>
+      <button onclick="finishAppTutorial(true)">Pular</button>
+    </div>
+    <div class="tutorial-card-icon" id="tutorialIcon">↗</div>
+    <h3 id="tutorialTitle"></h3>
+    <p id="tutorialText"></p>
+    <div class="tutorial-progress" id="tutorialProgress"></div>
+    <div class="tutorial-actions">
+      <button class="back" id="tutorialBack" onclick="previousTutorialStep()">← Voltar</button>
+      <button class="next" id="tutorialNext" onclick="nextTutorialStep()">Próximo →</button>
+    </div>
+  </div>
+</div>
 
 <div class="modal" id="todayModal" onclick="backdropClose(event,'todayModal')"><div class="sheet">
   <div class="grab"></div><div class="sheethead"><div><h3>▶ Treino de hoje</h3><p>Marque tudo o que vai treinar nesta sessão.</p></div><button class="close" onclick="closeModal('todayModal')">✕</button></div>
@@ -5833,7 +6113,8 @@ const DEFAULT={
   sessionFirstByMuscle:{},
   preparedByGym:{},
   exercises:[],
-  history:[]
+  history:[],
+  tutorialVersion:0
 };
 
 let state=structuredClone(DEFAULT), restTimer=null, restEnd=0, currentEditingHistoryId=null;
@@ -5855,7 +6136,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='7.9';
+const APP_BUILD_VERSION='8.0';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -5977,6 +6258,7 @@ function showMainApp(){
   document.getElementById('onboardingGate')?.classList.remove('show');
   document.body.classList.remove('auth-locked');
   refreshAccountUI();
+  setTimeout(maybeOfferAppTutorial,650);
 }
 function displayName(){
   return currentUser?.user_metadata?.display_name
@@ -8947,6 +9229,11 @@ function navExercises(btn){
   showAppScreen('exerciseScreen');
   toggleLibrary(true);
 }
+function navHelp(btn){
+  setNavActive(btn);
+  closeAllContentModals();
+  showAppScreen('helpScreen');
+}
 
 function setHistoryModalMode(mode){
   const title=document.getElementById('historyModalTitle');
@@ -9629,6 +9916,230 @@ renderProgressExerciseDetail=renderProgressExerciseDetailV4;
 renderProgressOverview=progressRenderOverviewV4;
 
 
+
+
+/* =========================================================
+   8.0 — interactive app tutorial
+   ========================================================= */
+const APP_TUTORIAL_VERSION=1;
+let tutorialStepIndex=0;
+let tutorialActive=false;
+let tutorialReplaying=false;
+
+function tutorialNav(name){
+  const btn=document.querySelector(`[data-nav="${name}"]`);
+  if(name==='home')navHome(btn);
+  if(name==='history')navHistory(btn);
+  if(name==='progress')navProgress(btn);
+  if(name==='exercises')navExercises(btn);
+  if(name==='help')navHelp(btn);
+}
+function tutorialPrepareGuided(){
+  closeAllContentModals();
+  const ex=(state.exercises||[]).find(e=>e.gymId===state.activeGym);
+  if(ex){
+    showAppScreen('homeScreen');
+    editExercise(ex.id);
+    setEntryMode('live');
+  }else{
+    tutorialNav('help');
+  }
+}
+function tutorialGuidedTarget(){
+  return (state.exercises||[]).some(e=>e.gymId===state.activeGym)
+    ?'#entryModeBox'
+    :'#helpGuidedDemo';
+}
+const APP_TUTORIAL_STEPS=[
+  {
+    icon:'↗',
+    title:'Primeiro: o que esse app faz?',
+    text:'Ele não monta seu treino e não manda você aumentar peso toda sessão. Ele guarda o que você fez, lembra suas referências e mostra sua evolução.',
+    prepare:()=>{closeAllContentModals();tutorialNav('home')},
+    target:null
+  },
+  {
+    icon:'⌂',
+    title:'“Hoje” é onde o treino acontece',
+    text:'Comece sempre por aqui. Essa tela mostra o treino atual, o próximo exercício e o que já foi concluído.',
+    prepare:()=>{closeAllContentModals();tutorialNav('home')},
+    target:'[data-nav="home"]'
+  },
+  {
+    icon:'＋',
+    title:'Escolha o treino do dia',
+    text:'Toque aqui para escolher os músculos e marcar apenas os exercícios que realmente entram na sessão de hoje.',
+    prepare:()=>{closeAllContentModals();tutorialNav('home')},
+    target:'#todaySetupBtn'
+  },
+  {
+    icon:'✓',
+    title:'Músculos primeiro, exercícios depois',
+    text:'Dentro dessa tela você marca o que vai treinar e quais exercícios vai fazer. Salvar aqui só organiza a sessão; ainda não registra cargas.',
+    prepare:()=>{closeAllContentModals();tutorialNav('home');openTodayModal()},
+    target:'#todayModal .guidebox'
+  },
+  {
+    icon:'◎',
+    title:'Cadastre seus exercícios',
+    text:'Na aba Exercícios ficam os movimentos que você realmente usa. Não existe catálogo obrigatório: você dá o nome que conhece e escolhe o grupo muscular.',
+    prepare:()=>{closeAllContentModals();tutorialNav('exercises')},
+    target:'#exerciseScreen .screen-add'
+  },
+  {
+    icon:'▶',
+    title:'Durante o treino, use o Modo Guiado',
+    text:'Ele conduz uma série por vez. A referência grande é da etapa atual; a carga de trabalho anterior aparece menor só para você lembrar onde vai chegar.',
+    prepare:tutorialPrepareGuided,
+    target:tutorialGuidedTarget
+  },
+  {
+    icon:'◷',
+    title:'Histórico responde “o que eu fiz?”',
+    text:'Use essa aba para consultar um dia antigo, corrigir um registro ou reconstruir um treino que você esqueceu de salvar.',
+    prepare:()=>{closeAllContentModals();showAppScreen('homeScreen')},
+    target:'[data-nav="history"]'
+  },
+  {
+    icon:'↗',
+    title:'Progresso responde “estou avançando?”',
+    text:'Aqui ficam gráficos, tendências e recordes de carga. O primeiro peso é só sua referência; recorde só existe quando uma carga futura supera a maior anterior.',
+    prepare:()=>{closeAllContentModals();showAppScreen('homeScreen')},
+    target:'[data-nav="progress"]'
+  },
+  {
+    icon:'?',
+    title:'Esqueceu alguma coisa? Volte aqui.',
+    text:'A aba Como usar guarda o passo a passo completo. Você pode repetir este tutorial quantas vezes quiser.',
+    prepare:()=>{closeAllContentModals();tutorialNav('help')},
+    target:'[data-nav="help"]'
+  }
+];
+
+function markTutorialSeen(){
+  if((state.tutorialVersion||0)>=APP_TUTORIAL_VERSION)return;
+  state.tutorialVersion=APP_TUTORIAL_VERSION;
+  persist();
+}
+function maybeOfferAppTutorial(){
+  if(document.body.classList.contains('auth-locked'))return;
+  if((state.tutorialVersion||0)>=APP_TUTORIAL_VERSION)return;
+  // Automatic offer is for a genuinely new account. Existing users can replay from "Como usar".
+  if((state.exercises||[]).length||(state.history||[]).length)return;
+  const el=document.getElementById('tutorialWelcome');if(!el)return;
+  el.classList.add('show');el.setAttribute('aria-hidden','false');
+}
+function dismissTutorialWelcome(){
+  document.getElementById('tutorialWelcome')?.classList.remove('show');
+  document.getElementById('tutorialWelcome')?.setAttribute('aria-hidden','true');
+  markTutorialSeen();
+}
+function startAppTutorial(replay=false){
+  document.getElementById('tutorialWelcome')?.classList.remove('show');
+  tutorialReplaying=!!replay;
+  tutorialActive=true;
+  tutorialStepIndex=0;
+  markTutorialSeen();
+  const el=document.getElementById('appTutorial');
+  el?.classList.add('show');el?.setAttribute('aria-hidden','false');
+  showTutorialStep();
+}
+function finishAppTutorial(skipped=false){
+  tutorialActive=false;
+  const el=document.getElementById('appTutorial');
+  el?.classList.remove('show');el?.setAttribute('aria-hidden','true');
+  closeAllContentModals();
+  tutorialNav('help');
+  if(!skipped)toast('Tutorial concluído ✓');
+}
+function nextTutorialStep(){
+  if(tutorialStepIndex>=APP_TUTORIAL_STEPS.length-1)return finishAppTutorial(false);
+  tutorialStepIndex++;
+  showTutorialStep();
+}
+function previousTutorialStep(){
+  if(tutorialStepIndex<=0)return;
+  tutorialStepIndex--;
+  showTutorialStep();
+}
+function tutorialTargetElement(step){
+  const target=typeof step.target==='function'?step.target():step.target;
+  if(!target)return null;
+  try{return document.querySelector(target)}catch(_){return null}
+}
+function showTutorialStep(){
+  if(!tutorialActive)return;
+  const step=APP_TUTORIAL_STEPS[tutorialStepIndex];
+  try{step.prepare?.()}catch(e){console.warn('Tutorial prepare',e)}
+  document.getElementById('tutorialStepLabel').textContent=`PASSO ${tutorialStepIndex+1} DE ${APP_TUTORIAL_STEPS.length}`;
+  document.getElementById('tutorialIcon').textContent=step.icon||'↗';
+  document.getElementById('tutorialTitle').textContent=step.title;
+  document.getElementById('tutorialText').textContent=step.text;
+  document.getElementById('tutorialBack').disabled=tutorialStepIndex===0;
+  document.getElementById('tutorialNext').textContent=tutorialStepIndex===APP_TUTORIAL_STEPS.length-1?'Concluir ✓':'Próximo →';
+  document.getElementById('tutorialProgress').innerHTML=APP_TUTORIAL_STEPS.map((_,i)=>`<i class="${i===tutorialStepIndex?'active':i<tutorialStepIndex?'done':''}"></i>`).join('');
+  setTimeout(()=>positionTutorialStep(true),170);
+}
+function positionTutorialStep(scroll=true){
+  if(!tutorialActive)return;
+  const step=APP_TUTORIAL_STEPS[tutorialStepIndex];
+  const target=tutorialTargetElement(step);
+  const overlay=document.getElementById('appTutorial');
+  const card=document.getElementById('tutorialCard');
+  const hole=overlay?.querySelector('.tutorial-hole');
+  const shades={
+    top:overlay?.querySelector('.tutorial-shade.top'),
+    left:overlay?.querySelector('.tutorial-shade.left'),
+    right:overlay?.querySelector('.tutorial-shade.right'),
+    bottom:overlay?.querySelector('.tutorial-shade.bottom')
+  };
+  if(!overlay||!card||!hole)return;
+
+  if(!target){
+    hole.style.display='none';
+    Object.values(shades).forEach(s=>{if(s)s.style.cssText='position:fixed;inset:0;background:rgba(2,4,6,.80);'});
+    card.classList.add('centered');
+    card.style.left='50%';card.style.top='50%';card.style.bottom='auto';
+    return;
+  }
+
+  if(scroll){
+    const r=target.getBoundingClientRect();
+    if(r.top<70||r.bottom>window.innerHeight-90){
+      target.scrollIntoView({behavior:'smooth',block:'center',inline:'nearest'});
+      setTimeout(()=>positionTutorialStep(false),280);
+      return;
+    }
+  }
+
+  const r=target.getBoundingClientRect();
+  const pad=7;
+  const x=Math.max(5,r.left-pad),y=Math.max(5,r.top-pad);
+  const w=Math.min(window.innerWidth-x-5,r.width+pad*2),h=Math.min(window.innerHeight-y-5,r.height+pad*2);
+  hole.style.display='block';
+  hole.style.left=x+'px';hole.style.top=y+'px';hole.style.width=w+'px';hole.style.height=h+'px';
+
+  const bg='rgba(2,4,6,.80)';
+  shades.top.style.cssText=`position:fixed;left:0;top:0;width:100vw;height:${y}px;background:${bg}`;
+  shades.bottom.style.cssText=`position:fixed;left:0;top:${y+h}px;width:100vw;height:${Math.max(0,window.innerHeight-y-h)}px;background:${bg}`;
+  shades.left.style.cssText=`position:fixed;left:0;top:${y}px;width:${x}px;height:${h}px;background:${bg}`;
+  shades.right.style.cssText=`position:fixed;left:${x+w}px;top:${y}px;width:${Math.max(0,window.innerWidth-x-w)}px;height:${h}px;background:${bg}`;
+
+  card.classList.remove('centered');
+  const cardW=Math.min(390,window.innerWidth-24);
+  card.style.width=cardW+'px';
+  card.style.left=Math.max(12,Math.min(window.innerWidth-cardW-12,x+w/2-cardW/2))+'px';
+
+  const estimatedH=270;
+  if(y+h+16+estimatedH<window.innerHeight){
+    card.style.top=(y+h+14)+'px';card.style.bottom='auto';
+  }else{
+    card.style.top='auto';
+    card.style.bottom=Math.max(12,window.innerHeight-y+14)+'px';
+  }
+}
+window.addEventListener('resize',()=>{if(tutorialActive)positionTutorialStep(false)});
+window.addEventListener('scroll',()=>{if(tutorialActive)positionTutorialStep(false)},{passive:true});
 
 /* =========================================================
    HISTÓRICO 4.0 — visual timeline + interactive calendar
