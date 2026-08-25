@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   8.1 — CLEANER ONBOARDING TUTORIAL
+   8.3 — DESKTOP TOAST FIX
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -3711,10 +3711,26 @@ select{
   .toast{
     left:auto!important;
     right:28px!important;
+    top:auto!important;
     bottom:28px!important;
-    transform:none!important;
+    transform:translateY(18px)!important;
     width:auto!important;
-    max-width:380px!important;
+    min-width:0!important;
+    max-width:360px!important;
+    height:auto!important;
+    min-height:0!important;
+    padding:11px 14px!important;
+    border:1px solid #303b2b!important;
+    border-radius:13px!important;
+    background:#121812!important;
+    color:#edf4e7!important;
+    box-shadow:0 14px 42px rgba(0,0,0,.34)!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+  .toast.show{
+    transform:translateY(0)!important;
+    opacity:1!important;
   }
 }
 
@@ -5425,6 +5441,55 @@ textarea{
 .help-guided-explain{align-content:start}
 .help-callout p{max-width:42ch}
 .tutorial-card p{max-width:44ch}
+
+/* =========================================================
+   8.2 — recognition feeder in current + historical workouts
+   ========================================================= */
+.recognition-extra-label{
+  color:#8fa6b6!important;
+  margin-top:8px!important;
+}
+.remove-set-spacer{
+  width:34px;
+  height:34px;
+  display:block;
+}
+.recognition-add{
+  border-style:dashed!important;
+  color:#a7bac8!important;
+  background:#10161b!important;
+}
+.live-extra-feeder{
+  width:100%;
+  min-height:38px;
+  margin:7px 0 2px;
+  border:1px dashed #3b4b58;
+  border-radius:11px;
+  background:#10171c;
+  color:#a9bbc8;
+  font-size:8px;
+  font-weight:900;
+}
+
+/* =========================================================
+   8.3 — desktop toast must stay compact
+   The old desktop rule kept top:18px while also setting bottom:28px,
+   which stretched the toast through almost the entire viewport.
+   ========================================================= */
+@media(min-width:900px){
+  #toast.toast{
+    position:fixed!important;
+    left:auto!important;
+    right:28px!important;
+    top:auto!important;
+    bottom:28px!important;
+    width:max-content!important;
+    max-width:min(360px,calc(100vw - 56px))!important;
+    height:auto!important;
+    min-height:0!important;
+    white-space:normal!important;
+  }
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -5761,7 +5826,7 @@ textarea{
             <i>→</i>
             <div class="work final"><span>🔥</span><strong>Trabalho 2</strong><small>Série final, até a falha técnica.</small></div>
           </div>
-          <div class="help-stage-note"><b>Atalho importante:</b> a preparação completa é para o primeiro exercício daquele músculo. Nos próximos, normalmente entra apenas um feeder de reconhecimento antes das séries de trabalho.</div>
+          <div class="help-stage-note"><b>Atalho importante:</b> a preparação completa é para o primeiro exercício daquele músculo. Nos próximos, normalmente entra 1 feeder de reconhecimento; se você ainda precisar se aproximar da carga, pode adicionar mais 1.</div>
         </section>
 
         <section class="help-section">
@@ -6141,7 +6206,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='8.1';
+const APP_BUILD_VERSION='8.3';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -6691,10 +6756,16 @@ function addSelectedExerciseToHistoryDay(){
   render();
 
   currentEditingHistoryId=null;
-  editExercise(id);
+  editExercise(id,day);
 
   const dateInput=document.getElementById('performedDate');
   if(dateInput)dateInput.value=day;
+
+  const fullPrep=historicalNewExerciseDefaultFullPrep(e.muscle,day);
+  document.getElementById('usePrep').checked=fullPrep;
+  recognitionFeederCount=1;
+  renderSetEditors();
+  if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}
 
   document.getElementById('modalTitle').textContent='＋ Adicionar ao treino';
   document.getElementById('modalSubtitle').textContent=`Novo registro para ${new Date(day+'T12:00:00').toLocaleDateString('pt-BR')}. Preencha as séries realizadas.`;
@@ -8551,16 +8622,69 @@ function openLinkedCatalogInfo(){return}
 
 function fillMuscleSelect(){const el=document.getElementById('exerciseMuscle');if(!el)return;el.innerHTML=MUSCLES.map(m=>`<option ${m===state.activeMuscle?'selected':''}>${m}</option>`).join('')}
 function muscleHasPrep(muscle,excludeId=''){return isPrepared(muscle)||state.exercises.some(e=>e.gymId===state.activeGym&&e.muscle===muscle&&e.usePrep&&e.id!==excludeId&&e.updatedAt&&state.muscleStartedAt&&e.updatedAt>=state.muscleStartedAt)}
+function filledPrepSet(s){return !!s&&(s.kg!==''||s.reps!==''||s.rir!=='')}
+function historyRecordHasFullPrep(h){
+  if(!h)return false;
+  const warm=(h.sets?.warmup||[]).some(filledPrepSet);
+  const pap=(h.sets?.pap||[]).some(filledPrepSet);
+  const feeders=(h.sets?.feeder||[]).filter(filledPrepSet).length;
+  return warm||pap||feeders>=2;
+}
+function historyRecordHasRecognition(h){
+  if(!h)return false;
+  return !historyRecordHasFullPrep(h)&&(h.sets?.feeder||[]).some(filledPrepSet);
+}
+function historicalRecordDefaultFullPrep(h){
+  if(!h)return false;
+  if(historyRecordHasFullPrep(h))return true;
+  if(historyRecordHasRecognition(h))return false;
+  const day=sessionDayFromHistory(h);
+  const earlierSame=historyEntriesForSessionDay(day).some(x=>
+    x.id!==h.id &&
+    (x.muscle||'')===(h.muscle||'') &&
+    (x.date||'')<(h.date||'')
+  );
+  return !earlierSame;
+}
+function historicalNewExerciseDefaultFullPrep(muscle,day){
+  if(!muscle||!day)return false;
+  return !historyEntriesForSessionDay(day).some(h=>(h.muscle||'')===muscle);
+}
 function currentExercisePrepMode(){
   const full=document.getElementById('usePrep')?.checked;
   if(full)return 'full';
   const muscle=document.getElementById('exerciseMuscle')?.value||'';
-  // Se o músculo já foi preparado hoje por outro exercício,
-  // este exercício recebe 1 feeder curto de reconhecimento.
+
+  // Ao editar/reconstruir um treino antigo, "não foi o primeiro exercício"
+  // significa feeder de reconhecimento — nunca "só trabalho".
+  if(currentEditingHistoryId||currentHistoricalDayContext)return 'recognition';
+
+  // Na sessão atual, depois que o músculo já foi preparado,
+  // entra feeder de reconhecimento antes das séries de trabalho.
   if(muscle&&isPrepared(muscle))return 'recognition';
   return 'work';
 }
-let currentEntryMode='later', liveStepIndex=0, currentCalibration=null;
+function ensureRecognitionFeeders(){
+  if(!currentSets.feeder)currentSets.feeder=[];
+  while(currentSets.feeder.length<recognitionFeederCount)currentSets.feeder.push(blankSet());
+}
+function addRecognitionFeeder(){
+  recognitionFeederCount=2;
+  ensureRecognitionFeeders();
+  renderSetEditors();
+  if(currentEntryMode==='live')renderLiveGuide();
+}
+function removeRecognitionFeederExtra(){
+  recognitionFeederCount=1;
+  if(currentSets.feeder?.[1])currentSets.feeder[1]=blankSet();
+  renderSetEditors();
+  if(currentEntryMode==='live'){
+    const steps=liveSteps();
+    liveStepIndex=Math.min(liveStepIndex,Math.max(0,steps.length-1));
+    renderLiveGuide();
+  }
+}
+let currentEntryMode='later', liveStepIndex=0, currentCalibration=null, currentHistoricalDayContext='', recognitionFeederCount=1;
 function liveSteps(){
   const mode=currentExercisePrepMode();
   const out=[];
@@ -8569,16 +8693,17 @@ function liveSteps(){
     (currentSets.feeder||[]).slice(0,2).forEach((_,i)=>out.push({type:'feeder',index:i,label:'Feeder '+(i+1),hint:i===0?'Primeira aproximação. Ainda deve estar confortável.':'Chegue mais perto da carga de trabalho sem se desgastar.',rest:i===0?90:120,icon:'↗'}));
     (currentSets.pap||[]).slice(0,1).forEach((_,i)=>out.push({type:'pap',index:i,label:'PAP',hint:'Série curta. 90–95% da carga de trabalho, sem falhar.',rest:180,icon:'⚡'}));
   }else if(mode==='recognition'){
-    if(!currentSets.feeder)currentSets.feeder=[];
-    if(!currentSets.feeder.length)currentSets.feeder.push(blankSet());
-    out.push({
-      type:'feeder',
-      index:0,
-      label:'Feeder de reconhecimento',
-      hint:'Só para sentir a máquina e confirmar a carga. Poucas reps, longe da falha.',
-      rest:90,
-      icon:'◎'
-    });
+    ensureRecognitionFeeders();
+    for(let i=0;i<recognitionFeederCount;i++){
+      out.push({
+        type:'feeder',
+        index:i,
+        label:i===0?'Feeder de reconhecimento':'Feeder extra',
+        hint:i===0?'Só para sentir a máquina e confirmar a carga. Poucas reps, longe da falha.':'Opcional. Use apenas se ainda quiser uma aproximação antes das séries de trabalho.',
+        rest:i===0?90:120,
+        icon:i===0?'◎':'＋'
+      });
+    }
   }
   (currentSets.work||[]).slice(0,2).forEach((_,i)=>out.push({type:'work',index:i,label:'Trabalho '+(i+1),hint:i===0?'Série forte. Termine com aproximadamente 1–2 RIR.':'SÉRIE FINAL. Vá até a falha técnica mantendo a execução.',rest:i===0?180:0,icon:i===0?'●':'🔥'}));
   return out;
@@ -8816,7 +8941,10 @@ function renderLiveGuide(){
         ${st.type==='pap'||st.type==='work'?`<div class="live-input-wrap"><label>RIR</label>${setPicker('rir',val.rir||'',st.type==='work'&&st.index===1?'liveFinalSetPreview()':'','liveRir')}</div>`:''}
       </div>
       ${st.type==='work'&&st.index===1?'<div id="liveFinalProgressPreview" class="live-final-progress-preview"></div>':''}
-      ${st.label==='Feeder de reconhecimento'?'<div class="live-upnext">◎ Músculo já preparado. Esta série é só para reconhecer a máquina antes das séries de trabalho.</div>':''}${st.type==='work'&&st.index===1?'<div class="live-final-note">🔥 Sua série final: RIR 0 / falha técnica.</div>':''}
+      ${currentExercisePrepMode()==='recognition'&&st.type==='feeder'&&st.index===0?'<div class="live-upnext">◎ O músculo já foi preparado. Use esta série só para reconhecer a carga deste exercício.</div>':''}
+      ${currentExercisePrepMode()==='recognition'&&st.type==='feeder'&&st.index===0&&recognitionFeederCount===1?'<button type="button" class="live-extra-feeder" onclick="addRecognitionFeeder()">＋ Quero fazer mais um feeder</button>':''}
+      ${currentExercisePrepMode()==='recognition'&&st.type==='feeder'&&st.index===1?'<div class="live-upnext">＋ Feeder extra opcional antes das séries de trabalho.</div>':''}
+      ${st.type==='work'&&st.index===1?'<div class="live-final-note">🔥 Sua série final: RIR 0 / falha técnica.</div>':''}
       ${next?`<div class="live-upnext">Depois: <b>${esc(next.label)}</b></div>`:'<div class="live-upnext"><b>Última série do exercício.</b> Ao concluir, o resultado será salvo.</div>'}
       <div class="live-rest">
         <div class="live-rest-head"><small>⏱ DESCANSO</small><div class="timerdisplay" id="liveTimerDisplay">00:00</div></div>
@@ -8894,6 +9022,8 @@ function openExerciseModal(){
 }
 function openBlankExerciseModal(prefill=null){
   currentEditingHistoryId=null;
+  currentHistoricalDayContext='';
+  recognitionFeederCount=1;
   document.getElementById('recordBanner')?.classList.remove('show');
   document.getElementById('recordActions')?.classList.remove('show');
   closeModal('exerciseCatalogModal');
@@ -8939,9 +9069,12 @@ function openBlankExerciseModal(prefill=null){
   updateMethodPreview();
   openModal('exerciseModal');
 }
-function editExercise(id){
+function editExercise(id,historicalDay=''){
   try{
-    currentEditingHistoryId=null;document.getElementById('recordBanner')?.classList.remove('show');document.getElementById('recordActions')?.classList.remove('show');
+    currentEditingHistoryId=null;
+    currentHistoricalDayContext=historicalDay||'';
+    recognitionFeederCount=1;
+    document.getElementById('recordBanner')?.classList.remove('show');document.getElementById('recordActions')?.classList.remove('show');
     const e=state.exercises.find(x=>x.id===id);
     if(!e)return toast('Exercício não encontrado');
     const hist=priorHistoryForExercise(id);
@@ -8979,7 +9112,9 @@ function editExercise(id){
     document.getElementById('targetReps').value=e.targetReps||'';
 
     const forcedFirst=state.sessionFirstByMuscle?.[e.muscle];
-    document.getElementById('usePrep').checked=!isPrepared(e.muscle)&&(forcedFirst?forcedFirst===e.id:(first?true:!!e.usePrep));
+    document.getElementById('usePrep').checked=currentHistoricalDayContext
+      ?historicalNewExerciseDefaultFullPrep(e.muscle,currentHistoricalDayContext)
+      :!isPrepared(e.muscle)&&(forcedFirst?forcedFirst===e.id:(first?true:!!e.usePrep));
 
     const lastHist=latestHistoryForExercise(id);
     currentCalibration={
@@ -9020,13 +9155,14 @@ function renderSetEditors(){
     const recognition=mode==='recognition'&&t.key==='feeder';
 
     if(recognition){
-      if(!currentSets.feeder)currentSets.feeder=[];
-      if(!currentSets.feeder.length)currentSets.feeder.push(blankSet());
-      arr=currentSets.feeder.slice(0,1);
+      ensureRecognitionFeeders();
+      arr=currentSets.feeder.slice(0,recognitionFeederCount);
     }
 
     const label=recognition?'Feeder de reconhecimento':t.label;
-    const hint=recognition?'1 série curta · só para sentir a carga do aparelho':t.hint;
+    const hint=recognition
+      ?(recognitionFeederCount===1?'1 série curta · só para sentir a carga do exercício':'1 feeder principal + 1 extra opcional')
+      :t.hint;
 
     return `<div class="set-group ${isWork?'final-set':''} ${recognition?'recognition-set':''}">
       <div class="set-group-head">
@@ -9034,13 +9170,18 @@ function renderSetEditors(){
         <small>${arr.length} série(s)</small>
       </div>
       <div>${arr.map((sv,i)=>`${isWork?`<div class="series-label ${i===0?'work1':'work2'}">${i===0?'Trabalho 1 · forte, guardar 1–2 reps':'Trabalho 2 · série final, falha técnica'}</div>`:''}
+        ${recognition&&i===1?'<div class="series-label recognition-extra-label">Feeder extra · opcional</div>':''}
         <div class="set-row ${hasRir?'':'no-rir'}">
           ${setPicker('kg',sv.kg,`setVal('${t.key}',${i},'kg',this.value)`)}
           ${setPicker('reps',sv.reps,`setVal('${t.key}',${i},'reps',this.value)`)}
           ${hasRir?setPicker('rir',sv.rir||'',`setVal('${t.key}',${i},'rir',this.value)`):''}
-          <button class="remove-set" onclick="removeSet('${t.key}',${i})">−</button>
+          ${recognition
+            ?(i===1?'<button class="remove-set" onclick="removeRecognitionFeederExtra()">−</button>':'<span class="remove-set-spacer"></span>')
+            :`<button class="remove-set" onclick="removeSet('${t.key}',${i})">−</button>`}
         </div>`).join('')}</div>
-      ${isWork||recognition?'':`<button class="addset" onclick="addSet('${t.key}')">+ adicionar série</button>`}
+      ${recognition&&recognitionFeederCount===1
+        ?'<button class="addset recognition-add" onclick="addRecognitionFeeder()">+ adicionar feeder extra</button>'
+        :(isWork||recognition?'':`<button class="addset" onclick="addSet('${t.key}')">+ adicionar série</button>`)}
     </div>`;
   }).join('');
 }
@@ -9070,12 +9211,15 @@ function openHistoryRecord(historyId){
     const h=state.history.find(x=>x.id===historyId);if(!h)return toast('Registro não encontrado');
     const e=state.exercises.find(x=>x.id===h.exerciseId);if(!e)return toast('Exercício não encontrado');
     if(h.gymId&&state.gyms.some(g=>g.id===h.gymId))state.activeGym=h.gymId;
-    currentEditingHistoryId=h.id;currentCalibration=null;
+    currentEditingHistoryId=h.id;
+    currentHistoricalDayContext=sessionDayFromHistory(h);
+    recognitionFeederCount=(h.sets?.feeder?.[1]&&filledPrepSet(h.sets.feeder[1]))?2:1;
+    currentCalibration=null;
     window.currentSets=JSON.parse(JSON.stringify(h.sets||{}));TYPES.forEach(t=>{if(!Array.isArray(currentSets[t.key]))currentSets[t.key]=[]});
     if(!currentSets.warmup.length)currentSets.warmup.push(blankSet());while(currentSets.feeder.length<2)currentSets.feeder.push(blankSet());if(!currentSets.pap.length)currentSets.pap.push(blankSet());while(currentSets.work.length<2)currentSets.work.push(blankSet());
     const modal=document.getElementById('exerciseModal');modal.classList.remove('new-exercise-mode');document.getElementById('editId').value=e.id;document.getElementById('entryModeBox').style.display='grid';
     fillMuscleSelect();document.getElementById('exerciseMuscle').value=h.muscle||e.muscle;document.getElementById('exerciseName').value=h.name||e.name;renderCatalogLinkedInfo(catalogKeyFromExercise(e));document.getElementById('exerciseNote').value=e.note||'';document.getElementById('targetKg').value=e.targetKg||'';document.getElementById('targetReps').value=e.targetReps||'';
-    document.getElementById('usePrep').checked=recordHasPrep(h);document.getElementById('performedDate').value=sessionDayFromHistory(h);document.getElementById('firstTimeNote').classList.remove('show');document.getElementById('targetKgField').style.display='';document.getElementById('targetRepsLabel').textContent='Meta de reps';
+    document.getElementById('usePrep').checked=historicalRecordDefaultFullPrep(h);document.getElementById('performedDate').value=sessionDayFromHistory(h);document.getElementById('firstTimeNote').classList.remove('show');document.getElementById('targetKgField').style.display='';document.getElementById('targetRepsLabel').textContent='Meta de reps';
     document.getElementById('modalTitle').textContent='✎ Editar registro';document.getElementById('modalSubtitle').textContent='Altere cargas, séries ou o dia realizado se precisar.';document.getElementById('saveExerciseBtn').textContent='Salvar alterações';document.getElementById('deleteExerciseBtn').style.display='none';
     const rb=document.getElementById('recordBanner');rb.classList.add('show');document.getElementById('recordBannerText').textContent=`${fmtDate(h.date)} · ${e.name}${h.editedAt?' · já editado':''}`;document.getElementById('recordActions').classList.add('show');
     currentCalibration={tests:JSON.parse(JSON.stringify(h.sets?.calibration||[blankSet(),blankSet(),blankSet()])),work:JSON.parse(JSON.stringify(h.sets?.work||[blankSet(),blankSet()])),approx:!!h.approximate};ensureCalibration();
@@ -9085,7 +9229,7 @@ function openHistoryRecord(historyId){
 function deleteHistoryRecord(historyId){const h=state.history.find(x=>x.id===historyId);if(!h)return;if(!confirm(`Excluir este registro de ${h.name || 'treino'}? Esta ação não apaga o exercício da biblioteca.`))return;state.history=state.history.filter(x=>x.id!==historyId);recomputePreparedToday();persist();if(currentEditingHistoryId===historyId){currentEditingHistoryId=null;closeModal('exerciseModal')}render();if(document.getElementById('historyModal')?.classList.contains('show'))renderHistory();toast('Registro excluído')}
 function deleteCurrentHistoryRecord(){if(currentEditingHistoryId)deleteHistoryRecord(currentEditingHistoryId)}
 function duplicateHistoryRecord(){if(!currentEditingHistoryId)return;const h=state.history.find(x=>x.id===currentEditingHistoryId);if(!h)return;const copy=JSON.parse(JSON.stringify(h));copy.id=uid();copy.date=new Date().toISOString();delete copy.editedAt;copy.prFlags=[];state.history.push(copy);recomputePreparedToday();persist();render();toast('Registro duplicado');closeModal('exerciseModal');currentEditingHistoryId=null}
-function cancelExerciseModal(){currentEditingHistoryId=null;stopRest();closeModal('exerciseModal');toast('Nada foi alterado')}
+function cancelExerciseModal(){currentEditingHistoryId=null;currentHistoricalDayContext='';recognitionFeederCount=1;stopRest();closeModal('exerciseModal');toast('Nada foi alterado')}
 function deleteExercise(){const id=document.getElementById('editId').value;if(!id)return;const ex=state.exercises.find(e=>e.id===id);if(!ex)return;if(!confirm(`Excluir ${ex.name}? O histórico de carga deste exercício também será apagado.`))return;state.exercises=state.exercises.filter(e=>e.id!==id);state.history=state.history.filter(h=>h.exerciseId!==id);recomputePreparedToday();state.sessionExerciseIds=(state.sessionExerciseIds||[]).filter(x=>x!==id);persist();closeModal('exerciseModal');render();toast('Exercício excluído')}
 function fillHistorySelect(){
   const el=document.getElementById('historyExercise');if(!el)return;
