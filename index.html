@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   8.0 — HOW TO USE / INTERACTIVE TUTORIAL
+   8.1 — CLEANER ONBOARDING TUTORIAL
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -5420,6 +5420,11 @@ textarea{
 @media(prefers-reduced-motion:reduce){
   .tutorial-hole,.tutorial-welcome,.help-shell *{animation:none!important;transition:none!important}
 }
+
+/* 8.1 — comunicação mais limpa no primeiro uso */
+.help-guided-explain{align-content:start}
+.help-callout p{max-width:42ch}
+.tutorial-card p{max-width:44ch}
 </style>
 </head>
 <body class="auth-locked">
@@ -5635,8 +5640,8 @@ textarea{
         <div class="help-hero">
           <div class="help-hero-copy">
             <small>COMO USAR</small>
-            <h1>O app fica simples quando você entende o fluxo.</h1>
-            <p>Você treina normalmente. O app guarda suas cargas, lembra o que veio antes e mostra se você está avançando.</p>
+            <h1>Comece pela ordem certa e o resto fica simples.</h1>
+            <p>Cadastre seus exercícios, monte o treino do dia e use o Modo Guiado. Depois, o app organiza seu histórico e mostra sua evolução.</p>
             <div class="help-hero-actions">
               <button class="help-show-me" onclick="startAppTutorial(true)">
                 <span>▶</span>
@@ -5660,7 +5665,7 @@ textarea{
 
         <section class="help-section" id="helpQuickStart">
           <div class="help-section-title">
-            <div><small>COMECE POR AQUI</small><h2>Seu treino em 4 passos</h2></div>
+            <div><small>COMECE POR AQUI</small><h2>A ordem certa para usar</h2></div>
             <span>leva menos de 1 minuto</span>
           </div>
 
@@ -5725,17 +5730,17 @@ textarea{
                 <h3>Tríceps Corda</h3>
                 <p>Leve. Prepare o movimento sem gerar fadiga.</p>
                 <div class="hgp-main-ref"><small>ÚLTIMO TREINO</small><strong>10 kg · 15 reps</strong><span>Aquecimento anterior</span></div>
-                <div class="hgp-work-ref"><small>LEMBRETE · TRABALHO ANTERIOR</small><span><b>T1</b> 22 kg</span><span><b>T2</b> 22 kg</span></div>
+                <div class="hgp-work-ref"><small>REFERÊNCIAS DO TREINO ANTERIOR</small><span><b>T1</b> 22 kg</span><span><b>T2</b> 22 kg</span></div>
                 <div class="hgp-inputs"><span><small>CARGA</small><b>10</b></span><span><small>REPS</small><b>15</b></span></div>
                 <button>✓ Concluir série e avançar</button>
               </div>
             </div>
 
             <div class="help-guided-explain">
-              <div class="help-callout main"><span>A</span><div><strong>O número grande é o que importa agora</strong><p>Se está no aquecimento, a referência principal é o aquecimento anterior. Se está no Trabalho 1, é o Trabalho 1 anterior.</p></div></div>
-              <div class="help-callout"><span>B</span><div><strong>A carga de trabalho fica como lembrete</strong><p>Ela aparece menor para você saber onde vai chegar, sem confundir com a série atual.</p></div></div>
-              <div class="help-callout"><span>C</span><div><strong>Preencha o que aconteceu de verdade</strong><p>Não precisa copiar a referência. Ela é só um ponto de comparação.</p></div></div>
-              <div class="help-callout"><span>D</span><div><strong>O app não exige recorde todo treino</strong><p>Igualar uma boa performance também pode ser consolidação. Evolução costuma acontecer aos poucos.</p></div></div>
+              <div class="help-callout main"><span>A</span><div><strong>Use a referência da etapa atual</strong><p>O app mostra o que você fez nessa mesma etapa no treino anterior. Use isso só para se orientar.</p></div></div>
+              <div class="help-callout"><span>B</span><div><strong>Registre o que você realmente fez</strong><p>A referência não é uma meta obrigatória. Ajuste carga e reps conforme o treino acontecer.</p></div></div>
+              <div class="help-callout"><span>C</span><div><strong>Avance uma série por vez</strong><p>Concluiu a série? Registre e toque para seguir. O app mostra a próxima etapa sozinho.</p></div></div>
+              <div class="help-callout"><span>D</span><div><strong>Não precisa bater recorde todo treino</strong><p>Repetir uma boa performance também é útil. A evolução aparece com o tempo.</p></div></div>
             </div>
           </div>
         </section>
@@ -5869,7 +5874,7 @@ textarea{
     <div class="tutorial-welcome-icon">↗</div>
     <small>PRIMEIRO ACESSO</small>
     <h2>Quer que eu te mostre como usar?</h2>
-    <p>É rapidinho. Eu vou destacar cada parte do aplicativo e explicar o que você precisa fazer.</p>
+    <p>É rapidinho. Eu vou mostrar a ordem certa para começar a usar o aplicativo.</p>
     <div class="tutorial-welcome-actions">
       <button class="primary" onclick="startAppTutorial()">▶ Me mostrar</button>
       <button onclick="dismissTutorialWelcome()">Agora não</button>
@@ -6136,7 +6141,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='8.0';
+const APP_BUILD_VERSION='8.1';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -9952,65 +9957,58 @@ function tutorialGuidedTarget(){
 }
 const APP_TUTORIAL_STEPS=[
   {
-    icon:'↗',
-    title:'Primeiro: o que esse app faz?',
-    text:'Ele não monta seu treino e não manda você aumentar peso toda sessão. Ele guarda o que você fez, lembra suas referências e mostra sua evolução.',
-    prepare:()=>{closeAllContentModals();tutorialNav('home')},
-    target:null
-  },
-  {
-    icon:'⌂',
-    title:'“Hoje” é onde o treino acontece',
-    text:'Comece sempre por aqui. Essa tela mostra o treino atual, o próximo exercício e o que já foi concluído.',
-    prepare:()=>{closeAllContentModals();tutorialNav('home')},
-    target:'[data-nav="home"]'
+    icon:'◎',
+    title:'Primeiro, cadastre seus exercícios',
+    text:'Antes de montar um treino, o app precisa saber quais exercícios você usa. Vá em Exercícios e adicione os seus.',
+    prepare:()=>{closeAllContentModals();tutorialNav('exercises')},
+    target:'[data-nav="exercises"]'
   },
   {
     icon:'＋',
-    title:'Escolha o treino do dia',
-    text:'Toque aqui para escolher os músculos e marcar apenas os exercícios que realmente entram na sessão de hoje.',
-    prepare:()=>{closeAllContentModals();tutorialNav('home')},
-    target:'#todaySetupBtn'
-  },
-  {
-    icon:'✓',
-    title:'Músculos primeiro, exercícios depois',
-    text:'Dentro dessa tela você marca o que vai treinar e quais exercícios vai fazer. Salvar aqui só organiza a sessão; ainda não registra cargas.',
-    prepare:()=>{closeAllContentModals();tutorialNav('home');openTodayModal()},
-    target:'#todayModal .guidebox'
-  },
-  {
-    icon:'◎',
-    title:'Cadastre seus exercícios',
-    text:'Na aba Exercícios ficam os movimentos que você realmente usa. Não existe catálogo obrigatório: você dá o nome que conhece e escolhe o grupo muscular.',
+    title:'Adicione pelo botão +',
+    text:'Escolha o grupo muscular e escreva o nome do exercício do jeito que você conhece na academia. Só isso.',
     prepare:()=>{closeAllContentModals();tutorialNav('exercises')},
     target:'#exerciseScreen .screen-add'
   },
   {
+    icon:'⌂',
+    title:'Depois, vá para Hoje',
+    text:'Com seus exercícios cadastrados, volte para Hoje. É aqui que você monta e acompanha a sessão atual.',
+    prepare:()=>{closeAllContentModals();tutorialNav('home')},
+    target:'[data-nav="home"]'
+  },
+  {
+    icon:'✓',
+    title:'Escolha o treino de hoje',
+    text:'Toque aqui, selecione os músculos e marque apenas os exercícios que você realmente vai fazer nessa sessão.',
+    prepare:()=>{closeAllContentModals();tutorialNav('home')},
+    target:'#todaySetupBtn'
+  },
+  {
     icon:'▶',
     title:'Durante o treino, use o Modo Guiado',
-    text:'Ele conduz uma série por vez. A referência grande é da etapa atual; a carga de trabalho anterior aparece menor só para você lembrar onde vai chegar.',
+    text:'Ele mostra uma série por vez e traz a referência do treino anterior. Você só registra o que realmente fez e avança.',
     prepare:tutorialPrepareGuided,
     target:tutorialGuidedTarget
   },
   {
     icon:'◷',
-    title:'Histórico responde “o que eu fiz?”',
-    text:'Use essa aba para consultar um dia antigo, corrigir um registro ou reconstruir um treino que você esqueceu de salvar.',
+    title:'Histórico é para consultar ou corrigir',
+    text:'Se quiser rever um treino, ajustar um registro ou adicionar algo que esqueceu, use Histórico.',
     prepare:()=>{closeAllContentModals();showAppScreen('homeScreen')},
     target:'[data-nav="history"]'
   },
   {
     icon:'↗',
-    title:'Progresso responde “estou avançando?”',
-    text:'Aqui ficam gráficos, tendências e recordes de carga. O primeiro peso é só sua referência; recorde só existe quando uma carga futura supera a maior anterior.',
+    title:'Progresso é para enxergar evolução',
+    text:'Aqui ficam gráficos, tendências e recordes de carga. O primeiro registro é só sua referência inicial.',
     prepare:()=>{closeAllContentModals();showAppScreen('homeScreen')},
     target:'[data-nav="progress"]'
   },
   {
     icon:'?',
-    title:'Esqueceu alguma coisa? Volte aqui.',
-    text:'A aba Como usar guarda o passo a passo completo. Você pode repetir este tutorial quantas vezes quiser.',
+    title:'Se esquecer, volte para Como usar',
+    text:'Esta aba guarda o passo a passo completo e você pode repetir este tutorial quantas vezes quiser.',
     prepare:()=>{closeAllContentModals();tutorialNav('help')},
     target:'[data-nav="help"]'
   }
