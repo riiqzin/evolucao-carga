@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   7.6 — ANATOMICAL MUSCLE CARDS
+   7.7 — PROGRESS EXPERIENCE REDESIGN
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -5128,6 +5128,81 @@ textarea{
   .muscle-visual.anatomical.list{width:58px!important;height:70px!important}
   .muscle-visual.anatomical.small{width:52px!important;height:64px!important}
 }
+
+/* =========================================================
+   7.7 — PROGRESSO 4.0
+   Less bureaucratic, more visual and rewarding.
+   ========================================================= */
+.p4-shell{max-width:1000px;margin:0 auto;padding:2px 0 18px}
+.p4-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin:1px 0 12px;border:1px solid #252e35;border-radius:15px;background:#0b1013}
+.p4-tabs button{min-height:40px;border:0;border-radius:11px;background:transparent;color:#7e8993;font-size:10px;font-weight:900;letter-spacing:.01em}
+.p4-tabs button.active{background:#1a2213;color:var(--accent);box-shadow:inset 0 0 0 1px rgba(203,255,56,.08)}
+
+.p4-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) 126px;gap:16px;align-items:center;padding:24px;border:1px solid #3a4725;border-radius:27px;background:radial-gradient(circle at 87% 16%,rgba(203,255,56,.13),transparent 28%),linear-gradient(145deg,#141d0e,#101615 50%,#0d1216);animation:p4Rise .42s cubic-bezier(.2,.8,.2,1) both}
+.p4-hero:before{content:'';position:absolute;inset:auto -70px -110px auto;width:240px;height:240px;border-radius:50%;border:1px solid rgba(203,255,56,.07);box-shadow:0 0 0 34px rgba(203,255,56,.025),0 0 0 68px rgba(203,255,56,.018)}
+.p4-hero-copy{position:relative;z-index:2;min-width:0}.p4-hero-copy>small,.p4-panel-head small,.p4-section-title small,.p4-muscle-hero small,.p4-muscle-focus-copy>small,.p4-ex-hero-copy>small,.p4-verdict small{display:block;color:#9bad70;font-size:8px;font-weight:950;letter-spacing:.13em}
+.p4-hero h2{margin:7px 0 7px;max-width:640px;font-size:30px;line-height:1.02;letter-spacing:-.055em}
+.p4-hero p{margin:0;max-width:630px;color:#9aa69f;font-size:10px;line-height:1.55}
+.p4-hero-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:15px}.p4-hero-pills span{padding:7px 9px;border:1px solid #2a342d;border-radius:999px;background:rgba(7,11,9,.45);color:#aeb9b0;font-size:8px;font-weight:850}.p4-hero-pills span.hot{border-color:#465624;color:#d5ed8b;background:rgba(203,255,56,.07)}
+.p4-ring{--ring:0;width:112px;height:112px;position:relative;z-index:2;display:grid;place-items:center;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--ring)*1%),#232c20 0);animation:p4Pop .5s .08s cubic-bezier(.2,.8,.2,1) both}
+.p4-ring:before{content:'';position:absolute;inset:8px;border-radius:50%;background:#10160f;border:1px solid #2e3a25}
+.p4-ring>div{position:relative;z-index:2;text-align:center}.p4-ring strong{font-size:27px;letter-spacing:-.06em}.p4-ring>div>span{font-size:10px;color:var(--accent);font-weight:950}.p4-ring small{display:block;margin-top:1px;color:#83907d;font-size:7px;line-height:1.1;text-transform:uppercase;letter-spacing:.06em}
+.p4-hero-spark{position:absolute;color:rgba(203,255,56,.45);font-size:12px;animation:p4Float 2.8s ease-in-out infinite}.p4-hero-spark.s1{right:148px;top:17px}.p4-hero-spark.s2{right:195px;bottom:24px;font-size:20px;animation-delay:.5s}.p4-hero-spark.s3{right:42px;bottom:12px;animation-delay:1s}
+
+.p4-glance{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0 16px}.p4-glance-item{display:flex;align-items:center;gap:9px;min-width:0;padding:12px;border:1px solid #242d34;border-radius:18px;background:#0f1418;animation:p4Rise .4s both}.p4-glance-item:nth-child(2){animation-delay:.04s}.p4-glance-item:nth-child(3){animation-delay:.08s}.p4-glance-item:nth-child(4){animation-delay:.12s}.p4-glance-item.primary{border-color:#364326;background:linear-gradient(145deg,rgba(203,255,56,.07),#0f1418)}.p4-glance-item .ico{width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:11px;background:#171f14;color:var(--accent);font-size:15px}.p4-glance-item div{min-width:0}.p4-glance-item small{display:block;color:#6f7b85;font-size:6.5px;font-weight:950;letter-spacing:.07em}.p4-glance-item strong{display:inline-block;margin-top:2px;font-size:19px;letter-spacing:-.05em}.p4-glance-item em{margin-left:4px;color:#74808a;font-size:7px;font-style:normal}
+
+.p4-panel{border:1px solid #263139;border-radius:23px;background:#0d1216;padding:15px;margin:11px 0 18px;animation:p4Rise .42s .08s both}.p4-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:10px}.p4-panel-head>div:first-child{min-width:0}.p4-panel-head strong{display:block;margin-top:3px;font-size:16px}.p4-panel-head span{display:block;max-width:550px;margin-top:3px;color:#77848e;font-size:8px;line-height:1.4}.p4-live-dot{display:flex!important;align-items:center;gap:6px!important;white-space:nowrap!important;color:#7f8b85!important;font-size:7px!important}.p4-live-dot i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(203,255,56,.06);animation:p4Pulse 1.8s ease infinite}
+.p4-chart-wrap{border-radius:17px;overflow:hidden;background:linear-gradient(180deg,#0b1013,#090d10);border:1px solid #1c252b}.p4-chart-wrap svg{display:block;width:100%;height:220px}.p4-chart-baseline{stroke:#313d2a;stroke-width:1;stroke-dasharray:6 6}.p4-chart-base-label{fill:#6e7c66;font-size:8px;font-weight:900}.p4-chart-area{fill:url(#p4Area)}.p4-chart-line{fill:none;stroke:var(--accent);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 7px rgba(203,255,56,.19));stroke-dasharray:1600;stroke-dashoffset:1600;animation:p4Draw 1.15s .08s cubic-bezier(.2,.75,.25,1) forwards}.p4-chart-dot{fill:#0b1013;stroke:var(--accent);stroke-width:2.5;animation:p4Dot .28s ease both}.p4-chart-date{fill:#64717b;font-size:8px}.p4-chart-foot{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #1b242a}.p4-chart-foot span{padding:9px 10px;text-align:center}.p4-chart-foot span+span{border-left:1px solid #1b242a}.p4-chart-foot b{display:block;font-size:12px}.p4-chart-foot small{display:block;margin-top:2px;color:#68747e;font-size:6.5px}.p4-chart-foot .up b{color:var(--accent)}.p4-chart-foot .down b{color:#e8a077}
+.p4-chart-empty{min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;border:1px dashed #2b353d;border-radius:17px;background:#0b1013}.p4-chart-empty>span{width:40px;height:40px;display:grid;place-items:center;border-radius:13px;background:#182015;color:var(--accent);font-size:18px}.p4-chart-empty strong{margin-top:9px;font-size:12px}.p4-chart-empty small{max-width:450px;margin-top:4px;color:#77838d;font-size:8px;line-height:1.45}
+
+.p4-section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:18px 2px 9px}.p4-section-title strong{display:block;margin-top:2px;font-size:16px}.p4-section-title>span{color:#6f7b85;font-size:8px}.p4-section-title button{border:0;background:transparent;color:var(--accent);font-size:9px;font-weight:900}
+.p4-win-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px}.p4-win-card{position:relative;overflow:hidden;min-height:122px;padding:14px;border:1px solid #242d35;border-radius:20px;background:#0f1418;animation:p4Rise .4s both}.p4-win-card.best{border-color:#394727;background:linear-gradient(145deg,rgba(203,255,56,.10),#0f1418)}.p4-win-card>span{position:absolute;right:12px;top:9px;color:#3b463a;font-size:32px;font-weight:950}.p4-win-card small{position:relative;z-index:2;color:#7d898e;font-size:7px;font-weight:950;letter-spacing:.08em}.p4-win-card strong{position:relative;z-index:2;display:block;margin-top:14px;font-size:23px;letter-spacing:-.055em}.p4-win-card.best strong{color:var(--accent)}.p4-win-card p{position:relative;z-index:2;margin:4px 0 0;color:#7d8992;font-size:8px;line-height:1.35}
+
+.p4-badges{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.p4-badge{--delay:0s;min-height:116px;padding:11px;border:1px solid #242d34;border-radius:18px;background:#0f1418;text-align:center;animation:p4Badge .45s var(--delay) cubic-bezier(.2,.8,.2,1) both}.p4-badge-medal{width:40px;height:40px;margin:0 auto 8px;display:grid;place-items:center;border-radius:50%;font-size:12px;font-weight:950}.p4-badge.unlocked{border-color:#354226;background:linear-gradient(180deg,rgba(203,255,56,.055),#0f1418)}.p4-badge.unlocked .p4-badge-medal{background:var(--accent);color:#090c05;box-shadow:0 0 0 5px rgba(203,255,56,.055)}.p4-badge.locked{opacity:.42;filter:saturate(.45)}.p4-badge.locked .p4-badge-medal{background:#20272c;color:#6e7880}.p4-badge strong{display:block;font-size:10px}.p4-badge span{display:block;margin-top:3px;color:#707c86;font-size:7px;line-height:1.3}
+
+.p4-muscle-preview-grid,.p4-muscle-full-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.p4-muscle-tile{--delay:0s;width:100%;min-height:122px;display:grid;grid-template-columns:72px minmax(0,1fr) 18px;gap:10px;align-items:center;padding:12px;border:1px solid #252f36;border-radius:21px;background:#0f1418;color:#f2f5f6;text-align:left;animation:p4Rise .42s var(--delay) both;transition:.18s ease}.p4-muscle-tile:active{transform:scale(.985)}.p4-muscle-art{width:72px;height:92px;display:grid;place-items:center;border-radius:15px;overflow:hidden;background:#0c1114}.p4-muscle-art .muscle-visual.progress{width:72px!important;height:92px!important;border-radius:15px!important}.p4-muscle-copy{min-width:0}.p4-muscle-copy>small{display:block;color:#6e7a84;font-size:7px}.p4-muscle-copy>strong{display:block;margin-top:3px;font-size:15px}.p4-muscle-copy>span{display:block;margin-top:4px;color:#8a959d;font-size:8px}.p4-muscle-copy>em{display:block;margin-top:5px;color:#a6b57b;font-size:7px;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.p4-muscle-tile>b{color:#58636c;font-size:19px}.p4-mini-meter{height:5px;margin-top:9px;overflow:hidden;border-radius:999px;background:#1b2328}.p4-mini-meter i{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#718c22,var(--accent));transition:width .7s .15s cubic-bezier(.2,.8,.2,1)}.p4-mini-meter i.go{width:var(--fill)}
+.p4-muscle-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 80px;gap:10px;align-items:center;padding:19px;margin-bottom:11px;border:1px solid #2c363d;border-radius:23px;background:linear-gradient(145deg,#11171b,#0d1216)}.p4-muscle-hero h2{margin:5px 0 5px;max-width:620px;font-size:23px;line-height:1.05;letter-spacing:-.045em}.p4-muscle-hero p{margin:0;color:#7e8a93;font-size:9px}.p4-muscle-hero-mark{width:66px;height:66px;display:grid;place-items:center;border-radius:21px;background:#182114;color:var(--accent);font-size:28px;transform:rotate(-8deg)}
+
+.p4-detail-nav{display:flex;align-items:center;gap:8px;margin:2px 0 10px;color:#78848d;font-size:9px}.p4-detail-nav button{width:39px;height:39px;border:1px solid #29333a;border-radius:12px;background:#10161a;color:#e7ebed;font-size:17px}
+.p4-muscle-focus{display:grid;grid-template-columns:105px minmax(0,1fr) auto;gap:15px;align-items:center;padding:16px;border:1px solid #344126;border-radius:24px;background:radial-gradient(circle at 10% 10%,rgba(203,255,56,.07),transparent 34%),#0f1518}.p4-muscle-focus-art{width:105px;height:125px;display:grid;place-items:center}.p4-muscle-focus-art .muscle-visual.context{width:95px!important;height:116px!important}.p4-muscle-focus-copy{min-width:0}.p4-muscle-focus-copy h2{margin:4px 0 4px;font-size:27px;letter-spacing:-.05em}.p4-muscle-focus-copy p{margin:0;color:#869198;font-size:9px}.p4-muscle-focus-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}.p4-muscle-focus-pills span{padding:6px 8px;border:1px solid #29332e;border-radius:999px;color:#78857e;font-size:7px}.p4-muscle-focus-pills b{color:#dce4dd;font-size:8px}.p4-muscle-best{min-width:112px;padding:12px;border:1px solid rgba(203,255,56,.16);border-radius:17px;background:#151e10;text-align:center}.p4-muscle-best small{display:block;color:#819069;font-size:6px}.p4-muscle-best strong{display:block;margin-top:4px;color:var(--accent);font-size:24px}.p4-muscle-best span{display:block;max-width:110px;margin-top:2px;color:#899687;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.p4-exercise-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.p4-exercise-card{--delay:0s;padding:13px;border:1px solid #252e35;border-radius:20px;background:#0f1418;color:#f2f5f7;text-align:left;animation:p4Rise .4s var(--delay) both}.p4-ex-top{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:9px;align-items:center}.p4-ex-icon{width:52px;height:64px}.p4-ex-icon .muscle-visual.progress{width:52px!important;height:64px!important}.p4-ex-name{min-width:0}.p4-ex-name small{display:block;color:#6e7a85;font-size:6.5px}.p4-ex-name strong{display:block;margin-top:2px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.p4-ex-name span{display:block;margin-top:3px;color:#7f8a93;font-size:7.5px}.p4-ex-delta{text-align:right}.p4-ex-delta strong{display:block;font-size:18px;letter-spacing:-.045em}.p4-ex-delta small{display:block;margin-top:2px;color:#74808a;font-size:7px}.p4-ex-delta.up strong{color:var(--accent)}.p4-ex-delta.down strong{color:#e99b75}.p4-ex-delta.new strong{font-size:10px;color:#9aa49d}.p4-ex-bottom{display:grid;grid-template-columns:72px 72px 1fr;gap:7px;align-items:end;margin-top:10px;padding-top:9px;border-top:1px solid #1e272d}.p4-ex-bottom>div>small{display:block;color:#65717b;font-size:6px}.p4-ex-bottom>div>strong{display:block;margin-top:2px;font-size:9px}.p4-ex-spark{display:flex;justify-content:flex-end}.p4-ex-spark .progress-spark svg{width:90px;height:28px}
+
+.p4-ex-hero{display:grid;grid-template-columns:78px minmax(0,1fr) auto;gap:13px;align-items:center;padding:16px;border:1px solid #303b28;border-radius:24px;background:linear-gradient(145deg,rgba(203,255,56,.075),#0f1518 48%,#0d1216)}.p4-ex-hero-art{width:78px;height:92px}.p4-ex-hero-art .muscle-visual.context{width:78px!important;height:92px!important}.p4-ex-hero-copy{min-width:0}.p4-ex-hero-copy h2{margin:4px 0;font-size:22px;line-height:1.05;letter-spacing:-.045em}.p4-ex-hero-copy p{margin:0;max-width:500px;color:#87938d;font-size:8px;line-height:1.45}.p4-ex-hero-result{min-width:105px;text-align:right}.p4-ex-hero-result small{display:block;color:#6f7b84;font-size:6px}.p4-ex-hero-result strong{display:block;margin-top:3px;font-size:25px;letter-spacing:-.055em}.p4-ex-hero-result.up strong{color:var(--accent)}
+.p4-verdict{display:flex;align-items:center;gap:9px;margin:9px 0;padding:10px 12px;border:1px solid #28323a;border-radius:16px;background:#101519}.p4-verdict>span{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:#1a211b;color:#aab2aa}.p4-verdict strong{display:block;margin-top:2px;font-size:11px}.p4-verdict.good,.p4-verdict.ready{border-color:#384626;background:#121912}.p4-verdict.good>span,.p4-verdict.ready>span{background:var(--accent);color:#0a0d05}.p4-verdict.ready strong{color:#d9f084}
+.p4-detail-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:9px 0}.p4-detail-kpis>div{padding:11px;border:1px solid #242e35;border-radius:16px;background:#0f1418}.p4-detail-kpis>div.main{border-color:#354226;background:#121812}.p4-detail-kpis small{display:block;color:#6e7a84;font-size:6.5px}.p4-detail-kpis strong{display:block;margin-top:3px;font-size:17px}.p4-detail-kpis>div.main strong{color:var(--accent)}.p4-detail-kpis span{display:block;margin-top:2px;color:#74808a;font-size:6.5px}
+.p4-metric-tabs{display:flex;gap:3px;padding:3px;border:1px solid #273038;border-radius:11px;background:#090d10}.p4-metric-tabs button{border:0;border-radius:8px;background:transparent;color:#77838d;padding:7px 8px;font-size:7px;font-weight:900}.p4-metric-tabs button.active{background:#1a2213;color:var(--accent)}.p4-detail-chart .progress-chart-panel{border:0!important;padding:0!important;margin:0!important;background:transparent!important}.p4-detail-chart .progress-chart-toolbar{display:none!important}
+.p4-latest{padding:13px;border:1px solid #283239;border-radius:19px;background:#101519;margin:9px 0}.p4-latest-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.p4-latest-head small{display:block;color:#73808a;font-size:6.5px}.p4-latest-head strong{display:block;margin-top:2px;font-size:10px}.p4-latest-head>span{padding:6px 8px;border-radius:999px;background:#171e15;color:#9eb56c;font-size:7px}.p4-latest-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}.p4-latest-grid>div{padding:9px;border-radius:13px;background:#0b1013}.p4-latest-grid small{display:block;color:#68747e;font-size:6px}.p4-latest-grid strong{display:block;margin-top:3px;font-size:10px}.p4-latest-grid span{display:block;margin-top:2px;color:#76818b;font-size:6.5px}
+.p4-history-details{margin-top:12px;border:1px solid #242e35;border-radius:18px;background:#0f1418;overflow:hidden}.p4-history-details summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;padding:13px}.p4-history-details summary::-webkit-details-marker{display:none}.p4-history-details summary small{display:block;color:#6e7a84;font-size:6px}.p4-history-details summary strong{display:block;margin-top:2px;font-size:10px}.p4-history-details summary>b{color:#7b8790}.p4-history-details[open] summary>b{transform:rotate(45deg)}.p4-history-list{display:grid;gap:5px;padding:0 10px 10px}.p4-history-row{display:grid;grid-template-columns:68px 90px minmax(0,1fr);gap:8px;align-items:center;padding:9px;border-radius:12px;background:#0b1013}.p4-history-row span{font-size:8px;color:#8b969e}.p4-history-row strong{font-size:9px}.p4-history-row small{min-width:0;color:#6f7b85;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.p4-history-details>p{margin:0;padding:0 12px 12px;color:#69757f;font-size:7px}
+
+@keyframes p4Rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@keyframes p4Pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@keyframes p4Float{0%,100%{transform:translateY(0) rotate(0);opacity:.4}50%{transform:translateY(-6px) rotate(10deg);opacity:.85}}
+@keyframes p4Pulse{50%{opacity:.35;box-shadow:0 0 0 9px rgba(203,255,56,.02)}}
+@keyframes p4Draw{to{stroke-dashoffset:0}}
+@keyframes p4Dot{from{opacity:0;transform:scale(.3);transform-box:fill-box;transform-origin:center}to{opacity:1;transform:scale(1)}}
+@keyframes p4Badge{from{opacity:0;transform:translateY(6px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+@media(max-width:760px){
+  .p4-hero{grid-template-columns:minmax(0,1fr) 92px;padding:18px}.p4-hero h2{font-size:24px}.p4-ring{width:86px;height:86px}.p4-ring strong{font-size:22px}.p4-ring small{font-size:5.5px}.p4-glance{grid-template-columns:repeat(2,1fr)}.p4-win-grid{grid-template-columns:1fr 1fr}.p4-win-card.best{grid-column:1/-1}.p4-badges{grid-template-columns:repeat(2,1fr)}.p4-muscle-focus{grid-template-columns:82px minmax(0,1fr)}.p4-muscle-focus-art{width:82px;height:100px}.p4-muscle-focus-art .muscle-visual.context{width:78px!important;height:96px!important}.p4-muscle-best{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left}.p4-muscle-best strong{font-size:18px}.p4-exercise-list{grid-template-columns:1fr}.p4-ex-hero{grid-template-columns:64px minmax(0,1fr)}.p4-ex-hero-art{width:64px;height:78px}.p4-ex-hero-art .muscle-visual.context{width:64px!important;height:78px!important}.p4-ex-hero-result{grid-column:1/-1;display:flex;align-items:end;justify-content:space-between;text-align:left;padding-top:8px;border-top:1px solid #263128}.p4-ex-hero-result strong{font-size:21px}
+}
+@media(max-width:520px){
+  #historyModal .progress-content{padding-left:0!important;padding-right:0!important}
+  .p4-hero{grid-template-columns:1fr 78px;gap:8px;padding:15px;border-radius:22px}.p4-hero h2{font-size:21px}.p4-hero p{font-size:8.5px}.p4-ring{width:72px;height:72px}.p4-ring:before{inset:6px}.p4-ring strong{font-size:18px}.p4-ring small{display:none}.p4-hero-pills{gap:4px;margin-top:10px}.p4-hero-pills span{padding:5px 7px;font-size:6.5px}
+  .p4-glance{gap:6px}.p4-glance-item{padding:9px;gap:7px}.p4-glance-item .ico{width:29px;height:29px;flex-basis:29px;font-size:12px}.p4-glance-item strong{font-size:16px}.p4-glance-item em{display:none}
+  .p4-panel{padding:11px;border-radius:19px}.p4-panel-head{display:block}.p4-live-dot{margin-top:7px!important}.p4-chart-wrap svg{height:175px}
+  .p4-win-grid{grid-template-columns:1fr}.p4-win-card.best{grid-column:auto}.p4-win-card{min-height:98px}
+  .p4-badges{grid-template-columns:repeat(2,1fr);gap:6px}.p4-badge{min-height:105px;padding:9px}
+  .p4-muscle-preview-grid,.p4-muscle-full-grid{grid-template-columns:1fr}.p4-muscle-tile{grid-template-columns:62px minmax(0,1fr) 16px;min-height:105px}.p4-muscle-art{width:62px;height:80px}.p4-muscle-art .muscle-visual.progress{width:62px!important;height:80px!important}
+  .p4-muscle-hero{grid-template-columns:1fr 55px;padding:15px}.p4-muscle-hero h2{font-size:19px}.p4-muscle-hero-mark{width:50px;height:50px;border-radius:16px;font-size:22px}
+  .p4-muscle-focus{grid-template-columns:68px 1fr;gap:10px;padding:12px}.p4-muscle-focus-art{width:68px;height:84px}.p4-muscle-focus-art .muscle-visual.context{width:65px!important;height:80px!important}.p4-muscle-focus-copy h2{font-size:21px}.p4-muscle-focus-pills span{padding:5px 6px}
+  .p4-ex-bottom{grid-template-columns:62px 62px 1fr}.p4-ex-spark .progress-spark svg{width:76px}
+  .p4-detail-kpis{grid-template-columns:1fr 1fr}.p4-detail-kpis>div.main{grid-column:1/-1;grid-row:1}.p4-metric-tabs{margin-top:9px}.p4-panel-head:has(.p4-metric-tabs){display:block}.p4-history-row{grid-template-columns:60px 82px minmax(0,1fr)}
+}
+@media(prefers-reduced-motion:reduce){
+  .p4-shell *{animation:none!important;transition:none!important}
+  .p4-chart-line{stroke-dasharray:none!important;stroke-dashoffset:0!important}
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -5620,7 +5695,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='7.6';
+const APP_BUILD_VERSION='7.7';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -8722,7 +8797,7 @@ function setHistoryModalMode(mode){
     if(gymLabel)gymLabel.textContent='TODAS AS ACADEMIAS';
   }else{
     if(title)title.textContent='Seu progresso';
-    if(subtitle)subtitle.textContent='Tendências de carga, reps e consolidação por exercício.';
+    if(subtitle)subtitle.textContent='Veja o quanto você já saiu do lugar — carga, reps e consistência.';
     if(gymLabel)gymLabel.textContent=(gym()?.name||'ACADEMIA').toUpperCase();
   }
 }
@@ -9007,7 +9082,390 @@ function renderHistory(){
   return renderProgressOverview();
 }
 
-renderProgressOverview=progressRenderOverviewV3;
+
+/* =========================================================
+   PROGRESSO 4.0 — visual, rewarding and still data-driven
+   ========================================================= */
+let progressMainTab='geral';
+
+function progressV4ActiveRecords(){
+  return (state.history||[]).filter(h=>h.gymId===state.activeGym&&!h.referenceOnly);
+}
+function progressV4Day(h){
+  try{return sessionDayFromHistory(h)}catch(_){return String(h?.date||'').slice(0,10)}
+}
+function progressV4DayDiff(a,b){
+  const da=new Date(a+'T12:00:00'),db=new Date(b+'T12:00:00');
+  return Math.round((db-da)/86400000);
+}
+function progressV4RecentDays(windowDays=30){
+  const today=todayKey();
+  const cutoff=new Date(today+'T12:00:00');
+  cutoff.setDate(cutoff.getDate()-(windowDays-1));
+  const cutoffKey=`${cutoff.getFullYear()}-${String(cutoff.getMonth()+1).padStart(2,'0')}-${String(cutoff.getDate()).padStart(2,'0')}`;
+  return [...new Set(progressV4ActiveRecords().map(progressV4Day).filter(d=>d>=cutoffKey&&d<=today))].sort();
+}
+function progressV4Summary(){
+  const exercises=(state.exercises||[]).filter(e=>e.gymId===state.activeGym);
+  const infos=exercises.map(progressExerciseInfo);
+  const withData=infos.filter(x=>x.sessions>0);
+  const comparable=infos.filter(x=>x.sessions>=2);
+  const improving=withData.filter(x=>x.statusClass==='good'||x.statusClass==='ready');
+  const ready=withData.filter(x=>x.statusClass==='ready');
+  const records=progressV4ActiveRecords();
+  const prs=records.reduce((n,h)=>n+(h.prFlags||[]).length,0);
+  const days=[...new Set(records.map(progressV4Day))].sort();
+  const recent30=progressV4RecentDays(30);
+  const recent14=progressV4RecentDays(14);
+  const best=withData
+    .filter(x=>x.firstLoad>0&&x.currentLoad>0)
+    .map(x=>({...x,percent:(x.currentLoad-x.firstLoad)/x.firstLoad*100}))
+    .sort((a,b)=>b.percent-a.percent)[0]||null;
+  const positiveRate=comparable.length?Math.round(comparable.filter(x=>x.currentLoad>x.firstLoad||(x.currentLoad===x.firstLoad&&x.currentReps>x.firstReps)).length/comparable.length*100):0;
+  return {exercises,infos,withData,comparable,improving,ready,records,prs,days,recent30,recent14,best,positiveRate};
+}
+function progressV4GlobalIndexPoints(){
+  const exercises=(state.exercises||[]).filter(e=>e.gymId===state.activeGym);
+  const series=exercises.map(e=>{
+    const arr=progressRealRecordsForExercise(e)
+      .map(h=>({day:progressV4Day(h),value:progressMetricValue(h,'load')}))
+      .filter(x=>x.value>0)
+      .sort((a,b)=>a.day.localeCompare(b.day));
+    if(!arr.length)return null;
+    return {id:e.id,base:arr[0].value,firstDay:arr[0].day,arr};
+  }).filter(Boolean);
+  const days=[...new Set(series.flatMap(s=>s.arr.map(x=>x.day)))].sort();
+  return days.map(day=>{
+    const values=[];
+    series.forEach(s=>{
+      if(day<s.firstDay)return;
+      let latest=null;
+      for(const p of s.arr){
+        if(p.day<=day)latest=p;
+        else break;
+      }
+      if(latest&&s.base>0)values.push(latest.value/s.base*100);
+    });
+    if(!values.length)return null;
+    return {day,value:values.reduce((a,b)=>a+b,0)/values.length,count:values.length};
+  }).filter(Boolean).slice(-16);
+}
+function progressV4GlobalChart(){
+  const pts=progressV4GlobalIndexPoints();
+  if(pts.length<2){
+    return `<div class="p4-chart-empty">
+      <span>↗</span>
+      <strong>Seu gráfico geral nasce no próximo comparativo</strong>
+      <small>Quando houver pelo menos dois momentos de carga, ele mostra a evolução relativa do conjunto dos exercícios.</small>
+    </div>`;
+  }
+  const vals=pts.map(x=>x.value),w=760,h=230,pL=34,pR=18,pT=26,pB=38;
+  const min=Math.min(...vals,98),max=Math.max(...vals,102),span=Math.max(4,max-min);
+  const floor=min-(span-(max-min))*.35,ceil=floor+span;
+  const coords=vals.map((v,i)=>[
+    pL+i*(w-pL-pR)/(vals.length-1),
+    pT+(ceil-v)*(h-pT-pB)/span
+  ]);
+  const line=coords.map(c=>c.join(',')).join(' ');
+  const area=`${pL},${h-pB} ${line} ${w-pR},${h-pB}`;
+  const baseY=pT+(ceil-100)*(h-pT-pB)/span;
+  const labels=coords.map((c,i)=>{
+    const show=i===0||i===coords.length-1||i===Math.floor(coords.length/2);
+    return `${show?`<text x="${c[0]}" y="${h-12}" text-anchor="middle" class="p4-chart-date">${fmtDate(pts[i].day+'T12:00:00').slice(0,5)}</text>`:''}
+      <circle cx="${c[0]}" cy="${c[1]}" r="${i===coords.length-1?5:3}" class="p4-chart-dot" style="animation-delay:${i*.045}s">
+        <title>${fmtDate(pts[i].day+'T12:00:00')} · índice ${pts[i].value.toFixed(1).replace('.',',')}</title>
+      </circle>`;
+  }).join('');
+  const first=vals[0],last=vals[vals.length-1],delta=last-first;
+  return `<div class="p4-chart-wrap">
+    <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-label="Índice relativo geral de carga">
+      <defs>
+        <linearGradient id="p4Area" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#cbff38" stop-opacity=".20"/>
+          <stop offset="100%" stop-color="#cbff38" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <line x1="${pL}" y1="${baseY}" x2="${w-pR}" y2="${baseY}" class="p4-chart-baseline"/>
+      <text x="${pL+4}" y="${Math.max(12,baseY-7)}" class="p4-chart-base-label">BASE 100</text>
+      <polygon points="${area}" class="p4-chart-area"/>
+      <polyline points="${line}" class="p4-chart-line"/>
+      ${labels}
+    </svg>
+    <div class="p4-chart-foot">
+      <span><b>${first.toFixed(0)}</b><small>começo</small></span>
+      <span class="${delta>0?'up':delta<0?'down':''}"><b>${delta>0?'+':''}${delta.toFixed(1).replace('.',',')}</b><small>movimento do índice</small></span>
+      <span><b>${last.toFixed(0)}</b><small>agora</small></span>
+    </div>
+  </div>`;
+}
+function progressV4AchievementHTML(s){
+  const span=s.days.length>1?progressV4DayDiff(s.days[0],s.days[s.days.length-1]):0;
+  const items=[
+    {ico:'✓',title:'Começou',desc:'Primeiro treino registrado',on:s.days.length>=1},
+    {ico:'↗',title:'Subindo',desc:'Algum exercício avançou',on:s.improving.length>=1},
+    {ico:'★',title:'Primeiro PR',desc:'Primeira marca pessoal',on:s.prs>=1},
+    {ico:'3',title:'Ritmo',desc:'3 treinos em 14 dias',on:s.recent14.length>=3},
+    {ico:'5',title:'Cinco avanços',desc:'5 exercícios evoluindo',on:s.improving.length>=5},
+    {ico:'◆',title:'Consolidou',desc:'Carga pronta para subir',on:s.ready.length>=1},
+    {ico:'10',title:'10 treinos',desc:'10 dias de treino salvos',on:s.days.length>=10},
+    {ico:'30',title:'Longo prazo',desc:'30+ dias acompanhando',on:span>=30}
+  ];
+  return items.map((x,i)=>`<div class="p4-badge ${x.on?'unlocked':'locked'}" style="--delay:${i*.045}s">
+    <div class="p4-badge-medal">${x.ico}</div>
+    <strong>${esc(x.title)}</strong>
+    <span>${esc(x.desc)}</span>
+  </div>`).join('');
+}
+function progressV4MuscleTile(mi,index){
+  const comparable=mi.infos.filter(x=>x.sessions>=2);
+  const positive=comparable.filter(x=>x.currentLoad>x.firstLoad||(x.currentLoad===x.firstLoad&&x.currentReps>x.firstReps)).length;
+  const rate=comparable.length?Math.round(positive/comparable.length*100):0;
+  const best=mi.infos.filter(x=>x.firstLoad>0&&x.currentLoad>0)
+    .map(x=>({name:x.e.name,pct:(x.currentLoad-x.firstLoad)/x.firstLoad*100}))
+    .sort((a,b)=>b.pct-a.pct)[0];
+  return `<button class="p4-muscle-tile" style="--delay:${Math.min(index,8)*.04}s" onclick="showProgressMuscle('${esc(mi.muscle)}')">
+    <div class="p4-muscle-art">${muscleVisualHTML(mi.muscle,'progress')}</div>
+    <div class="p4-muscle-copy">
+      <small>${mi.records.length} registro${mi.records.length===1?'':'s'}</small>
+      <strong>${esc(mi.muscle)}</strong>
+      <span>${mi.improving?`${mi.improving} exercício${mi.improving===1?'':'s'} avançando`:mi.records.length?'Construindo referência':'Sem dados ainda'}</span>
+      ${comparable.length?`<div class="p4-mini-meter"><i style="--fill:${rate}%"></i></div>`:''}
+      ${best&&best.pct>0?`<em>melhor: +${best.pct.toFixed(0)}% · ${esc(best.name)}</em>`:''}
+    </div>
+    <b>›</b>
+  </button>`;
+}
+function progressV4Tabs(active){
+  return `<div class="p4-tabs" role="tablist">
+    <button role="tab" class="${active==='geral'?'active':''}" onclick="progressRenderOverviewV4()">Visão geral</button>
+    <button role="tab" class="${active==='musculos'?'active':''}" onclick="progressRenderMusclesV4()">Por músculo</button>
+  </div>`;
+}
+function progressRenderOverviewV4(){
+  progressMainTab='geral';progressViewMuscle='';progressViewExercise='';
+  const s=progressV4Summary();
+  const best=s.best&&s.best.percent>0?s.best:null;
+  const ratio=s.comparable.length?Math.round((s.improving.length/s.comparable.length)*100):0;
+  const ring=Math.max(0,Math.min(100,ratio));
+  const recentPR=s.records
+    .filter(h=>(h.prFlags||[]).length)
+    .sort((a,b)=>b.date.localeCompare(a.date))[0]||null;
+  const heroTitle=s.improving.length
+    ?`${s.improving.length} exercício${s.improving.length===1?' está':'s estão'} andando pra frente`
+    :s.withData.length?'Você já tem uma base real pra comparar':'Tudo começa no primeiro registro';
+  const heroSub=best
+    ?`Seu maior salto até agora foi em ${best.e.name}: ${best.percent>=0?'+':''}${best.percent.toFixed(1).replace('.',',')}% de carga em relação ao primeiro registro.`
+    :s.withData.length?'Nem todo treino precisa ser PR. O legal é conseguir enxergar a direção.':'Registre os treinos normalmente. O painel vai ficando mais vivo conforme seus dados aparecem.';
+
+  document.getElementById('historyContent').innerHTML=`
+    <div class="p4-shell">
+      ${progressV4Tabs('geral')}
+
+      <section class="p4-hero">
+        <div class="p4-hero-spark s1">✦</div><div class="p4-hero-spark s2">·</div><div class="p4-hero-spark s3">✦</div>
+        <div class="p4-hero-copy">
+          <small>SEU MOMENTO</small>
+          <h2>${esc(heroTitle)}</h2>
+          <p>${esc(heroSub)}</p>
+          <div class="p4-hero-pills">
+            <span>🔥 ${s.recent30.length} treino${s.recent30.length===1?'':'s'} / 30d</span>
+            <span>★ ${s.prs} PR${s.prs===1?'':'s'}</span>
+            ${s.ready.length?`<span class="hot">⚡ ${s.ready.length} carga${s.ready.length===1?'':'s'} consolidada${s.ready.length===1?'':'s'}</span>`:''}
+          </div>
+        </div>
+        <div class="p4-ring" style="--ring:${ring}">
+          <div><strong data-progress-count="${ring}">0</strong><span>%</span><small>sinais<br>positivos</small></div>
+        </div>
+      </section>
+
+      <section class="p4-glance">
+        <div class="p4-glance-item primary"><span class="ico">↗</span><div><small>EVOLUINDO</small><strong data-progress-count="${s.improving.length}">0</strong><em>exercícios</em></div></div>
+        <div class="p4-glance-item"><span class="ico">◷</span><div><small>ÚLTIMOS 30 DIAS</small><strong data-progress-count="${s.recent30.length}">0</strong><em>dias treinados</em></div></div>
+        <div class="p4-glance-item"><span class="ico">★</span><div><small>MARCAS PESSOAIS</small><strong data-progress-count="${s.prs}">0</strong><em>PRs registrados</em></div></div>
+        <div class="p4-glance-item"><span class="ico">◆</span><div><small>CONSOLIDADOS</small><strong data-progress-count="${s.ready.length}">0</strong><em>prontos pra testar</em></div></div>
+      </section>
+
+      <section class="p4-panel p4-global-panel">
+        <div class="p4-panel-head">
+          <div><small>VISÃO GERAL</small><strong>Sua curva de evolução</strong><span>Cada exercício começa em 100. Assim dá pra juntar movimentos diferentes sem comparar kg com kg.</span></div>
+          <div class="p4-live-dot"><i></i> seus dados</div>
+        </div>
+        ${progressV4GlobalChart()}
+      </section>
+
+      <section class="p4-wins">
+        <div class="p4-section-title"><div><small>O QUE MERECE DESTAQUE</small><strong>Suas vitórias</strong></div><span>dados reais</span></div>
+        <div class="p4-win-grid">
+          <div class="p4-win-card best">
+            <span>↗</span><small>MAIOR SALTO</small>
+            <strong>${best?`+${best.percent.toFixed(1).replace('.',',')}%`:'—'}</strong>
+            <p>${best?esc(best.e.name):'Ainda sem comparação suficiente.'}</p>
+          </div>
+          <div class="p4-win-card">
+            <span>★</span><small>PR MAIS RECENTE</small>
+            <strong>${recentPR?fmtDate(recentPR.date):'—'}</strong>
+            <p>${recentPR?esc(recentPR.name||'Marca pessoal registrada'):'Quando sair um PR, ele aparece aqui.'}</p>
+          </div>
+          <div class="p4-win-card">
+            <span>🔥</span><small>RITMO RECENTE</small>
+            <strong>${s.recent14.length} treino${s.recent14.length===1?'':'s'}</strong>
+            <p>nos últimos 14 dias</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="p4-achievements">
+        <div class="p4-section-title"><div><small>CONQUISTAS</small><strong>Seu mural</strong></div><span>vai desbloqueando sozinho</span></div>
+        <div class="p4-badges">${progressV4AchievementHTML(s)}</div>
+      </section>
+
+      <section class="p4-muscle-preview">
+        <div class="p4-section-title"><div><small>ONDE VOCÊ ESTÁ MEXENDO</small><strong>Por grupo muscular</strong></div><button onclick="progressRenderMusclesV4()">Ver todos ›</button></div>
+        <div class="p4-muscle-preview-grid">
+          ${MUSCLES.filter(m=>state.exercises.some(e=>e.gymId===state.activeGym&&e.muscle===m)).slice(0,4).map((m,i)=>progressV4MuscleTile(progressMuscleInfo(m),i)).join('')||'<div class="progress-empty-state"><div class="ico">＋</div><strong>Seus grupos vão aparecer aqui</strong><span>Cadastre exercícios e eles entram automaticamente.</span></div>'}
+        </div>
+      </section>
+    </div>`;
+  animateProgressNumbers();
+  requestAnimationFrame(()=>document.querySelectorAll('#historyContent .p4-mini-meter i').forEach(i=>i.classList.add('go')));
+}
+function progressRenderMusclesV4(){
+  progressMainTab='musculos';progressViewMuscle='';progressViewExercise='';
+  const names=MUSCLES.filter(m=>state.exercises.some(e=>e.gymId===state.activeGym&&e.muscle===m));
+  const s=progressV4Summary();
+  document.getElementById('historyContent').innerHTML=`
+    <div class="p4-shell">
+      ${progressV4Tabs('musculos')}
+      <section class="p4-muscle-hero">
+        <div><small>MAPA DA SUA EVOLUÇÃO</small><h2>Escolha um grupo e veja onde você realmente avançou.</h2><p>${s.withData.length?`${s.withData.length} exercícios já têm dados para acompanhar.`:'Assim que seus treinos forem registrados, cada grupo ganha vida aqui.'}</p></div>
+        <div class="p4-muscle-hero-mark">◎</div>
+      </section>
+      <div class="p4-muscle-full-grid">
+        ${names.length?names.map((m,i)=>progressV4MuscleTile(progressMuscleInfo(m),i)).join(''):`<div class="progress-empty-state" style="grid-column:1/-1"><div class="ico">＋</div><strong>Nenhum grupo ainda</strong><span>Os grupos aparecem conforme seus exercícios cadastrados.</span></div>`}
+      </div>
+    </div>`;
+  requestAnimationFrame(()=>document.querySelectorAll('#historyContent .p4-mini-meter i').forEach(i=>i.classList.add('go')));
+}
+function showProgressMuscleV4(muscle){
+  progressViewMuscle=muscle;progressViewExercise='';
+  const mi=progressMuscleInfo(muscle);
+  const comparable=mi.infos.filter(x=>x.sessions>=2);
+  const positive=comparable.filter(x=>x.currentLoad>x.firstLoad||(x.currentLoad===x.firstLoad&&x.currentReps>x.firstReps)).length;
+  const rate=comparable.length?Math.round(positive/comparable.length*100):0;
+  const best=mi.infos.filter(x=>x.firstLoad>0&&x.currentLoad>0)
+    .map(x=>({...x,pct:(x.currentLoad-x.firstLoad)/x.firstLoad*100}))
+    .sort((a,b)=>b.pct-a.pct)[0]||null;
+
+  const rows=mi.infos.length?mi.infos.map((x,i)=>{
+    const pct=x.firstLoad?((x.currentLoad-x.firstLoad)/x.firstLoad*100):0;
+    const trend=x.sessions>=2?(pct>0?'up':pct<0?'down':'flat'):'new';
+    return `<button class="p4-exercise-card" style="--delay:${Math.min(i,8)*.04}s" onclick="openProgressExercise('${x.e.id}')">
+      <div class="p4-ex-top">
+        <div class="p4-ex-icon">${exerciseVisualThumbHTML(x.e,'peak','progress')}</div>
+        <div class="p4-ex-name"><small>${x.sessions} registro${x.sessions===1?'':'s'}</small><strong>${esc(x.e.name)}</strong><span>${esc(x.status)}</span></div>
+        <div class="p4-ex-delta ${trend}">
+          <strong>${x.sessions<2?'novo':pct>0?`+${pct.toFixed(0)}%`:pct<0?`${pct.toFixed(0)}%`:'='}</strong>
+          <small>${x.currentLoad?fmtKg(x.currentLoad)+' kg':'—'}</small>
+        </div>
+      </div>
+      <div class="p4-ex-bottom">
+        <div><small>COMEÇOU</small><strong>${x.firstLoad?fmtKg(x.firstLoad)+' kg':'—'}</strong></div>
+        <div><small>AGORA</small><strong>${x.currentLoad?fmtKg(x.currentLoad)+' kg':'—'}</strong></div>
+        <div class="p4-ex-spark">${progressSparklineHTML(x)}</div>
+      </div>
+    </button>`;
+  }).join(''):`<div class="progress-empty-state"><div class="ico">◎</div><strong>Nenhum exercício aqui</strong><span>Cadastre um exercício de ${esc(muscle)} para acompanhar.</span></div>`;
+
+  document.getElementById('historyContent').innerHTML=`
+    <div class="p4-shell p4-muscle-detail">
+      <div class="p4-detail-nav"><button onclick="progressRenderMusclesV4()">←</button><span>Por músculo</span></div>
+      <section class="p4-muscle-focus">
+        <div class="p4-muscle-focus-art">${muscleVisualHTML(muscle,'context')}</div>
+        <div class="p4-muscle-focus-copy">
+          <small>GRUPO MUSCULAR</small><h2>${esc(muscle)}</h2>
+          <p>${mi.records.length?`${mi.records.length} registros · ${mi.improving} exercício${mi.improving===1?'':'s'} mostrando sinal positivo.`:'Ainda sem histórico real neste grupo.'}</p>
+          <div class="p4-muscle-focus-pills">
+            <span><b>${rate}%</b> positivos</span>
+            <span><b>${mi.ready}</b> consolidados</span>
+            <span><b>${mi.infos.length}</b> exercícios</span>
+          </div>
+        </div>
+        ${best&&best.pct>0?`<div class="p4-muscle-best"><small>MELHOR SALTO</small><strong>+${best.pct.toFixed(0)}%</strong><span>${esc(best.e.name)}</span></div>`:''}
+      </section>
+      <div class="p4-section-title"><div><small>EXERCÍCIOS</small><strong>Toque pra abrir a evolução</strong></div><span>${mi.infos.length} total</span></div>
+      <div class="p4-exercise-list">${rows}</div>
+    </div>`;
+  document.querySelector('#historyModal .progress-sheet')?.scrollTo({top:0,behavior:'smooth'});
+}
+function renderProgressExerciseDetailV4(e,scrollTop=true){
+  const x=progressExerciseInfo(e),pct=x.firstLoad?((x.currentLoad-x.firstLoad)/x.firstLoad*100):0;
+  const arrDesc=[...x.arr].reverse(),last=x.last,work=last?.sets?.work||[];
+  let verdict='Construindo referência',verdictCopy='Mais alguns registros e a tendência fica bem clara.';
+  if(x.sessions>=2){
+    if(pct>0){verdict=`+${pct.toFixed(1).replace('.',',')}% desde o começo`;verdictCopy=`Você saiu de ${fmtKg(x.firstLoad)} kg para ${fmtKg(x.currentLoad)} kg.`}
+    else if(x.currentLoad===x.firstLoad&&x.currentReps>x.firstReps){verdict=`+${x.currentReps-x.firstReps} rep${x.currentReps-x.firstReps===1?'':'s'} na mesma carga`;verdictCopy='Progresso também é fazer mais com o mesmo peso.'}
+    else if(pct===0){verdict='Carga estável';verdictCopy='Veja reps e volume: pode existir progresso sem trocar a carga.'}
+    else{verdict='Fase de ajuste';verdictCopy='A carga atual está abaixo do começo. O gráfico mostra se isso é pontual ou tendência.'}
+  }
+  if(x.advice?.state==='ready'){verdict='Carga dominada ⚡';verdictCopy='Seu histórico indica que pode fazer sentido experimentar um aumento, sem obrigação.'}
+
+  const latestSets=last?`<div class="p4-latest">
+    <div class="p4-latest-head"><div><small>ÚLTIMO TREINO</small><strong>${fmtDate(last.date)}</strong></div><span>${esc(x.status)}</span></div>
+    <div class="p4-latest-grid">${[0,1].map(i=>{const s=work[i];return `<div><small>TRABALHO ${i+1}</small><strong>${s?(s.kg?esc(s.kg)+' kg':'peso corporal')+(s.reps?' × '+esc(s.reps):''):'—'}</strong><span>${s&&s.rir!==''&&s.rir!==undefined?'RIR '+esc(s.rir):' '}</span></div>`}).join('')}</div>
+  </div>`:'';
+
+  const historyRows=arrDesc.slice(0,10).map(h=>`<div class="p4-history-row">
+    <span>${fmtDate(h.date)}</span><strong>${progressFormatMetric('load',progressMetricValue(h,'load'))}</strong><small>${esc(setSummary(h.sets))}</small>
+  </div>`).join('');
+
+  document.getElementById('historyContent').innerHTML=`
+    <div class="p4-shell p4-exercise-detail">
+      <div class="p4-detail-nav"><button onclick="showProgressMuscle('${esc(e.muscle)}')">←</button><span>${esc(e.muscle)}</span></div>
+
+      <section class="p4-ex-hero">
+        <div class="p4-ex-hero-art">${exerciseVisualThumbHTML(e,'peak','context')}</div>
+        <div class="p4-ex-hero-copy"><small>${esc(e.muscle)}</small><h2>${esc(e.name)}</h2><p>${esc(verdictCopy)}</p></div>
+        <div class="p4-ex-hero-result ${pct>0?'up':''}"><small>DESDE O INÍCIO</small><strong>${x.sessions<2?'—':pct>0?`+${pct.toFixed(1).replace('.',',')}%`:pct<0?`${pct.toFixed(1).replace('.',',')}%`:'0%'}</strong></div>
+      </section>
+
+      <section class="p4-verdict ${x.advice?.state==='ready'?'ready':pct>0?'good':''}">
+        <span>${x.advice?.state==='ready'?'⚡':pct>0?'↗':'◎'}</span>
+        <div><small>LEITURA RÁPIDA</small><strong>${esc(verdict)}</strong></div>
+      </section>
+
+      <div class="p4-detail-kpis">
+        <div><small>COMEÇOU</small><strong>${x.firstLoad?fmtKg(x.firstLoad)+' kg':'—'}</strong><span>${x.first?fmtDate(x.first.date):'sem dado'}</span></div>
+        <div class="main"><small>AGORA</small><strong>${x.currentLoad?fmtKg(x.currentLoad)+' kg':'—'}</strong><span>${x.currentReps?x.currentReps+' reps no melhor set':'último registro'}</span></div>
+        <div><small>RECORDE</small><strong>${x.bestLoad?fmtKg(x.bestLoad)+' kg':'—'}</strong><span>${x.bestReps?x.bestReps+' reps máx.':'sem reps'}</span></div>
+      </div>
+
+      <section class="p4-panel p4-detail-chart">
+        <div class="p4-panel-head">
+          <div><small>EVOLUÇÃO</small><strong>${progressMetricLabel(progressMetric)}</strong><span>Troque a métrica e veja o mesmo exercício por outro ângulo.</span></div>
+          <div class="p4-metric-tabs">
+            <button class="${progressMetric==='load'?'active':''}" onclick="setProgressMetric('load','${e.id}')">Carga</button>
+            <button class="${progressMetric==='reps'?'active':''}" onclick="setProgressMetric('reps','${e.id}')">Reps</button>
+            <button class="${progressMetric==='volume'?'active':''}" onclick="setProgressMetric('volume','${e.id}')">Volume</button>
+          </div>
+        </div>
+        ${progressGraphHTML(x,progressMetric)}
+      </section>
+
+      ${latestSets}
+
+      <details class="p4-history-details">
+        <summary><span><small>DADOS BRUTOS</small><strong>Ver resultados usados no gráfico</strong></span><b>＋</b></summary>
+        <div class="p4-history-list">${historyRows||'<div class="progress-empty-state"><strong>Sem registros.</strong></div>'}</div>
+        <p>Para corrigir ou excluir um treino antigo, use a aba Histórico.</p>
+      </details>
+    </div>`;
+  if(scrollTop)document.querySelector('#historyModal .progress-sheet')?.scrollTo({top:0,behavior:'smooth'});
+}
+
+showProgressMuscle=showProgressMuscleV4;
+renderProgressExerciseDetail=renderProgressExerciseDetailV4;
+renderProgressOverview=progressRenderOverviewV4;
+
 
 showAuthGate('login');
 initSupabase();
