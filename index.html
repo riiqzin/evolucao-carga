@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   8.3 — DESKTOP TOAST FIX
+   8.5 — EXERCISE ADD FIX / CLEAN REGISTRATION
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -5490,6 +5490,218 @@ textarea{
     white-space:normal!important;
   }
 }
+
+/* =========================================================
+   8.4 — GLOBAL LEGIBILITY PASS
+   Increase microcopy and secondary information without
+   changing the already-large headings/titles.
+   ========================================================= */
+
+/* General floor for tiny labels across app, modals and dashboards */
+.mobile-app-shell small,
+.sheet small,
+.progress-sheet small,
+.help-shell small,
+.catalog-sheet small,
+.catalog-detail-sheet small{
+  font-size:10px!important;
+  line-height:1.42!important;
+}
+
+/* Secondary text that carries actual meaning */
+.picker-hint,
+.quick-note,
+.first-time-note,
+.mode-caption,
+.live-progress-advice .pa-text,
+.live-last-stage,
+.guided-workload-chip em,
+.progress-ex-main small,
+.progress-ex-load small,
+.progress-history-sets small,
+.progress-history-date small,
+.progress-detail-stat span,
+.progress-story-item small,
+.progress-latest-set small,
+.progress-history-simple-row .date small,
+.progress-screen-copy span,
+.progress-muscle-copy span,
+.p4-hero p,
+.p4-muscle-copy>span,
+.p4-muscle-copy>em,
+.p4-ex-name span,
+.p4-ex-hero-copy p,
+.p4-detail-kpis span,
+.p4-latest-grid span,
+.p4-history-row small,
+.h4-hero p,
+.h4-session-meta>span,
+.h4-session-exercises span,
+.h4-calendar-head span,
+.h4-day-hero p,
+.h4-day-sets>span,
+.help-flow-card p,
+.help-callout p,
+.help-modes article>p,
+.help-rule p,
+.help-nav-map small,
+.help-faq details p,
+.help-bottom-cta p,
+.tutorial-card p,
+.tutorial-welcome-card>p{
+  font-size:11px!important;
+  line-height:1.48!important;
+}
+
+/* Small functional labels / chips / badges */
+.prbadge,
+.refbadge,
+.live-phase,
+.live-input-wrap label,
+.guided-workload-caption,
+.guided-workload-chip b,
+.progress-screen-pill,
+.p4-live-dot,
+.p4-chart-base-label,
+.p4-chart-date,
+.p4-glance-item small,
+.p4-win-card small,
+.p4-muscle-copy>small,
+.p4-ex-name small,
+.p4-ex-bottom>div>small,
+.p4-ex-delta small,
+.p4-ex-hero-result small,
+.p4-verdict small,
+.p4-detail-kpis small,
+.p4-latest-head small,
+.p4-latest-grid small,
+.p4-history-details summary small,
+.h4-hero-copy>small,
+.h4-section-head small,
+.h4-calendar-head small,
+.h4-session-date small,
+.h4-session-date span,
+.h4-session-meta em,
+.h4-calendar-foot span,
+.h4-day-hero small,
+.h4-day-actionbar small,
+.h4-day-card-main>small,
+.h4-day-pr,
+.help-hero-copy>small,
+.help-section-title small,
+.help-modes article>small,
+.tutorial-card-top>span,
+.tutorial-card-top>button,
+.tutorial-welcome-card>small,
+.tutorial-welcome-card>span{
+  font-size:9.5px!important;
+  line-height:1.3!important;
+}
+
+/* Controls should never feel miniature */
+.btn,
+.entry-mode button,
+.timeractions button,
+.mini-action,
+.today-first,
+.upcoming-action,
+.upcoming-first,
+.progress-history-actions button,
+.p4-metric-tabs button,
+.h4-calendar-nav button,
+.h4-edit-btn,
+.h4-remove-btn,
+.help-quick-jump,
+.help-bottom-cta button,
+.tutorial-actions button,
+.tutorial-welcome-actions button,
+.live-extra-feeder{
+  font-size:11px!important;
+}
+
+/* Exercise cards / compact card metadata */
+.mobile-exercise-list .chip,
+.chip,
+.upcoming-first b,
+.today-order-control small,
+.reorder-copy em{
+  font-size:9.5px!important;
+}
+
+/* Calendar and chart labels: still compact, but readable */
+.progress-chart text,
+.chart text,
+.cal-weekday,
+.cal-day,
+.cal-stat span,
+.h4-cal-week,
+.h4-cal-day,
+.h4-cal-day>span{
+  font-size:9.5px!important;
+}
+
+/* Guided workload reference stays secondary, but no longer microscopic */
+.guided-workload-chip strong{
+  font-size:11px!important;
+}
+.guided-workload-chip em{
+  font-size:9.5px!important;
+}
+
+/* Bottom navigation: modest bump only; 5 items still fit on phones */
+@media(max-width:899px){
+  .mobile-bottom-nav button{
+    font-size:8.5px!important;
+  }
+  .mobile-bottom-nav button .nav-ico{
+    font-size:19px!important;
+  }
+
+  .mobile-app-shell small,
+  .sheet small,
+  .progress-sheet small,
+  .help-shell small{
+    font-size:10.5px!important;
+  }
+
+  .picker-hint,
+  .quick-note,
+  .first-time-note,
+  .live-progress-advice .pa-text,
+  .p4-hero p,
+  .p4-ex-hero-copy p,
+  .h4-hero p,
+  .help-flow-card p,
+  .help-callout p,
+  .help-faq details p,
+  .tutorial-card p{
+    font-size:11.5px!important;
+  }
+}
+
+/* Desktop gets slightly more breathing room in secondary text */
+@media(min-width:900px){
+  .mobile-app-shell,
+  .sheet,
+  .progress-sheet,
+  .help-shell{
+    font-size:14px;
+  }
+
+  .desktop-nav-section-label,
+  .desktop-nav-brand small,
+  .desktop-gym-card>span{
+    font-size:9.5px!important;
+  }
+
+  .mobile-bottom-nav>button:not(.desktop-account-button){
+    font-size:11px!important;
+  }
+
+  .desktop-account-copy small{
+    font-size:10px!important;
+  }
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -5996,13 +6208,13 @@ textarea{
   <div class="field live-hide"><label>Grupo muscular</label><select id="exerciseMuscle" class="select" onchange="onMuscleFormChange()"></select></div>
   <div class="field live-hide"><label>Exercício</label><input id="exerciseName" class="input" placeholder="Ex.: Supino inclinado máquina"></div>
   <input type="hidden" id="catalogKey">
-  <div class="toggle live-hide"><input type="checkbox" id="usePrep" onchange="renderSetEditors();if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}"><label for="usePrep">Primeiro exercício do músculo · fazer preparação completa</label></div>
+  <div class="toggle live-hide training-only"><input type="checkbox" id="usePrep" onchange="renderSetEditors();if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}"><label for="usePrep">Primeiro exercício do músculo · fazer preparação completa</label></div>
   <div id="lastWorkoutBox" class="training-only"></div>
   <div class="field training-only live-hide" id="performedDateField"><label>📅 Dia realizado</label><input id="performedDate" type="date" class="input"><small style="display:block;color:#7f8997;font-size:9px;margin-top:6px;line-height:1.4">Use a data em que você realmente fez este exercício. Pode registrar hoje um treino de dias atrás.</small></div>
   <div class="first-time-note training-only" id="firstTimeNote"><strong>🧭 PRIMEIRA VEZ NESTE EXERCÍCIO NA <span id="firstTimeGym">ACADEMIA</span></strong>Você ainda não tem carga de referência aqui. <b>Não precisa adivinhar.</b> Faça o exercício, descubra suas cargas e registre o que realmente usou. Se a máquina também é nova para você ou o treino saiu do plano, use <b>≈ Referência / calibração</b>.</div>
   <div class="row live-hide">
     <div class="field training-only" id="targetKgField"><label>Carga de trabalho prevista</label><input id="targetKg" class="input" inputmode="decimal" placeholder="Ex.: 70 kg" oninput="updateMethodPreview()"></div>
-    <div class="field"><label id="targetRepsLabel">Meta de reps · opcional</label><input id="targetReps" class="input" placeholder="Ex.: 6–8"></div>
+    <input type="hidden" id="targetReps" value="">
   </div>
   <div class="methodbox live-only training-only live-hide" id="methodBox"><strong>SEU MÉTODO · LOW VOLUME</strong><p id="methodPreview">Feeder 1 ≈ 50% · Feeder 2 ≈ 70% · PAP 90–95% · Trabalho 1 em RIR 1–2 · Trabalho 2 até a falha técnica.</p><button type="button" onclick="applyMethodSuggestions()">Aplicar sugestões de carga e RIR</button></div>
   <button class="mini-action training-only live-hide" id="copyLastBtn" onclick="copyLastExerciseRecord()">↺ Preencher com o último treino</button>
@@ -6206,7 +6418,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='8.3';
+const APP_BUILD_VERSION='8.5';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -7529,7 +7741,7 @@ function renderExercises(){
   document.getElementById('exerciseSectionTitle').textContent=state.activeMuscle?state.activeMuscle:'Todos os exercícios';
   document.getElementById('exerciseCount').textContent=arr.length+' cadastrado'+(arr.length===1?'':'s');
   if(!arr.length){root.innerHTML=`<div class="empty"><strong>Nenhum exercício por aqui</strong>${state.activeMuscle?'Cadastre o primeiro exercício de '+state.activeMuscle+'.':'Cadastre seus exercícios para começar.'}</div>`;return}
-  root.innerHTML=arr.map((e,i)=>{const hist=priorHistoryForExercise(e.id);const last=hist[0];const cur=last?.workMax??workMax(e);const best=Math.max(0,...hist.map(h=>h.workMax||0));const lastText=last?setSummary(last.sets):setSummary(e.sets);const target=(e.targetKg||e.targetReps)?`${e.targetKg?e.targetKg+' kg':''}${e.targetKg&&e.targetReps?' · ':''}${e.targetReps?e.targetReps+' reps':''}`:'não definida';const pr=isLoadPRRecord(last)?`<span class="prbadge">★ PR de carga</span>`:'';const progression=progressionChipHTML(e.id);const nextStep=progressionNextStepText(e.id);const pct=best?Math.max(8,Math.min(100,(cur/best)*100)):45;return `<div class="exercise-card" onclick="editExercise('${e.id}')"><div class="exercise-head"><div class="exercise-card-visual">${exerciseVisualThumbHTML(e,'peak','list')}<span>${i+1}</span></div><div class="exercise-title"><strong>${esc(e.name)}</strong><small>${e.muscle}${e.note?' · '+esc(e.note):''}</small>${exerciseEmphasisInlineHTML(e,2)}</div><div class="exercise-load">${cur||'—'}<small>${cur?'kg':''}</small></div></div><div class="chips">${doneToday(e.id)?'<span class="chip prep">FEITO HOJE ✓</span>':isPrepared(e.muscle)?'<span class="chip prep">PREPARADO ✓</span>':e.usePrep?'<span class="chip prep">PREPARAÇÃO</span>':''}<span class="chip work">TRABALHO</span>${progression}${pr}</div><div class="refbox"><div class="refitem"><small>Último registro</small><strong>${esc(lastText)}</strong></div><div class="refitem"><small>Próximo passo</small><strong>${esc(nextStep)}</strong></div></div><div class="progressline"><i style="width:${pct}%"></i></div></div>`}).join('');
+  root.innerHTML=arr.map((e,i)=>{const hist=priorHistoryForExercise(e.id);const last=hist[0];const cur=last?.workMax??workMax(e);const best=Math.max(0,...hist.map(h=>h.workMax||0));const lastText=last?setSummary(last.sets):setSummary(e.sets);const target=e.targetKg?`${e.targetKg} kg`:'não definida';const pr=isLoadPRRecord(last)?`<span class="prbadge">★ PR de carga</span>`:'';const progression=progressionChipHTML(e.id);const nextStep=progressionNextStepText(e.id);const pct=best?Math.max(8,Math.min(100,(cur/best)*100)):45;return `<div class="exercise-card" onclick="editExercise('${e.id}')"><div class="exercise-head"><div class="exercise-card-visual">${exerciseVisualThumbHTML(e,'peak','list')}<span>${i+1}</span></div><div class="exercise-title"><strong>${esc(e.name)}</strong><small>${e.muscle}${e.note?' · '+esc(e.note):''}</small>${exerciseEmphasisInlineHTML(e,2)}</div><div class="exercise-load">${cur||'—'}<small>${cur?'kg':''}</small></div></div><div class="chips">${doneToday(e.id)?'<span class="chip prep">FEITO HOJE ✓</span>':isPrepared(e.muscle)?'<span class="chip prep">PREPARADO ✓</span>':''}<span class="chip work">TRABALHO</span>${progression}${pr}</div><div class="refbox"><div class="refitem"><small>Último registro</small><strong>${esc(lastText)}</strong></div><div class="refitem"><small>Próximo passo</small><strong>${esc(nextStep)}</strong></div></div><div class="progressline"><i style="width:${pct}%"></i></div></div>`}).join('');
 }
 function filterMuscle(m){state.activeMuscle=state.activeMuscle===m?null:m;persist();render()}
 function startExercise(id){
@@ -9049,7 +9261,7 @@ function openBlankExerciseModal(prefill=null){
   else if(state.activeMuscle)document.getElementById('exerciseMuscle').value=state.activeMuscle;
 
   const m=document.getElementById('exerciseMuscle').value;
-  document.getElementById('usePrep').checked=!isPrepared(m);
+  document.getElementById('usePrep').checked=false;
 
   window.currentSets={
     warmup:[blankSet()],
@@ -9061,7 +9273,6 @@ function openBlankExerciseModal(prefill=null){
   renderCatalogLinkedInfo(prefill?.key||'');
   document.getElementById('modalTitle').textContent='＋ Adicionar exercício';
   document.getElementById('modalSubtitle').textContent='Escolha o grupo muscular e dê o nome que você usa para esse exercício.';
-  document.getElementById('targetRepsLabel').textContent='Meta de reps · opcional';
   document.getElementById('saveExerciseBtn').textContent='Adicionar exercício';
 
   renderLastWorkoutBox(null);
@@ -9099,7 +9310,6 @@ function editExercise(id,historicalDay=''){
     document.getElementById('firstTimeNote').classList.toggle('show',first);
     document.getElementById('firstTimeGym').textContent=(gym()?.name||'ACADEMIA').toUpperCase();
     document.getElementById('targetKgField').style.display=first?'none':'';
-    document.getElementById('targetRepsLabel').textContent=first?'Meta de reps · opcional':'Meta de hoje · reps';
     document.getElementById('saveExerciseBtn').textContent='Salvar resultado';
     document.getElementById('deleteExerciseBtn').style.display='block';
     fillMuscleSelect();
@@ -9109,7 +9319,7 @@ function editExercise(id,historicalDay=''){
     document.getElementById('exerciseNote').value=e.note||'';
     document.getElementById('performedDate').value=todayKey();
     document.getElementById('targetKg').value=e.targetKg||'';
-    document.getElementById('targetReps').value=e.targetReps||'';
+    document.getElementById('targetReps').value='';
 
     const forcedFirst=state.sessionFirstByMuscle?.[e.muscle];
     document.getElementById('usePrep').checked=currentHistoricalDayContext
@@ -9137,9 +9347,37 @@ function editExercise(id,historicalDay=''){
   }
 }
 function renderLastWorkoutBox(e){const root=document.getElementById('lastWorkoutBox');if(!e){root.innerHTML='';document.getElementById('copyLastBtn').style.display='none';return}const h=priorHistoryForExerciseRobust(e.id)[0]||null;document.getElementById('copyLastBtn').style.display=h?'block':'none';root.innerHTML=h?`<div class="last-workout"><small>${h.referenceOnly?'≈ Última referência':'Último treino'} · ${fmtDate(h.date)}</small><strong>${esc(setSummary(h.sets))}</strong>${h.referenceOnly?'<span class="refbadge">carga aproximada</span>':''}</div>`:`<div class="last-workout"><small>Último treino</small><strong>Ainda sem histórico.</strong></div>`}
+function copyLastExerciseRecord(){
+  const id=document.getElementById('editId')?.value;
+  if(!id)return toast('Abra um exercício já cadastrado');
+  const h=priorHistoryForExerciseRobust(id).find(x=>!x.referenceOnly)||priorHistoryForExerciseRobust(id)[0];
+  if(!h)return toast('Ainda não existe treino anterior');
+
+  const source=JSON.parse(JSON.stringify(h.sets||{}));
+  TYPES.forEach(t=>{
+    if(Array.isArray(source[t.key]))currentSets[t.key]=source[t.key].map(s=>({...s}));
+  });
+
+  if(!Array.isArray(currentSets.warmup))currentSets.warmup=[];
+  if(!Array.isArray(currentSets.feeder))currentSets.feeder=[];
+  if(!Array.isArray(currentSets.pap))currentSets.pap=[];
+  if(!Array.isArray(currentSets.work))currentSets.work=[];
+  while(currentSets.work.length<2)currentSets.work.push(blankSet());
+
+  renderSetEditors();
+  if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}
+  toast('Último treino preenchido');
+}
 function updateMethodPreview(){const el=document.getElementById('methodPreview');if(!el)return;const kg=normalizeNum(document.getElementById('targetKg')?.value);if(!kg){el.textContent='Feeder 1 ≈ 50% · Feeder 2 ≈ 70% · PAP 90–95% · Trabalho 1 em RIR 1–2 · Trabalho 2 até a falha técnica.';return}const feeder1=kg*.50,feeder2=kg*.70,papLo=kg*.90,papHi=kg*.95;el.textContent=`Para ${fmtKg(kg)} kg de trabalho: F1 ≈ ${fmtKg(feeder1)} kg · F2 ≈ ${fmtKg(feeder2)} kg · PAP ≈ ${fmtKg(papLo)}–${fmtKg(papHi)} kg · T1 RIR 1–2 · T2 RIR 0.`}
 function applyMethodSuggestions(){if(!window.currentSets)return;const kg=normalizeNum(document.getElementById('targetKg')?.value);if(!currentSets.work)currentSets.work=[];while(currentSets.work.length<2)currentSets.work.push(blankSet());currentSets.work[0].rir='1-2';currentSets.work[1].rir='0';if(kg){if(!currentSets.feeder)currentSets.feeder=[];while(currentSets.feeder.length<2)currentSets.feeder.push(blankSet());if(!currentSets.pap||!currentSets.pap.length)currentSets.pap=[blankSet()];currentSets.feeder[0].kg=fmtKg(kg*.50);currentSets.feeder[1].kg=fmtKg(kg*.70);currentSets.pap[0].kg=fmtKg(kg*.925);if(currentSets.feeder[0].reps==='')currentSets.feeder[0].reps='5-6';if(currentSets.feeder[1].reps==='')currentSets.feeder[1].reps='3-5';if(currentSets.pap[0].reps==='')currentSets.pap[0].reps='1-2';currentSets.work[0].kg=currentSets.work[0].kg||fmtKg(kg);currentSets.work[1].kg=currentSets.work[1].kg||fmtKg(kg)}renderSetEditors();updateMethodPreview();toast(kg?'Método aplicado':'RIR das séries de trabalho aplicado')}
-function onMuscleFormChange(){const id=document.getElementById('editId').value;const m=document.getElementById('exerciseMuscle').value;document.getElementById('usePrep').checked=!isPrepared(m)&&!muscleHasPrep(m,id);renderSetEditors();if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}}
+function onMuscleFormChange(){
+  const id=document.getElementById('editId').value;
+  const m=document.getElementById('exerciseMuscle').value;
+  if(id)document.getElementById('usePrep').checked=!isPrepared(m)&&!muscleHasPrep(m,id);
+  else document.getElementById('usePrep').checked=false;
+  renderSetEditors();
+  if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}
+}
 function renderSetEditors(){
   const mode=currentExercisePrepMode();
   const root=document.getElementById('setsEditor');
@@ -9206,6 +9444,160 @@ function calcPRs(ex,sets,excludeHistoryId=null){
   if(oldMax>0&&newMax>oldMax)return ['PR de carga'];
   return [];
 }
+
+function saveExercise(){
+  try{
+    const id=document.getElementById('editId')?.value||'';
+    const muscle=document.getElementById('exerciseMuscle')?.value||'';
+    const name=(document.getElementById('exerciseName')?.value||'').trim();
+
+    if(!muscle)return toast('Escolha o grupo muscular');
+    if(!name)return toast('Digite o nome do exercício');
+
+    const now=new Date().toISOString();
+    const performedDay=document.getElementById('performedDate')?.value||todayKey();
+
+    // CADASTRO: registra apenas a identidade do exercício.
+    // Preparação é decidida na sessão, não na biblioteca.
+    if(!id){
+      const ex={
+        id:uid(),
+        gymId:state.activeGym,
+        muscle,
+        name,
+        catalogKey:document.getElementById('catalogKey')?.value||'',
+        usePrep:false,
+        sets:{warmup:[],feeder:[],pap:[],work:[]},
+        note:(document.getElementById('exerciseNote')?.value||'').trim(),
+        targetKg:'',
+        targetReps:'',
+        createdAt:now,
+        updatedAt:now
+      };
+      state.exercises.push(ex);
+      persist();
+      closeModal('exerciseModal');
+      render();
+      toast('Exercício adicionado');
+      return;
+    }
+
+    const ex=state.exercises.find(e=>e.id===id);
+    if(!ex)return toast('Exercício não encontrado');
+
+    const prepMode=currentExercisePrepMode();
+    const sets={};
+
+    TYPES.forEach(t=>{
+      sets[t.key]=(currentSets?.[t.key]||[])
+        .map(s=>(t.key==='warmup'||t.key==='feeder')?{...s,rir:''}:{...s})
+        .filter(s=>s.kg!==''||s.reps!==''||s.rir!=='');
+    });
+
+    if(Array.isArray(currentSets?.calibration)){
+      sets.calibration=currentSets.calibration
+        .map(s=>({...s}))
+        .filter(s=>s.kg!==''||s.reps!==''||s.rir!=='');
+    }
+
+    if(prepMode==='recognition'){
+      sets.warmup=[];
+      sets.feeder=(sets.feeder||[]).slice(0,Math.max(1,recognitionFeederCount||1));
+      sets.pap=[];
+    }else if(prepMode==='work'){
+      sets.warmup=[];
+      sets.feeder=[];
+      sets.pap=[];
+    }
+
+    const usePrep=prepMode==='full';
+
+    // Editing an old history entry should not replace today's working
+    // reference on the exercise itself. Normal/current training can.
+    if(!currentEditingHistoryId){
+      Object.assign(ex,{
+        muscle,
+        name,
+        catalogKey:document.getElementById('catalogKey')?.value||catalogKeyFromExercise(ex),
+        usePrep:false,
+        sets:JSON.parse(JSON.stringify(sets)),
+        note:(document.getElementById('exerciseNote')?.value||'').trim(),
+        targetKg:(document.getElementById('targetKg')?.value||'').trim(),
+        targetReps:'',
+        updatedAt:now
+      });
+    }
+
+    const referenceOnly=currentEntryMode==='calibration';
+    const approximate=referenceOnly?!!currentCalibration?.approx:false;
+    const flags=referenceOnly?[]:calcPRs(ex,sets,currentEditingHistoryId);
+    const wm=Math.max(0,...(sets.work||[]).map(s=>normalizeNum(s.kg)));
+
+    if(currentEditingHistoryId){
+      const idx=state.history.findIndex(h=>h.id===currentEditingHistoryId);
+      if(idx<0)return toast('Registro não encontrado');
+
+      const old=state.history[idx];
+      state.history[idx]={
+        ...old,
+        exerciseId:ex.id,
+        gymId:old.gymId||state.activeGym,
+        muscle,
+        name,
+        date:isoForPerformedDate(performedDay,old.date),
+        workMax:wm,
+        sets:JSON.parse(JSON.stringify(sets)),
+        prFlags:flags,
+        referenceOnly,
+        approximate,
+        sessionDay:performedDay,
+        editedAt:now
+      };
+    }else{
+      state.history.push({
+        id:uid(),
+        exerciseId:ex.id,
+        gymId:state.activeGym,
+        muscle,
+        name,
+        date:isoForPerformedDate(performedDay),
+        sessionDay:performedDay,
+        createdAt:now,
+        workMax:wm,
+        sets:JSON.parse(JSON.stringify(sets)),
+        prFlags:flags,
+        referenceOnly,
+        approximate
+      });
+    }
+
+    if(usePrep&&!referenceOnly&&performedDay===todayKey()){
+      markPrepared(muscle);
+      if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle];
+    }
+
+    recomputePreparedToday();
+    state.activeMuscle=muscle;
+    if(!state.muscleStartedAt&&performedDay===todayKey())state.muscleStartedAt=now;
+
+    const wasEditing=!!currentEditingHistoryId;
+    persist();
+    closeModal('exerciseModal');
+    render();
+
+    if(wasEditing)toast('Registro atualizado');
+    else if(performedDay!==todayKey())toast('Treino de '+new Date(isoForPerformedDate(performedDay)).toLocaleDateString('pt-BR')+' salvo');
+    else if(referenceOnly)toast('Referência salva');
+    else toast(progressionToastText(ex.id));
+
+    currentEditingHistoryId=null;
+    currentHistoricalDayContext='';
+    recognitionFeederCount=1;
+  }catch(err){
+    console.error('Erro ao salvar exercício:',err);
+    toast('Não consegui salvar. Tente novamente.');
+  }
+}
 function openHistoryRecord(historyId){
   try{
     const h=state.history.find(x=>x.id===historyId);if(!h)return toast('Registro não encontrado');
@@ -9218,8 +9610,8 @@ function openHistoryRecord(historyId){
     window.currentSets=JSON.parse(JSON.stringify(h.sets||{}));TYPES.forEach(t=>{if(!Array.isArray(currentSets[t.key]))currentSets[t.key]=[]});
     if(!currentSets.warmup.length)currentSets.warmup.push(blankSet());while(currentSets.feeder.length<2)currentSets.feeder.push(blankSet());if(!currentSets.pap.length)currentSets.pap.push(blankSet());while(currentSets.work.length<2)currentSets.work.push(blankSet());
     const modal=document.getElementById('exerciseModal');modal.classList.remove('new-exercise-mode');document.getElementById('editId').value=e.id;document.getElementById('entryModeBox').style.display='grid';
-    fillMuscleSelect();document.getElementById('exerciseMuscle').value=h.muscle||e.muscle;document.getElementById('exerciseName').value=h.name||e.name;renderCatalogLinkedInfo(catalogKeyFromExercise(e));document.getElementById('exerciseNote').value=e.note||'';document.getElementById('targetKg').value=e.targetKg||'';document.getElementById('targetReps').value=e.targetReps||'';
-    document.getElementById('usePrep').checked=historicalRecordDefaultFullPrep(h);document.getElementById('performedDate').value=sessionDayFromHistory(h);document.getElementById('firstTimeNote').classList.remove('show');document.getElementById('targetKgField').style.display='';document.getElementById('targetRepsLabel').textContent='Meta de reps';
+    fillMuscleSelect();document.getElementById('exerciseMuscle').value=h.muscle||e.muscle;document.getElementById('exerciseName').value=h.name||e.name;renderCatalogLinkedInfo(catalogKeyFromExercise(e));document.getElementById('exerciseNote').value=e.note||'';document.getElementById('targetKg').value=e.targetKg||'';document.getElementById('targetReps').value='';
+    document.getElementById('usePrep').checked=historicalRecordDefaultFullPrep(h);document.getElementById('performedDate').value=sessionDayFromHistory(h);document.getElementById('firstTimeNote').classList.remove('show');document.getElementById('targetKgField').style.display='';
     document.getElementById('modalTitle').textContent='✎ Editar registro';document.getElementById('modalSubtitle').textContent='Altere cargas, séries ou o dia realizado se precisar.';document.getElementById('saveExerciseBtn').textContent='Salvar alterações';document.getElementById('deleteExerciseBtn').style.display='none';
     const rb=document.getElementById('recordBanner');rb.classList.add('show');document.getElementById('recordBannerText').textContent=`${fmtDate(h.date)} · ${e.name}${h.editedAt?' · já editado':''}`;document.getElementById('recordActions').classList.add('show');
     currentCalibration={tests:JSON.parse(JSON.stringify(h.sets?.calibration||[blankSet(),blankSet(),blankSet()])),work:JSON.parse(JSON.stringify(h.sets?.work||[blankSet(),blankSet()])),approx:!!h.approximate};ensureCalibration();
