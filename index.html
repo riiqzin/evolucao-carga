@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   7.7 — PROGRESS EXPERIENCE REDESIGN
+   7.8 — GUIDED FIRST / TRUE LOAD PRS
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -5203,6 +5203,136 @@ textarea{
   .p4-shell *{animation:none!important;transition:none!important}
   .p4-chart-line{stroke-dasharray:none!important;stroke-dashoffset:0!important}
 }
+
+/* =========================================================
+   7.8 — guided mode is primary + clearer reference hierarchy
+   ========================================================= */
+.entry-mode.guided-first{
+  grid-template-columns:1.18fr .92fr .92fr;
+}
+.entry-mode.guided-first button{
+  position:relative;
+}
+.entry-mode.guided-first .primary-mode small{
+  display:inline-block;
+  margin-left:4px;
+  padding:2px 5px;
+  border-radius:999px;
+  background:rgba(203,255,56,.10);
+  color:#bdda67;
+  font-size:7px!important;
+  font-weight:950;
+  letter-spacing:.05em;
+  vertical-align:1px;
+}
+.entry-mode.guided-first .primary-mode.active small{
+  background:rgba(203,255,56,.16);
+  color:var(--accent);
+}
+
+/* A referência da ETAPA ATUAL é a informação principal. */
+.exercise-modal-live .live-reference{
+  margin:13px 0 8px!important;
+  padding:12px 13px!important;
+  border-color:#3a4651!important;
+  background:linear-gradient(135deg,#111820,#0d1217)!important;
+}
+.exercise-modal-live .live-last-label{
+  color:#9aa6b3!important;
+  font-size:8px!important;
+}
+.exercise-modal-live .live-last-values{
+  margin-top:6px!important;
+}
+.exercise-modal-live .live-last-values strong{
+  color:#f4f7f9!important;
+  font-size:17px!important;
+  font-weight:950!important;
+}
+.exercise-modal-live .live-last-stage{
+  color:#8a96a1!important;
+  font-size:9px!important;
+}
+
+/* Trabalho anterior continua visível, mas apenas como lembrete secundário. */
+.guided-workload-reference.multi{
+  margin:2px 0 10px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.guided-workload-caption{
+  display:block;
+  margin:0 0 4px;
+  color:#59656f;
+  font-size:7px!important;
+  font-weight:900;
+  letter-spacing:.075em;
+}
+.guided-workload-inline{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:4px 10px;
+}
+.guided-workload-chip{
+  display:inline-flex!important;
+  align-items:baseline;
+  gap:4px;
+  min-width:0;
+  margin:0!important;
+  padding:0!important;
+  color:#65717b!important;
+  white-space:nowrap;
+}
+.guided-workload-chip b{
+  color:#626e77;
+  font-size:8px;
+  font-weight:950;
+}
+.guided-workload-chip strong{
+  margin:0!important;
+  color:#aeb8bf!important;
+  font-size:10px!important;
+  font-weight:900!important;
+  letter-spacing:0!important;
+}
+.guided-workload-chip em{
+  color:#59656e;
+  font-size:7.5px;
+  font-style:normal;
+}
+.guided-workload-reference.prep-cue{
+  opacity:.78;
+}
+.guided-workload-reference.work-cue{
+  opacity:.68;
+}
+
+/* Old 7.0/7.1 row layout must not visually compete anymore. */
+.guided-workload-reference.multi .guided-workload-copy,
+.guided-workload-reference.multi .guided-workload-rows,
+.guided-workload-reference.multi .guided-workload-row,
+.guided-workload-reference.multi .guided-workload-date{
+  display:none!important;
+}
+
+@media(max-width:560px){
+  .entry-mode.guided-first{
+    grid-template-columns:1fr 1fr;
+  }
+  .entry-mode.guided-first #modeCalibrationBtn{
+    grid-column:1/-1;
+  }
+  .guided-workload-inline{
+    gap:3px 8px;
+  }
+  .guided-workload-chip em{
+    display:none;
+  }
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -5475,9 +5605,9 @@ textarea{
 <div class="modal" id="exerciseModal" onclick="backdropClose(event,'exerciseModal')"><div class="sheet">
   <div class="grab"></div><div class="sheethead"><div><h3 id="modalTitle">＋ Registrar exercício</h3><p id="modalSubtitle">As cargas ficam separadas por academia.</p></div><button class="close" onclick="closeModal('exerciseModal')">✕</button></div>
   <input type="hidden" id="editId"><div class="record-banner" id="recordBanner"><small>Editando registro</small><strong id="recordBannerText"></strong></div>
-  <div class="entry-mode training-only" id="entryModeBox" style="display:none">
-    <button type="button" id="modeLaterBtn" class="active" onclick="setEntryMode('later')">✎ Registrar depois</button>
-    <button type="button" id="modeLiveBtn" onclick="setEntryMode('live')">▶ Modo guiado</button>
+  <div class="entry-mode training-only guided-first" id="entryModeBox" style="display:none">
+    <button type="button" id="modeLiveBtn" class="active primary-mode" onclick="setEntryMode('live')">▶ Modo guiado <small>principal</small></button>
+    <button type="button" id="modeLaterBtn" onclick="setEntryMode('later')">✎ Registrar depois</button>
     <button type="button" id="modeCalibrationBtn" onclick="setEntryMode('calibration')">≈ Referência / calibração</button>
   </div>
   <div class="quick-note training-only"><strong>✎ Do papel para o app</strong>Faça o exercício normalmente, anote no papel e depois preencha todas as séries abaixo de uma vez.</div>
@@ -5695,7 +5825,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='7.7';
+const APP_BUILD_VERSION='7.8';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -6840,7 +6970,7 @@ function renderToday(){
     hero?.classList.add('completed');
     desc.textContent='Treino concluído. Seus resultados já estão salvos para a próxima sessão.';
     const todayRecords=state.history.filter(h=>h.gymId===state.activeGym&&isHistoryToday(h)&&xs.some(e=>e.id===h.exerciseId));
-    const prs=todayRecords.reduce((n,h)=>n+(h.prFlags||[]).length,0);
+    const prs=loadPRCount(todayRecords);
     const refs=todayRecords.filter(h=>h.referenceOnly).length;
 
     summary.innerHTML=`<div class="completion-card">
@@ -7011,7 +7141,7 @@ function renderExercises(){
   document.getElementById('exerciseSectionTitle').textContent=state.activeMuscle?state.activeMuscle:'Todos os exercícios';
   document.getElementById('exerciseCount').textContent=arr.length+' cadastrado'+(arr.length===1?'':'s');
   if(!arr.length){root.innerHTML=`<div class="empty"><strong>Nenhum exercício por aqui</strong>${state.activeMuscle?'Cadastre o primeiro exercício de '+state.activeMuscle+'.':'Cadastre seus exercícios para começar.'}</div>`;return}
-  root.innerHTML=arr.map((e,i)=>{const hist=priorHistoryForExercise(e.id);const last=hist[0];const cur=last?.workMax??workMax(e);const best=Math.max(0,...hist.map(h=>h.workMax||0));const lastText=last?setSummary(last.sets):setSummary(e.sets);const target=(e.targetKg||e.targetReps)?`${e.targetKg?e.targetKg+' kg':''}${e.targetKg&&e.targetReps?' · ':''}${e.targetReps?e.targetReps+' reps':''}`:'não definida';const pr=last?.prFlags?.length?`<span class="prbadge">★ ${last.prFlags[0]}</span>`:'';const progression=progressionChipHTML(e.id);const nextStep=progressionNextStepText(e.id);const pct=best?Math.max(8,Math.min(100,(cur/best)*100)):45;return `<div class="exercise-card" onclick="editExercise('${e.id}')"><div class="exercise-head"><div class="exercise-card-visual">${exerciseVisualThumbHTML(e,'peak','list')}<span>${i+1}</span></div><div class="exercise-title"><strong>${esc(e.name)}</strong><small>${e.muscle}${e.note?' · '+esc(e.note):''}</small>${exerciseEmphasisInlineHTML(e,2)}</div><div class="exercise-load">${cur||'—'}<small>${cur?'kg':''}</small></div></div><div class="chips">${doneToday(e.id)?'<span class="chip prep">FEITO HOJE ✓</span>':isPrepared(e.muscle)?'<span class="chip prep">PREPARADO ✓</span>':e.usePrep?'<span class="chip prep">PREPARAÇÃO</span>':''}<span class="chip work">TRABALHO</span>${progression}${pr}</div><div class="refbox"><div class="refitem"><small>Último registro</small><strong>${esc(lastText)}</strong></div><div class="refitem"><small>Próximo passo</small><strong>${esc(nextStep)}</strong></div></div><div class="progressline"><i style="width:${pct}%"></i></div></div>`}).join('');
+  root.innerHTML=arr.map((e,i)=>{const hist=priorHistoryForExercise(e.id);const last=hist[0];const cur=last?.workMax??workMax(e);const best=Math.max(0,...hist.map(h=>h.workMax||0));const lastText=last?setSummary(last.sets):setSummary(e.sets);const target=(e.targetKg||e.targetReps)?`${e.targetKg?e.targetKg+' kg':''}${e.targetKg&&e.targetReps?' · ':''}${e.targetReps?e.targetReps+' reps':''}`:'não definida';const pr=isLoadPRRecord(last)?`<span class="prbadge">★ PR de carga</span>`:'';const progression=progressionChipHTML(e.id);const nextStep=progressionNextStepText(e.id);const pct=best?Math.max(8,Math.min(100,(cur/best)*100)):45;return `<div class="exercise-card" onclick="editExercise('${e.id}')"><div class="exercise-head"><div class="exercise-card-visual">${exerciseVisualThumbHTML(e,'peak','list')}<span>${i+1}</span></div><div class="exercise-title"><strong>${esc(e.name)}</strong><small>${e.muscle}${e.note?' · '+esc(e.note):''}</small>${exerciseEmphasisInlineHTML(e,2)}</div><div class="exercise-load">${cur||'—'}<small>${cur?'kg':''}</small></div></div><div class="chips">${doneToday(e.id)?'<span class="chip prep">FEITO HOJE ✓</span>':isPrepared(e.muscle)?'<span class="chip prep">PREPARADO ✓</span>':e.usePrep?'<span class="chip prep">PREPARAÇÃO</span>':''}<span class="chip work">TRABALHO</span>${progression}${pr}</div><div class="refbox"><div class="refitem"><small>Último registro</small><strong>${esc(lastText)}</strong></div><div class="refitem"><small>Próximo passo</small><strong>${esc(nextStep)}</strong></div></div><div class="progressline"><i style="width:${pct}%"></i></div></div>`}).join('');
 }
 function filterMuscle(m){state.activeMuscle=state.activeMuscle===m?null:m;persist();render()}
 function startExercise(id){
@@ -8326,27 +8456,28 @@ function guidedLastWorkingLoads(){
     loads
   };
 }
-function guidedWorkingLoadReferenceHTML(){
+function guidedWorkingLoadReferenceHTML(step=null){
   const ref=guidedLastWorkingLoads();
   if(!ref)return '';
 
-  const rows=ref.loads.map(x=>`
-    <div class="guided-workload-row">
-      <span>TRABALHO ${x.index+1}</span>
+  const summary=ref.loads.map(x=>{
+    const meta=[
+      x.reps?`${x.reps} reps`:'',
+      x.rir!==''&&x.rir!=null?`RIR ${x.rir}`:''
+    ].filter(Boolean).join(' · ');
+    return `<span class="guided-workload-chip">
+      <b>T${x.index+1}</b>
       <strong>${fmtKg(x.kg)} kg</strong>
-      <small>${x.reps?`${x.reps} reps`:''}${x.rir!==''&&x.rir!=null?`${x.reps?' · ':''}RIR ${x.rir}`:''}</small>
-    </div>
-  `).join('');
+      ${meta?`<em>${meta}</em>`:''}
+    </span>`;
+  }).join('');
 
-  return `<div class="guided-workload-reference multi">
-    <div class="guided-workload-copy">
-      <small>CARGAS DE TRABALHO DO ÚLTIMO TREINO</small>
-      <div class="guided-workload-rows">${rows}</div>
-      <span class="guided-workload-date">${fmtDate(ref.history.date)}</span>
-    </div>
+  const phaseClass=step&&step.type!=='work'?'prep-cue':'work-cue';
+  return `<div class="guided-workload-reference multi ${phaseClass}">
+    <span class="guided-workload-caption">LEMBRETE · TRABALHO DO ÚLTIMO TREINO</span>
+    <div class="guided-workload-inline">${summary}</div>
   </div>`;
 }
-
 function renderLiveGuide(){
   const root=document.getElementById('liveGuide'); if(!root||currentEntryMode!=='live')return;
   const steps=liveSteps(); if(!steps.length){root.innerHTML='';return}
@@ -8361,7 +8492,7 @@ function renderLiveGuide(){
       <h4>${esc(document.getElementById('exerciseName')?.value||'Exercício')}</h4>
       <p class="live-hint">${esc(st.hint)}</p>
       ${ref?`<div class="live-reference">${ref}</div>`:''}
-      ${guidedWorkingLoadReferenceHTML()}${liveProgressionAdvice(st)}
+      ${guidedWorkingLoadReferenceHTML(st)}${liveProgressionAdvice(st)}
       <div class="live-inputs ${st.type==='pap'||st.type==='work'?'':'no-rir'}">
         <div class="live-input-wrap"><label>Carga</label>${setPicker('kg',val.kg,st.type==='work'&&st.index===1?'liveFinalSetPreview()':'','liveKg')}</div>
         <div class="live-input-wrap"><label>Reps</label>${setPicker('reps',val.reps,st.type==='work'&&st.index===1?'liveFinalSetPreview()':'','liveReps')}</div>
@@ -8546,7 +8677,7 @@ function editExercise(id){
     renderLastWorkoutBox(e);
     renderSetEditors();
     updateMethodPreview();
-    setEntryMode('later');
+    setEntryMode('live');
     openModal('exerciseModal');
   }catch(err){
     console.error('Erro em editExercise:',err);
@@ -8599,22 +8730,23 @@ function renderSetEditors(){
 function setVal(type,i,key,val){currentSets[type][i][key]=val}
 function addSet(type){currentSets[type].push(blankSet());renderSetEditors()}
 function removeSet(type,i){if(currentSets[type].length<=1)return;currentSets[type].splice(i,1);renderSetEditors()}
-function calcPRs(ex,sets,excludeHistoryId=null){const old=state.history.filter(h=>h.exerciseId===ex.id&&h.id!==excludeHistoryId&&!h.referenceOnly);if(!old.length)return ['PR inicial'];const newMax=Math.max(0,...(sets.work||[]).map(s=>normalizeNum(s.kg)));const oldMax=Math.max(0,...old.map(h=>h.workMax||0));const newVol=(sets.work||[]).reduce((a,s)=>a+normalizeNum(s.kg)*normalizeNum(s.reps),0);const oldVol=Math.max(0,...old.map(h=>(h.sets?.work||[]).reduce((a,s)=>a+normalizeNum(s.kg)*normalizeNum(s.reps),0)));let flags=[];if(newMax>oldMax)flags.push('PR de carga');if(newVol>oldVol)flags.push('PR de volume');const bestRepAtLoad={};old.forEach(h=>(h.sets?.work||[]).forEach(s=>{const k=normalizeNum(s.kg),r=normalizeNum(s.reps);bestRepAtLoad[k]=Math.max(bestRepAtLoad[k]||0,r)}));if((sets.work||[]).some(s=>normalizeNum(s.reps)>(bestRepAtLoad[normalizeNum(s.kg)]||0)&&normalizeNum(s.kg)>0))flags.push('PR de reps');return [...new Set(flags)]}
-function saveExercise(){
-  const id=document.getElementById('editId').value;const muscle=document.getElementById('exerciseMuscle').value;const name=document.getElementById('exerciseName').value.trim();if(!name)return toast('Digite o exercício');
-  const usePrep=document.getElementById('usePrep').checked;const now=new Date().toISOString();const performedDay=(document.getElementById('performedDate')?.value||todayKey());
-  if(!id){
-    const ex={id:uid(),gymId:state.activeGym,muscle,name,catalogKey:document.getElementById('catalogKey')?.value||'',usePrep,sets:{warmup:[],feeder:[],pap:[],work:[]},note:document.getElementById('exerciseNote').value.trim(),targetKg:'',targetReps:document.getElementById('targetReps').value.trim(),createdAt:now,updatedAt:now};
-    state.exercises.push(ex);persist();closeModal('exerciseModal');render();toast('Exercício cadastrado');return;
-  }
-  const prepMode=currentExercisePrepMode();const sets={};TYPES.forEach(t=>sets[t.key]=(currentSets[t.key]||[]).map(s=>t.key==='warmup'||t.key==='feeder'?{...s,rir:''}:s).filter(s=>s.kg!==''||s.reps!==''||s.rir!==''));if(Array.isArray(currentSets.calibration))sets.calibration=currentSets.calibration.filter(s=>s.kg!==''||s.reps!==''||s.rir!=='');if(prepMode==='recognition'){sets.warmup=[];sets.feeder=(sets.feeder||[]).slice(0,1);sets.pap=[]}else if(prepMode==='work'){sets.warmup=[];sets.feeder=[];sets.pap=[]}
-  let ex;if(id){ex=state.exercises.find(e=>e.id===id);Object.assign(ex,{muscle,name,catalogKey:document.getElementById('catalogKey')?.value||catalogKeyFromExercise(ex),usePrep:usePrep||isPrepared(muscle),sets,note:document.getElementById('exerciseNote').value.trim(),targetKg:document.getElementById('targetKg').value.trim(),targetReps:document.getElementById('targetReps').value.trim(),updatedAt:now})}
-  const referenceOnly=currentEntryMode==='calibration';const approximate=referenceOnly?!!currentCalibration?.approx:false;const flags=referenceOnly?[]:calcPRs(ex,sets,currentEditingHistoryId);const wm=Math.max(0,...(sets.work||[]).map(s=>normalizeNum(s.kg)));
-  if(currentEditingHistoryId){
-    const idx=state.history.findIndex(h=>h.id===currentEditingHistoryId);
-    if(idx>=0){const old=state.history[idx];state.history[idx]={...old,exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay,old.date),workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate,sessionDay:performedDay,editedAt:now}}
-  }else{state.history.push({id:uid(),exerciseId:ex.id,gymId:state.activeGym,muscle,name,date:isoForPerformedDate(performedDay),sessionDay:performedDay,createdAt:now,workMax:wm,sets:JSON.parse(JSON.stringify(sets)),prFlags:flags,referenceOnly,approximate})}
-  if(usePrep&&!referenceOnly&&performedDay===todayKey()){markPrepared(muscle);if(state.sessionFirstByMuscle)delete state.sessionFirstByMuscle[muscle]}recomputePreparedToday();state.activeMuscle=muscle;if(!state.muscleStartedAt)state.muscleStartedAt=now;persist();closeModal('exerciseModal');render();toast(currentEditingHistoryId?'Registro atualizado':performedDay!==todayKey()?'Treino de '+new Date(isoForPerformedDate(performedDay)).toLocaleDateString('pt-BR')+' salvo':referenceOnly?'Referência salva':progressionToastText(ex.id));currentEditingHistoryId=null
+function isLoadPRRecord(h){
+  return !!h && (h.prFlags||[]).includes('PR de carga');
+}
+function loadPRCount(records){
+  return (records||[]).reduce((n,h)=>n+(isLoadPRRecord(h)?1:0),0);
+}
+function calcPRs(ex,sets,excludeHistoryId=null){
+  const old=state.history.filter(h=>h.exerciseId===ex.id&&h.id!==excludeHistoryId&&!h.referenceOnly);
+  if(!old.length)return [];
+
+  const oldMax=Math.max(0,...old.map(h=>normalizeNum(h.workMax)||Math.max(0,...(h.sets?.work||[]).map(s=>normalizeNum(s.kg)))));
+  const newMax=Math.max(0,...(sets.work||[]).map(s=>normalizeNum(s.kg)));
+
+  // O primeiro resultado é apenas a referência inicial.
+  // PR só existe quando uma sessão FUTURA supera a maior carga de trabalho já registrada.
+  if(oldMax>0&&newMax>oldMax)return ['PR de carga'];
+  return [];
 }
 function openHistoryRecord(historyId){
   try{
@@ -8674,7 +8806,7 @@ function renderHistory(){
   const id=document.getElementById('historyExercise').value;if(!id)return renderProgressOverview();
   const e=state.exercises.find(x=>x.id===id);if(!e)return renderProgressOverview();
   const {arr,current,first,best,delta,sessions,last}=progressExerciseStats(e);const pct=first?((delta/first)*100):0;
-  const rows=arr.map((h,i)=>{const prev=arr[i+1];const d=prev?(h.workMax||0)-(prev.workMax||0):0;const prs=(h.prFlags||[]).map(x=>`★ ${esc(x)}`).join(' · ');return `<div class="progress-history-row"><div class="progress-history-date"><strong>${fmtDate(h.date)}</strong><small>${h.referenceOnly?'≈ referência':h.editedAt?'editado':'treino'}</small></div><div class="progress-history-sets"><strong>${h.workMax?h.workMax+' kg':'Sem carga máxima'} ${prev&&h.workMax?`<span class="${d>0?'progress-up':d<0?'progress-down':''}" style="font-size:9px;margin-left:5px">${d>0?'+':''}${d.toFixed(1).replace('.0','')} kg</span>`:''}</strong><small>${esc(setSummary(h.sets))}${prs?' · '+prs:''}</small></div><div class="progress-history-actions"><button onclick="openHistoryRecord('${h.id}')">✎ Editar</button><button class="danger-mini" onclick="deleteHistoryRecord('${h.id}')">⌫</button></div></div>`}).join('');
+  const rows=arr.map((h,i)=>{const prev=arr[i+1];const d=prev?(h.workMax||0)-(prev.workMax||0):0;const prs=isLoadPRRecord(h)?'★ PR de carga':'';return `<div class="progress-history-row"><div class="progress-history-date"><strong>${fmtDate(h.date)}</strong><small>${h.referenceOnly?'≈ referência':h.editedAt?'editado':'treino'}</small></div><div class="progress-history-sets"><strong>${h.workMax?h.workMax+' kg':'Sem carga máxima'} ${prev&&h.workMax?`<span class="${d>0?'progress-up':d<0?'progress-down':''}" style="font-size:9px;margin-left:5px">${d>0?'+':''}${d.toFixed(1).replace('.0','')} kg</span>`:''}</strong><small>${esc(setSummary(h.sets))}${prs?' · '+prs:''}</small></div><div class="progress-history-actions"><button onclick="openHistoryRecord('${h.id}')">✎ Editar</button><button class="danger-mini" onclick="deleteHistoryRecord('${h.id}')">⌫</button></div></div>`}).join('');
   document.getElementById('historyContent').innerHTML=`<div class="progress-detail-head"><button class="progress-back" onclick="document.getElementById('historyExercise').value='';renderHistory()">←</button><div class="progress-detail-title"><small>${esc(e.muscle)}</small><strong>${esc(e.name)}</strong></div>${last?.referenceOnly?'<span class="progress-detail-badge">≈ referência</span>':''}</div><div class="progress-overview-stats"><div class="progress-bigstat"><small>Atual</small><strong>${current||'—'}${current?' kg':''}</strong><em>${last?'último '+fmtDate(last.date):'sem histórico'}</em></div><div class="progress-bigstat"><small>Melhor</small><strong>${best||'—'}${best?' kg':''}</strong><em>maior carga registrada</em></div><div class="progress-bigstat"><small>Evolução</small><strong class="${delta>0?'progress-up':delta<0?'progress-down':''}">${first?(delta>0?'+':'')+delta.toFixed(1).replace('.0','')+' kg':'—'}</strong><em>${first?(pct>0?'+':'')+pct.toFixed(1).replace('.0','')+'% desde o início':'precisa de mais dados'}</em></div><div class="progress-bigstat"><small>Sessões</small><strong>${sessions}</strong><em>registros deste exercício</em></div></div>${progressChartHTML(arr)}<div class="progress-section-label">Histórico de sessões</div><div class="progress-history-list">${rows||'<div class="empty"><strong>Sem registros</strong>Quando você registrar esse exercício, ele aparecerá aqui.</div>'}</div>`;
 }
 function startRest(sec){stopRest(false);restEnd=Date.now()+sec*1000;updateRest();restTimer=setInterval(updateRest,250)}
@@ -9113,7 +9245,7 @@ function progressV4Summary(){
   const improving=withData.filter(x=>x.statusClass==='good'||x.statusClass==='ready');
   const ready=withData.filter(x=>x.statusClass==='ready');
   const records=progressV4ActiveRecords();
-  const prs=records.reduce((n,h)=>n+(h.prFlags||[]).length,0);
+  const prs=loadPRCount(records);
   const days=[...new Set(records.map(progressV4Day))].sort();
   const recent30=progressV4RecentDays(30);
   const recent14=progressV4RecentDays(14);
@@ -9203,7 +9335,7 @@ function progressV4AchievementHTML(s){
   const items=[
     {ico:'✓',title:'Começou',desc:'Primeiro treino registrado',on:s.days.length>=1},
     {ico:'↗',title:'Subindo',desc:'Algum exercício avançou',on:s.improving.length>=1},
-    {ico:'★',title:'Primeiro PR',desc:'Primeira marca pessoal',on:s.prs>=1},
+    {ico:'★',title:'Primeiro recorde',desc:'Primeira carga máxima superada',on:s.prs>=1},
     {ico:'3',title:'Ritmo',desc:'3 treinos em 14 dias',on:s.recent14.length>=3},
     {ico:'5',title:'Cinco avanços',desc:'5 exercícios evoluindo',on:s.improving.length>=5},
     {ico:'◆',title:'Consolidou',desc:'Carga pronta para subir',on:s.ready.length>=1},
@@ -9248,7 +9380,7 @@ function progressRenderOverviewV4(){
   const ratio=s.comparable.length?Math.round((s.improving.length/s.comparable.length)*100):0;
   const ring=Math.max(0,Math.min(100,ratio));
   const recentPR=s.records
-    .filter(h=>(h.prFlags||[]).length)
+    .filter(isLoadPRRecord)
     .sort((a,b)=>b.date.localeCompare(a.date))[0]||null;
   const heroTitle=s.improving.length
     ?`${s.improving.length} exercício${s.improving.length===1?' está':'s estão'} andando pra frente`
@@ -9269,7 +9401,7 @@ function progressRenderOverviewV4(){
           <p>${esc(heroSub)}</p>
           <div class="p4-hero-pills">
             <span>🔥 ${s.recent30.length} treino${s.recent30.length===1?'':'s'} / 30d</span>
-            <span>★ ${s.prs} PR${s.prs===1?'':'s'}</span>
+            <span>★ ${s.prs} recorde${s.prs===1?'':'s'} de carga</span>
             ${s.ready.length?`<span class="hot">⚡ ${s.ready.length} carga${s.ready.length===1?'':'s'} consolidada${s.ready.length===1?'':'s'}</span>`:''}
           </div>
         </div>
@@ -9281,7 +9413,7 @@ function progressRenderOverviewV4(){
       <section class="p4-glance">
         <div class="p4-glance-item primary"><span class="ico">↗</span><div><small>EVOLUINDO</small><strong data-progress-count="${s.improving.length}">0</strong><em>exercícios</em></div></div>
         <div class="p4-glance-item"><span class="ico">◷</span><div><small>ÚLTIMOS 30 DIAS</small><strong data-progress-count="${s.recent30.length}">0</strong><em>dias treinados</em></div></div>
-        <div class="p4-glance-item"><span class="ico">★</span><div><small>MARCAS PESSOAIS</small><strong data-progress-count="${s.prs}">0</strong><em>PRs registrados</em></div></div>
+        <div class="p4-glance-item"><span class="ico">★</span><div><small>RECORDES DE CARGA</small><strong data-progress-count="${s.prs}">0</strong><em>cargas máximas superadas</em></div></div>
         <div class="p4-glance-item"><span class="ico">◆</span><div><small>CONSOLIDADOS</small><strong data-progress-count="${s.ready.length}">0</strong><em>prontos pra testar</em></div></div>
       </section>
 
@@ -9302,9 +9434,9 @@ function progressRenderOverviewV4(){
             <p>${best?esc(best.e.name):'Ainda sem comparação suficiente.'}</p>
           </div>
           <div class="p4-win-card">
-            <span>★</span><small>PR MAIS RECENTE</small>
+            <span>★</span><small>RECORDE MAIS RECENTE</small>
             <strong>${recentPR?fmtDate(recentPR.date):'—'}</strong>
-            <p>${recentPR?esc(recentPR.name||'Marca pessoal registrada'):'Quando sair um PR, ele aparece aqui.'}</p>
+            <p>${recentPR?esc(recentPR.name||'Carga máxima superada'):'Quando sair um PR, ele aparece aqui.'}</p>
           </div>
           <div class="p4-win-card">
             <span>🔥</span><small>RITMO RECENTE</small>
