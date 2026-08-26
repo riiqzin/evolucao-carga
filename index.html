@@ -2694,7 +2694,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   8.5 — EXERCISE ADD FIX / CLEAN REGISTRATION
+   8.6 — POST WORKOUT / TRASH / AUTO PREP
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -5702,6 +5702,131 @@ textarea{
     font-size:10px!important;
   }
 }
+
+/* =========================================================
+   8.6 — post-workout summary / trash / automatic preparation
+   ========================================================= */
+.auto-prep-note{
+  display:flex;align-items:center;gap:9px;
+  margin:10px 0 2px;padding:9px 10px;
+  border:1px solid rgba(203,255,56,.16);
+  border-radius:13px;background:#121a0f;
+}
+.auto-prep-note>span{
+  width:28px;height:28px;display:grid;place-items:center;
+  border-radius:9px;background:var(--app-accent);color:#090d04;font-size:9px;font-weight:950;
+}
+.auto-prep-note div{min-width:0;display:flex;flex-direction:column}
+.auto-prep-note b{color:#dceaaa;font-size:10px}
+.auto-prep-note small{margin-top:2px;color:#79856f;font-size:9px!important}
+.auto-prep-pill{
+  display:inline-flex;margin-top:7px;padding:4px 7px;border-radius:999px;
+  border:1px solid #3b4929;background:#151d10;color:#b9d367;
+  font-size:9px;font-weight:900;
+}
+
+/* Undo-capable toast */
+.toast{
+  display:flex!important;align-items:center;gap:12px!important;
+}
+.toast-message{min-width:0;flex:1}
+.toast>button{
+  flex:0 0 auto;border:0;border-radius:9px;padding:7px 9px;
+  background:var(--app-accent);color:#090d04;font-size:10px;font-weight:950;
+}
+
+/* Settings trash entry */
+.trash-settings-button{
+  width:100%;min-height:62px;display:grid;grid-template-columns:36px minmax(0,1fr) auto 14px;
+  gap:9px;align-items:center;padding:10px 11px;border:1px solid #29333a;border-radius:14px;
+  background:#11171b;color:#e7ecef;text-align:left;
+}
+.trash-settings-icon{
+  width:36px;height:36px;display:grid;place-items:center;border-radius:11px;
+  background:#171e16;color:var(--app-accent);font-size:15px;
+}
+.trash-settings-button>span:nth-child(2){min-width:0}
+.trash-settings-button strong{display:block;font-size:11px}
+.trash-settings-button small{display:block;margin-top:2px;color:#77838c;font-size:9.5px!important}
+.trash-settings-button>b{
+  min-width:24px;height:24px;padding:0 6px;display:grid;place-items:center;border-radius:999px;
+  background:#20282d;color:#aeb8bf;font-size:9px;
+}
+.trash-settings-button>i{font-style:normal;color:#65717a}
+
+.trash-sheet{width:min(760px,calc(100vw - 24px))!important}
+.trash-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:2px 0 10px;color:#7b8790;font-size:10px}
+.trash-toolbar button{border:0;background:transparent;color:#d27b84;font-size:9px;font-weight:900}
+.trash-list{display:grid;gap:7px}
+.trash-item{
+  display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:10px;align-items:center;
+  padding:11px;border:1px solid #242f36;border-radius:16px;background:#0f1518;
+}
+.trash-item-icon{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:#171e16;color:#a7bd6c}
+.trash-item-copy{min-width:0}
+.trash-item-copy small{display:block;color:#6f7b84;font-size:8px!important;font-weight:950;letter-spacing:.08em}
+.trash-item-copy strong{display:block;margin-top:2px;font-size:11px}
+.trash-item-copy span{display:block;margin-top:3px;color:#717d86;font-size:8.5px}
+.trash-item-actions{display:flex;gap:5px}
+.trash-item-actions button{height:34px;border-radius:10px;padding:0 9px;font-size:8.5px;font-weight:900}
+.trash-item-actions .restore{border:1px solid #3b4928;background:#151d10;color:#bdd66c}
+.trash-item-actions .permanent{border:1px solid #3b292e;background:#1a1215;color:#d88791}
+.trash-empty{padding:28px;text-align:center;border:1px dashed #2b363d;border-radius:18px;background:#0d1215}
+.trash-empty>span{width:42px;height:42px;margin:0 auto;display:grid;place-items:center;border-radius:13px;background:#172014;color:var(--app-accent)}
+.trash-empty strong{display:block;margin-top:8px;font-size:12px}
+.trash-empty p{margin:4px 0 0;color:#74808a;font-size:9px}
+
+/* Workout summary */
+.workout-summary-sheet{width:min(900px,calc(100vw - 24px))!important}
+.ws-shell{display:grid;gap:11px}
+.ws-hero{
+  display:grid;grid-template-columns:54px 1fr;gap:12px;align-items:center;
+  padding:16px;border:1px solid #3a4728;border-radius:20px;
+  background:radial-gradient(circle at 90% 5%,rgba(203,255,56,.09),transparent 32%),#101713;
+}
+.ws-check{width:54px;height:54px;display:grid;place-items:center;border-radius:18px;background:var(--app-accent);color:#090d04;font-size:22px;font-weight:950}
+.ws-hero small{color:#8fa064;font-size:8.5px!important;font-weight:950;letter-spacing:.09em}
+.ws-hero h2{margin:4px 0 3px;font-size:21px;letter-spacing:-.04em}
+.ws-hero p{margin:0;color:#79867f;font-size:9.5px}
+.ws-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ws-stats>div{padding:10px;border:1px solid #242e35;border-radius:14px;background:#0f1418}
+.ws-stats small{display:block;color:#6f7b84;font-size:8px!important;font-weight:950}
+.ws-stats strong{display:block;margin-top:3px;font-size:19px}
+.ws-stats span{display:block;margin-top:1px;color:#6e7a83;font-size:8px}
+.ws-stats .good strong,.ws-stats .record strong{color:var(--app-accent)}
+.ws-section,.ws-next{padding:12px;border:1px solid #242e35;border-radius:18px;background:#0e1417}
+.ws-section-head{display:flex;align-items:end;justify-content:space-between;gap:8px;margin-bottom:8px}
+.ws-section-head small{display:block;color:#82945d;font-size:8px!important;font-weight:950;letter-spacing:.09em}
+.ws-section-head strong{display:block;margin-top:2px;font-size:13px}
+.ws-section-head>span{color:#6e7a83;font-size:8px}
+.ws-list{display:grid;gap:6px}
+.ws-item{
+  display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:9px;align-items:center;
+  padding:9px;border-radius:13px;background:#0a0f12;border:1px solid #1d262c;
+}
+.ws-item.record,.ws-item.improved{border-color:#344226;background:linear-gradient(90deg,rgba(203,255,56,.035),#0a0f12 55%)}
+.ws-item-visual{width:46px;height:56px}.ws-item-visual .muscle-visual.tiny{width:46px!important;height:56px!important}
+.ws-item-copy{min-width:0}
+.ws-item-copy small{display:block;color:#69757e;font-size:7.5px!important}
+.ws-item-copy strong{display:block;margin-top:2px;font-size:10.5px}
+.ws-item-copy span{display:block;margin-top:2px;color:#75818a;font-size:8.5px}
+.ws-item-result{text-align:right}
+.ws-item-result strong{display:block;font-size:10px}.ws-item.record .ws-item-result strong,.ws-item.improved .ws-item-result strong{color:var(--app-accent)}
+.ws-item-result small{display:block;margin-top:2px;color:#77838c;font-size:8px!important}
+.ws-next-list{display:grid;gap:5px}
+.ws-next-list>div{display:grid;grid-template-columns:24px 1fr;gap:7px;align-items:start;padding:8px;border-radius:11px;background:#0a0f12}
+.ws-next-list>div>span{width:24px;height:24px;display:grid;place-items:center;border-radius:8px;background:#172014;color:var(--app-accent);font-size:9px}
+.ws-next-list p{margin:0;color:#78848d;font-size:9px;line-height:1.4}
+.ws-next-list p strong{display:block;margin-bottom:2px;color:#e5eaed;font-size:9.5px}
+.ws-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.ws-empty{padding:16px;text-align:center;color:#75818a;font-size:9px}
+
+@media(max-width:600px){
+  .trash-item{grid-template-columns:36px 1fr}.trash-item-actions{grid-column:1/-1;display:grid;grid-template-columns:1fr auto}
+  .ws-stats{grid-template-columns:1fr 1fr}
+  .ws-item{grid-template-columns:42px minmax(0,1fr)}.ws-item-result{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;text-align:left;padding-top:7px;border-top:1px solid #1b2429}
+  .ws-actions{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body class="auth-locked">
@@ -6208,7 +6333,7 @@ textarea{
   <div class="field live-hide"><label>Grupo muscular</label><select id="exerciseMuscle" class="select" onchange="onMuscleFormChange()"></select></div>
   <div class="field live-hide"><label>Exercício</label><input id="exerciseName" class="input" placeholder="Ex.: Supino inclinado máquina"></div>
   <input type="hidden" id="catalogKey">
-  <div class="toggle live-hide training-only"><input type="checkbox" id="usePrep" onchange="renderSetEditors();if(currentEntryMode==='live'){liveStepIndex=0;renderLiveGuide()}"><label for="usePrep">Primeiro exercício do músculo · fazer preparação completa</label></div>
+  <input type="checkbox" id="usePrep" hidden>
   <div id="lastWorkoutBox" class="training-only"></div>
   <div class="field training-only live-hide" id="performedDateField"><label>📅 Dia realizado</label><input id="performedDate" type="date" class="input"><small style="display:block;color:#7f8997;font-size:9px;margin-top:6px;line-height:1.4">Use a data em que você realmente fez este exercício. Pode registrar hoje um treino de dias atrás.</small></div>
   <div class="first-time-note training-only" id="firstTimeNote"><strong>🧭 PRIMEIRA VEZ NESTE EXERCÍCIO NA <span id="firstTimeGym">ACADEMIA</span></strong>Você ainda não tem carga de referência aqui. <b>Não precisa adivinhar.</b> Faça o exercício, descubra suas cargas e registre o que realmente usou. Se a máquina também é nova para você ou o treino saiu do plano, use <b>≈ Referência / calibração</b>.</div>
@@ -6225,6 +6350,25 @@ textarea{
   <button id="cancelExerciseBtn" class="btn secondary" style="width:100%;margin-top:10px" onclick="cancelExerciseModal()">Cancelar / voltar sem salvar</button>
   <div class="record-actions" id="recordActions"><button class="btn secondary" onclick="duplicateHistoryRecord()">Duplicar registro</button><button class="btn danger" onclick="deleteCurrentHistoryRecord()">Excluir este registro</button></div>
   <button id="deleteExerciseBtn" class="btn danger" style="width:100%;margin-top:10px;display:none" onclick="deleteExercise()">Excluir exercício</button>
+</div></div>
+
+
+<div class="modal" id="workoutSummaryModal" onclick="backdropClose(event,'workoutSummaryModal')"><div class="sheet workout-summary-sheet">
+  <div class="grab"></div>
+  <div class="sheethead">
+    <div><h3>✓ Resumo do treino</h3><p>O que aconteceu hoje e o que levar para a próxima sessão.</p></div>
+    <button class="close" onclick="closeModal('workoutSummaryModal')">✕</button>
+  </div>
+  <div id="workoutSummaryBody"></div>
+</div></div>
+
+<div class="modal" id="trashModal" onclick="backdropClose(event,'trashModal')"><div class="sheet trash-sheet">
+  <div class="grab"></div>
+  <div class="sheethead">
+    <div><h3>↶ Lixeira</h3><p>Itens apagados ficam aqui por até 30 dias.</p></div>
+    <button class="close" onclick="closeModal('trashModal')">✕</button>
+  </div>
+  <div id="trashBody"></div>
 </div></div>
 
 <div class="modal" id="historyModal" onclick="backdropClose(event,'historyModal')"><div class="progress-sheet">
@@ -6320,6 +6464,16 @@ textarea{
     <input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)">
   </div>
 
+  <div class="field">
+    <label>Lixeira</label>
+    <button class="trash-settings-button" type="button" onclick="openTrashModal()">
+      <span class="trash-settings-icon">↶</span>
+      <span><strong>Itens apagados</strong><small>Você pode restaurar exclusões dos últimos 30 dias.</small></span>
+      <b id="trashCountBadge">0</b>
+      <i>›</i>
+    </button>
+  </div>
+
   <div class="account-actions">
     <button class="btn secondary" onclick="signOutSupabase()">Sair da conta</button>
     <button class="btn danger" onclick="resetData()">Apagar meus dados de treino</button>
@@ -6396,6 +6550,7 @@ const DEFAULT={
   preparedByGym:{},
   exercises:[],
   history:[],
+  trash:[],
   tutorialVersion:0
 };
 
@@ -6418,7 +6573,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='8.5';
+const APP_BUILD_VERSION='8.6';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -6821,6 +6976,8 @@ function normalizeLoadedState(raw){
   z.preparedByGym=z.preparedByGym||{};
   z.exercises=z.exercises||[];
   z.history=z.history||[];
+  z.trash=Array.isArray(z.trash)?z.trash:[];
+  z.trash=z.trash.filter(x=>x&&x.deletedAt&&(Date.now()-new Date(x.deletedAt).getTime())<30*86400000).slice(-100);
   z.sessionMuscles=z.sessionMuscles||[];
   z.sessionFirstByMuscle=z.sessionFirstByMuscle||{};
   z.sessionExerciseIds=Array.isArray(z.sessionExerciseIds)?z.sessionExerciseIds:[];
@@ -6987,8 +7144,9 @@ function addSelectedExerciseToHistoryDay(){
 }
 function removeHistoryRecordFromDay(historyId){
   const h=(state.history||[]).find(x=>x.id===historyId);if(!h)return;
-  if(!confirm(`Remover ${h.name||'este exercício'} desse treino? O exercício continuará cadastrado na sua biblioteca.`))return;
+  if(!confirm(`Remover ${h.name||'este exercício'} desse treino? O registro irá para a lixeira e o exercício continuará cadastrado.`))return;
 
+  const item=pushTrashItem('history',`${h.name||'Treino'} · ${fmtDate(h.date)}`,{history:h});
   state.history=state.history.filter(x=>x.id!==historyId);
   recomputePreparedToday();
   persist();
@@ -6997,9 +7155,9 @@ function removeHistoryRecordFromDay(historyId){
 
   if(document.getElementById('historyModal')?.classList.contains('show')){
     const title=document.getElementById('historyModalTitle')?.textContent||'';
-    if(title.includes('Histórico'))renderHistoryHub();
+    if(title.includes('Histórico')||title.includes('histórico'))renderHistoryHub();
   }
-  toast('Exercício removido desse treino');
+  toast('Exercício removido desse treino','Desfazer',()=>restoreTrashItem(item.id),6000);
 }
 function renderHistoryDayEditor(){
   const day=document.getElementById('historyDayPicker')?.value||todayKey();
@@ -7055,7 +7213,144 @@ function uid(){return Math.random().toString(36).slice(2,9)+Date.now().toString(
 function muscleIcon(m){return ({'Peito':'◇','Costas':'↔','Quadríceps':'▲','Posterior':'▼','Ombros':'◆','Bíceps':'⌁','Tríceps':'⌁','Antebraços':'≈','Panturrilha':'◒','Glúteos':'●','Abdômen':'▦'})[m]||'●'}
 function toggleLibrary(forceOpen=false){const box=document.getElementById('libraryContent'),btn=document.getElementById('libraryToggle');if(!box)return;const open=forceOpen||box.classList.contains('hidden');box.classList.toggle('hidden',!open);if(btn)btn.textContent=open?'Ocultar':'Mostrar';if(open&&forceOpen)document.querySelector('.mobile-library')?.scrollTo?.({top:0,behavior:'smooth'})}
 function gym(){return state.gyms.find(g=>g.id===state.activeGym)||state.gyms[0]}
-function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1800)}
+let toastTimer=null,toastAction=null;
+function toast(t,actionLabel='',actionFn=null,duration=1800){
+  const el=document.getElementById('toast');if(!el)return;
+  clearTimeout(toastTimer);
+  toastAction=typeof actionFn==='function'?actionFn:null;
+  el.innerHTML='';
+  const msg=document.createElement('span');
+  msg.className='toast-message';
+  msg.textContent=String(t||'');
+  el.appendChild(msg);
+  if(actionLabel&&toastAction){
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.textContent=actionLabel;
+    btn.onclick=()=>{
+      const fn=toastAction;
+      toastAction=null;
+      el.classList.remove('show');
+      if(fn)fn();
+    };
+    el.appendChild(btn);
+  }
+  el.classList.add('show');
+  toastTimer=setTimeout(()=>{
+    el.classList.remove('show');
+    toastAction=null;
+  },actionLabel?Math.max(duration,5200):duration);
+}
+
+function pruneTrash(){
+  state.trash=Array.isArray(state.trash)?state.trash:[];
+  const cutoff=Date.now()-30*86400000;
+  state.trash=state.trash.filter(x=>x&&new Date(x.deletedAt||0).getTime()>=cutoff).slice(-100);
+}
+function refreshTrashCount(){
+  pruneTrash();
+  const badge=document.getElementById('trashCountBadge');
+  if(badge)badge.textContent=String(state.trash.length);
+}
+function pushTrashItem(type,label,data){
+  pruneTrash();
+  const item={id:uid(),type,label,deletedAt:new Date().toISOString(),data:JSON.parse(JSON.stringify(data||{}))};
+  state.trash.push(item);
+  state.trash=state.trash.slice(-100);
+  return item;
+}
+function restoreTrashItem(itemId){
+  pruneTrash();
+  const idx=state.trash.findIndex(x=>x.id===itemId);
+  if(idx<0)return toast('Item não encontrado na lixeira');
+  const item=state.trash[idx];
+
+  if(item.type==='history'){
+    const h=item.data?.history;
+    if(h&&!state.history.some(x=>x.id===h.id))state.history.push(h);
+  }else if(item.type==='exercise'){
+    const ex=item.data?.exercise;
+    if(ex&&!state.exercises.some(x=>x.id===ex.id))state.exercises.push(ex);
+    (item.data?.history||[]).forEach(h=>{
+      if(!state.history.some(x=>x.id===h.id))state.history.push(h);
+    });
+
+    const session=item.data?.session;
+    if(ex&&session?.wasSelected&&state.sessionDate===session.sessionDate){
+      const ids=[...(state.sessionExerciseIds||[])].filter(id=>id!==ex.id);
+      const at=Math.max(0,Math.min(Number(session.index)||0,ids.length));
+      ids.splice(at,0,ex.id);
+      state.sessionExerciseIds=ids;
+      if(!state.sessionMuscles.includes(ex.muscle))state.sessionMuscles.push(ex.muscle);
+      syncSessionPrepToOrder();
+    }
+  }
+
+  state.trash.splice(idx,1);
+  recomputePreparedToday();
+  persist();
+  render();
+  refreshTrashCount();
+  if(document.getElementById('trashModal')?.classList.contains('show'))renderTrashModal();
+  if(document.getElementById('historyDayModal')?.classList.contains('show'))renderHistoryDayEditor();
+  toast('Item restaurado ✓');
+}
+function deleteTrashItemPermanently(itemId){
+  const item=state.trash.find(x=>x.id===itemId);if(!item)return;
+  if(!confirm('Apagar este item definitivamente? Depois disso não será possível restaurar.'))return;
+  state.trash=state.trash.filter(x=>x.id!==itemId);
+  persist();
+  renderTrashModal();
+  refreshTrashCount();
+  toast('Item apagado definitivamente');
+}
+function emptyTrash(){
+  if(!state.trash?.length)return;
+  if(!confirm('Esvaziar a lixeira? Essa ação não pode ser desfeita.'))return;
+  state.trash=[];
+  persist();
+  renderTrashModal();
+  refreshTrashCount();
+  toast('Lixeira esvaziada');
+}
+function openTrashModal(){
+  renderTrashModal();
+  openModal('trashModal');
+}
+function renderTrashModal(){
+  const root=document.getElementById('trashBody');if(!root)return;
+  pruneTrash();
+  const items=[...state.trash].sort((a,b)=>b.deletedAt.localeCompare(a.deletedAt));
+  if(!items.length){
+    root.innerHTML=`<div class="trash-empty"><span>✓</span><strong>Nada apagado</strong><p>Exercícios e registros excluídos aparecem aqui por 30 dias.</p></div>`;
+    refreshTrashCount();
+    return;
+  }
+  root.innerHTML=`<div class="trash-toolbar">
+      <span>${items.length} item${items.length===1?'':'s'} recuperável${items.length===1?'':'is'}</span>
+      <button onclick="emptyTrash()">Esvaziar lixeira</button>
+    </div>
+    <div class="trash-list">
+      ${items.map(item=>{
+        const d=new Date(item.deletedAt);
+        const expiry=new Date(d.getTime()+30*86400000);
+        return `<article class="trash-item">
+          <div class="trash-item-icon">${item.type==='exercise'?'◎':'◷'}</div>
+          <div class="trash-item-copy">
+            <small>${item.type==='exercise'?'EXERCÍCIO':'REGISTRO DE TREINO'}</small>
+            <strong>${esc(item.label||'Item apagado')}</strong>
+            <span>Apagado em ${d.toLocaleDateString('pt-BR')} · disponível até ${expiry.toLocaleDateString('pt-BR')}</span>
+          </div>
+          <div class="trash-item-actions">
+            <button class="restore" onclick="restoreTrashItem('${item.id}')">↶ Restaurar</button>
+            <button class="permanent" onclick="deleteTrashItemPermanently('${item.id}')">Excluir</button>
+          </div>
+        </article>`;
+      }).join('')}
+    </div>`;
+  refreshTrashCount();
+}
+
 function fmtDate(iso){return new Date(iso).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'2-digit'})}
 function workMax(ex){return Math.max(0,...(ex.sets?.work||[]).map(s=>+String(s.kg).replace(',','.')||0))}
 function preparedSet(){return new Set(state.preparedByGym[state.activeGym]||[])}
@@ -7404,6 +7699,7 @@ function render(){
   const dayLabel=document.getElementById('desktopTodayLabel');
   if(dayLabel)dayLabel.textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'}).toUpperCase();
   refreshAccountUI();
+  refreshTrashCount();
   renderToday();
   const prep=preparedSet();
   const ms=document.getElementById('muscles');ms.innerHTML=MUSCLES.map(m=>{const active=state.activeMuscle===m;const ready=prep.has(m);const selected=(state.sessionMuscles||[]).includes(m);const count=state.exercises.filter(e=>e.gymId===state.activeGym&&e.muscle===m).length;let sub=selected?'no treino de hoje':ready?'preparado hoje ✓':count?count+' exercício'+(count>1?'s':''):'nenhum cadastrado';return `<button class="muscle ${active||selected?'active':''}" onclick="filterMuscle('${m}')"><div class="muscle-top"><span class="muscle-icon">${muscleIcon(m)}</span><strong>${m}</strong></div><small>${sub}</small></button>`}).join('');
@@ -7519,8 +7815,10 @@ function setTodaySetupButton(mode){
 function exerciseTodayModeText(e,done,forced=false){
   if(done)return 'Registrado hoje';
   if(isPrepared(e.muscle))return '1 feeder de reconhecimento + 2 séries de trabalho';
-  if(forced)return 'Vai fazer a preparação completa deste músculo';
-  return 'Ainda precisa preparar este músculo';
+  if(forced)return 'Preparação completa + 2 séries de trabalho';
+  const firstId=effectiveFirstExerciseId(e.muscle);
+  if(firstId&&firstId!==e.id)return 'Depois da preparação: feeder de reconhecimento + 2 séries de trabalho';
+  return 'Preparação definida automaticamente';
 }
 function renderToday(){
   const chosen=state.sessionMuscles||[];
@@ -7584,14 +7882,14 @@ function renderToday(){
         <div class="completion-stat"><small>Refs.</small><strong>${refs}</strong></div>
       </div>
       <div class="completion-actions">
-        <button class="primary-mini" onclick="openHistoryModal()">↗ Ver progresso</button>
-        <button class="secondary-mini" onclick="openTodayModal()">✎ Ajustar treino</button>
+        <button class="primary-mini" onclick="finishWorkout()">✓ Finalizar e ver resumo</button>
+        <button class="secondary-mini" onclick="openHistoryModal()">↗ Ver progresso</button>
       </div>
     </div>`;
   }else{
     desc.textContent=workoutReorderMode
       ?'Segure o ícone de arrastar e coloque os exercícios na ordem que você quer fazer.'
-      :'Siga a ordem abaixo. Você pode escolher onde começa a preparação e também reorganizar o treino.';
+      :'Siga a ordem abaixo. O app define a preparação automaticamente pela sequência do treino.';
     summary.innerHTML=`<div class="today-progress-wrap">
       <div class="today-progress-head"><span>Seu progresso hoje</span><strong>${done} de ${xs.length}</strong></div>
       <div class="today-progress"><div class="bar"><i style="width:${pct}%"></i></div><span>${pct}%</span></div>
@@ -7627,7 +7925,7 @@ function renderToday(){
             <div class="reorder-copy">
               <strong>${esc(e.name)}</strong>
               <small>${esc(e.muscle)}${exerciseEmphasisText(e,1)?' · '+esc(exerciseEmphasisText(e,1)):''}</small>
-              ${prep?'<em>★ preparação começa aqui</em>':''}
+              ${prep?'<em>★ preparação automática</em>':''}
             </div>
           </article>`;
         }).join('')}
@@ -7672,11 +7970,10 @@ function renderToday(){
           </div>
         </div>
         ${exerciseVisualSummaryHTML(next,'compact')}
-        ${!isPrepared(next.muscle)?`
-          <button class="prep-choice active" onclick="setFirstToday('${next.id}')">
-            <span class="prep-choice-dot">★</span>
-            <span><b>Preparação começa aqui</b><small>toque em outro exercício abaixo para trocar</small></span>
-          </button>`:''}
+        ${isFirst?`
+          <div class="auto-prep-note">
+            <span>★</span><div><b>Preparação completa automática</b><small>Primeiro exercício de ${esc(next.muscle)} nesta sequência.</small></div>
+          </div>`:''}
         <button class="now-primary-action" onclick="startExercise('${next.id}')">
           <span>Registrar resultado</span><i>›</i>
         </button>
@@ -7701,11 +7998,7 @@ function renderToday(){
           <strong>${esc(e.name)}</strong>
           <small>${esc(e.muscle)} · ${esc(exerciseTodayModeText(e,false,isFirst))}</small>
           ${exerciseEmphasisInlineHTML(e,2)}
-          ${!ready?`
-            <button class="upcoming-first ${isFirst?'active':''}" onclick="event.stopPropagation();setFirstToday('${e.id}')">
-              <span>${isFirst?'★':'○'}</span>
-              <b>${isFirst?'Preparação começa aqui':'Começar preparação aqui'}</b>
-            </button>`:''}
+          ${isFirst?`<span class="auto-prep-pill">★ preparação automática</span>`:''}
         </div>
         <button class="upcoming-action" onclick="startExercise('${e.id}')" aria-label="Registrar ${esc(e.name)}">Registrar</button>
       </article>`;
@@ -7732,8 +8025,8 @@ function renderToday(){
   }
 
   root.innerHTML=html;
-  fab.textContent=next?'▶ '+next.name:'↗ Ver progresso';
-  fab.onclick=completed?openHistoryModal:doNextAction;
+  fab.textContent=next?'▶ '+next.name:'✓ Finalizar treino';
+  fab.onclick=completed?finishWorkout:doNextAction;
 }
 function renderExercises(){
   const root=document.getElementById('exerciseList');
@@ -7916,13 +8209,171 @@ function saveTodayWorkout(){
   if(!state.sessionDate||shouldRollSessionToToday())state.sessionDate=todayKey();
   state.activeMuscle=null;
   if(!state.muscleStartedAt)state.muscleStartedAt=new Date().toISOString();
+  syncSessionPrepToOrder();
 
   persist();
   closeModal('todayModal');
   render();
   toast(`${ordered.length} exercício${ordered.length===1?'':'s'} no treino de hoje`);
 }
-function finishWorkout(){if(!confirm('Finalizar o treino de hoje? Os registros feitos continuarão salvos.'))return;state.sessionMuscles=[];state.sessionExerciseIds=[];state.sessionFirstByMuscle={};state.activeMuscle=null;state.muscleStartedAt=null;clearPrepared();persist();closeModal('todayModal');render();toast('Treino finalizado')}
+
+let lastWorkoutSummarySnapshot=null;
+
+function workoutRecordForDay(exerciseId,day,gymId=state.activeGym){
+  return state.history
+    .filter(h=>h.exerciseId===exerciseId&&h.gymId===gymId&&!h.referenceOnly&&sessionDayFromHistory(h)===day)
+    .sort((a,b)=>b.date.localeCompare(a.date))[0]||null;
+}
+function previousWorkoutRecord(exerciseId,day,gymId=state.activeGym){
+  return state.history
+    .filter(h=>h.exerciseId===exerciseId&&h.gymId===gymId&&!h.referenceOnly&&sessionDayFromHistory(h)<day)
+    .sort((a,b)=>b.date.localeCompare(a.date))[0]||null;
+}
+function bestWorkRepsAtLoad(h,kg){
+  if(!h||!kg)return 0;
+  return Math.max(0,...(h.sets?.work||[]).filter(s=>Math.abs(normalizeNum(s.kg)-kg)<.001).map(s=>normalizeNum(s.reps)));
+}
+function workoutSummaryComparison(exerciseId,day,gymId){
+  const e=state.exercises.find(x=>x.id===exerciseId);
+  const current=workoutRecordForDay(exerciseId,day,gymId);
+  if(!e||!current)return null;
+  const previous=previousWorkoutRecord(exerciseId,day,gymId);
+  const currentLoad=Math.max(0,...(current.sets?.work||[]).map(s=>normalizeNum(s.kg)));
+  const previousLoad=previous?Math.max(0,...(previous.sets?.work||[]).map(s=>normalizeNum(s.kg))):0;
+  const currentReps=bestWorkRepsAtLoad(current,currentLoad);
+  const previousReps=previous&&currentLoad===previousLoad?bestWorkRepsAtLoad(previous,previousLoad):0;
+
+  let status='reference',label='Nova referência',detail='Primeiro resultado salvo para comparar no futuro.';
+  if(previous){
+    if(isLoadPRRecord(current)||currentLoad>previousLoad+.001){
+      status='record';label='Recorde de carga';
+      detail=`${fmtKg(previousLoad)} kg → ${fmtKg(currentLoad)} kg`;
+    }else if(currentLoad===previousLoad&&currentReps>previousReps){
+      status='improved';label=`+${currentReps-previousReps} rep${currentReps-previousReps===1?'':'s'}`;
+      detail=`${fmtKg(currentLoad)} kg · ${previousReps} → ${currentReps} reps`;
+    }else if(currentLoad===previousLoad&&currentReps===previousReps){
+      status='maintained';label='Performance mantida';
+      detail=`${fmtKg(currentLoad)} kg · ${currentReps} reps`;
+    }else{
+      status='adjusted';label='Sessão de ajuste';
+      detail=currentLoad===previousLoad
+        ?`${fmtKg(currentLoad)} kg · ${previousReps} → ${currentReps} reps`
+        :`${fmtKg(previousLoad)} kg → ${fmtKg(currentLoad)} kg`;
+    }
+  }
+
+  const a1=progressionAdviceForExercise(exerciseId,false);
+  const a2=progressionAdviceForFinalSet(exerciseId,false);
+  const advice=[a1,a2].filter(Boolean);
+  let next='Use este treino como nova referência.';
+  if(advice.some(a=>a.state==='ready'))next='Carga consolidada: aumentar no próximo treino é uma opção.';
+  else if(advice.some(a=>a.state==='top'))next='Tente repetir o topo da faixa para consolidar.';
+  else if(advice.some(a=>a.state==='progress'))next='Tente manter essa nova referência antes de cobrar outra evolução.';
+  else if(advice.some(a=>a.state==='stable'))next='Igualar novamente já é válido; se estiver bem, tente +1 rep.';
+  else if(advice.some(a=>a.state==='recover'))next='Use sua melhor marca recente como referência, sem tratar uma sessão isolada como regressão.';
+  else if(advice.some(a=>a.state==='build'||a.state==='near'))next=(advice.find(a=>a.state==='near'||a.state==='build')?.title||'Continue consolidando')+'.';
+
+  return {e,current,previous,currentLoad,currentReps,status,label,detail,next};
+}
+function buildWorkoutSummarySnapshot(exerciseIds,day,gymId,muscles=[]){
+  const comparisons=(exerciseIds||[]).map(id=>workoutSummaryComparison(id,day,gymId)).filter(Boolean);
+  return {
+    day,gymId,muscles:[...muscles],
+    exerciseIds:[...exerciseIds],
+    comparisons,
+    finishedAt:new Date().toISOString()
+  };
+}
+function openWorkoutSummary(snapshot=null){
+  const snap=snapshot||lastWorkoutSummarySnapshot;
+  if(!snap)return toast('Ainda não há resumo deste treino');
+  lastWorkoutSummarySnapshot=snap;
+  const root=document.getElementById('workoutSummaryBody');if(!root)return;
+
+  const xs=snap.comparisons||[];
+  const records=xs.filter(x=>x.status==='record').length;
+  const improved=xs.filter(x=>x.status==='improved'||x.status==='record').length;
+  const maintained=xs.filter(x=>x.status==='maintained').length;
+  const adjusted=xs.filter(x=>x.status==='adjusted').length;
+  const references=xs.filter(x=>x.status==='reference').length;
+  const dateLabel=new Date(snap.day+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});
+
+  const heroTitle=records
+    ?`${records} recorde${records===1?'':'s'} de carga hoje`
+    :improved
+      ?`${improved} exercício${improved===1?' avançou':'s avançaram'}`
+      :maintained
+        ?'Treino consistente. Referências mantidas.'
+        :'Treino registrado. Agora existe mais contexto para o próximo.';
+
+  root.innerHTML=`<div class="ws-shell">
+    <section class="ws-hero">
+      <div class="ws-check">✓</div>
+      <div><small>TREINO FINALIZADO · ${esc(dateLabel.toUpperCase())}</small><h2>${esc(heroTitle)}</h2><p>${xs.length} exercício${xs.length===1?'':'s'} registrado${xs.length===1?'':'s'}${snap.muscles.length?' · '+esc(snap.muscles.join(' + ')):''}</p></div>
+    </section>
+
+    <div class="ws-stats">
+      <div class="good"><small>EVOLUÍRAM</small><strong>${improved}</strong><span>carga ou reps</span></div>
+      <div><small>MANTIVERAM</small><strong>${maintained}</strong><span>boa referência</span></div>
+      <div class="record"><small>RECORDES</small><strong>${records}</strong><span>de carga</span></div>
+      <div><small>AJUSTES</small><strong>${adjusted}</strong><span>sessões abaixo</span></div>
+    </div>
+
+    <section class="ws-section">
+      <div class="ws-section-head"><div><small>HOJE</small><strong>Exercício por exercício</strong></div>${references?`<span>${references} nova${references===1?'':'s'} referência${references===1?'':'s'}</span>`:''}</div>
+      <div class="ws-list">
+        ${xs.map(x=>`<article class="ws-item ${x.status}">
+          <div class="ws-item-visual">${exerciseVisualThumbHTML(x.e,'peak','tiny')}</div>
+          <div class="ws-item-copy"><small>${esc(x.e.muscle)}</small><strong>${esc(x.e.name)}</strong><span>${esc(x.detail)}</span></div>
+          <div class="ws-item-result"><strong>${esc(x.label)}</strong><small>${x.currentLoad?`${fmtKg(x.currentLoad)} kg${x.currentReps?' · '+x.currentReps+' reps':''}`:'resultado salvo'}</small></div>
+        </article>`).join('')||'<div class="ws-empty">Nenhum resultado de trabalho foi encontrado para resumir.</div>'}
+      </div>
+    </section>
+
+    <section class="ws-next">
+      <div class="ws-section-head"><div><small>PRÓXIMA VEZ</small><strong>O que levar deste treino</strong></div><span>sem obrigação de PR</span></div>
+      <div class="ws-next-list">
+        ${xs.slice(0,5).map(x=>`<div><span>→</span><p><strong>${esc(x.e.name)}</strong>${esc(x.next)}</p></div>`).join('')}
+      </div>
+    </section>
+
+    <div class="ws-actions">
+      <button class="btn primary" onclick="closeModal('workoutSummaryModal');navProgress(document.querySelector('[data-nav=progress]'))">↗ Ver progresso completo</button>
+      <button class="btn secondary" onclick="closeModal('workoutSummaryModal')">Fechar resumo</button>
+    </div>
+  </div>`;
+  openModal('workoutSummaryModal');
+}
+
+function finishWorkout(){
+  const exerciseIds=[...(state.sessionExerciseIds||[])];
+  const muscles=[...(state.sessionMuscles||[])];
+  const day=state.sessionDate||todayKey();
+  const gymId=state.activeGym;
+  const saved=exerciseIds.filter(id=>workoutRecordForDay(id,day,gymId)).length;
+  const missing=Math.max(0,exerciseIds.length-saved);
+  const question=missing
+    ?`Finalizar o treino com ${missing} exercício${missing===1?'':'s'} sem registro? O que já foi salvo será mantido.`
+    :'Finalizar o treino e ver o resumo?';
+  if(!confirm(question))return;
+
+  const snapshot=buildWorkoutSummarySnapshot(exerciseIds,day,gymId,muscles);
+  state.sessionMuscles=[];
+  state.sessionExerciseIds=[];
+  state.sessionFirstByMuscle={};
+  state.activeMuscle=null;
+  state.muscleStartedAt=null;
+  clearPrepared();
+  persist();
+  closeModal('todayModal');
+  render();
+
+  if(snapshot.comparisons.length){
+    setTimeout(()=>openWorkoutSummary(snapshot),80);
+  }else{
+    toast('Treino finalizado');
+  }
+}
 function startMuscle(m){filterMuscle(m)}
 function finishMuscle(){if(!state.activeMuscle)return toast('Nenhum músculo ativo');state.activeMuscle=null;persist();render();toast('Grupo muscular finalizado')}
 function changeGym(id){state.activeGym=id;state.activeMuscle=null;state.muscleStartedAt=null;state.sessionMuscles=[];state.sessionExerciseIds=[];state.sessionFirstByMuscle={};persist();render();toast('Academia alterada')}
@@ -8863,18 +9314,33 @@ function historicalNewExerciseDefaultFullPrep(muscle,day){
   return !historyEntriesForSessionDay(day).some(h=>(h.muscle||'')===muscle);
 }
 function currentExercisePrepMode(){
-  const full=document.getElementById('usePrep')?.checked;
-  if(full)return 'full';
   const muscle=document.getElementById('exerciseMuscle')?.value||'';
 
-  // Ao editar/reconstruir um treino antigo, "não foi o primeiro exercício"
-  // significa feeder de reconhecimento — nunca "só trabalho".
-  if(currentEditingHistoryId||currentHistoricalDayContext)return 'recognition';
+  // Histórico: mantém a inferência daquele dia.
+  if(currentEditingHistoryId||currentHistoricalDayContext){
+    return document.getElementById('usePrep')?.checked?'full':'recognition';
+  }
 
-  // Na sessão atual, depois que o músculo já foi preparado,
-  // entra feeder de reconhecimento antes das séries de trabalho.
-  if(muscle&&isPrepared(muscle))return 'recognition';
-  return 'work';
+  const id=document.getElementById('editId')?.value||'';
+  const e=state.exercises.find(x=>x.id===id);
+
+  // Sessão atual: a preparação é automática.
+  // O primeiro exercício REALMENTE executado daquele músculo recebe
+  // preparação completa. Depois, reconhecimento + trabalho.
+  if(e){
+    const day=activeTrainingDay();
+    const alreadyWorked=state.history.some(h=>
+      h.gymId===state.activeGym &&
+      !h.referenceOnly &&
+      sessionDayFromHistory(h)===day &&
+      (h.muscle||'')===e.muscle &&
+      h.exerciseId!==e.id
+    );
+    if(isPrepared(e.muscle)||alreadyWorked)return 'recognition';
+    return 'full';
+  }
+
+  return 'full';
 }
 function ensureRecognitionFeeders(){
   if(!currentSets.feeder)currentSets.feeder=[];
@@ -9321,10 +9787,10 @@ function editExercise(id,historicalDay=''){
     document.getElementById('targetKg').value=e.targetKg||'';
     document.getElementById('targetReps').value='';
 
-    const forcedFirst=state.sessionFirstByMuscle?.[e.muscle];
+    const forcedFirst=effectiveFirstExerciseId(e.muscle);
     document.getElementById('usePrep').checked=currentHistoricalDayContext
       ?historicalNewExerciseDefaultFullPrep(e.muscle,currentHistoricalDayContext)
-      :!isPrepared(e.muscle)&&(forcedFirst?forcedFirst===e.id:(first?true:!!e.usePrep));
+      :(!isPrepared(e.muscle)&&(!state.sessionExerciseIds.includes(e.id)||forcedFirst===e.id));
 
     const lastHist=latestHistoryForExercise(id);
     currentCalibration={
@@ -9618,11 +10084,51 @@ function openHistoryRecord(historyId){
     renderLastWorkoutBox(e);renderSetEditors();updateMethodPreview();setEntryMode(h.referenceOnly?'calibration':'later');openModal('exerciseModal');
   }catch(err){console.error('Erro ao editar registro:',err);toast('Não consegui abrir este registro')}
 }
-function deleteHistoryRecord(historyId){const h=state.history.find(x=>x.id===historyId);if(!h)return;if(!confirm(`Excluir este registro de ${h.name || 'treino'}? Esta ação não apaga o exercício da biblioteca.`))return;state.history=state.history.filter(x=>x.id!==historyId);recomputePreparedToday();persist();if(currentEditingHistoryId===historyId){currentEditingHistoryId=null;closeModal('exerciseModal')}render();if(document.getElementById('historyModal')?.classList.contains('show'))renderHistory();toast('Registro excluído')}
+function deleteHistoryRecord(historyId){
+  const h=state.history.find(x=>x.id===historyId);if(!h)return;
+  if(!confirm(`Excluir este registro de ${h.name||'treino'}? Ele poderá ser restaurado pela lixeira por 30 dias.`))return;
+  const item=pushTrashItem('history',`${h.name||'Treino'} · ${fmtDate(h.date)}`,{history:h});
+  state.history=state.history.filter(x=>x.id!==historyId);
+  recomputePreparedToday();
+  persist();
+  if(currentEditingHistoryId===historyId){currentEditingHistoryId=null;closeModal('exerciseModal')}
+  render();
+  if(document.getElementById('historyModal')?.classList.contains('show'))renderHistory();
+  toast('Registro movido para a lixeira','Desfazer',()=>restoreTrashItem(item.id),6000);
+}
 function deleteCurrentHistoryRecord(){if(currentEditingHistoryId)deleteHistoryRecord(currentEditingHistoryId)}
 function duplicateHistoryRecord(){if(!currentEditingHistoryId)return;const h=state.history.find(x=>x.id===currentEditingHistoryId);if(!h)return;const copy=JSON.parse(JSON.stringify(h));copy.id=uid();copy.date=new Date().toISOString();delete copy.editedAt;copy.prFlags=[];state.history.push(copy);recomputePreparedToday();persist();render();toast('Registro duplicado');closeModal('exerciseModal');currentEditingHistoryId=null}
 function cancelExerciseModal(){currentEditingHistoryId=null;currentHistoricalDayContext='';recognitionFeederCount=1;stopRest();closeModal('exerciseModal');toast('Nada foi alterado')}
-function deleteExercise(){const id=document.getElementById('editId').value;if(!id)return;const ex=state.exercises.find(e=>e.id===id);if(!ex)return;if(!confirm(`Excluir ${ex.name}? O histórico de carga deste exercício também será apagado.`))return;state.exercises=state.exercises.filter(e=>e.id!==id);state.history=state.history.filter(h=>h.exerciseId!==id);recomputePreparedToday();state.sessionExerciseIds=(state.sessionExerciseIds||[]).filter(x=>x!==id);persist();closeModal('exerciseModal');render();toast('Exercício excluído')}
+function deleteExercise(){
+  const id=document.getElementById('editId').value;if(!id)return;
+  const ex=state.exercises.find(e=>e.id===id);if(!ex)return;
+  if(!confirm(`Excluir ${ex.name}? O exercício e todo o histórico dele irão para a lixeira por 30 dias.`))return;
+
+  const related=state.history.filter(h=>h.exerciseId===id);
+  const currentIds=[...(state.sessionExerciseIds||[])];
+  const item=pushTrashItem('exercise',ex.name,{
+    exercise:ex,
+    history:related,
+    session:{
+      wasSelected:currentIds.includes(id),
+      index:Math.max(0,currentIds.indexOf(id)),
+      sessionDate:state.sessionDate
+    }
+  });
+
+  state.exercises=state.exercises.filter(e=>e.id!==id);
+  state.history=state.history.filter(h=>h.exerciseId!==id);
+  state.sessionExerciseIds=currentIds.filter(x=>x!==id);
+  if(!state.sessionExerciseIds.some(x=>state.exercises.find(e=>e.id===x)?.muscle===ex.muscle)){
+    state.sessionMuscles=(state.sessionMuscles||[]).filter(m=>m!==ex.muscle);
+  }
+  syncSessionPrepToOrder();
+  recomputePreparedToday();
+  persist();
+  closeModal('exerciseModal');
+  render();
+  toast('Exercício movido para a lixeira','Desfazer',()=>restoreTrashItem(item.id),6500);
+}
 function fillHistorySelect(){
   const el=document.getElementById('historyExercise');if(!el)return;
   const current=el.value;
