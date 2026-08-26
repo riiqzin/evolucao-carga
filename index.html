@@ -5725,6 +5725,19 @@ textarea{
   font-size:9px;font-weight:900;
 }
 
+/* =========================================================
+   8.7 — explicit order + instant gym-floor reordering
+   ========================================================= */
+.order-importance{display:flex;align-items:flex-start;gap:10px;margin:12px 0 2px;padding:11px 12px;border:1px solid rgba(203,255,56,.14);border-radius:14px;background:#10160d}
+.order-importance>span{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;border-radius:9px;background:#1a2410;color:var(--app-accent);font-weight:950}
+.order-importance div{min-width:0}.order-importance b{display:block;font-size:10px;color:#e7efcf}.order-importance small{display:block;margin-top:3px;color:#87917e;font-size:9px!important;line-height:1.4}
+.now-order-number{position:relative;width:46px;height:46px;display:grid;place-items:center;border-radius:16px;background:var(--app-accent);color:#090b05;font-size:18px;font-weight:950}
+.now-order-number small{position:absolute;right:-4px;bottom:-5px;display:grid!important;place-items:center;width:18px;height:18px;border-radius:7px;background:#0d1216;border:2px solid #0d1216;color:var(--app-accent);font-size:8px!important}
+.now-quick-actions{display:grid;grid-template-columns:1fr 1.45fr;gap:8px;margin-top:10px}.now-skip-action{min-height:43px;border:1px solid #28323b;border-radius:13px;background:#11171d;color:#bac3cc;font-size:10px;font-weight:900;padding:8px 10px}.now-skip-action:active,.make-now-action:active{transform:scale(.98)}.now-quick-actions .now-primary-action{margin-top:0;height:43px}
+.upcoming-actions{display:flex;flex-direction:column;align-items:stretch;gap:6px}.make-now-action{min-width:78px;border:1px solid #2e3a28;border-radius:10px;background:#141b11;color:#c9df84;padding:7px 8px;font-size:9px;font-weight:900}.upcoming-actions .upcoming-action{min-width:78px}
+.reorder-item{grid-template-columns:42px 30px minmax(0,1fr) auto}.reorder-step-buttons{display:flex;gap:5px}.reorder-step-buttons button{width:32px;height:32px;border:1px solid #26313a;border-radius:9px;background:#10161b;color:#cbd3da;font-size:14px;font-weight:900}.reorder-step-buttons button:disabled{opacity:.25;cursor:default}
+@media(max-width:520px){.now-quick-actions{grid-template-columns:1fr}.upcoming-actions{gap:5px}.make-now-action,.upcoming-actions .upcoming-action{min-width:74px}.order-importance{padding:10px}}
+
 /* Undo-capable toast */
 .toast{
   display:flex!important;align-items:center;gap:12px!important;
@@ -6573,7 +6586,7 @@ let todayDraftExerciseIds=new Set();
 const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
-const APP_BUILD_VERSION='8.6';
+const APP_BUILD_VERSION='8.7';
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -7730,6 +7743,34 @@ function commitWorkoutReorderFromDOM(){
   syncSessionPrepToOrder();
   persist();
 }
+function setPendingExercisePosition(id,targetIndex,announce=true){
+  const pending=workoutPendingIds();
+  const from=pending.indexOf(id);
+  if(from<0)return;
+  const to=Math.max(0,Math.min(pending.length-1,targetIndex));
+  if(from===to)return;
+  pending.splice(from,1);
+  pending.splice(to,0,id);
+  const pendingSet=new Set(pending),queue=[...pending];
+  state.sessionExerciseIds=(state.sessionExerciseIds||[]).map(exId=>pendingSet.has(exId)?queue.shift():exId);
+  syncSessionPrepToOrder();
+  persist();
+  renderToday();
+  if(announce)toast('Ordem atualizada · preparação recalculada');
+}
+function movePendingExercise(id,direction){
+  const pending=workoutPendingIds();
+  const index=pending.indexOf(id);
+  if(index<0)return;
+  setPendingExercisePosition(id,index+direction,false);
+}
+function makeExerciseNext(id){setPendingExercisePosition(id,0,true)}
+function skipOccupiedExercise(id){
+  const pending=workoutPendingIds();
+  if(pending.length<2)return toast('Este é o último exercício pendente');
+  setPendingExercisePosition(id,pending.length-1,false);
+  toast('Máquina ocupada · exercício movido para o fim');
+}
 function beginWorkoutDrag(ev,id){
   if(!workoutReorderMode)return;
   if(ev.button!==undefined&&ev.button!==0)return;
@@ -7927,6 +7968,10 @@ function renderToday(){
               <small>${esc(e.muscle)}${exerciseEmphasisText(e,1)?' · '+esc(exerciseEmphasisText(e,1)):''}</small>
               ${prep?'<em>★ preparação automática</em>':''}
             </div>
+            <div class="reorder-step-buttons">
+              <button onclick="movePendingExercise('${e.id}',-1)" ${i===0?'disabled':''} aria-label="Subir ${esc(e.name)}">↑</button>
+              <button onclick="movePendingExercise('${e.id}',1)" ${i===pending.length-1?'disabled':''} aria-label="Descer ${esc(e.name)}">↓</button>
+            </div>
           </article>`;
         }).join('')}
       </div>
@@ -7946,7 +7991,8 @@ function renderToday(){
   const finished=xs.filter(e=>doneToday(e.id));
   const upcoming=undone.filter(e=>!next||e.id!==next.id);
 
-  let html=`<div class="today-order-control">
+  let html=`<div class="order-importance"><span>↕</span><div><b>A ordem define a preparação</b><small>O primeiro exercício ainda não executado de cada músculo recebe preparação completa. Ao mudar a sequência, o app recalcula isso automaticamente.</small></div></div>
+  <div class="today-order-control">
     <button onclick="toggleWorkoutReorder(true)">
       <span class="order-control-icon">↕</span>
       <span><b>Organizar ordem</b><small>arraste os exercícios</small></span>
@@ -7955,6 +8001,7 @@ function renderToday(){
   </div>`;
 
   if(next){
+    const nextOrder=xs.findIndex(e=>e.id===next.id)+1;
     const firstId=effectiveFirstExerciseId(next.muscle);
     const isFirst=!isPrepared(next.muscle)&&firstId===next.id;
 
@@ -7962,7 +8009,7 @@ function renderToday(){
       <div class="today-section-label"><span>AGORA</span><small>próximo exercício</small></div>
       <article class="now-exercise-card">
         <div class="now-exercise-top">
-          <div class="now-play">▶</div>
+          <div class="now-order-number">${nextOrder}<small>º</small></div>
           <div class="now-copy">
             <small>${esc(next.muscle)}</small>
             <strong>${esc(next.name)}</strong>
@@ -7974,9 +8021,10 @@ function renderToday(){
           <div class="auto-prep-note">
             <span>★</span><div><b>Preparação completa automática</b><small>Primeiro exercício de ${esc(next.muscle)} nesta sequência.</small></div>
           </div>`:''}
-        <button class="now-primary-action" onclick="startExercise('${next.id}')">
-          <span>Registrar resultado</span><i>›</i>
-        </button>
+        <div class="now-quick-actions">
+          ${undone.length>1?`<button class="now-skip-action" onclick="skipOccupiedExercise('${next.id}')">Máquina ocupada · pular</button>`:''}
+          <button class="now-primary-action" onclick="startExercise('${next.id}')"><span>Registrar resultado</span><i>›</i></button>
+        </div>
       </article>
     </section>`;
   }
@@ -8000,7 +8048,10 @@ function renderToday(){
           ${exerciseEmphasisInlineHTML(e,2)}
           ${isFirst?`<span class="auto-prep-pill">★ preparação automática</span>`:''}
         </div>
-        <button class="upcoming-action" onclick="startExercise('${e.id}')" aria-label="Registrar ${esc(e.name)}">Registrar</button>
+        <div class="upcoming-actions">
+          <button class="make-now-action" onclick="makeExerciseNext('${e.id}')">Fazer agora</button>
+          <button class="upcoming-action" onclick="startExercise('${e.id}')" aria-label="Registrar ${esc(e.name)}">Registrar</button>
+        </div>
       </article>`;
     });
 
