@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0b0c0f" />
+  <meta name="application-name" content="Evolução de Carga" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Evolução" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
   <title>Evolução de Carga</title>
   <style>
     :root{
@@ -2694,7 +2703,7 @@ body:before{display:none!important}
 .live-final-progress-preview.recover strong{color:#e2c784}
 
 /* =========================================================
-   8.6 — POST WORKOUT / TRASH / AUTO PREP
+   8.7 — PWA / INSTALLABLE APP
    ========================================================= */
 body.auth-locked .mobile-app-shell,
 body.auth-locked .mobile-bottom-nav,
@@ -5725,19 +5734,6 @@ textarea{
   font-size:9px;font-weight:900;
 }
 
-/* =========================================================
-   8.7 — explicit order + instant gym-floor reordering
-   ========================================================= */
-.order-importance{display:flex;align-items:flex-start;gap:10px;margin:12px 0 2px;padding:11px 12px;border:1px solid rgba(203,255,56,.14);border-radius:14px;background:#10160d}
-.order-importance>span{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;border-radius:9px;background:#1a2410;color:var(--app-accent);font-weight:950}
-.order-importance div{min-width:0}.order-importance b{display:block;font-size:10px;color:#e7efcf}.order-importance small{display:block;margin-top:3px;color:#87917e;font-size:9px!important;line-height:1.4}
-.now-order-number{position:relative;width:46px;height:46px;display:grid;place-items:center;border-radius:16px;background:var(--app-accent);color:#090b05;font-size:18px;font-weight:950}
-.now-order-number small{position:absolute;right:-4px;bottom:-5px;display:grid!important;place-items:center;width:18px;height:18px;border-radius:7px;background:#0d1216;border:2px solid #0d1216;color:var(--app-accent);font-size:8px!important}
-.now-quick-actions{display:grid;grid-template-columns:1fr 1.45fr;gap:8px;margin-top:10px}.now-skip-action{min-height:43px;border:1px solid #28323b;border-radius:13px;background:#11171d;color:#bac3cc;font-size:10px;font-weight:900;padding:8px 10px}.now-skip-action:active,.make-now-action:active{transform:scale(.98)}.now-quick-actions .now-primary-action{margin-top:0;height:43px}
-.upcoming-actions{display:flex;flex-direction:column;align-items:stretch;gap:6px}.make-now-action{min-width:78px;border:1px solid #2e3a28;border-radius:10px;background:#141b11;color:#c9df84;padding:7px 8px;font-size:9px;font-weight:900}.upcoming-actions .upcoming-action{min-width:78px}
-.reorder-item{grid-template-columns:42px 30px minmax(0,1fr) auto}.reorder-step-buttons{display:flex;gap:5px}.reorder-step-buttons button{width:32px;height:32px;border:1px solid #26313a;border-radius:9px;background:#10161b;color:#cbd3da;font-size:14px;font-weight:900}.reorder-step-buttons button:disabled{opacity:.25;cursor:default}
-@media(max-width:520px){.now-quick-actions{grid-template-columns:1fr}.upcoming-actions{gap:5px}.make-now-action,.upcoming-actions .upcoming-action{min-width:74px}.order-importance{padding:10px}}
-
 /* Undo-capable toast */
 .toast{
   display:flex!important;align-items:center;gap:12px!important;
@@ -5839,6 +5835,86 @@ textarea{
   .ws-stats{grid-template-columns:1fr 1fr}
   .ws-item{grid-template-columns:42px minmax(0,1fr)}.ws-item-result{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;text-align:left;padding-top:7px;border-top:1px solid #1b2429}
   .ws-actions{grid-template-columns:1fr}
+}
+
+/* =========================================================
+   8.7 — PWA / installed-app polish
+   ========================================================= */
+.pwa-install-card{
+  display:grid;
+  grid-template-columns:54px minmax(0,1fr) auto;
+  gap:12px;
+  align-items:center;
+  padding:14px;
+  border:1px solid #354227;
+  border-radius:20px;
+  background:linear-gradient(145deg,rgba(203,255,56,.065),#0f1518);
+}
+.pwa-install-icon{
+  width:54px;height:54px;
+  display:grid;place-items:center;
+  border-radius:17px;
+  background:var(--accent);
+  color:#090d04;
+  font-size:23px;
+  font-weight:950;
+  box-shadow:0 8px 26px rgba(203,255,56,.10);
+}
+.pwa-install-copy{min-width:0}
+.pwa-install-copy>strong{display:block;font-size:13px}
+.pwa-install-copy>p{margin:4px 0 0;color:#7e8a93;font-size:10.5px!important;line-height:1.45}
+.pwa-install-button{
+  min-height:42px;
+  padding:0 13px;
+  border:0;
+  border-radius:12px;
+  background:var(--accent);
+  color:#090d04;
+  font-size:10px;
+  font-weight:950;
+  white-space:nowrap;
+}
+.pwa-install-button:disabled{opacity:.45}
+.pwa-ios-steps{
+  display:grid;
+  gap:6px;
+  margin-top:11px;
+  padding-top:10px;
+  border-top:1px solid #29332f;
+}
+.pwa-ios-steps[hidden]{display:none!important}
+.pwa-ios-steps>span{
+  display:grid;
+  grid-template-columns:23px 1fr;
+  gap:7px;
+  align-items:center;
+  color:#89958e;
+  font-size:9.5px;
+}
+.pwa-ios-steps>span>b{
+  width:23px;height:23px;
+  display:grid;place-items:center;
+  border-radius:8px;
+  background:#182114;
+  color:var(--accent);
+  font-size:8px;
+}
+.pwa-ios-steps strong{color:#d9dfdc}
+@media(max-width:600px){
+  .pwa-install-card{grid-template-columns:46px minmax(0,1fr)}
+  .pwa-install-icon{width:46px;height:46px;border-radius:15px}
+  .pwa-install-button{grid-column:1/-1;width:100%}
+}
+@media(display-mode:standalone){
+  html,body{min-height:100dvh}
+  body{
+    padding-top:env(safe-area-inset-top);
+    padding-bottom:max(110px,env(safe-area-inset-bottom));
+    overscroll-behavior-y:none;
+  }
+  .mobile-bottom-nav{
+    padding-bottom:max(7px,env(safe-area-inset-bottom))!important;
+  }
 }
 </style>
 </head>
@@ -6211,6 +6287,28 @@ textarea{
             <button onclick="navHistory(document.querySelector('[data-nav=history]'))"><span>◷</span><div><strong>Histórico</strong><small>consultar ou corrigir treinos passados</small></div><b>›</b></button>
             <button onclick="navProgress(document.querySelector('[data-nav=progress]'))"><span>↗</span><div><strong>Progresso</strong><small>gráficos, evolução e recordes de carga</small></div><b>›</b></button>
             <button onclick="navExercises(document.querySelector('[data-nav=exercises]'))"><span>◎</span><div><strong>Exercícios</strong><small>cadastrar os exercícios que você usa</small></div><b>›</b></button>
+          </div>
+        </section>
+
+        
+        <section class="help-section pwa-install-section" id="installAppSection">
+          <div class="help-section-title">
+            <div><small>NO SEU CELULAR</small><h2>Instale como aplicativo</h2></div>
+            <span id="pwaInstallStatus">verificando</span>
+          </div>
+          <div class="pwa-install-card" id="pwaInstallCard">
+            <div class="pwa-install-icon">↗</div>
+            <div class="pwa-install-copy">
+              <strong id="pwaInstallTitle">Evolução de Carga na sua tela inicial</strong>
+              <p id="pwaInstallText">Abre como aplicativo, sem precisar procurar o site toda vez.</p>
+              <div class="pwa-ios-steps" id="pwaIosSteps" hidden>
+                <span><b>1</b> Abra esta página no <strong>Safari</strong>.</span>
+                <span><b>2</b> Toque em <strong>Compartilhar</strong> ⎋.</span>
+                <span><b>3</b> Escolha <strong>Adicionar à Tela de Início</strong>.</span>
+                <span><b>4</b> Toque em <strong>Adicionar</strong>.</span>
+              </div>
+            </div>
+            <button class="pwa-install-button" id="pwaInstallButton" type="button" onclick="installEvolucaoApp()">Instalar</button>
           </div>
         </section>
 
@@ -6587,6 +6685,109 @@ const APP_SUPABASE_URL='https://gmdcolbxveabwzpzxcpk.supabase.co';
 const APP_SUPABASE_KEY='sb_publishable_Krr7OIeTb0XFyfrBeu3ghw_KGHbb4PP';
 
 const APP_BUILD_VERSION='8.7';
+
+let deferredInstallPrompt=null;
+
+function isStandaloneApp(){
+  return window.matchMedia?.('(display-mode: standalone)')?.matches || window.navigator.standalone===true;
+}
+function isIOSDevice(){
+  return /iphone|ipad|ipod/i.test(navigator.userAgent||'');
+}
+function isSafariBrowser(){
+  const ua=navigator.userAgent||'';
+  return /safari/i.test(ua)&&!/crios|fxios|edgios|opios/i.test(ua);
+}
+function updatePwaInstallUI(){
+  const status=document.getElementById('pwaInstallStatus');
+  const btn=document.getElementById('pwaInstallButton');
+  const title=document.getElementById('pwaInstallTitle');
+  const copy=document.getElementById('pwaInstallText');
+  const steps=document.getElementById('pwaIosSteps');
+  if(!status||!btn)return;
+
+  if(isStandaloneApp()){
+    status.textContent='instalado ✓';
+    btn.textContent='Instalado';
+    btn.disabled=true;
+    if(title)title.textContent='Você já está usando como aplicativo';
+    if(copy)copy.textContent='O Evolução de Carga está instalado e abre em modo próprio.';
+    if(steps)steps.hidden=true;
+    return;
+  }
+
+  if(isIOSDevice()){
+    status.textContent='iPhone / iPad';
+    btn.textContent='Ver como instalar';
+    btn.disabled=false;
+    if(title)title.textContent='Coloque o Evolução na Tela de Início';
+    if(copy)copy.textContent=isSafariBrowser()
+      ?'No iPhone, a instalação é feita pelo menu Compartilhar do Safari.'
+      :'Abra esta página no Safari para adicionar o aplicativo à Tela de Início.';
+    return;
+  }
+
+  if(deferredInstallPrompt){
+    status.textContent='pronto para instalar';
+    btn.textContent='Instalar aplicativo';
+    btn.disabled=false;
+    if(steps)steps.hidden=true;
+    return;
+  }
+
+  status.textContent='disponível no navegador';
+  btn.textContent='Como instalar';
+  btn.disabled=false;
+}
+async function installEvolucaoApp(){
+  if(isStandaloneApp())return toast('O aplicativo já está instalado');
+
+  const steps=document.getElementById('pwaIosSteps');
+
+  if(deferredInstallPrompt){
+    try{
+      deferredInstallPrompt.prompt();
+      const result=await deferredInstallPrompt.userChoice;
+      if(result?.outcome==='accepted')toast('Aplicativo instalado ✓');
+      deferredInstallPrompt=null;
+      updatePwaInstallUI();
+      return;
+    }catch(err){
+      console.warn('Falha ao abrir instalação PWA:',err);
+    }
+  }
+
+  if(isIOSDevice()){
+    if(steps){
+      steps.hidden=!steps.hidden;
+      if(!steps.hidden)steps.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    return;
+  }
+
+  toast('Use a opção “Instalar aplicativo” do seu navegador');
+}
+window.addEventListener('beforeinstallprompt',event=>{
+  event.preventDefault();
+  deferredInstallPrompt=event;
+  updatePwaInstallUI();
+});
+window.addEventListener('appinstalled',()=>{
+  deferredInstallPrompt=null;
+  updatePwaInstallUI();
+  toast('Evolução de Carga instalado ✓');
+});
+window.addEventListener('DOMContentLoaded',updatePwaInstallUI);
+window.matchMedia?.('(display-mode: standalone)')?.addEventListener?.('change',updatePwaInstallUI);
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./sw.js',{scope:'./'})
+      .then(reg=>console.info('PWA pronta',reg.scope))
+      .catch(err=>console.warn('Service worker não registrado:',err));
+  });
+}
+
 const LEGACY_SUPABASE_CONFIG_KEY='loadProgressSupabaseConfig';
 let supabaseClient=null, syncTimer=null, syncBusy=false, cloudUpdatedAt=null, currentUser=null, suppressCloudSync=false;
 let appBootUserId=null, passwordRecoveryMode=false;
@@ -7743,34 +7944,6 @@ function commitWorkoutReorderFromDOM(){
   syncSessionPrepToOrder();
   persist();
 }
-function setPendingExercisePosition(id,targetIndex,announce=true){
-  const pending=workoutPendingIds();
-  const from=pending.indexOf(id);
-  if(from<0)return;
-  const to=Math.max(0,Math.min(pending.length-1,targetIndex));
-  if(from===to)return;
-  pending.splice(from,1);
-  pending.splice(to,0,id);
-  const pendingSet=new Set(pending),queue=[...pending];
-  state.sessionExerciseIds=(state.sessionExerciseIds||[]).map(exId=>pendingSet.has(exId)?queue.shift():exId);
-  syncSessionPrepToOrder();
-  persist();
-  renderToday();
-  if(announce)toast('Ordem atualizada · preparação recalculada');
-}
-function movePendingExercise(id,direction){
-  const pending=workoutPendingIds();
-  const index=pending.indexOf(id);
-  if(index<0)return;
-  setPendingExercisePosition(id,index+direction,false);
-}
-function makeExerciseNext(id){setPendingExercisePosition(id,0,true)}
-function skipOccupiedExercise(id){
-  const pending=workoutPendingIds();
-  if(pending.length<2)return toast('Este é o último exercício pendente');
-  setPendingExercisePosition(id,pending.length-1,false);
-  toast('Máquina ocupada · exercício movido para o fim');
-}
 function beginWorkoutDrag(ev,id){
   if(!workoutReorderMode)return;
   if(ev.button!==undefined&&ev.button!==0)return;
@@ -7968,10 +8141,6 @@ function renderToday(){
               <small>${esc(e.muscle)}${exerciseEmphasisText(e,1)?' · '+esc(exerciseEmphasisText(e,1)):''}</small>
               ${prep?'<em>★ preparação automática</em>':''}
             </div>
-            <div class="reorder-step-buttons">
-              <button onclick="movePendingExercise('${e.id}',-1)" ${i===0?'disabled':''} aria-label="Subir ${esc(e.name)}">↑</button>
-              <button onclick="movePendingExercise('${e.id}',1)" ${i===pending.length-1?'disabled':''} aria-label="Descer ${esc(e.name)}">↓</button>
-            </div>
           </article>`;
         }).join('')}
       </div>
@@ -7991,8 +8160,7 @@ function renderToday(){
   const finished=xs.filter(e=>doneToday(e.id));
   const upcoming=undone.filter(e=>!next||e.id!==next.id);
 
-  let html=`<div class="order-importance"><span>↕</span><div><b>A ordem define a preparação</b><small>O primeiro exercício ainda não executado de cada músculo recebe preparação completa. Ao mudar a sequência, o app recalcula isso automaticamente.</small></div></div>
-  <div class="today-order-control">
+  let html=`<div class="today-order-control">
     <button onclick="toggleWorkoutReorder(true)">
       <span class="order-control-icon">↕</span>
       <span><b>Organizar ordem</b><small>arraste os exercícios</small></span>
@@ -8001,7 +8169,6 @@ function renderToday(){
   </div>`;
 
   if(next){
-    const nextOrder=xs.findIndex(e=>e.id===next.id)+1;
     const firstId=effectiveFirstExerciseId(next.muscle);
     const isFirst=!isPrepared(next.muscle)&&firstId===next.id;
 
@@ -8009,7 +8176,7 @@ function renderToday(){
       <div class="today-section-label"><span>AGORA</span><small>próximo exercício</small></div>
       <article class="now-exercise-card">
         <div class="now-exercise-top">
-          <div class="now-order-number">${nextOrder}<small>º</small></div>
+          <div class="now-play">▶</div>
           <div class="now-copy">
             <small>${esc(next.muscle)}</small>
             <strong>${esc(next.name)}</strong>
@@ -8021,10 +8188,9 @@ function renderToday(){
           <div class="auto-prep-note">
             <span>★</span><div><b>Preparação completa automática</b><small>Primeiro exercício de ${esc(next.muscle)} nesta sequência.</small></div>
           </div>`:''}
-        <div class="now-quick-actions">
-          ${undone.length>1?`<button class="now-skip-action" onclick="skipOccupiedExercise('${next.id}')">Máquina ocupada · pular</button>`:''}
-          <button class="now-primary-action" onclick="startExercise('${next.id}')"><span>Registrar resultado</span><i>›</i></button>
-        </div>
+        <button class="now-primary-action" onclick="startExercise('${next.id}')">
+          <span>Registrar resultado</span><i>›</i>
+        </button>
       </article>
     </section>`;
   }
@@ -8048,10 +8214,7 @@ function renderToday(){
           ${exerciseEmphasisInlineHTML(e,2)}
           ${isFirst?`<span class="auto-prep-pill">★ preparação automática</span>`:''}
         </div>
-        <div class="upcoming-actions">
-          <button class="make-now-action" onclick="makeExerciseNext('${e.id}')">Fazer agora</button>
-          <button class="upcoming-action" onclick="startExercise('${e.id}')" aria-label="Registrar ${esc(e.name)}">Registrar</button>
-        </div>
+        <button class="upcoming-action" onclick="startExercise('${e.id}')" aria-label="Registrar ${esc(e.name)}">Registrar</button>
       </article>`;
     });
 
